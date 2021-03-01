@@ -9,7 +9,7 @@
     "eslint": "^7.20.0",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-standard": "^5.0.0",
-    "husky": "^5.0.9",
+    "husky": "^5.1.2",
     "prettier": "^2.2.1",
     "sass": "^1.32.7",
     "sass-loader": "^11.0.1",
@@ -28,16 +28,7 @@
     "eslint": "eslint --max-warnings=0 src/**/*.{ts,tsx}",
     "prettier": "prettier --write \"src/**/*.+(js|jsx|ts|tsx|json)\"",
     "prettier-scss": "prettier --write --tab-width 2 \"src/**/*.+(scss)\"",
-    "stylelint": "stylelint \"src/**/*.+(css|scss)\""
-  },
-  "author": "",
-  "license": "ISC",
-  "description": "",
-  "husky": {
-    "hooks": {
-      "pre-commit": [
-        "npm run eslint && npm run prettier --write && npm run prettier-scss --write && npm run stylelint && git add ."
-      ]
-    }
+    "stylelint": "stylelint \"src/**/*.+(css|scss)\"",
+    "prepare": "husky install"
   }
 }
