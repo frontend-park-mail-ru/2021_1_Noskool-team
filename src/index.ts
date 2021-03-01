@@ -1,9 +1,6 @@
-import { App } from './App';
+import { router } from './utils/router';
+import { ROUTERS, onClickA } from './constants/router';
 
-const component = () => {
-    const root = document.getElementById('root');
-    root.appendChild(App());
-    return root;
-};
+window.addEventListener('load', router(ROUTERS));
 
-document.body.appendChild(component());
+Array.from(document.getElementsByTagName('a')).map((el) => el.addEventListener('click', onClickA));

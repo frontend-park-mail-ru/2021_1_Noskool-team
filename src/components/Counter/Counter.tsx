@@ -1,6 +1,6 @@
 import { JSX } from 'jsx/jsx';
 
-import './style.scss'
+import './style.scss';
 
 export const Counter = () => {
     const decrement = () => {
@@ -16,7 +16,7 @@ export const Counter = () => {
     return (
         <div class='some'>
             <h1>Hello?</h1>
-            <div class='counter' >
+            <div class='counter'>
                 Count:
                 <div id='counter'>0</div>
             </div>
