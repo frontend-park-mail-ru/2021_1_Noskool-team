@@ -10,6 +10,6 @@ export const ROUTERS: Routers[] = [
 
 export const onClickA = (e: MouseEvent) => {
     e.preventDefault();
-    window.history.pushState('', '', e.target.getAttribute('href'));
+    window.history.pushState('', '', (<HTMLLinkElement>e.target).getAttribute('href'));
     router(ROUTERS)();
 };
