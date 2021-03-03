@@ -10,7 +10,7 @@ export const JSX = (tagName: string | Function, props: Props, ...children: Array
     if (props) {
         Object.entries(props).forEach(([key, value]) => {
             if (key.startsWith('on')) {
-                node.addEventListener('click', value);
+                node.addEventListener(key.substr(2), value);
             } else {
                 node.setAttribute(key, value);
             }

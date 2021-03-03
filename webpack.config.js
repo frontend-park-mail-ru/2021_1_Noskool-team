@@ -27,6 +27,10 @@ module.exports = {
                 use: 'ts-loader',
                 exclude: /node_modules/,
             },
+            {
+                test: /.(jpg|jpeg|png|svg)$/,
+                use: ['file-loader'],
+            },
         ],
     },
     resolve: {

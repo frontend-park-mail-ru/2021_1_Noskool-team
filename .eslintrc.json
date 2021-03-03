@@ -13,7 +13,8 @@
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
 		"project": "tsconfig.json",
-		"tsconfigRootDir": "."
+		"tsconfigRootDir": ".",
+    "no-unused-vars": "off"
 	},
   "rules": {
     "no-debugger": "off",

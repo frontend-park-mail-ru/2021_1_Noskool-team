@@ -1,13 +1,4 @@
 import { JSX } from 'jsx/jsx';
-import { Counter } from './components/Counter/Counter';
-
-export const HomeComponent = () => {
-    return (
-        <div>
-            <Counter />
-        </div>
-    );
-};
 
 export const Page1Component = () => {
     return (
