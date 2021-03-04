@@ -92,99 +92,142 @@ export const MainPageForm = () => {
                         {item.items.map((newItem, newIndex) => (
                             <div class='item' key={newIndex}>
                                 <div class={newItem.className}></div>
-                                <div class='text'>{newItem.text}</div>
+                                <a href='/' class='text'>
+                                    {newItem.text}
+                                </a>
                             </div>
                         ))}
                     </div>
                 ))}
-                {/* <div class="menu-items">
-                    <div class="menu-header">
-                        RECOMMEND
+            </div>
+            <div class='main'>
+                <div class='feature-week'>
+                    <button class='profile'></button>
+                    <button class='notifications'>4</button>
+                    <button class='search'></button>
+                    <div class='title'>
+                        <div class='title-text'>FEATURED OF THE WEEK</div>
                     </div>
-                    <div class="item">
-                        <div class="icon-1"></div>
-                        <div class="text">Explore</div>
-                    </div>
-                    <div class="item">
-                        <div class="icon-2"></div>
-                        <div class="text">Genres</div>
-                    </div>
-                    <div class="item">
-                        <div class="icon-3"></div>
-                        <div class="text">Artists</div>
-                    </div>
-                    <div class="item">
-                        <div class="icon-4"></div>
-                        <div class="text">Albums</div>
-                    </div>
+                    <div class='song-name'>Love The Way You Lie</div>
+                    <div class='singers'>Eminem ft. Rihanna</div>
+                    <button class='play'></button>
                 </div>
-                <div class="menu-items">
-                    <div class="menu-header">
-                        MY LIBRARY
-                    </div>
-                    <div class="item">
-                        Recently Played
-                    </div>
-                    <div class="item">
-                        Albums
-                    </div>
-                    <div class="item">
-                        Favourite Songs
-                    </div>
-                    <div class="item">
-                        Local Files
-                    </div>
-                </div>
-                <div class="menu-items">
-                    <div class="menu-header">
-                        PLAYLIST
-                    </div>
-                    <div class="item">
-                        Unplugged
-                    </div>
-                    <div class="item">
-                        Best of Arnob
-                    </div>
-                    <div class="item">
-                        Best of James
-                    </div>
-                </div>
-                <div class="menu-items">
-                    <div class="menu-header">
-                        MY STATISTICS
-                    </div>
-                    <div class="item">
-                        Listenings
-                    </div>
-                    <div class="item">
-                        Top artists
-                    </div>
-                    <div class="item">
-                        Top songs
-                    </div>
-                </div>
-            </div> 
-            <div class="main">
-                <div class="best-of-week">
-                    gfhfc
-                     <button>hjghgh</button>
-                </div>
-                <div class="weekly-top">
-
-                </div>
-                <div class="recommend">
-                    <div class="billboard-top">
-
-                    </div>
-                    <div class="dicover">
-                        <div class="monthly-top">
-
-                        </div>
-                        <div class="genres">
-
+                <div class='weekly-top'>
+                    <div class='legend'>
+                        <div class='title'>Weekly Top Track</div>
+                        <div class='buttons'>
+                            <button class='prev'></button>
+                            <button class='next'></button>
                         </div>
                     </div>
-                </div> */}
+                    <ul class='single-items'>
+                        <li class='item'>
+                            <div class='single-photo-1'></div>
+                            <div class='name-song'>Blinding Lights</div>
+                            <div class='singer'>The Weeknd</div>
+                        </li>
+                        <li class='item'>
+                            <div class='single-photo-2'></div>
+                            <div class='name-song'>Leon On</div>
+                            <div class='singer'>Major Lazer & DJ Snake</div>
+                        </li>
+                        <li class='item'>
+                            <div class='single-photo-3'></div>
+                            <div class='name-song'>Спам</div>
+                            <div class='singer'>Дайте танк (!)</div>
+                        </li>
+                        <li class='item'>
+                            <div class='single-photo-4'></div>
+                            <div class='name-song'>Havana</div>
+                            <div class='singer'>Camila Cabello</div>
+                        </li>
+                        <li class='item'>
+                            <div class='single-photo-5'></div>
+                            <div class='name-song'>Come As You Are</div>
+                            <div class='singer'>Nirvana</div>
+                        </li>
+                        <li class='item'>
+                            <div class='single-photo-6'></div>
+                            <div class='name-song'>Feel Something</div>
+                            <div class='singer'>Bea Miller</div>
+                        </li>
+                    </ul>
+                </div>
+                <div class='top'>
+                    <div class='billboard-charts'>
+                        <div class='title'>Billboard Top Charts</div>
+                        <div class='audio'>
+                            <div class='number'>01</div>
+                            <button class='sing-photo'></button>
+                            <div class='song'>
+                                <div class='song-name'>Real Life</div>
+                                <div class='song-author'>The Weeknd</div>
+                            </div>
+                            <div class='time'>3:21</div>
+                            <button class='like'></button>
+                            <button class='add'></button>
+                        </div>
+                        <div class='audio'>
+                            <div class='number'>02</div>
+                            <div class='sing-photo'></div>
+                            <div class='song'>
+                                <div class='song-name'>Real Life</div>
+                                <div class='song-author'>The Weeknd</div>
+                            </div>
+                            <div class='time'>3:21</div>
+                            <button class='like'></button>
+                            <button class='add'></button>
+                        </div>
+                        <div class='audio'>
+                            <div class='number'>03</div>
+                            <div class='sing-photo'></div>
+                            <div class='song'>
+                                <div class='song-name'>Real Life</div>
+                                <div class='song-author'>The Weeknd</div>
+                            </div>
+                            <div class='time'>3:21</div>
+                            <button class='like'></button>
+                            <button class='add'></button>
+                        </div>
+                        <div class='audio'>
+                            <div class='number'>04</div>
+                            <div class='sing-photo'></div>
+                            <div class='song'>
+                                <div class='song-name'>Real Life</div>
+                                <div class='song-author'>The Weeknd</div>
+                            </div>
+                            <div class='time'>3:21</div>
+                            <button class='like'></button>
+                            <button class='add'></button>
+                        </div>
+                        <div class='audio'>
+                            <div class='number'>05</div>
+                            <div class='sing-photo'></div>
+                            <div class='song'>
+                                <div class='song-name'>Real Life</div>
+                                <div class='song-author'>The Weeknd</div>
+                            </div>
+                            <div class='time'>3:21</div>
+                            <button class='like'></button>
+                            <button class='add'></button>
+                        </div>
+                        <div class='audio'>
+                            <div class='number'>06</div>
+                            <div class='sing-photo'></div>
+                            <div class='song'>
+                                <div class='song-name'>Real Life</div>
+                                <div class='song-author'>The Weeknd</div>
+                            </div>
+                            <div class='time'>3:21</div>
+                            <button class='like'></button>
+                            <button class='add'></button>
+                        </div>
+                    </div>
+                    <div class='discover'>
+                        <div class='monthly-artists'></div>
+                        <div class='genres'></div>
+                    </div>
+                </div>
             </div>
         </div>
     );
