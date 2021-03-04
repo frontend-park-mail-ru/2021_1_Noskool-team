@@ -1,6 +1,10 @@
 type Props = { [key: string]: any } | (() => any);
 
-export const JSX = (tagName: string | Function, props: Props, ...children: Array<string | Node>) => {
+export const JSX = (
+    tagName: string | Function,
+    props: Props,
+    ...children: Array<string | Node | Array<string | Node>>
+) => {
     if (typeof tagName === 'function') {
         return tagName(props, children);
     }
@@ -18,7 +22,13 @@ export const JSX = (tagName: string | Function, props: Props, ...children: Array
     }
 
     children.forEach((child) => {
-        node.appendChild(typeof child === 'string' ? document.createTextNode(child.toString()) : child);
+        if (Array.isArray(child)) {
+            child.forEach((el) => {
+                node.appendChild(typeof el === 'string' ? document.createTextNode(el.toString()) : el);
+            });
+        } else {
+            node.appendChild(typeof child === 'string' ? document.createTextNode(child.toString()) : child);
+        }
     });
 
     return node;

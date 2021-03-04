@@ -46,6 +46,18 @@ export const RegistrationForm = () => {
         console.log(form);
     };
 
+    const gg = [1, 2];
+
+    const ff = () => {
+        return (
+            <div>
+                {gg.map(() => (
+                    <div />
+                ))}
+            </div>
+        );
+    };
+
     return (
         <div class={MAIN_CLASS_WRAPPER}>
             <form onsubmit={onSubmitForm} class={MAIN_CLASS}>
@@ -85,6 +97,7 @@ export const RegistrationForm = () => {
                     validators={[requaredValidator]}
                     placeholder='Введите фамилию'
                 />
+                {ff()}
                 <button type='submit' id={ID_REG_FORM_BUTTON}>
                     {'Зарегистрироваться'}
                 </button>
