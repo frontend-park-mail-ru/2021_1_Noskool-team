@@ -9,82 +9,85 @@
   justify-content: space-between;
 
   .right-menu {
-    height: 100%;
-    width: 22vw;
+    height: 100vh;
+    width: 15vw;
     background-color: #fff;
-  }
+    position: fixed;
 
-  .menu-items {
-    padding-top: 110px;
-    padding-left: 30px;
-    color: #8a8c99;
-
-    .menu-header {
-      font-family: 'M PLUS 1p', sans-serif;
-      font-size: 15px;
-      letter-spacing: 2px;
-    }
-
-    .item {
-      font-family: 'Comfortaa', cursive;
-      font-size: 20px;
-      letter-spacing: 1.5px;
-      padding: 16px 0;
-    }
-
-    %icon {
-      width: 20vh;
-      background-color: #8a8c99;
-      display: inline;
-      padding-right: 25px;
-    }
-
-    .icon-1 {
-      @extend %icon;
-
-      -webkit-mask-image: url(../../icons/bubble_chart_black_24dp.svg);
-      mask-image: url(../../icons/bubble_chart_black_24dp.svg);
-    }
-
-    .icon-2 {
-      @extend %icon;
-
-      -webkit-mask-image: url(../../icons/campaign_black_24dp.svg);
-      mask-image: url(../../icons/campaign_black_24dp.svg);
-    }
-
-    .icon-3 {
-      @extend %icon;
-
-      -webkit-mask-image: url(../../icons/mic_black_24dp.svg);
-      mask-image: url(../../icons/mic_black_24dp.svg);
-    }
-
-    .icon-4 {
-      @extend %icon;
-
-      -webkit-mask-image: url(../../icons/collections_black_24dp.svg);
-      mask-image: url(../../icons/collections_black_24dp.svg);
-    }
-
-    .text {
-      display: inline;
-      padding-left: 20px;
+    .menu-items {
+      padding-top: 50px;
+      padding-left: 30px;
       color: #8a8c99;
-      text-decoration: none;
-    }
 
-    .text:hover {
-      text-decoration: underline;
+      .menu-header {
+        font-family: 'M PLUS 1p', sans-serif;
+        font-size: 13px;
+        letter-spacing: 2px;
+      }
+
+      .item {
+        font-family: 'Comfortaa', cursive;
+        font-size: 18px;
+        letter-spacing: 1.5px;
+        padding: 10px 0;
+      }
+
+      %icon {
+        width: 20vh;
+        background-color: #8a8c99;
+        display: inline;
+        padding-right: 25px;
+      }
+
+      .icon-1 {
+        @extend %icon;
+
+        -webkit-mask-image: url(../../icons/bubble_chart_black_24dp.svg);
+        mask-image: url(../../icons/bubble_chart_black_24dp.svg);
+      }
+
+      .icon-2 {
+        @extend %icon;
+
+        -webkit-mask-image: url(../../icons/campaign_black_24dp.svg);
+        mask-image: url(../../icons/campaign_black_24dp.svg);
+      }
+
+      .icon-3 {
+        @extend %icon;
+
+        -webkit-mask-image: url(../../icons/mic_black_24dp.svg);
+        mask-image: url(../../icons/mic_black_24dp.svg);
+      }
+
+      .icon-4 {
+        @extend %icon;
+
+        -webkit-mask-image: url(../../icons/collections_black_24dp.svg);
+        mask-image: url(../../icons/collections_black_24dp.svg);
+      }
+
+      .text {
+        display: inline;
+        padding-left: 20px;
+        color: #8a8c99;
+        text-decoration: none;
+      }
+
+      .text:hover {
+        text-decoration: underline;
+      }
     }
   }
 
   .main {
-    width: 100%;
+    position: absolute;
+    left: 15vw;
+    width: 84.18vw;
 
     %button {
-      height: 55px;
-      width: 55px;
+      height: 48px;
+      width: 48px;
       border: none;
       cursor: pointer;
       border-radius: 20px;
@@ -92,12 +95,12 @@
       outline: none;
       position: absolute;
       background-position: center;
-      top: 50px;
+      top: 30px;
       background-repeat: no-repeat;
     }
 
     .feature-week {
-      height: 508px;
+      height: 408px;
       background-image: url(../../image/альбом1.png);
       background-size: 100%;
       background-position: center;
@@ -117,7 +120,7 @@
         background-color: $pink;
         color: $white;
         font-size: 20px;
-        right: 156px;
+        right: 136px;
       }
 
       .search {
@@ -126,43 +129,43 @@
         background-image: url(../../icons/search_black_24dp.svg);
         background-size: 22px;
         background-color: $white;
-        right: 242px;
+        right: 202px;
       }
 
       .title {
-        height: 49px;
-        width: 302px;
+        height: 39px;
+        width: 252px;
         background-color: $white;
         border-radius: 20px;
         position: absolute;
-        top: 152px;
-        left: 1067px;
+        top: 122px;
+        left: 767px;
       }
 
       .title-text {
         color: $pink;
         letter-spacing: 2px;
         text-align: center;
-        font-size: 18px;
+        font-size: 15px;
         line-height: 12px;
-        padding-top: 20px;
+        padding-top: 15px;
       }
 
       .song-name {
         position: absolute;
-        font-size: 60px;
+        font-size: 50px;
         letter-spacing: 3px;
         font-weight: 600;
         color: $white;
-        top: 213px;
-        left: 1067px;
+        top: 168px;
+        left: 767px;
       }
 
       .singers {
         position: absolute;
-        top: 294px;
-        left: 1067px;
-        font-size: 30px;
+        top: 234px;
+        left: 767px;
+        font-size: 25px;
         letter-spacing: 3px;
         color: $white;
       }
@@ -170,10 +173,10 @@
       .play {
         @extend %button;
 
-        height: 78px;
-        width: 78px;
-        top: 368px;
-        left: 1067px;
+        height: 68px;
+        width: 68px;
+        top: 303px;
+        left: 767px;
         background-color: $white;
         background-image: url(../../icons/arrow_right_black_24dp.svg);
         background-size: 70px;
@@ -192,7 +195,7 @@
 
       .title {
         padding-left: 18px;
-        font-size: 30px;
+        font-size: 28px;
         font-weight: 500;
         letter-spacing: 3px;
         color: #373944;
@@ -202,7 +205,7 @@
         @extend %button;
 
         background-image: url(../../icons/chevron_left_black_24dp.svg);
-        top: 557px;
+        top: 433px;
         right: 146px;
       }
 
@@ -210,7 +213,7 @@
         @extend %button;
 
         background-image: url(../../icons/chevron_right_black_24dp.svg);
-        top: 557px;
+        top: 433px;
         right: 72px;
         background-color: $pink;
       }
@@ -224,13 +227,15 @@
         display: flex;
         list-style: none;
         justify-content: space-between;
+        overflow: hidden;
 
         .item {
-          padding: 28px 12px;
+          padding: 28px 25px;
+          width: 50%;
 
           %photo {
-            height: 218px;
-            width: 218px;
+            height: 198px;
+            width: 198px;
             border-radius: 10px;
             background-position: center;
             background-size: 100%;
@@ -275,8 +280,8 @@
           }
 
           .name-song {
-            width: 218px;
-            font-size: 23px;
+            width: 198px;
+            font-size: 20px;
             letter-spacing: 1px;
             text-align: center;
             color: #0f1e36;
@@ -285,8 +290,8 @@
           }
 
           .singer {
-            width: 218px;
-            font-size: 19px;
+            width: 198px;
+            font-size: 16px;
             letter-spacing: 1px;
             text-align: center;
             color: #8a8c99;
@@ -299,16 +304,15 @@
     .top {
       display: flex;
       justify-content: space-between;
-      width: 50%;
+      // width: 50%;
       font-family: 'Comfortaa', cursive;
-      // margin: 25px 50px;
 
       .billboard-charts {
-        width: 100%;
-        margin: 25px 0 25px 50px;
+        width: 50%;
+        margin: 5px 0 25px 50px;
 
         .title {
-          font-size: 30px;
+          font-size: 28px;
           font-weight: 500;
           letter-spacing: 3px;
           color: #373944;
@@ -316,16 +320,20 @@
         }
 
         .audio {
-          height: 58px;
+          height: 48px;
           display: flex;
           padding: 8px;
 
           .number {
             color: #8a8c99;
-            font-size: 22px;
-            padding-top: 16px;
+            font-size: 19px;
+            padding-top: 13px;
             padding-bottom: 16px;
             font-family: 'Heebo', sans-serif;
+          }
+
+          .number::before {
+            content: 0;
           }
 
           .sing-photo {
@@ -334,8 +342,8 @@
             margin-left: 27px;
             background-position: center;
             border-radius: 5px;
-            width: 66px;
-            height: 58px;
+            width: 56px;
+            height: 48px;
             cursor: pointer;
             outline: none;
             border: none;
@@ -354,7 +362,7 @@
 
             .song-name {
               color: #0f1e36;
-              font-size: 22px;
+              font-size: 19px;
               letter-spacing: 2px;
               padding-bottom: 5px;
               width: 400px;
@@ -362,21 +370,21 @@
 
             .song-author {
               color: #8a8c99;
-              font-size: 20px;
+              font-size: 17px;
             }
           }
 
           .time {
             font-family: 'Heebo', sans-serif;
-            font-size: 22px;
+            font-size: 19px;
             color: #8a8c99;
-            padding-top: 16px;
+            padding-top: 13px;
             padding-bottom: 16px;
           }
 
           %button-music {
             padding-right: 25px;
-            background-size: 25px;
+            background-size: 23px;
             background-position: center;
             background-repeat: no-repeat;
             outline: none;
@@ -400,7 +408,7 @@
             @extend %button-music;
 
             background-image: url(../../icons/add_black_24dp.svg);
-            background-size: 30px;
+            background-size: 27px;
             margin-right: 0;
           }
 
@@ -408,6 +416,324 @@
             background-image: url(../../icons/add_pink.svg);
           }
         }
+      }
+    }
+
+    .discover {
+      width: 100%;
+      margin: 5px 50px 25px 10px;
+
+      .titles {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        font-family: 'Comfortaa', cursive;
+
+        .monthly-artists {
+          font-size: 28px;
+          font-weight: 500;
+          letter-spacing: 3px;
+          color: #373944;
+          margin-bottom: 25px;
+          margin-left: 12px;
+        }
+
+        .see-all {
+          color: #373944;
+          font-size: 16px;
+          margin-bottom: 25px;
+          padding-top: 7px;
+          padding-right: 15px;
+          text-decoration: none;
+        }
+
+        .see-all:hover {
+          text-decoration: underline;
+        }
+      }
+
+      .artists {
+        display: flex;
+        list-style: none;
+        justify-content: space-between;
+        padding: 0 20px;
+
+        %one-item {
+          width: 112px;
+          height: 112px;
+          background-position: center;
+          background-size: 100%;
+          border-radius: 40px;
+        }
+
+        .one-item-1 {
+          @extend %one-item;
+
+          background-image: url(../../image/артист1.png);
+        }
+
+        .one-item-2 {
+          @extend %one-item;
+
+          background-image: url(../../image/артист2.png);
+        }
+
+        .one-item-3 {
+          @extend %one-item;
+
+          background-image: url(../../image/артист3.png);
+        }
+
+        .one-item-4 {
+          @extend %one-item;
+
+          background-image: url(../../image/артист5.png);
+        }
+
+        .one-item-5 {
+          @extend %one-item;
+
+          background-image: url(../../image/артист7.png);
+        }
+      }
+    }
+
+    .genres {
+      width: 100%;
+      margin: 50px 50px 25px 10px;
+
+      .titles {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        font-family: 'Comfortaa', cursive;
+
+        .monthly-artists {
+          font-size: 28px;
+          font-weight: 500;
+          letter-spacing: 3px;
+          color: #373944;
+          margin-bottom: 25px;
+          margin-left: 12px;
+        }
+
+        .see-all {
+          color: #373944;
+          font-size: 16px;
+          margin-bottom: 25px;
+          padding-top: 7px;
+          padding-right: 25px;
+          text-decoration: none;
+        }
+
+        .see-all:hover {
+          text-decoration: underline;
+        }
+      }
+
+      .section {
+        display: flex;
+        list-style: none;
+        justify-content: space-between;
+        padding: 0 20px;
+
+        %one-item {
+          width: 200px;
+          height: 148px;
+          background-position: center;
+          background-size: 100%;
+          border-radius: 15px;
+        }
+
+        .album {
+          @extend %one-item;
+
+          background-image: url(../../image/альбом3.png);
+        }
+      }
+    }
+  }
+
+  .player {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    border-radius: 0;
+    height: 95px;
+    background-color: $white;
+    display: flex;
+
+    .song-image {
+      margin-left: 40px;
+      height: 58px;
+      width: 66px;
+      background-image: url(../../image/The_Weeknd_-_The_Highlights.png);
+      background-position: center;
+      background-size: 100%;
+      border-radius: 10px;
+      margin-top: 20px;
+    }
+
+    .full-name {
+      margin-left: 20px;
+      margin-top: 25px;
+      font-family: 'Comfortaa', cursive;
+      width: 250px;
+
+      .name {
+        font-size: 18px;
+        color: #0f1e36;
+        letter-spacing: 1px;
+      }
+
+      .singer {
+        font-size: 16px;
+        padding-top: 7px;
+        color: #8a8c99;
+      }
+    }
+
+    %music-button {
+      width: 40px;
+      height: 40px;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: 18px;
+      background-color: $white;
+      outline: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    .buttons {
+      margin-left: 10px;
+      margin-top: 22px;
+
+      .repeat {
+        @extend %music-button;
+
+        background-image: url(../../icons/repeat_black_24dp.svg);
+      }
+
+      .back {
+        @extend %music-button;
+
+        background-image: url(../../icons/skip_previous_black_24dp.svg);
+        background-size: 25px;
+      }
+
+      .play {
+        @extend %music-button;
+
+        background-image: url(../../icons/arrow.svg);
+        width: 50px;
+        height: 50px;
+        background-size: 45px;
+        border-radius: 20px;
+        background-color: $pink;
+        margin-left: 2px;
+      }
+
+      .next {
+        @extend %music-button;
+
+        background-image: url(../../icons/skip_next_black_24dp.svg);
+        background-size: 25px;
+        margin-left: 2px;
+      }
+
+      .mix {
+        @extend %music-button;
+
+        background-image: url(../../icons/shuffle_black_24dp.svg);
+        background-size: 19px;
+      }
+    }
+
+    input[type='range'] {
+      margin-top: 16px;
+      width: 670px;
+      background-color: #d3d3d3;
+      -webkit-appearance: none;
+      height: 5px;
+    }
+
+    input[type='range']::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      height: 13px;
+      width: 13px;
+      border-radius: 10px;
+      cursor: pointer;
+      background: $pink;
+      box-shadow: 0 0 3px 5px #dda0dd; /* Add cool effects to your sliders! */
+    }
+
+    input[type='range']::-moz-range-thumb {
+      box-shadow: 0 0 3px 5px #dda0dd;
+      height: 13px;
+      width: 13px;
+      border-radius: 10px;
+      background: $pink;
+      cursor: pointer;
+    }
+
+    input[type='range']::-ms-thumb {
+      box-shadow: 0 0 3px 5px #dda0dd;
+      height: 13px;
+      width: 13px;
+      border-radius: 10px;
+      background: $pink;
+      cursor: pointer;
+    }
+
+    .time-slider {
+      display: flex;
+      margin: 32px;
+      font-family: 'Heebo', sans-serif;
+      color: #8a8c99;
+
+      .current-time {
+        margin: 7px 12px;
+      }
+
+      .time-left {
+        margin: 7px 12px;
+      }
+    }
+
+    .volume {
+      display: flex;
+      margin: 29px 32px;
+
+      .icon {
+        @extend %music-button;
+
+        background-image: url(../../icons/volume_up_black_24dp.svg);
+        background-size: 22px;
+      }
+
+      input[type='range'] {
+        margin-top: 19px;
+        width: 130px;
+      }
+    }
+
+    .end-icons {
+      display: flex;
+      margin: 29px 20px 39px 40px;
+
+      .settings {
+        @extend %music-button;
+
+        background-image: url(../../icons/settings_black_24dp.svg);
+        background-size: 22px;
+      }
+
+      .album {
+        @extend %music-button;
+
+        background-image: url(../../icons/folder_black_24dp.svg);
+        background-size: 22px;
       }
     }
   }
