@@ -1,5 +1,7 @@
 import { JSX } from 'jsx/jsx';
 import { RightMenu } from '../../types/rightMenu';
+import { TopTrack } from '../../types/topTrack';
+import { BillboardChart } from '../../types/billboardCharts';
 
 import './style.scss';
 
@@ -83,6 +85,109 @@ export const MainPageForm = () => {
         },
     ];
 
+    const topTrack: TopTrack[] = [
+        {
+            className: 'single-photo-1',
+            name: 'Blinding Lights',
+            singer: 'The Weeknd',
+        },
+        {
+            className: 'single-photo-2',
+            name: 'Leon On',
+            singer: 'Major Lazer & DJ Snake',
+        },
+        {
+            className: 'single-photo-3',
+            name: 'Спам',
+            singer: 'Дайте танк (!)',
+        },
+        {
+            className: 'single-photo-4',
+            name: 'Havana',
+            singer: 'Camila Cabello',
+        },
+        {
+            className: 'single-photo-5',
+            name: 'Come As You Are',
+            singer: 'Nirvana',
+        },
+        {
+            className: 'single-photo-6',
+            name: 'Feel Something',
+            singer: 'Bea Miller',
+        },
+        {
+            className: 'single-photo-5',
+            name: 'Come As You Are',
+            singer: 'Nirvana',
+        },
+        {
+            className: 'single-photo-4',
+            name: 'Havana',
+            singer: 'Camila Cabello',
+        },
+        {
+            className: 'single-photo-1',
+            name: 'Blinding Lights',
+            singer: 'The Weeknd',
+        },
+        {
+            className: 'single-photo-2',
+            name: 'Leon On',
+            singer: 'Major Lazer & DJ Snake',
+        },
+        {
+            className: 'single-photo-3',
+            name: 'Спам',
+            singer: 'Дайте танк (!)',
+        },
+    ];
+
+    const billboardChart: BillboardChart[] = [
+        {
+            sondId: '01',
+            className: 'sing-photo',
+            songName: 'Real Life',
+            author: 'The Weeknd',
+            time: '3:21',
+        },
+        {
+            sondId: '02',
+            className: 'sing-photo',
+            songName: 'Real Life',
+            author: 'The Weeknd',
+            time: '3:21',
+        },
+        {
+            sondId: '03',
+            className: 'sing-photo',
+            songName: 'Real Life',
+            author: 'The Weeknd',
+            time: '3:21',
+        },
+        {
+            sondId: '04',
+            className: 'sing-photo',
+            songName: 'Real Life',
+            author: 'The Weeknd',
+            time: '3:21',
+        },
+        {
+            sondId: '05',
+            className: 'sing-photo',
+            songName: 'Real Life',
+            author: 'The Weeknd',
+            time: '3:21',
+        },
+        {
+            sondId: '06',
+            className: 'sing-photo',
+            songName: 'Real Life',
+            author: 'The Weeknd',
+            time: '3:21',
+        },
+    ];
+
     return (
         <div class='main-page'>
             <div class='right-menu'>
@@ -121,112 +226,91 @@ export const MainPageForm = () => {
                         </div>
                     </div>
                     <ul class='single-items'>
-                        <li class='item'>
-                            <div class='single-photo-1'></div>
-                            <div class='name-song'>Blinding Lights</div>
-                            <div class='singer'>The Weeknd</div>
-                        </li>
-                        <li class='item'>
-                            <div class='single-photo-2'></div>
-                            <div class='name-song'>Leon On</div>
-                            <div class='singer'>Major Lazer & DJ Snake</div>
-                        </li>
-                        <li class='item'>
-                            <div class='single-photo-3'></div>
-                            <div class='name-song'>Спам</div>
-                            <div class='singer'>Дайте танк (!)</div>
-                        </li>
-                        <li class='item'>
-                            <div class='single-photo-4'></div>
-                            <div class='name-song'>Havana</div>
-                            <div class='singer'>Camila Cabello</div>
-                        </li>
-                        <li class='item'>
-                            <div class='single-photo-5'></div>
-                            <div class='name-song'>Come As You Are</div>
-                            <div class='singer'>Nirvana</div>
-                        </li>
-                        <li class='item'>
-                            <div class='single-photo-6'></div>
-                            <div class='name-song'>Feel Something</div>
-                            <div class='singer'>Bea Miller</div>
-                        </li>
+                        {topTrack.map((item, index) => (
+                            <li class='item' key={index}>
+                                <div class={item.className}></div>
+                                <div class='name-song'>{item.name}</div>
+                                <div class='singer'>{item.singer}</div>
+                            </li>
+                        ))}
                     </ul>
                 </div>
                 <div class='top'>
                     <div class='billboard-charts'>
                         <div class='title'>Billboard Top Charts</div>
-                        <div class='audio'>
-                            <div class='number'>01</div>
-                            <button class='sing-photo'></button>
-                            <div class='song'>
-                                <div class='song-name'>Real Life</div>
-                                <div class='song-author'>The Weeknd</div>
-                            </div>
-                            <div class='time'>3:21</div>
-                            <button class='like'></button>
-                            <button class='add'></button>
-                        </div>
-                        <div class='audio'>
-                            <div class='number'>02</div>
-                            <div class='sing-photo'></div>
-                            <div class='song'>
-                                <div class='song-name'>Real Life</div>
-                                <div class='song-author'>The Weeknd</div>
-                            </div>
-                            <div class='time'>3:21</div>
-                            <button class='like'></button>
-                            <button class='add'></button>
-                        </div>
-                        <div class='audio'>
-                            <div class='number'>03</div>
-                            <div class='sing-photo'></div>
-                            <div class='song'>
-                                <div class='song-name'>Real Life</div>
-                                <div class='song-author'>The Weeknd</div>
-                            </div>
-                            <div class='time'>3:21</div>
-                            <button class='like'></button>
-                            <button class='add'></button>
-                        </div>
-                        <div class='audio'>
-                            <div class='number'>04</div>
-                            <div class='sing-photo'></div>
-                            <div class='song'>
-                                <div class='song-name'>Real Life</div>
-                                <div class='song-author'>The Weeknd</div>
-                            </div>
-                            <div class='time'>3:21</div>
-                            <button class='like'></button>
-                            <button class='add'></button>
-                        </div>
-                        <div class='audio'>
-                            <div class='number'>05</div>
-                            <div class='sing-photo'></div>
-                            <div class='song'>
-                                <div class='song-name'>Real Life</div>
-                                <div class='song-author'>The Weeknd</div>
-                            </div>
-                            <div class='time'>3:21</div>
-                            <button class='like'></button>
-                            <button class='add'></button>
-                        </div>
-                        <div class='audio'>
-                            <div class='number'>06</div>
-                            <div class='sing-photo'></div>
-                            <div class='song'>
-                                <div class='song-name'>Real Life</div>
-                                <div class='song-author'>The Weeknd</div>
-                            </div>
-                            <div class='time'>3:21</div>
-                            <button class='like'></button>
-                            <button class='add'></button>
+                        <div class='tracks'>
+                            {billboardChart.map((item, index) => (
+                                <div class='audio' key={index}>
+                                    <div class='number'>{item.sondId}</div>
+                                    <button class={item.className}></button>
+                                    <div class='song'>
+                                        <div class='song-name'>{item.songName}</div>
+                                        <div class='song-author'>{item.author}</div>
+                                    </div>
+                                    <div class='time'>{item.time}</div>
+                                    <button class='like'></button>
+                                    <button class='add'></button>
+                                </div>
+                            ))}
                         </div>
                     </div>
                     <div class='discover'>
-                        <div class='monthly-artists'></div>
-                        <div class='genres'></div>
+                        <div class='top-artists'>
+                            <div class='titles'>
+                                <div class='monthly-artists'>Monthly Top Artists</div>
+                                <a href='/' class='see-all'>
+                                    See All
+                                </a>
+                            </div>
+                            <ul class='artists'>
+                                <li class='one-item-1'></li>
+                                <li class='one-item-2'></li>
+                                <li class='one-item-3'></li>
+                                <li class='one-item-4'></li>
+                                <li class='one-item-5'></li>
+                            </ul>
+                        </div>
+                        <div class='genres'>
+                            <div class='titles'>
+                                <div class='monthly-artists'>Discover Genres</div>
+                                <a href='/' class='see-all'>
+                                    See All
+                                </a>
+                            </div>
+                            <div class='section'>
+                                <div class='album'></div>
+                                <div class='album'></div>
+                                <div class='album'></div>
+                            </div>
+                        </div>
                     </div>
+                </div>
+            </div>
+            <div class='player'>
+                <div class='song-image'></div>
+                <div class='full-name'>
+                    <div class='name'>Save Your Tears</div>
+                    <div class='singer'>The Weeknd</div>
+                </div>
+                <div class='buttons'>
+                    <button class='repeat'></button>
+                    <button class='back'></button>
+                    <button class='play'></button>
+                    <button class='next'></button>
+                    <button class='mix'></button>
+                </div>
+                <div class='time-slider'>
+                    <span class='current-time'>0:00</span>
+                    <input type='range' min='0' max='100' step='0.01' value='0'></input>
+                    <span class='time-left'>3:36</span>
+                </div>
+                <div class='volume'>
+                    <div class='icon'></div>
+                    <input type='range' value='0'></input>
+                </div>
+                <div class='end-icons'>
+                    <button class='settings'></button>
+                    <button class='album'></button>
                 </div>
             </div>
         </div>
