@@ -1,12 +1,14 @@
 import { Page1Component, Page2Component } from '../App';
 import { RegistrationPage } from '../pages/RegistrationPage/RegistrationPage';
 import { MainPage } from '../pages/MainPage/MainPage';
+import { AlbumPage } from '../pages/AlbumPage/AlbumPage';
 import { router } from '../utils/router';
 import { Routers } from '../types/router';
 
 export const ROUTERS: Routers[] = [
     { path: '/registration', component: RegistrationPage },
     { path: '/', component: MainPage },
+    { path: '/album', component: AlbumPage },
     { path: '/page1', component: Page1Component },
     { path: '/page2', component: Page2Component },
 ];

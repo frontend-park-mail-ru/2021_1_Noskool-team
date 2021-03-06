@@ -1,0 +1,70 @@
+@import '../../styles/colors.scss';
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@500&display=swap');
+
+.main-page {
+  background-color: $background;
+  display: flex;
+  justify-content: space-between;
+
+  .main {
+    position: absolute;
+    left: 15vw;
+    width: 84.18vw;
+
+    .header {
+      height: 105px;
+      background-color: $white;
+    }
+
+    .album {
+      display: flex;
+      justify-content: space-between;
+      margin: 70px 30px 70px 30px;
+      height: 700px;
+
+      .album-image {
+        margin-left: 60px;
+        width: 47%;
+        background-image: url(../../image/альбом1.png);
+        background-size: 100%;
+        background-position: center;
+      }
+
+      .album-songs {
+        margin-right: 60px;
+        width: 40%;
+        background-color: $white;
+        border-radius: 20px;
+
+        .song-image {
+          height: 200px;
+          width: 200px;
+          margin: 50px 0 60px 195px;
+          background-image: url(../../image/песня5.png);
+          background-position: center;
+          background-size: 100%;
+          border-radius: 120px;
+        }
+
+        .name {
+          margin-left: 100px;
+          font-family: 'Comfortaa', cursive;
+          color: #3f4b5e;
+          letter-spacing: 1px;
+
+          .song-name {
+            font-size: 24px;
+            font-weight: 600;
+          }
+
+          .singer {
+            font-size: 18px;
+            margin-top: 5px;
+          }
+        }
+      }
+    }
+  }
+}
