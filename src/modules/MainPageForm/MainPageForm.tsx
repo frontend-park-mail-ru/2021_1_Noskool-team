@@ -26,7 +26,12 @@ export const MainPageForm = () => {
                     <Single />
                 </div>
                 <div class='top'>
-                    <BillboardChart />
+                    <div class='billboard-charts'>
+                        <a href='/' class='title'>
+                            Billboard Top Charts
+                        </a>
+                        <BillboardChart />
+                    </div>
                     <div class='discover'>
                         <TopArtists />
                         <DiscoverGenres />

@@ -3,7 +3,7 @@ import { JSX } from 'jsx/jsx';
 import './style.scss';
 
 const HeaderButtons = () => {
-    const NOTFICATIONS: number = 4;
+    const NOTFICATIONS: string = '4';
 
     return (
         <div>
