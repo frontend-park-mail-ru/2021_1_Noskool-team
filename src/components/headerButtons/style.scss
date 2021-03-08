@@ -20,6 +20,18 @@
   background-image: url(../../image/артист4.png);
   background-size: 120%;
   right: 70px;
+
+  .close {
+    display: none;
+  }
+
+  .profile-menu {
+    position: absolute;
+    background-color: $white;
+    width: 80px;
+    height: 120px;
+    top: 60px;
+  }
 }
 
 .notifications {
