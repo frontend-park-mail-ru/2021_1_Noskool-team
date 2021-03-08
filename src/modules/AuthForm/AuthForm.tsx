@@ -2,15 +2,18 @@ import { JSX } from 'jsx/jsx';
 import { Input } from '../../components/Input/Input';
 import { Form } from '../../types/registration';
 import { requaredValidator } from '../../utils/form-validators';
+import { authUser } from '../../actions/registration';
 
 import './style.scss';
+import { redirectTo } from '../../utils/router';
+import { LINKS } from '../../constants/router';
 
 export const AuthForm = () => {
     const ID_REG_FORM_BUTTON = 'ID_REG_FORM_BUTTON';
 
     const form: Form = {
         fields: {
-            email: {
+            nickname: {
                 value: '',
                 isValid: false,
                 onSubmit: undefined,
@@ -37,7 +40,12 @@ export const AuthForm = () => {
         values.preventDefault();
         checkValid();
         if (form.isValid) {
-            console.log('send');
+            authUser({
+                nickname: form.fields.nickname.value,
+                password: form.fields.password.value,
+            })
+                .then(() => redirectTo(LINKS.main))
+                .catch((error) => console.log(error));
         }
     };
 
@@ -47,15 +55,15 @@ export const AuthForm = () => {
                 <div class={'auth-form__title'}>{'Вход'}</div>
                 <Input
                     onChange={(value) => {
-                        form.fields.email.value = (value.target as HTMLInputElement).value;
+                        form.fields.nickname.value = (value.target as HTMLInputElement).value;
                     }}
-                    name='email'
+                    name='nickname'
                     onValid={(value) => {
-                        form.fields.email.isValid = value;
+                        form.fields.nickname.isValid = value;
                     }}
                     validators={[requaredValidator]}
-                    placeholder='Введите email'
-                    onSubmit={form.fields.email}
+                    placeholder='Введите ник'
+                    onSubmit={form.fields.nickname}
                     className={'auth-form__input'}
                 />
                 <Input

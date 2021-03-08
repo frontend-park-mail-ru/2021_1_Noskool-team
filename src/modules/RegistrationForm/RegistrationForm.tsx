@@ -1,7 +1,13 @@
 import { JSX } from 'jsx/jsx';
 import { Input } from '../../components/Input/Input';
 import { Form } from '../../types/registration';
-import { requaredValidator } from '../../utils/form-validators';
+import {
+    requaredValidator,
+    emailValidator,
+    passwordValidator,
+    passwordLengthValidator,
+} from '../../utils/form-validators';
+import { registerUser } from '../../actions/registration';
 
 import './style.scss';
 
@@ -35,6 +41,11 @@ export const RegistrationForm = () => {
                 isValid: false,
                 onSubmit: undefined,
             },
+            nickname: {
+                value: '',
+                isValid: false,
+                onSubmit: undefined,
+            },
         },
         isValid: false,
     };
@@ -52,7 +63,13 @@ export const RegistrationForm = () => {
         values.preventDefault();
         checkValid();
         if (form.isValid) {
-            console.log('send');
+            registerUser({
+                email: form.fields.email.value,
+                nickname: form.fields.nickname.value,
+                password: form.fields.password.value,
+            })
+                .then((res) => console.log(res))
+                .catch((error) => console.log(error));
         }
     };
 
@@ -68,9 +85,22 @@ export const RegistrationForm = () => {
                     onValid={(value) => {
                         form.fields.email.isValid = value;
                     }}
-                    validators={[requaredValidator]}
+                    validators={[requaredValidator, emailValidator]}
                     placeholder='Введите email'
                     onSubmit={form.fields.email}
+                    className={'registration-form__input'}
+                />
+                <Input
+                    onChange={(value) => {
+                        form.fields.nickname.value = (value.target as HTMLInputElement).value;
+                    }}
+                    name='nickname'
+                    onValid={(value) => {
+                        form.fields.nickname.isValid = value;
+                    }}
+                    validators={[requaredValidator]}
+                    placeholder='Введите никнейм'
+                    onSubmit={form.fields.nickname}
                     className={'registration-form__input'}
                 />
                 <Input
@@ -81,7 +111,7 @@ export const RegistrationForm = () => {
                     onValid={(value) => {
                         form.fields.password.isValid = value;
                     }}
-                    validators={[requaredValidator]}
+                    validators={[requaredValidator, passwordLengthValidator, passwordValidator]}
                     placeholder='Введите пароль'
                     onSubmit={form.fields.password}
                     className={'registration-form__input'}
@@ -94,7 +124,7 @@ export const RegistrationForm = () => {
                     onValid={(value) => {
                         form.fields.passwordRepeat.isValid = value;
                     }}
-                    validators={[requaredValidator]}
+                    validators={[requaredValidator, passwordLengthValidator, passwordValidator]}
                     placeholder='Повторите пароль'
                     onSubmit={form.fields.passwordRepeat}
                     className={'registration-form__input'}
