@@ -9,13 +9,16 @@ interface InputProps {
     onValid: (value: boolean) => void;
     validators: ((value: string) => string | undefined)[];
     placeholder: string;
+    onSubmit: {
+        onSubmit: () => void;
+    };
     className?: string;
 }
 
 const InputInnner = () => {
     let count = 0;
 
-    return ({ onChange, name, validators, onValid, placeholder, className }: InputProps) => {
+    return ({ onChange, name, validators, onValid, placeholder, className, onSubmit }: InputProps) => {
         count++;
 
         const ID_INPUT = `input-${count}`;
@@ -34,11 +37,8 @@ const InputInnner = () => {
 
         let errorMsg: string = undefined;
 
-        const validateInput = (e: InputEvent) => {
-            errorMsg = validators.reduce(
-                (error, validator) => error || validator((e.target as HTMLInputElement).value),
-                ''
-            );
+        const validateInputCore = (value: string) => {
+            errorMsg = validators.reduce((error, validator) => error || validator(value), '');
             if (errorMsg) {
                 document.getElementById(ID_INPUT_ERROR).innerHTML = errorMsg;
                 document.getElementById(ID_INPUT_WRAPPER).classList.add(NOT_VALID_CLASS);
@@ -52,6 +52,14 @@ const InputInnner = () => {
                 document.getElementById(ID_INPUT_ERROR).innerHTML = '';
                 onValid(true);
             }
+        };
+
+        const validateInput = (e: InputEvent) => {
+            validateInputCore((e.target as HTMLInputElement).value);
+        };
+
+        onSubmit.onSubmit = () => {
+            validateInputCore((document.getElementById(ID_INPUT) as HTMLInputElement).value);
         };
 
         const onInput = (e: InputEvent) => {

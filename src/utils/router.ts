@@ -1,4 +1,4 @@
-import { ErrorComponent } from '../App';
+import { ErrorPage } from '../pages/ErrorPage/ErrorPage';
 import { Routers } from '../types/router';
 
 const findComponentByPath = (path: string, routes: Routers[]): Routers | undefined => {
@@ -6,7 +6,7 @@ const findComponentByPath = (path: string, routes: Routers[]): Routers | undefin
 };
 
 export const router = (routes: Routers[]) => () => {
-    const { component = ErrorComponent } = findComponentByPath(window.location.pathname, routes) || {};
+    const { component = ErrorPage } = findComponentByPath(window.location.pathname, routes) || {};
     const root = document.getElementById('root');
     root.innerHTML = '';
     root.appendChild(component());

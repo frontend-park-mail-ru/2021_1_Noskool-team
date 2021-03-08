@@ -1,12 +1,12 @@
 @import '../../styles/colors.scss';
 
-.registration-form-wrapper {
+.auth-form-wrapper {
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
 
-  .registration-form {
+  .auth-form {
     width: 500px;
     background-color: $white;
     border-radius: 30px;

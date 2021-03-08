@@ -1,12 +1,19 @@
-import { Page1Component, Page2Component } from '../App';
 import { RegistrationPage } from '../pages/RegistrationPage/RegistrationPage';
+import { AuthPage } from '../pages/AuthPage/AuthPage';
 import { router } from '../utils/router';
 import { Routers } from '../types/router';
+import { MainPage } from '../pages/MainPage/MainPage';
+
+export const LINKS = {
+    reg: '/registration',
+    auth: '/auth',
+    main: '/',
+};
 
 export const ROUTERS: Routers[] = [
-    { path: '/registration', component: RegistrationPage },
-    { path: '/page1', component: Page1Component },
-    { path: '/page2', component: Page2Component },
+    { path: LINKS.reg, component: RegistrationPage },
+    { path: LINKS.auth, component: AuthPage },
+    { path: LINKS.main, component: MainPage },
 ];
 
 export const onClickA = (e: MouseEvent) => {
