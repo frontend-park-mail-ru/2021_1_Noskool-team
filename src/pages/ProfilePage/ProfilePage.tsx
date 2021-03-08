@@ -5,7 +5,7 @@ export const ProfilePage = () => {
     return (
         <div class={'profile-page-wrapper'}>
             <NavBar />
-            <div></div>
+            <div class='profile-page'></div>
         </div>
     );
 };
