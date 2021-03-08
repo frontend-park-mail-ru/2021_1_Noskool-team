@@ -3,13 +3,15 @@ import { onClickA } from '../../utils/router';
 
 interface LinkProps {
     to: string;
-    text: string;
+    text?: string;
+    child?: () => any;
 }
 
-export const Link = ({ to, text }: LinkProps) => {
+export const Link = ({ to, text = '', child = () => <div></div> }: LinkProps) => {
     return (
-        <a href={to} onclick={onClickA}>
+        <a href={''} onclick={onClickA(to)}>
             {text}
+            {child()}
         </a>
     );
 };

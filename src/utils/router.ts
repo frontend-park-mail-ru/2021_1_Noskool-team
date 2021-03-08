@@ -18,8 +18,8 @@ export const redirectTo = (url: string) => {
     router(ROUTERS)();
 };
 
-export const onClickA = (e: MouseEvent) => {
+export const onClickA = (to: string) => (e: MouseEvent) => {
     e.preventDefault();
-    window.history.pushState('', '', (<HTMLLinkElement>e.target).getAttribute('href'));
+    window.history.pushState('', '', to);
     router(ROUTERS)();
 };
