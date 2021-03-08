@@ -1,0 +1,53 @@
+@import '../../styles/colors.scss';
+
+%button {
+  height: 48px;
+  width: 48px;
+  border: none;
+  cursor: pointer;
+  border-radius: 20px;
+  box-shadow: 5px 5px 5px 5px rgba($color: #8a8c99, $alpha: 0.3);
+  outline: none;
+  position: absolute;
+  background-position: center;
+  top: 30px;
+  background-repeat: no-repeat;
+}
+
+.profile {
+  @extend %button;
+
+  background-image: url(../../image/артист4.png);
+  background-size: 120%;
+  right: 70px;
+
+  .close {
+    display: none;
+  }
+
+  .profile-menu {
+    position: absolute;
+    background-color: $white;
+    width: 80px;
+    height: 120px;
+    top: 60px;
+  }
+}
+
+.notifications {
+  @extend %button;
+
+  background-color: $pink;
+  color: $white;
+  font-size: 20px;
+  right: 136px;
+}
+
+.search {
+  @extend %button;
+
+  background-image: url(../../icons/search_black_24dp.svg);
+  background-size: 22px;
+  background-color: $white;
+  right: 202px;
+}

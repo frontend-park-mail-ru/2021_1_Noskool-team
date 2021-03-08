@@ -1,0 +1,200 @@
+@import '../../styles/colors.scss';
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@500&display=swap');
+
+.right-menu {
+  height: 110vh;
+  width: 15vw;
+  background-color: #fff;
+  position: fixed;
+
+  .menu-items {
+    padding-top: 50px;
+    padding-left: 30px;
+    color: #8a8c99;
+
+    .menu-header {
+      font-family: 'M PLUS 1p', sans-serif;
+      font-size: 13px;
+      letter-spacing: 2px;
+    }
+
+    .item {
+      font-family: 'Comfortaa', cursive;
+      font-size: 18px;
+      letter-spacing: 1.5px;
+      padding: 7px 0;
+      width: 250px;
+
+      %icon {
+        width: 20vh;
+        background-color: #8a8c99;
+        display: inline;
+        padding-right: 25px;
+      }
+
+      .icon-1 {
+        @extend %icon;
+
+        background-image: url(./icons/bubble_chart_black_24dp.svg);
+      }
+
+      .icon-2 {
+        @extend %icon;
+
+        background-image: url(./icons/campaign_black_24dp.svg);
+      }
+
+      .icon-3 {
+        @extend %icon;
+
+        background-image: url(./icons/mic_black_24dp.svg);
+      }
+
+      .icon-4 {
+        @extend %icon;
+
+        background-image: url(./icons/collections_black_24dp.svg);
+      }
+
+      .icon-5 {
+        @extend %icon;
+
+        background-image: url(./icons/music_note_black_24dp.svg);
+      }
+
+      .icon-6 {
+        @extend %icon;
+
+        background-image: url(./icons/collections_bookmark_black_24dp.svg);
+      }
+
+      .icon-7 {
+        @extend %icon;
+
+        background-image: url(./icons/like_black.svg);
+      }
+
+      .icon-8 {
+        @extend %icon;
+
+        background-image: url(./icons/folder_black_24dp.svg);
+      }
+
+      .icon-9 {
+        @extend %icon;
+
+        background-image: url(./icons/album_black_24dp.svg);
+      }
+
+      .icon-10 {
+        @extend %icon;
+
+        background-image: url(./icons/analytics_black_24dp.svg);
+      }
+
+      .icon-11 {
+        @extend %icon;
+
+        background-image: url(./icons/equalizer_black_24dp.svg);
+      }
+
+      .icon-12 {
+        @extend %icon;
+
+        background-image: url(./icons/show_chart_black_24dp.svg);
+      }
+
+      .text {
+        display: inline;
+        padding-left: 20px;
+        color: #8a8c99;
+        text-decoration: none;
+      }
+    }
+
+    .item:hover {
+      .icon-1 {
+        background-image: url(./icons/bubble_chart_pink.svg);
+      }
+
+      .icon-2 {
+        background-image: url(./icons//campaign_pink.svg);
+      }
+
+      .icon-3 {
+        background-image: url(./icons/mic_pink.svg);
+      }
+
+      .icon-4 {
+        background-image: url(./icons/collections_pink.svg);
+      }
+
+      .icon-5 {
+        background-image: url(./icons/music_note_pink.svg);
+      }
+
+      .icon-6 {
+        background-image: url(./icons/collections_boolmark_pink.svg);
+      }
+
+      .icon-7 {
+        background-image: url(./icons/like_pink.svg);
+      }
+
+      .icon-8 {
+        background-image: url(./icons/folder_pink.svg);
+      }
+
+      .icon-9 {
+        background-image: url(./icons/album_pink.svg);
+      }
+
+      .icon-10 {
+        background-image: url(./icons/analystics_pink.svg);
+      }
+
+      .icon-11 {
+        background-image: url(./icons/equalizer_pink.svg);
+      }
+
+      .icon-12 {
+        background-image: url(./icons/show_chart_pink.svg);
+      }
+
+      .text {
+        color: $pink;
+      }
+    }
+  }
+
+  .line {
+    border-bottom: 1px solid #8a8c99;
+    height: 30px;
+    margin-top: 20px;
+  }
+
+  .under-menu {
+    color: #8a8c99;
+    margin-left: 35px;
+    margin-top: 5px;
+    font-family: 'M PLUS 1p', sans-serif;
+
+    .help {
+      text-decoration: none;
+      color: #8a8c99;
+    }
+
+    .help:hover {
+      color: $pink;
+    }
+
+    .language {
+      cursor: pointer;
+    }
+
+    .language:hover {
+      color: $pink;
+    }
+  }
+}
