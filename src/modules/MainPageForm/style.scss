@@ -8,83 +8,14 @@
   display: flex;
   justify-content: space-between;
 
-  .right-menu {
-    height: 100%;
-    width: 22vw;
-    background-color: #fff;
-  }
-
-  .menu-items {
-    padding-top: 110px;
-    padding-left: 30px;
-    color: #8a8c99;
-
-    .menu-header {
-      font-family: 'M PLUS 1p', sans-serif;
-      font-size: 15px;
-      letter-spacing: 2px;
-    }
-
-    .item {
-      font-family: 'Comfortaa', cursive;
-      font-size: 20px;
-      letter-spacing: 1.5px;
-      padding: 16px 0;
-    }
-
-    %icon {
-      width: 20vh;
-      background-color: #8a8c99;
-      display: inline;
-      padding-right: 25px;
-    }
-
-    .icon-1 {
-      @extend %icon;
-
-      -webkit-mask-image: url(../../icons/bubble_chart_black_24dp.svg);
-      mask-image: url(../../icons/bubble_chart_black_24dp.svg);
-    }
-
-    .icon-2 {
-      @extend %icon;
-
-      -webkit-mask-image: url(../../icons/campaign_black_24dp.svg);
-      mask-image: url(../../icons/campaign_black_24dp.svg);
-    }
-
-    .icon-3 {
-      @extend %icon;
-
-      -webkit-mask-image: url(../../icons/mic_black_24dp.svg);
-      mask-image: url(../../icons/mic_black_24dp.svg);
-    }
-
-    .icon-4 {
-      @extend %icon;
-
-      -webkit-mask-image: url(../../icons/collections_black_24dp.svg);
-      mask-image: url(../../icons/collections_black_24dp.svg);
-    }
-
-    .text {
-      display: inline;
-      padding-left: 20px;
-      color: #8a8c99;
-      text-decoration: none;
-    }
-
-    .text:hover {
-      text-decoration: underline;
-    }
-  }
-
   .main {
-    width: 100%;
+    position: absolute;
+    left: 15vw;
+    width: 84.18vw;
 
     %button {
-      height: 55px;
-      width: 55px;
+      height: 48px;
+      width: 48px;
       border: none;
       cursor: pointer;
       border-radius: 20px;
@@ -92,93 +23,8 @@
       outline: none;
       position: absolute;
       background-position: center;
-      top: 50px;
+      top: 30px;
       background-repeat: no-repeat;
-    }
-
-    .feature-week {
-      height: 508px;
-      background-image: url(../../image/альбом1.png);
-      background-size: 100%;
-      background-position: center;
-      font-family: 'M PLUS 1p', sans-serif;
-
-      .profile {
-        @extend %button;
-
-        background-image: url(../../image/артист4.png);
-        background-size: 120%;
-        right: 70px;
-      }
-
-      .notifications {
-        @extend %button;
-
-        background-color: $pink;
-        color: $white;
-        font-size: 20px;
-        right: 156px;
-      }
-
-      .search {
-        @extend %button;
-
-        background-image: url(../../icons/search_black_24dp.svg);
-        background-size: 22px;
-        background-color: $white;
-        right: 242px;
-      }
-
-      .title {
-        height: 49px;
-        width: 302px;
-        background-color: $white;
-        border-radius: 20px;
-        position: absolute;
-        top: 152px;
-        left: 1067px;
-      }
-
-      .title-text {
-        color: $pink;
-        letter-spacing: 2px;
-        text-align: center;
-        font-size: 18px;
-        line-height: 12px;
-        padding-top: 20px;
-      }
-
-      .song-name {
-        position: absolute;
-        font-size: 60px;
-        letter-spacing: 3px;
-        font-weight: 600;
-        color: $white;
-        top: 213px;
-        left: 1067px;
-      }
-
-      .singers {
-        position: absolute;
-        top: 294px;
-        left: 1067px;
-        font-size: 30px;
-        letter-spacing: 3px;
-        color: $white;
-      }
-
-      .play {
-        @extend %button;
-
-        height: 78px;
-        width: 78px;
-        top: 368px;
-        left: 1067px;
-        background-color: $white;
-        background-image: url(../../icons/arrow_right_black_24dp.svg);
-        background-size: 70px;
-        background-repeat: no-repeat;
-      }
     }
 
     .weekly-top {
@@ -192,7 +38,7 @@
 
       .title {
         padding-left: 18px;
-        font-size: 30px;
+        font-size: 28px;
         font-weight: 500;
         letter-spacing: 3px;
         color: #373944;
@@ -202,7 +48,7 @@
         @extend %button;
 
         background-image: url(../../icons/chevron_left_black_24dp.svg);
-        top: 557px;
+        top: 433px;
         right: 146px;
       }
 
@@ -210,7 +56,7 @@
         @extend %button;
 
         background-image: url(../../icons/chevron_right_black_24dp.svg);
-        top: 557px;
+        top: 433px;
         right: 72px;
         background-color: $pink;
       }
@@ -219,196 +65,18 @@
         padding: 0;
         margin: 0;
       }
-
-      .single-items {
-        display: flex;
-        list-style: none;
-        justify-content: space-between;
-
-        .item {
-          padding: 28px 12px;
-
-          %photo {
-            height: 218px;
-            width: 218px;
-            border-radius: 10px;
-            background-position: center;
-            background-size: 100%;
-            box-shadow: 5px 5px 5px 5px rgba($color: #8a8c99, $alpha: 0.3);
-          }
-
-          .single-photo-1 {
-            @extend %photo;
-
-            background-image: url(../../image/песня1.png);
-            background-position: center;
-          }
-
-          .single-photo-2 {
-            @extend %photo;
-
-            background-image: url(../../image/песня6.png);
-          }
-
-          .single-photo-3 {
-            @extend %photo;
-
-            background-image: url(../../image/песня4.png);
-          }
-
-          .single-photo-4 {
-            @extend %photo;
-
-            background-image: url(../../image/песня5.png);
-          }
-
-          .single-photo-5 {
-            @extend %photo;
-
-            background-image: url(../../image/альбом3.png);
-          }
-
-          .single-photo-6 {
-            @extend %photo;
-
-            background-image: url(../../image/песня3.png);
-          }
-
-          .name-song {
-            width: 218px;
-            font-size: 23px;
-            letter-spacing: 1px;
-            text-align: center;
-            color: #0f1e36;
-            font-weight: 500;
-            padding-top: 32px;
-          }
-
-          .singer {
-            width: 218px;
-            font-size: 19px;
-            letter-spacing: 1px;
-            text-align: center;
-            color: #8a8c99;
-            padding-top: 12px;
-          }
-        }
-      }
     }
 
     .top {
       display: flex;
       justify-content: space-between;
-      width: 50%;
+      // width: 50%;
       font-family: 'Comfortaa', cursive;
-      // margin: 25px 50px;
+    }
 
-      .billboard-charts {
-        width: 100%;
-        margin: 25px 0 25px 50px;
-
-        .title {
-          font-size: 30px;
-          font-weight: 500;
-          letter-spacing: 3px;
-          color: #373944;
-          margin-bottom: 25px;
-        }
-
-        .audio {
-          height: 58px;
-          display: flex;
-          padding: 8px;
-
-          .number {
-            color: #8a8c99;
-            font-size: 22px;
-            padding-top: 16px;
-            padding-bottom: 16px;
-            font-family: 'Heebo', sans-serif;
-          }
-
-          .sing-photo {
-            background-image: url(../../image/песня1.png);
-            background-size: 100%;
-            margin-left: 27px;
-            background-position: center;
-            border-radius: 5px;
-            width: 66px;
-            height: 58px;
-            cursor: pointer;
-            outline: none;
-            border: none;
-          }
-
-          .sing-photo:hover {
-            background-image: url(../../icons/play_circle_filled_black_24dp.svg), url(../../image/песня1.png);
-            background-repeat: no-repeat, no-repeat;
-            background-position: center, center;
-            background-size: 40px, 100%;
-          }
-
-          .song {
-            display: block;
-            padding: 2px 37px;
-
-            .song-name {
-              color: #0f1e36;
-              font-size: 22px;
-              letter-spacing: 2px;
-              padding-bottom: 5px;
-              width: 400px;
-            }
-
-            .song-author {
-              color: #8a8c99;
-              font-size: 20px;
-            }
-          }
-
-          .time {
-            font-family: 'Heebo', sans-serif;
-            font-size: 22px;
-            color: #8a8c99;
-            padding-top: 16px;
-            padding-bottom: 16px;
-          }
-
-          %button-music {
-            padding-right: 25px;
-            background-size: 25px;
-            background-position: center;
-            background-repeat: no-repeat;
-            outline: none;
-            border: none;
-            cursor: pointer;
-          }
-
-          .like {
-            @extend %button-music;
-
-            margin-left: 45px;
-            margin-right: 5px;
-            background-image: url(../../icons/favorite_black_24dp.svg);
-          }
-
-          .like:hover {
-            background-image: url(../../icons/favourite_pink.svg);
-          }
-
-          .add {
-            @extend %button-music;
-
-            background-image: url(../../icons/add_black_24dp.svg);
-            background-size: 30px;
-            margin-right: 0;
-          }
-
-          .add:hover {
-            background-image: url(../../icons/add_pink.svg);
-          }
-        }
-      }
+    .discover {
+      width: 100%;
+      margin: 5px 50px 25px 10px;
     }
   }
 }
