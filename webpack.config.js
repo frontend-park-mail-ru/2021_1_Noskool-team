@@ -42,7 +42,7 @@ module.exports = {
     },
     output: {
         filename: 'main.js',
-        path: path.resolve(__dirname, 'out'),
+        path: path.resolve(__dirname, 'build'),
     },
     mode: "development"
 };

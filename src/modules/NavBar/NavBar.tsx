@@ -1,4 +1,5 @@
 import { JSX } from 'jsx/jsx';
+import { logoutUser } from '../../actions/registration';
 import { Link } from '../../components/Link/Link';
 import { LINKS } from '../../constants/router';
 
@@ -12,6 +13,7 @@ export const NavBar = () => {
                 to={LINKS.profile}
                 child={() => <div class='nav-bar__link nav-bar__link--profile'>{'Профиль'}</div>}
             />
+            <div onclick={() => logoutUser()}>{'awddawdawd'}</div>
         </div>
     );
 };
