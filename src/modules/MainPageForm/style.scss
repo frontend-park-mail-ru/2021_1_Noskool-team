@@ -21,7 +21,7 @@
       border-radius: 20px;
       box-shadow: 5px 5px 5px 5px rgba($color: #8a8c99, $alpha: 0.3);
       outline: none;
-      position: absolute;
+      // position: absolute;
       background-position: center;
       top: 30px;
       background-repeat: no-repeat;
@@ -50,6 +50,7 @@
         background-image: url(../../icons/chevron_left_black_24dp.svg);
         top: 433px;
         right: 146px;
+        margin-right: 25px;
       }
 
       .next {

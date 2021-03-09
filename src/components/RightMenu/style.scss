@@ -167,34 +167,4 @@
       }
     }
   }
-
-  .line {
-    border-bottom: 1px solid #8a8c99;
-    height: 30px;
-    margin-top: 20px;
-  }
-
-  .under-menu {
-    color: #8a8c99;
-    margin-left: 35px;
-    margin-top: 5px;
-    font-family: 'M PLUS 1p', sans-serif;
-
-    .help {
-      text-decoration: none;
-      color: #8a8c99;
-    }
-
-    .help:hover {
-      color: $pink;
-    }
-
-    .language {
-      cursor: pointer;
-    }
-
-    .language:hover {
-      color: $pink;
-    }
-  }
 }

@@ -18,13 +18,6 @@ const RightMenu = () => (
                 ))}
             </div>
         ))}
-        <div class='line'></div>
-        <div class='under-menu'>
-            <a href='/' class='help'>
-                Help
-            </a>
-            <div class='language'>En</div>
-        </div>
     </div>
 );
 
