@@ -1,4 +1,32 @@
 .profile-page-wrapper {
-  width: 100%;
-  display: flex;
+  .profile-page {
+    width: calc(100% - 125px);
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 250px;
+
+    &__photo {
+      width: 250px;
+
+      img {
+        width: 100%;
+        border-radius: 40px;
+      }
+    }
+
+    &__main-info {
+      display: flex;
+      align-items: center;
+    }
+
+    &__text-info-container {
+      margin: 0 0 0 15px;
+      width: 300px;
+    }
+  }
 }
