@@ -1,5 +1,5 @@
 import { JSX } from 'jsx/jsx';
-import RightMenu from '../../components/RightMenu/rightMenu';
+import { NavBar } from '../NavBar/NavBar';
 import HeaderButtons from '../../components/headerButtons/HeaderButtons';
 import Songs from '../../components/Songs/Songs';
 
@@ -8,7 +8,7 @@ import './style.scss';
 export const AlbumPageForm = () => {
     return (
         <div class='main-page'>
-            <RightMenu />
+            <NavBar />
             <div class='main-part'>
                 <div class='header'>
                     <HeaderButtons />
