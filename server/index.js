@@ -5,13 +5,13 @@ let path = require('path');
 http.createServer((request, response) => {
     console.log('request ', request.url);
 
-    var filePath = '.' + request.url;
+    let filePath = '.' + request.url;
     if (filePath == './') {
         filePath = './index.html';
     }
 
-    var extname = String(path.extname(filePath)).toLowerCase();
-    var mimeTypes = {
+    let extname = String(path.extname(filePath)).toLowerCase();
+    let mimeTypes = {
         '.html': 'text/html',
         '.js': 'text/javascript',
         '.css': 'text/css',
@@ -29,13 +29,13 @@ http.createServer((request, response) => {
         '.wasm': 'application/wasm'
     };
 
-    var contentType = mimeTypes[extname] || 'application/octet-stream';
+    let contentType = mimeTypes[extname] || 'application/octet-stream';
 
-    fs.readFile(filePath, function(error, content) {
+    fs.readFile(filePath, (error, content) => {
         if (error) {
             if(error.code == 'ENOENT') {
-                fs.readFile('./index.html', function(error, content) {
-                    response.writeHead(404, { 'Content-Type': 'text/html' });
+                fs.readFile('./index.html', function(_, content) {
+                    response.writeHead(200, { 'Content-Type': 'text/html' });
                     response.end(content, 'utf-8');
                 });
             }
@@ -51,4 +51,3 @@ http.createServer((request, response) => {
     });
 
 }).listen(80);
-console.log('Server running at http://127.0.0.1:80/');
