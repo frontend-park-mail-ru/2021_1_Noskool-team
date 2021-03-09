@@ -10,8 +10,5 @@ export const post = <R>(url: string, body: R) => {
         method: 'post',
         credentials: 'include',
         body: JSON.stringify(body),
-        headers: {
-            'Authorization': 'Bearer awdusehgfoisrh;ogj;seoipf[da',
-        },
     });
 };
