@@ -8,9 +8,7 @@
   border-radius: 20px;
   box-shadow: 5px 5px 5px 5px rgba($color: #8a8c99, $alpha: 0.3);
   outline: none;
-  position: absolute;
   background-position: center;
-  top: 30px;
   background-repeat: no-repeat;
 }
 
@@ -21,14 +19,16 @@
   background-position: center;
   font-family: 'M PLUS 1p', sans-serif;
 
-  .title {
-    height: 39px;
-    width: 252px;
-    background-color: $white;
-    border-radius: 20px;
-    position: absolute;
-    top: 122px;
-    left: 767px;
+  .position-feature {
+    padding-top: 122px;
+    padding-left: 41.8%;
+
+    .title {
+      height: 39px;
+      width: 252px;
+      background-color: $white;
+      border-radius: 20px;
+    }
   }
 
   .title-text {
@@ -41,28 +41,30 @@
   }
 
   .song-name {
-    position: absolute;
     font-size: 50px;
     letter-spacing: 3px;
     font-weight: 600;
     color: $white;
-    top: 168px;
-    left: 767px;
+    padding-left: 41.8%;
     display: block;
     cursor: pointer;
     text-decoration: none;
   }
 
   .singers {
-    position: absolute;
     top: 234px;
-    left: 767px;
+    padding-left: 41.8%;
     font-size: 25px;
     letter-spacing: 3px;
     color: $white;
     display: block;
     cursor: pointer;
     text-decoration: none;
+  }
+
+  .position-button {
+    padding-left: 41.8%;
+    padding-top: 20px;
   }
 
   .play {
