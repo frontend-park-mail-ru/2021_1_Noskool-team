@@ -59,7 +59,17 @@ export const ProfilePage = () => {
         if (!form.fields.nickname.value) {
             delete body.nickname;
         }
-        changeUser({}, localStorage.getItem('user_id'));
+        changeUser(body, localStorage.getItem('user_id')).then((res) => {
+            if (res.ok) {
+                getUser()
+                    .then((res) => {
+                        onLoadProfile(res);
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
+            }
+        });
     };
 
     return (
