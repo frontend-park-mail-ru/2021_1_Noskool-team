@@ -10,8 +10,10 @@ const FeatureOfWeek = () => {
     return (
         <div class='feature-week'>
             <HeaderButtons />
-            <div class='title'>
-                <div class='title-text'>FEATURED OF THE WEEK</div>
+            <div class='position-feature'>
+                <div class='title'>
+                    <div class='title-text'>FEATURED OF THE WEEK</div>
+                </div>
             </div>
             <a href='/' class='song-name'>
                 {SONGNAME}
@@ -19,7 +21,9 @@ const FeatureOfWeek = () => {
             <a href='/' class='singers'>
                 {SINGERS}
             </a>
-            <button class='play'></button>
+            <div class='position-button'>
+                <button class='play'></button>
+            </div>
         </div>
     );
 };
