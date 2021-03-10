@@ -1,0 +1,24 @@
+{
+  "env": {
+    "browser": true,
+    "es2020": true
+  },
+  "plugins": [
+    "standard",
+    "import"
+  ],
+  "extends": [
+    "eslint:recommended"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+		"project": "tsconfig.json",
+		"tsconfigRootDir": ".",
+    "no-unused-vars": "off"
+	},
+  "rules": {
+    "no-debugger": "off",
+    "no-console": 0,
+    "javascript.validate.enable": 0
+  }
+}

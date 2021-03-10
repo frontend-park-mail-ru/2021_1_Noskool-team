@@ -1,0 +1,57 @@
+@import '../../styles/colors.scss';
+
+.auth-form-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .auth-form {
+    width: 500px;
+    background-color: $white;
+    border-radius: 30px;
+    padding: 50px 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 15%;
+
+    &__title {
+      color: $black;
+      font-size: 40px;
+      line-height: 45px;
+      margin-bottom: 30px;
+    }
+
+    &__input {
+      margin-bottom: 30px;
+    }
+
+    &__error {
+      height: 50px;
+      color: $error;
+    }
+
+    button {
+      background-color: $pink;
+      border-radius: 5px;
+      width: 325px;
+      height: 50px;
+      color: $white;
+      font-size: 22px;
+      line-height: 25px;
+      font-weight: 500;
+      cursor: pointer;
+      transform: scale(0.975, 0.975);
+      transition: all 0.5s;
+
+      &:nth-last-child(1) {
+        margin-top: 15px;
+      }
+
+      &:hover {
+        transform: scale(1, 1);
+      }
+    }
+  }
+}

@@ -1,0 +1,199 @@
+@import '../../styles/colors.scss';
+
+%button {
+  height: 48px;
+  width: 48px;
+  border: none;
+  cursor: pointer;
+  border-radius: 20px;
+  box-shadow: 5px 5px 5px 5px rgba($color: #8a8c99, $alpha: 0.3);
+  outline: none;
+  position: absolute;
+  background-position: center;
+  top: 30px;
+  background-repeat: no-repeat;
+}
+
+.profile {
+  @extend %button;
+
+  background-image: url(../../image/артист4.png);
+  background-size: 120%;
+  right: 70px;
+
+  .close {
+    display: none;
+  }
+
+  .profile-menu {
+    position: absolute;
+    background-color: $white;
+    width: 300px;
+    height: 300px;
+    top: 75px;
+    right: -50px;
+    border-radius: 10px;
+
+    .data-profile {
+      display: flex;
+      // justify-content: space-between;
+      margin-top: 15px;
+
+      .image-profile {
+        background-image: url(../../image/артист4.png);
+        background-position: center;
+        background-size: 120%;
+        height: 55px;
+        width: 55px;
+        margin-left: 15px;
+        border-radius: 35px;
+      }
+
+      .text {
+        text-align: start;
+        font-family: 'Comfortaa', cursive;
+        font-size: 15px;
+        padding-top: 5px;
+        margin-right: 10px;
+        margin-left: 20px;
+        color: #8a8c99;
+
+        .nickname {
+          margin-bottom: 5px;
+          font-size: 20px;
+          font-weight: 600;
+        }
+      }
+    }
+
+    ul {
+      padding: 0;
+      margin: 0;
+    }
+
+    .item {
+      padding-bottom: 7px;
+      width: 100%;
+      display: flex;
+
+      %icon {
+        height: 25px;
+        width: 25px;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: 100%;
+        margin-right: 10px;
+      }
+
+      .icon-1 {
+        @extend %icon;
+
+        background-image: url(./icons/settings_black_24dp.svg);
+      }
+
+      .icon-2 {
+        @extend %icon;
+
+        background-image: url(./icons/exit_to_app_black_24dp.svg);
+      }
+
+      .icon-3 {
+        @extend %icon;
+
+        background-image: url(./icons/brightness_4_black_24dp.svg);
+      }
+
+      .icon-4 {
+        @extend %icon;
+
+        background-image: url(./icons/help_outline_black_24dp.svg);
+      }
+
+      .icon-5 {
+        @extend %icon;
+
+        background-image: url(./icons/language_black_24dp.svg);
+      }
+
+      .next {
+        margin-right: 0;
+        height: 25px;
+        width: 25px;
+        margin-left: 10px;
+        background-image: url(./icons/chevron_right_black_24dp.svg);
+      }
+
+      .link {
+        margin-top: 5px;
+        text-decoration: none;
+        color: #8a8c99;
+        margin-right: 0;
+        width: 200px;
+      }
+    }
+
+    .item:hover {
+      .link {
+        color: $pink;
+      }
+
+      .icon-1 {
+        background-image: url(./icons//settings_pink.svg);
+      }
+
+      .icon-2 {
+        background-image: url(./icons/exit_pink.svg);
+      }
+
+      .icon-3 {
+        background-image: url(./icons/brightness_pink.svg);
+      }
+
+      .icon-4 {
+        background-image: url(./icons/help_pink.svg);
+      }
+
+      .icon-5 {
+        background-image: url(./icons/language_pink.svg);
+      }
+
+      .next {
+        background-image: url(./icons/chevron_pink.svg);
+      }
+    }
+
+    .items-user {
+      margin-top: 13px;
+      list-style: none;
+      font-family: 'Comfortaa', cursive;
+      text-align: start;
+      font-size: 18px;
+      margin-left: 20px;
+    }
+
+    .line {
+      margin-top: 13px;
+      height: 1px;
+      width: 100%;
+      border-bottom: 1px solid #8a8c99;
+    }
+  }
+}
+
+.notifications {
+  @extend %button;
+
+  background-color: $pink;
+  color: $white;
+  font-size: 20px;
+  right: 136px;
+}
+
+.search {
+  @extend %button;
+
+  background-image: url(../../icons/search_black_24dp.svg);
+  background-size: 22px;
+  background-color: $white;
+  right: 202px;
+}

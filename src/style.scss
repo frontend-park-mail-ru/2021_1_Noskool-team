@@ -1,0 +1,25 @@
+@import './styles/colors.scss';
+
+body {
+  background-color: $background;
+  padding: 0;
+  margin: 0;
+  font-family: 'Alegreya', serif;
+}
+
+input {
+  outline: none;
+  font-family: 'Alegreya', serif;
+}
+
+button {
+  outline: none;
+  margin: 0;
+  padding: 0;
+  border: none;
+  font-family: 'Alegreya', serif;
+}
+
+a {
+  text-decoration: none;
+}

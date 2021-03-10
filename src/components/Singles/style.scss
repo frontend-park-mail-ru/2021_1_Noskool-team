@@ -1,0 +1,137 @@
+@import '../../styles/colors.scss';
+
+.single-items {
+  display: flex;
+  list-style: none;
+  justify-content: space-between;
+  overflow: hidden;
+
+  .item {
+    padding: 28px 25px;
+    width: 50%;
+
+    %photo {
+      height: 198px;
+      width: 198px;
+      border-radius: 10px;
+      background-position: center;
+      background-size: 100%;
+      box-shadow: 5px 5px 5px 5px rgba($color: #8a8c99, $alpha: 0.3);
+      outline: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    .single-photo-1 {
+      @extend %photo;
+
+      background-image: url(../../image/песня1.png);
+      background-position: center;
+    }
+
+    .single-photo-1:hover {
+      background-image: url(../../icons/play_circle_filled_black_24dp.svg), url(../../image/песня1.png);
+      background-repeat: no-repeat, no-repeat;
+      background-position: center, center;
+      background-size: 60px, 100%;
+    }
+
+    .single-photo-2 {
+      @extend %photo;
+
+      background-image: url(../../image/песня6.png);
+    }
+
+    .single-photo-2:hover {
+      background-image: url(../../icons/play_circle_filled_black_24dp.svg), url(../../image/песня6.png);
+      background-repeat: no-repeat, no-repeat;
+      background-position: center, center;
+      background-size: 60px, 100%;
+    }
+
+    .single-photo-3 {
+      @extend %photo;
+
+      background-image: url(../../image/песня4.png);
+    }
+
+    .single-photo-3:hover {
+      background-image: url(../../icons/play_circle_filled_black_24dp.svg), url(../../image/песня4.png);
+      background-repeat: no-repeat, no-repeat;
+      background-position: center, center;
+      background-size: 60px, 100%;
+    }
+
+    .single-photo-4 {
+      @extend %photo;
+
+      background-image: url(../../image/песня5.png);
+    }
+
+    .single-photo-4:hover {
+      background-image: url(../../icons/play_circle_filled_black_24dp.svg), url(../../image/песня5.png);
+      background-repeat: no-repeat, no-repeat;
+      background-position: center, center;
+      background-size: 60px, 100%;
+    }
+
+    .single-photo-5 {
+      @extend %photo;
+
+      background-image: url(../../image/альбом3.png);
+    }
+
+    .single-photo-5:hover {
+      background-image: url(../../icons/play_circle_filled_black_24dp.svg), url(../../image/альбом3.png);
+      background-repeat: no-repeat, no-repeat;
+      background-position: center, center;
+      background-size: 60px, 100%;
+    }
+
+    .single-photo-6 {
+      @extend %photo;
+
+      background-image: url(../../image/песня3.png);
+    }
+
+    .single-photo-6:hover {
+      background-image: url(../../icons/play_circle_filled_black_24dp.svg), url(../../image/песня3.png);
+      background-repeat: no-repeat, no-repeat;
+      background-position: center, center;
+      background-size: 60px, 100%;
+    }
+
+    .name-song {
+      width: 198px;
+      font-size: 20px;
+      letter-spacing: 1px;
+      text-align: center;
+      color: #0f1e36;
+      font-weight: 500;
+      padding-top: 32px;
+      display: block;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .name-song:hover {
+      color: $pink;
+    }
+
+    .singer {
+      width: 198px;
+      font-size: 16px;
+      letter-spacing: 1px;
+      text-align: center;
+      color: #8a8c99;
+      padding-top: 12px;
+      display: block;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .singer:hover {
+      color: $pink;
+    }
+  }
+}
