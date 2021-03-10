@@ -1,4 +1,4 @@
-import { JSX } from 'jsx/jsx';
+import { JSX } from '../../jsx/jsx';
 import RightMenu from '../../components/RightMenu/rightMenu';
 import FeatureOfWeek from '../../components/featureWeek/featureOfWeek';
 import Single from '../../components/Singles/Single';
@@ -9,7 +9,7 @@ import AudioLine from '../../components/AudioLine/AudioLine';
 
 import './style.scss';
 
-export const MainPageForm = () => {
+export const MainPageInner = () => {
     return (
         <div class='main-page'>
             <RightMenu />

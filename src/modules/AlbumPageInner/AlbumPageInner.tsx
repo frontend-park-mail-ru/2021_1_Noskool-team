@@ -1,11 +1,11 @@
-import { JSX } from 'jsx/jsx';
+import { JSX } from '../../jsx/jsx';
 import { NavBar } from '../NavBar/NavBar';
 import HeaderButtons from '../../components/headerButtons/HeaderButtons';
 import Songs from '../../components/Songs/Songs';
 
 import './style.scss';
 
-export const AlbumPageForm = () => {
+export const AlbumPageInner = () => {
     return (
         <div class='main-page'>
             <NavBar />

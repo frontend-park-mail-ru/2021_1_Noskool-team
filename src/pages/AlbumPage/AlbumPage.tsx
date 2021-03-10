@@ -1,6 +1,6 @@
 import { JSX } from 'jsx/jsx';
-import { AlbumPageForm } from '../../modules/AlbumPageForm/AlbumPageForm';
+import { AlbumPageInner } from '../../modules/AlbumPageInner/AlbumPageInner';
 
 export const AlbumPage = () => {
-    return <AlbumPageForm />;
+    return <AlbumPageInner />;
 };
