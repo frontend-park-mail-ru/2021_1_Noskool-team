@@ -7,7 +7,7 @@ import {
     passwordValidator,
     passwordLengthValidator,
 } from '../../utils/form-validators';
-import { registerUser } from '../../actions/registration';
+import { registerUser } from '../../actions/registration/registration';
 import { redirectTo } from '../../utils/router';
 import { LINKS } from '../../constants/router';
 import { ErrorFetch } from '../../types/common';

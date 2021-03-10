@@ -17,3 +17,7 @@ export const toggleClass = (id: string, className: string) => {
 export const getInputValue = (id: string): string => {
     return (document.getElementById(id) as HTMLInputElement).value;
 };
+
+export const setImgPath = (id: string, path: string) => {
+    (document.getElementById(id) as HTMLImageElement).setAttribute('href', path);
+};

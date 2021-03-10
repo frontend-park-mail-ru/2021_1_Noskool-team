@@ -2,7 +2,7 @@ import { JSX } from 'jsx/jsx';
 import { Input } from '../../components/Input/Input';
 import { Form } from '../../types/registration';
 import { requaredValidator } from '../../utils/form-validators';
-import { authUser } from '../../actions/registration';
+import { authUser } from '../../actions/registration/registration';
 import { redirectTo } from '../../utils/router';
 import { LINKS } from '../../constants/router';
 import { setText } from '../../utils/inner-utils';

@@ -1,4 +1,8 @@
+@import '../../styles/colors.scss';
+
 .profile-page-wrapper {
+  height: 100%;
+
   .profile-page {
     width: calc(100% - 125px);
     position: absolute;
@@ -8,7 +12,6 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-    padding-top: 250px;
 
     &__photo {
       width: 250px;
@@ -21,12 +24,26 @@
 
     &__main-info {
       display: flex;
-      align-items: center;
+      align-items: flex-start;
+      background-color: $white;
+      padding: 15px;
+      border-radius: 30px;
+      margin-top: 15%;
     }
 
     &__text-info-container {
       margin: 0 0 0 15px;
-      width: 300px;
+      width: 400px;
+    }
+
+    &__text-info {
+      &--nickname {
+        font-size: 40px;
+      }
+
+      &--email {
+        font-size: 20px;
+      }
     }
   }
 }
