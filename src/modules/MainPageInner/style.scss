@@ -1,0 +1,82 @@
+@import '../../styles/colors.scss';
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@500&display=swap');
+
+.main-page {
+  background-color: $background;
+  display: flex;
+  justify-content: space-between;
+
+  .main {
+    position: absolute;
+    left: 15vw;
+    width: 84.18vw;
+
+    %button {
+      height: 48px;
+      width: 48px;
+      border: none;
+      cursor: pointer;
+      border-radius: 20px;
+      box-shadow: 5px 5px 5px 5px rgba($color: #8a8c99, $alpha: 0.3);
+      outline: none;
+      position: absolute;
+      background-position: center;
+      top: 30px;
+      background-repeat: no-repeat;
+    }
+
+    .weekly-top {
+      margin: 41px 50px 0 41px;
+      font-family: 'Comfortaa', cursive;
+
+      .legend {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .title {
+        padding-left: 18px;
+        font-size: 28px;
+        font-weight: 500;
+        letter-spacing: 3px;
+        color: #373944;
+      }
+
+      .prev {
+        @extend %button;
+
+        background-image: url(../../icons/chevron_left_black_24dp.svg);
+        top: 433px;
+        right: 146px;
+      }
+
+      .next {
+        @extend %button;
+
+        background-image: url(../../icons/chevron_right_black_24dp.svg);
+        top: 433px;
+        right: 72px;
+        background-color: $pink;
+      }
+
+      ul {
+        padding: 0;
+        margin: 0;
+      }
+    }
+
+    .top {
+      display: flex;
+      justify-content: space-between;
+      // width: 50%;
+      font-family: 'Comfortaa', cursive;
+    }
+
+    .discover {
+      width: 100%;
+      margin: 5px 50px 25px 10px;
+    }
+  }
+}

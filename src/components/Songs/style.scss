@@ -1,0 +1,103 @@
+@import '../../styles/colors.scss';
+
+.tracks {
+  height: 310px;
+  overflow-y: scroll;
+
+  .audio {
+    height: 48px;
+    display: flex;
+    padding: 5px 10px;
+    margin-left: 25px;
+
+    .number {
+      position: relative;
+      color: #8a8c99;
+      font-size: 19px;
+      margin-top: 13px;
+      margin-bottom: 16px;
+      font-family: 'Heebo', sans-serif;
+      cursor: pointer;
+      outline: none;
+      border: none;
+      width: 40px;
+    }
+
+    .number:hover {
+      font-size: 1px;
+      color: $pink;
+      padding-left: 26.5px;
+      margin-top: 6px;
+      margin-bottom: 6px;
+      background-image: url(../../icons/arrow.svg);
+      background-color: $pink;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: 40px;
+      border-radius: 150px;
+    }
+
+    .song {
+      display: block;
+      padding: 2px 20px;
+
+      .song-name {
+        color: #0f1e36;
+        font-size: 20px;
+        letter-spacing: 2px;
+        margin-top: 10px;
+        font-weight: 600;
+        width: 350px;
+        text-decoration: none;
+        font-family: 'Comfortaa', cursive;
+        padding-top: 5px;
+      }
+    }
+
+    .time {
+      font-family: 'Heebo', sans-serif;
+      font-size: 19px;
+      color: #8a8c99;
+      padding-top: 13px;
+      padding-bottom: 16px;
+    }
+
+    %button-music {
+      padding-right: 25px;
+      background-size: 23px;
+      background-position: center;
+      background-repeat: no-repeat;
+      outline: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    .like {
+      @extend %button-music;
+
+      margin-left: 20px;
+      margin-right: 5px;
+      background-image: url(../../icons/favorite_black_24dp.svg);
+    }
+
+    .like:hover {
+      background-image: url(../../icons/favourite_pink.svg);
+    }
+
+    .add {
+      @extend %button-music;
+
+      background-image: url(../../icons/add_black_24dp.svg);
+      background-size: 27px;
+      margin-right: 0;
+    }
+
+    .add:hover {
+      background-image: url(../../icons/add_pink.svg);
+    }
+
+    .songs {
+      width: 500px;
+    }
+  }
+}
