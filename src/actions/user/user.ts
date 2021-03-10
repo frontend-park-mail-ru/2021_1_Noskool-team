@@ -20,7 +20,7 @@ export const changeUser = (body: UserChangeData, userId: string) => {
 
 export const changeUserPhoto = (img: any, userId: string) => {
     const formData = new FormData();
-    formData.append('file', img.files[0]);
+    formData.append('my_file', img.files[0]);
     console.log(formData);
     return post(CHANGE_USER_PHOTE + userId, formData);
 };
