@@ -104,6 +104,7 @@ export const AuthForm = () => {
                     placeholder='Введите пароль'
                     onSubmit={form.fields.password}
                     className={'auth-form__input'}
+                    isPassword
                 />
                 <div class='auth-form__error' id={ID_REG_FORM_ERROR_MSG} />
                 <button type='submit'>{'Войти'}</button>
