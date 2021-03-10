@@ -1,5 +1,5 @@
 import { JSX } from 'jsx/jsx';
-import { changeUser, getUser } from '../../actions/user/user';
+import { changeUser, changeUserPhoto, getUser } from '../../actions/user/user';
 import { Input } from '../../components/Input/Input';
 import { NavBar } from '../../modules/NavBar/NavBar';
 import { UserProfile } from '../../types/requests/user';
@@ -12,6 +12,7 @@ export const ProfilePage = () => {
     const ID_NICKNAME = 'ID_NICKNAME';
     const ID_EMAIL = 'ID_EMAIL';
     const ID_AVATAR = 'ID_AVATAR';
+    const ID_IMAGE_INPUT = 'ID_IMAGE_INPUT';
 
     const form: Form = {
         fields: {
@@ -72,21 +73,27 @@ export const ProfilePage = () => {
         });
     };
 
+    const onChacngePhoto = (e: MouseEvent) => {
+        changeUserPhoto(e.target, localStorage.getItem('user_id'));
+    };
+
     return (
         <div class={'profile-page-wrapper'}>
             <NavBar />
             <div class='profile-page'>
                 <div class={'profile-page__main-info'}>
                     <div class={'profile-page__photo'}>
-                        <img src={''} id={ID_AVATAR} alt='' />
+                        <img src={'https://i.ibb.co/M6LdN5m/2.png'} id={ID_AVATAR} alt='' />
+                        <input
+                            type='file'
+                            id={ID_IMAGE_INPUT}
+                            accept={'image/jpeg,image/png,image/webp'}
+                            onchange={onChacngePhoto}
+                        />
                     </div>
                     <div class={'profile-page__text-info-container'}>
-                        <div class={'profile-page__text-info profile-page__text-info--nickname'} id={ID_NICKNAME}>
-                            CUzkov
-                        </div>
-                        <div class={'profile-page__text-info--email'} id={ID_EMAIL}>
-                            UskovDanek@gmail.com
-                        </div>
+                        <div class={'profile-page__text-info profile-page__text-info--nickname'} id={ID_NICKNAME} />
+                        <div class={'profile-page__text-info--email'} id={ID_EMAIL} />
                     </div>
                 </div>
                 <div class='change-data'>
