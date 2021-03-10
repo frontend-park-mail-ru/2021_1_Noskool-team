@@ -4,3 +4,8 @@ export interface UserProfile {
     login: string;
     avatar: string;
 }
+
+export interface UserChangeData {
+    email?: string;
+    login?: string;
+}

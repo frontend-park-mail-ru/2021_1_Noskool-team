@@ -1,9 +1,10 @@
 import { JSX } from 'jsx/jsx';
-import { getUser } from '../../actions/user/user';
-// import { Input } from '../../components/Input/Input';
+import { changeUser, getUser } from '../../actions/user/user';
+import { Input } from '../../components/Input/Input';
 import { NavBar } from '../../modules/NavBar/NavBar';
 import { UserProfile } from '../../types/requests/user';
 import { setText, setImgPath } from '../../utils/inner-utils';
+import { Form } from '../../types/registration';
 
 import './style.scss';
 
@@ -11,6 +12,24 @@ export const ProfilePage = () => {
     const ID_NICKNAME = 'ID_NICKNAME';
     const ID_EMAIL = 'ID_EMAIL';
     const ID_AVATAR = 'ID_AVATAR';
+
+    const form: Form = {
+        fields: {
+            email: {
+                value: '',
+                isValid: false,
+                onSubmit: undefined,
+                onSetError: undefined,
+            },
+            nickname: {
+                value: '',
+                isValid: false,
+                onSubmit: undefined,
+                onSetError: undefined,
+            },
+        },
+        isValid: true,
+    };
 
     getUser()
         .then((res) => {
@@ -25,6 +44,22 @@ export const ProfilePage = () => {
         setText(ID_NICKNAME, proflie?.login);
         setText(ID_EMAIL, proflie?.email);
         setImgPath(ID_AVATAR, proflie?.avatar);
+        localStorage.setItem('user_id', String(proflie?.user_id));
+    };
+
+    const onSubmitChanges = (e: MouseEvent) => {
+        e.preventDefault();
+        const body = {
+            email: form.fields.email.value,
+            nickname: form.fields.nickname.value,
+        };
+        if (!form.fields.email.value) {
+            delete body.email;
+        }
+        if (!form.fields.nickname.value) {
+            delete body.nickname;
+        }
+        changeUser({}, localStorage.getItem('user_id'));
     };
 
     return (
@@ -44,14 +79,34 @@ export const ProfilePage = () => {
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class='change-data'>
-                <div class='change-data__input'>
-                    {/* <Input 
-                        name='email'
-                        placeholder='Измените ваш email'
-
-                    /> */}
+                <div class='change-data'>
+                    <form class='change-data__input' onsubmit={onSubmitChanges}>
+                        <Input
+                            onChange={(value) => {
+                                form.fields.email.value = (value.target as HTMLInputElement).value;
+                            }}
+                            name='email'
+                            onValid={(value) => {
+                                form.fields.email.isValid = value;
+                            }}
+                            validators={[]}
+                            placeholder='Измените email'
+                            onSubmit={form.fields.email}
+                        />
+                        <Input
+                            onChange={(value) => {
+                                form.fields.nickname.value = (value.target as HTMLInputElement).value;
+                            }}
+                            name='nickname'
+                            onValid={(value) => {
+                                form.fields.nickname.isValid = value;
+                            }}
+                            validators={[]}
+                            placeholder='Измените ник'
+                            onSubmit={form.fields.nickname}
+                        />
+                        <button type='submit'>{'Изменить'}</button>
+                    </form>
                 </div>
             </div>
         </div>

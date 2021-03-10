@@ -84,7 +84,7 @@ export const RegistrationForm = () => {
             })
                 .then((res) => {
                     if (res.status === 200) {
-                        redirectTo(LINKS.main);
+                        redirectTo(LINKS.auth);
                     } else {
                         res.json().then((res) => onSetError(res.error));
                     }
