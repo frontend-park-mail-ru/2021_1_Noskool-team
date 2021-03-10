@@ -27,6 +27,11 @@
       margin-bottom: 30px;
     }
 
+    &__error-msg {
+      height: 50px;
+      color: $error;
+    }
+
     button {
       background-color: $pink;
       border-radius: 5px;
@@ -39,7 +44,10 @@
       cursor: pointer;
       transform: scale(0.975, 0.975);
       transition: all 0.5s;
-      margin-top: 50px;
+
+      &:nth-last-child(1) {
+        margin-top: 15px;
+      }
 
       &:hover {
         transform: scale(1, 1);

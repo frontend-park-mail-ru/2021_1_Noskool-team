@@ -3,13 +3,15 @@ import { Input } from '../../components/Input/Input';
 import { Form } from '../../types/registration';
 import { requaredValidator } from '../../utils/form-validators';
 import { authUser } from '../../actions/registration';
-
-import './style.scss';
 import { redirectTo } from '../../utils/router';
 import { LINKS } from '../../constants/router';
+import { setText } from '../../utils/inner-utils';
+import { ErrorFetch } from '../../types/common';
+
+import './style.scss';
 
 export const AuthForm = () => {
-    const ID_REG_FORM_BUTTON = 'ID_REG_FORM_BUTTON';
+    const ID_REG_FORM_ERROR_MSG = 'ID_REG_FORM_ERROR_MSG';
 
     const form: Form = {
         fields: {
@@ -17,11 +19,13 @@ export const AuthForm = () => {
                 value: '',
                 isValid: false,
                 onSubmit: undefined,
+                onSetError: undefined,
             },
             password: {
                 value: '',
                 isValid: false,
                 onSubmit: undefined,
+                onSetError: undefined,
             },
         },
         isValid: false,
@@ -36,6 +40,14 @@ export const AuthForm = () => {
         form.isValid = isValid;
     };
 
+    const onSetError = (msg: string) => {
+        setText(ID_REG_FORM_ERROR_MSG, msg);
+    };
+
+    const onClickReg = () => {
+        redirectTo(LINKS.reg);
+    };
+
     const onSubmitForm = (values: MouseEvent) => {
         values.preventDefault();
         checkValid();
@@ -44,8 +56,22 @@ export const AuthForm = () => {
                 nickname: form.fields.nickname.value,
                 password: form.fields.password.value,
             })
-                .then(() => redirectTo(LINKS.main))
-                .catch((error) => console.log(error));
+                .then((res) => {
+                    if (res.status === 401) {
+                        onSetError('Пользователь не найден!');
+                    } else if (res.status === 200) {
+                        redirectTo(LINKS.main);
+                    } else {
+                        res.json().then((res) => {
+                            onSetError(res.error);
+                        });
+                    }
+                })
+                .catch((error) => {
+                    error.json().then((res: ErrorFetch) => {
+                        onSetError(res.error);
+                    });
+                });
         }
     };
 
@@ -79,9 +105,9 @@ export const AuthForm = () => {
                     onSubmit={form.fields.password}
                     className={'auth-form__input'}
                 />
-                <button type='submit' id={ID_REG_FORM_BUTTON}>
-                    {'Войти'}
-                </button>
+                <div class='auth-form__error' id={ID_REG_FORM_ERROR_MSG} />
+                <button type='submit'>{'Войти'}</button>
+                <button onclick={onClickReg}>{'Или зарегистрироваться'}</button>
             </form>
         </div>
     );

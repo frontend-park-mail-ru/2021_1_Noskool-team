@@ -5,6 +5,8 @@ export interface Form {
             value: string;
             isValid: boolean;
             onSubmit: () => void;
+            /*eslint-disable no-unused-vars*/
+            onSetError: (msg: string) => void;
         }
     >;
     isValid: boolean;

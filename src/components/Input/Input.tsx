@@ -1,4 +1,5 @@
 import { JSX } from 'jsx/jsx';
+import { addClass, removeClass, setText, getInputValue } from '../../utils/inner-utils';
 
 import './style.scss';
 
@@ -11,14 +12,25 @@ interface InputProps {
     placeholder: string;
     onSubmit: {
         onSubmit: () => void;
+        onSetError: (msg: string) => void;
     };
+    isPassword?: boolean;
     className?: string;
 }
 
 const InputInnner = () => {
     let count = 0;
 
-    return ({ onChange, name, validators, onValid, placeholder, className, onSubmit }: InputProps) => {
+    return ({
+        onChange,
+        name,
+        validators,
+        onValid,
+        placeholder,
+        onSubmit,
+        className = '',
+        isPassword = false,
+    }: InputProps) => {
         count++;
 
         const ID_INPUT = `input-${count}`;
@@ -35,22 +47,28 @@ const InputInnner = () => {
         const OK_ICON = 'ok';
         const NOT_VALID_ICON = 'not-valid';
 
-        let errorMsg: string = undefined;
+        const setError = (msg: string) => {
+            setText(ID_INPUT_ERROR, msg);
+            addClass(ID_INPUT_WRAPPER, NOT_VALID_CLASS);
+            addClass(ID_ICON, NOT_VALID_ICON);
+            removeClass(ID_ICON, OK_ICON);
+            onValid(false);
+        };
+
+        const removeError = () => {
+            removeClass(ID_INPUT_WRAPPER, NOT_VALID_CLASS);
+            removeClass(ID_ICON, NOT_VALID_ICON);
+            addClass(ID_ICON, OK_ICON);
+            setText(ID_INPUT_ERROR, '');
+            onValid(true);
+        };
 
         const validateInputCore = (value: string) => {
-            errorMsg = validators.reduce((error, validator) => error || validator(value), '');
+            let errorMsg = validators.reduce((error, validator) => error || validator(value), '');
             if (errorMsg) {
-                document.getElementById(ID_INPUT_ERROR).innerHTML = errorMsg;
-                document.getElementById(ID_INPUT_WRAPPER).classList.add(NOT_VALID_CLASS);
-                document.getElementById(ID_ICON).classList.add(NOT_VALID_ICON);
-                document.getElementById(ID_ICON).classList.remove(OK_ICON);
-                onValid(false);
+                setError(errorMsg);
             } else {
-                document.getElementById(ID_INPUT_WRAPPER).classList.remove(NOT_VALID_CLASS);
-                document.getElementById(ID_ICON).classList.add(OK_ICON);
-                document.getElementById(ID_ICON).classList.remove(NOT_VALID_ICON);
-                document.getElementById(ID_INPUT_ERROR).innerHTML = '';
-                onValid(true);
+                removeError();
             }
         };
 
@@ -59,28 +77,43 @@ const InputInnner = () => {
         };
 
         onSubmit.onSubmit = () => {
-            validateInputCore((document.getElementById(ID_INPUT) as HTMLInputElement).value);
+            validateInputCore(getInputValue(ID_INPUT));
+        };
+
+        onSubmit.onSetError = (value: string) => {
+            if (value !== '') {
+                setError(value);
+            } else {
+                removeError();
+            }
         };
 
         const onInput = (e: InputEvent) => {
-            onChange(e);
             validateInput(e);
+            onChange(e);
         };
 
         const onFocus = () => {
-            document.getElementById(ID_INPUT_WRAPPER).classList.add(FOCUS_CLASS);
+            addClass(ID_INPUT_WRAPPER, FOCUS_CLASS);
         };
 
         const onBlur = (e: InputEvent) => {
-            if ((document.getElementById(ID_INPUT) as HTMLInputElement).value === '') {
-                document.getElementById(ID_INPUT_WRAPPER).classList.remove(FOCUS_CLASS);
+            if (getInputValue(ID_INPUT) === '') {
+                removeClass(ID_INPUT_WRAPPER, FOCUS_CLASS);
                 validateInput(e);
             }
         };
 
         return (
             <div id={ID_INPUT_WRAPPER} class={MAIN_CLASS}>
-                <input type='text' id={ID_INPUT} oninput={onInput} name={name} onblur={onBlur} onfocus={onFocus} />
+                <input
+                    type={isPassword ? 'password' : 'text'}
+                    id={ID_INPUT}
+                    oninput={onInput}
+                    name={name}
+                    onblur={onBlur}
+                    onfocus={onFocus}
+                />
                 <div id={ID_INPUT_ERROR} class={ERROR_MSG}></div>
                 <div class={PLACEHOLDER}>{`${placeholder}`}</div>
                 <div id={ID_ICON}></div>

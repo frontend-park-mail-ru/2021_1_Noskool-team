@@ -8,11 +8,15 @@ import {
     passwordLengthValidator,
 } from '../../utils/form-validators';
 import { registerUser } from '../../actions/registration';
+import { redirectTo } from '../../utils/router';
+import { LINKS } from '../../constants/router';
+import { ErrorFetch } from '../../types/common';
 
 import './style.scss';
+import { setText } from '../../utils/inner-utils';
 
 export const RegistrationForm = () => {
-    const ID_REG_FORM_BUTTON = 'ID_REG_FORM_BUTTON';
+    const ID_AUTH_FORM_ERROR_MSG = 'ID_AUTH_FORM_ERROR_MSG';
 
     const form: Form = {
         fields: {
@@ -20,31 +24,37 @@ export const RegistrationForm = () => {
                 value: '',
                 isValid: false,
                 onSubmit: undefined,
+                onSetError: undefined,
             },
             lastName: {
                 value: '',
                 isValid: false,
                 onSubmit: undefined,
+                onSetError: undefined,
             },
             email: {
                 value: '',
                 isValid: false,
+                onSetError: undefined,
                 onSubmit: undefined,
             },
             password: {
                 value: '',
                 isValid: false,
                 onSubmit: undefined,
+                onSetError: undefined,
             },
             passwordRepeat: {
                 value: '',
                 isValid: false,
                 onSubmit: undefined,
+                onSetError: undefined,
             },
             nickname: {
                 value: '',
                 isValid: false,
                 onSubmit: undefined,
+                onSetError: undefined,
             },
         },
         isValid: false,
@@ -59,6 +69,10 @@ export const RegistrationForm = () => {
         form.isValid = isValid;
     };
 
+    const onSetError = (msg: string) => {
+        setText(ID_AUTH_FORM_ERROR_MSG, msg);
+    };
+
     const onSubmitForm = (values: MouseEvent) => {
         values.preventDefault();
         checkValid();
@@ -68,9 +82,21 @@ export const RegistrationForm = () => {
                 nickname: form.fields.nickname.value,
                 password: form.fields.password.value,
             })
-                .then((res) => console.log(res))
-                .catch((error) => console.log(error));
+                .then((res) => {
+                    if (res.status === 200) {
+                        redirectTo(LINKS.main);
+                    } else {
+                        res.json().then((res) => onSetError(res.error));
+                    }
+                })
+                .catch((error) => {
+                    error.json().then((res: ErrorFetch) => onSetError(res.error));
+                });
         }
+    };
+
+    const onClickAuth = () => {
+        redirectTo(LINKS.auth);
     };
 
     return (
@@ -115,10 +141,14 @@ export const RegistrationForm = () => {
                     placeholder='Введите пароль'
                     onSubmit={form.fields.password}
                     className={'registration-form__input'}
+                    isPassword
                 />
                 <Input
                     onChange={(value) => {
                         form.fields.passwordRepeat.value = (value.target as HTMLInputElement).value;
+                        form.fields.passwordRepeat.onSetError(
+                            form.fields.passwordRepeat.value === form.fields.password.value ? '' : 'Пароли не совпадают'
+                        );
                     }}
                     name='passwordRepeat'
                     onValid={(value) => {
@@ -128,6 +158,7 @@ export const RegistrationForm = () => {
                     placeholder='Повторите пароль'
                     onSubmit={form.fields.passwordRepeat}
                     className={'registration-form__input'}
+                    isPassword
                 />
                 <Input
                     onChange={(value) => {
@@ -154,9 +185,9 @@ export const RegistrationForm = () => {
                     placeholder='Введите фамилию'
                     onSubmit={form.fields.lastName}
                 />
-                <button type='submit' id={ID_REG_FORM_BUTTON}>
-                    {'Зарегистрироваться'}
-                </button>
+                <div class='registration-form__error-msg' id={ID_AUTH_FORM_ERROR_MSG} />
+                <button type='submit'>{'Зарегистрироваться'}</button>
+                <button onclick={onClickAuth}>{'Или войти'}</button>
             </form>
         </div>
     );
