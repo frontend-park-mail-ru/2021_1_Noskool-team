@@ -35,7 +35,6 @@ export const ProfilePage = () => {
 
     getUser()
         .then((res) => {
-            console.log(res);
             onLoadProfile(res);
         })
         .catch((error) => {
