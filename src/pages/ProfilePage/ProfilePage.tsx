@@ -78,7 +78,7 @@ export const ProfilePage = () => {
             <div class='profile-page'>
                 <div class={'profile-page__main-info'}>
                     <div class={'profile-page__photo'}>
-                        <img src={'https://i.ibb.co/M6LdN5m/2.png'} id={ID_AVATAR} alt='' />
+                        <img src={''} id={ID_AVATAR} alt='' />
                     </div>
                     <div class={'profile-page__text-info-container'}>
                         <div class={'profile-page__text-info profile-page__text-info--nickname'} id={ID_NICKNAME}>
