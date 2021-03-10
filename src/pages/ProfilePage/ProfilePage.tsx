@@ -4,6 +4,7 @@ import { Input } from '../../components/Input/Input';
 import { NavBar } from '../../modules/NavBar/NavBar';
 import { UserProfile } from '../../types/requests/user';
 import { setText, setImgPath } from '../../utils/inner-utils';
+import { HOST } from '../../constants/api';
 import { Form } from '../../types/registration';
 
 import './style.scss';
@@ -44,7 +45,7 @@ export const ProfilePage = () => {
     const onLoadProfile = (proflie: UserProfile) => {
         setText(ID_NICKNAME, proflie?.login);
         setText(ID_EMAIL, proflie?.email);
-        setImgPath(ID_AVATAR, proflie?.avatar);
+        setImgPath(ID_AVATAR, HOST + proflie?.avatar);
         localStorage.setItem('user_id', String(proflie?.user_id));
     };
 
