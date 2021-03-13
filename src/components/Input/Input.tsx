@@ -10,10 +10,6 @@ interface InputProps {
     onValid: (value: boolean) => void;
     validators: ((value: string) => string | undefined)[];
     placeholder: string;
-    onSubmit: {
-        onSubmit: () => void;
-        onSetError: (msg: string) => void;
-    };
     isPassword?: boolean;
     className?: string;
 }
@@ -21,16 +17,7 @@ interface InputProps {
 const InputInnner = () => {
     let count = 0;
 
-    return ({
-        onChange,
-        name,
-        validators,
-        onValid,
-        placeholder,
-        onSubmit,
-        className = '',
-        isPassword = false,
-    }: InputProps) => {
+    return ({ onChange, name, validators, onValid, placeholder, className = '', isPassword = false }: InputProps) => {
         count++;
 
         const ID_INPUT = `input-${count}`;
@@ -76,11 +63,11 @@ const InputInnner = () => {
             validateInputCore((e.target as HTMLInputElement).value);
         };
 
-        onSubmit.onSubmit = () => {
+        const onSubmit = () => {
             validateInputCore(getInputValue(ID_INPUT));
         };
 
-        onSubmit.onSetError = (value: string) => {
+        const onSetError = (value: string) => {
             if (value !== '') {
                 setError(value);
             } else {
@@ -104,7 +91,7 @@ const InputInnner = () => {
             }
         };
 
-        return (
+        const element = () => (
             <div id={ID_INPUT_WRAPPER} class={MAIN_CLASS}>
                 <input
                     type={isPassword ? 'password' : 'text'}
@@ -119,6 +106,12 @@ const InputInnner = () => {
                 <div id={ID_ICON}></div>
             </div>
         );
+
+        return {
+            element,
+            onSetError,
+            onSubmit,
+        };
     };
 };
 

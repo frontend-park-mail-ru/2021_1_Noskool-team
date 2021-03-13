@@ -12,3 +12,11 @@ export const post = <R>(url: string, body: R) => {
         body: JSON.stringify(body),
     });
 };
+
+export const postImg = (url: string, body: FormData) => {
+    return fetch(url, {
+        method: 'post',
+        credentials: 'include',
+        body: body,
+    });
+};

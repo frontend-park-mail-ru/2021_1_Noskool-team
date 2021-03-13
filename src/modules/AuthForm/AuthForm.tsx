@@ -13,19 +13,46 @@ import './style.scss';
 export const AuthForm = () => {
     const ID_REG_FORM_ERROR_MSG = 'ID_REG_FORM_ERROR_MSG';
 
+    const LoginInput = Input({
+        onChange: (value) => {
+            form.fields.nickname.value = (value.target as HTMLInputElement).value;
+        },
+        name: 'nickname',
+        onValid: (value) => {
+            form.fields.nickname.isValid = value;
+        },
+        validators: [requaredValidator],
+        placeholder: 'Введите ник',
+        className: 'auth-form__input',
+    });
+
+    const PasswordInput = Input({
+        onChange: (value) => {
+            form.fields.password.value = (value.target as HTMLInputElement).value;
+        },
+        name: 'password',
+        onValid: (value) => {
+            form.fields.password.isValid = value;
+        },
+        validators: [requaredValidator],
+        placeholder: 'Введите пароль',
+        className: 'auth-form__input',
+        isPassword: true,
+    });
+
     const form: Form = {
         fields: {
             nickname: {
                 value: '',
                 isValid: false,
-                onSubmit: undefined,
-                onSetError: undefined,
+                onSubmit: LoginInput.onSubmit,
+                onSetError: LoginInput.onSetError,
             },
             password: {
                 value: '',
                 isValid: false,
-                onSubmit: undefined,
-                onSetError: undefined,
+                onSubmit: PasswordInput.onSubmit,
+                onSetError: PasswordInput.onSetError,
             },
         },
         isValid: false,
@@ -79,33 +106,8 @@ export const AuthForm = () => {
         <div class={'auth-form-wrapper'}>
             <form onsubmit={onSubmitForm} class={'auth-form'}>
                 <div class={'auth-form__title'}>{'Вход'}</div>
-                <Input
-                    onChange={(value) => {
-                        form.fields.nickname.value = (value.target as HTMLInputElement).value;
-                    }}
-                    name='nickname'
-                    onValid={(value) => {
-                        form.fields.nickname.isValid = value;
-                    }}
-                    validators={[requaredValidator]}
-                    placeholder='Введите ник'
-                    onSubmit={form.fields.nickname}
-                    className={'auth-form__input'}
-                />
-                <Input
-                    onChange={(value) => {
-                        form.fields.password.value = (value.target as HTMLInputElement).value;
-                    }}
-                    name='password'
-                    onValid={(value) => {
-                        form.fields.password.isValid = value;
-                    }}
-                    validators={[requaredValidator]}
-                    placeholder='Введите пароль'
-                    onSubmit={form.fields.password}
-                    className={'auth-form__input'}
-                    isPassword
-                />
+                <LoginInput.element />
+                <PasswordInput.element />
                 <div class='auth-form__error' id={ID_REG_FORM_ERROR_MSG} />
                 <button type='submit'>{'Войти'}</button>
                 <button onclick={onClickReg}>{'Или зарегистрироваться'}</button>
