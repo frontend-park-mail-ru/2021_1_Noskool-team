@@ -1,11 +1,11 @@
 import { JSX } from 'jsx/jsx';
-import { changeUser, changeUserPhoto, getUser } from '../../actions/user/user';
-import { Input } from '../../components/Input/Input';
-import { NavBar } from '../../modules/NavBar/NavBar';
-import { UserProfile } from '../../types/requests/user';
-import { setText, setImgPath } from '../../utils/inner-utils';
-import { HOST } from '../../constants/api';
-import { Form } from '../../types/registration';
+import { changeUser, changeUserPhoto, getUser } from 'actions/user/user';
+import { Input } from 'components/Input/Input';
+import { NavBar } from 'modules/NavBar/NavBar';
+import { UserProfile } from 'types/requests/user';
+import { setText, setImgPath } from 'utils/inner-utils';
+import { HOST } from 'constants/api';
+import { Form } from 'types/registration';
 
 import './style.scss';
 
@@ -15,19 +15,43 @@ export const ProfilePage = () => {
     const ID_AVATAR = 'ID_AVATAR';
     const ID_IMAGE_INPUT = 'ID_IMAGE_INPUT';
 
+    const EmailInput = Input({
+        onChange: (value) => {
+            form.fields.email.value = (value.target as HTMLInputElement).value;
+        },
+        name: 'email',
+        onValid: (value) => {
+            form.fields.email.isValid = value;
+        },
+        validators: [],
+        placeholder: 'Измените email',
+    });
+
+    const LoginInput = Input({
+        onChange: (value) => {
+            form.fields.nickname.value = (value.target as HTMLInputElement).value;
+        },
+        name: 'nickname',
+        onValid: (value) => {
+            form.fields.nickname.isValid = value;
+        },
+        validators: [],
+        placeholder: 'Измените ник',
+    });
+
     const form: Form = {
         fields: {
             email: {
                 value: '',
                 isValid: false,
-                onSubmit: undefined,
-                onSetError: undefined,
+                onSubmit: EmailInput.onSubmit,
+                onSetError: EmailInput.onSetError,
             },
             nickname: {
                 value: '',
                 isValid: false,
-                onSubmit: undefined,
-                onSetError: undefined,
+                onSubmit: LoginInput.onSubmit,
+                onSetError: LoginInput.onSetError,
             },
         },
         isValid: true,
@@ -74,7 +98,17 @@ export const ProfilePage = () => {
     };
 
     const onChacngePhoto = (e: MouseEvent) => {
-        changeUserPhoto(e.target, localStorage.getItem('user_id'));
+        changeUserPhoto(e.target, localStorage.getItem('user_id')).then((res) => {
+            if (res.ok) {
+                getUser()
+                    .then((res) => {
+                        onLoadProfile(res);
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
+            }
+        });
     };
 
     return (
@@ -98,30 +132,8 @@ export const ProfilePage = () => {
                 </div>
                 <div class='change-data'>
                     <form class='change-data__input' onsubmit={onSubmitChanges}>
-                        <Input
-                            onChange={(value) => {
-                                form.fields.email.value = (value.target as HTMLInputElement).value;
-                            }}
-                            name='email'
-                            onValid={(value) => {
-                                form.fields.email.isValid = value;
-                            }}
-                            validators={[]}
-                            placeholder='Измените email'
-                            onSubmit={form.fields.email}
-                        />
-                        <Input
-                            onChange={(value) => {
-                                form.fields.nickname.value = (value.target as HTMLInputElement).value;
-                            }}
-                            name='nickname'
-                            onValid={(value) => {
-                                form.fields.nickname.isValid = value;
-                            }}
-                            validators={[]}
-                            placeholder='Измените ник'
-                            onSubmit={form.fields.nickname}
-                        />
+                        <EmailInput.element />
+                        <LoginInput.element />
                         <button type='submit'>{'Изменить'}</button>
                     </form>
                 </div>
