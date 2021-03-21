@@ -24,7 +24,7 @@
     "webpack-dev-server": "^3.11.2"
   },
   "scripts": {
-    "build": "webpack",
+    "build": "webpack --mode=production",
     "start": "webpack serve",
     "eslint": "eslint --max-warnings=0 src/**/*.{ts,tsx}",
     "prettier": "prettier --write \"src/**/*.+(js|jsx|ts|tsx|json)\"",
