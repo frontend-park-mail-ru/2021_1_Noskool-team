@@ -1,9 +1,8 @@
 @import '../../styles/colors.scss';
 
 .nav-bar {
-  height: 100vh;
   width: 125px;
-  position: fixed;
+  height: 100%;
   font-family: 'Comfortaa', cursive;
   display: flex;
   align-items: center;

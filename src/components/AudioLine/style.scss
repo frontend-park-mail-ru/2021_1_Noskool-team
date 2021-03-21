@@ -1,13 +1,12 @@
 @import '../../styles/colors.scss';
 
 .player {
-  position: fixed;
-  bottom: 0;
   width: 100%;
   border-radius: 0;
   height: 95px;
   background-color: $white;
   display: flex;
+  overflow: auto;
 
   .song-image {
     margin-left: 40px;
