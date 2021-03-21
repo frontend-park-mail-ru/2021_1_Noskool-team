@@ -1,5 +1,5 @@
 import { router } from './utils/router';
-import { ROUTERS } from './constants/router';
+import { ROUTERS } from './utils/router-comp';
 
 import './style.scss';
 

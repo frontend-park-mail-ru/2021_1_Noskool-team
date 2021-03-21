@@ -1,6 +1,6 @@
 import { ErrorPage } from '../pages/ErrorPage/ErrorPage';
 import { Routers } from '../types/router';
-import { ROUTERS } from '../constants/router';
+import { ROUTERS } from './router-comp';
 
 const findComponentByPath = (path: string, routes: Routers[]): Routers | undefined => {
     return routes.find((r) => r.path === path) || undefined;

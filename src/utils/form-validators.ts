@@ -2,7 +2,7 @@ export const requaredValidator = (value: string) => (value ? undefined : 'Это
 
 export const emailValidator = (value: string) => {
     const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(value.toLowerCase()) ? undefined : 'Неправильный формат email';
+    return re.test(value.toLowerCase()) || value === '' ? undefined : 'Неправильный формат email';
 };
 
 export const passwordValidator = (value: string) => {

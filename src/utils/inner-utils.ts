@@ -19,5 +19,6 @@ export const getInputValue = (id: string): string => {
 };
 
 export const setImgPath = (id: string, path: string) => {
+    (document.getElementById(id) as HTMLImageElement).setAttribute('src', '');
     (document.getElementById(id) as HTMLImageElement).setAttribute('src', path);
 };
