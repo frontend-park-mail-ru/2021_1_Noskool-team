@@ -1,0 +1,30 @@
+.page-wrapper {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  position: relative;
+
+  &__nav-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 125px;
+  }
+
+  &__page {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: calc(100% - 95px);
+    width: calc(100% - 125px);
+  }
+
+  &__player {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    height: 95px;
+    width: calc(100% - 125px);
+  }
+}

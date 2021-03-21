@@ -1,14 +1,18 @@
 import { JSX } from 'jsx/jsx';
-import { Input } from '../../components/Input/Input';
-import { Form } from '../../types/registration';
-import { requaredValidator } from '../../utils/form-validators';
-import { authUser } from '../../actions/registration/registration';
-import { redirectTo } from '../../utils/router';
-import { LINKS } from '../../constants/router';
-import { setText } from '../../utils/inner-utils';
-import { ErrorFetch } from '../../types/common';
+import { Input } from 'components/Input/Input';
+import { Form } from 'types/registration';
+import { requaredValidator } from 'utils/form-validators';
+import { authUser } from 'actions/registration/registration';
+import { redirectTo } from 'utils/router';
+import { LINKS } from 'utils/router-comp';
+import { setText } from 'utils/inner-utils';
+import { ErrorFetch } from 'types/common';
+import { cn } from 'utils/cn';
+import { isMobile } from 'utils/isMobile';
 
 import './style.scss';
+
+const formCn = cn('auth-form');
 
 export const AuthForm = () => {
     const ID_REG_FORM_ERROR_MSG = 'ID_REG_FORM_ERROR_MSG';
@@ -23,7 +27,7 @@ export const AuthForm = () => {
         },
         validators: [requaredValidator],
         placeholder: 'Введите ник',
-        className: 'auth-form__input',
+        className: formCn('input'),
     });
 
     const PasswordInput = Input({
@@ -36,7 +40,7 @@ export const AuthForm = () => {
         },
         validators: [requaredValidator],
         placeholder: 'Введите пароль',
-        className: 'auth-form__input',
+        className: formCn('input'),
         isPassword: true,
     });
 
@@ -103,12 +107,12 @@ export const AuthForm = () => {
     };
 
     return (
-        <div class={'auth-form-wrapper'}>
-            <form onsubmit={onSubmitForm} class={'auth-form'}>
-                <div class={'auth-form__title'}>{'Вход'}</div>
+        <div class={formCn('wrapper', isMobile() ? 'mob' : '')}>
+            <form onsubmit={onSubmitForm} class={formCn()}>
+                <div class={formCn('title')}>{'Вход'}</div>
                 <LoginInput.element />
                 <PasswordInput.element />
-                <div class='auth-form__error' id={ID_REG_FORM_ERROR_MSG} />
+                <div class={formCn('error')} id={ID_REG_FORM_ERROR_MSG} />
                 <button type='submit'>{'Войти'}</button>
                 <button onclick={onClickReg}>{'Или зарегистрироваться'}</button>
             </form>

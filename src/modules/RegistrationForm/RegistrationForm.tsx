@@ -1,19 +1,18 @@
 import { JSX } from 'jsx/jsx';
-import { Input } from '../../components/Input/Input';
-import { Form } from '../../types/registration';
-import {
-    requaredValidator,
-    emailValidator,
-    passwordValidator,
-    passwordLengthValidator,
-} from '../../utils/form-validators';
-import { registerUser } from '../../actions/registration/registration';
-import { redirectTo } from '../../utils/router';
-import { LINKS } from '../../constants/router';
-import { ErrorFetch } from '../../types/common';
+import { Input } from 'components/Input/Input';
+import { Form } from 'types/registration';
+import { requaredValidator, emailValidator, passwordValidator, passwordLengthValidator } from 'utils/form-validators';
+import { registerUser } from 'actions/registration/registration';
+import { redirectTo } from 'utils/router';
+import { LINKS } from 'utils/router-comp';
+import { ErrorFetch } from 'types/common';
+import { DataTypes, useDisplay } from 'jsx/hooks';
+import { isMobile } from 'utils/isMobile';
+import { cn } from 'utils/cn';
 
 import './style.scss';
-import { setText } from '../../utils/inner-utils';
+
+const formCn = cn('registration-form');
 
 export const RegistrationForm = () => {
     const ID_AUTH_FORM_ERROR_MSG = 'ID_AUTH_FORM_ERROR_MSG';
@@ -28,7 +27,7 @@ export const RegistrationForm = () => {
         },
         validators: [requaredValidator, emailValidator],
         placeholder: 'Введите email',
-        className: 'registration-form__input',
+        className: formCn('input'),
     });
 
     const LoginInput = Input({
@@ -41,7 +40,7 @@ export const RegistrationForm = () => {
         },
         validators: [requaredValidator],
         placeholder: 'Введите никнейм',
-        className: 'registration-form__input',
+        className: formCn('input'),
     });
 
     const PasswordInput = Input({
@@ -54,7 +53,7 @@ export const RegistrationForm = () => {
         },
         validators: [requaredValidator, passwordLengthValidator, passwordValidator],
         placeholder: 'Введите пароль',
-        className: 'registration-form__input',
+        className: formCn('input'),
         isPassword: true,
     });
 
@@ -71,7 +70,7 @@ export const RegistrationForm = () => {
         },
         validators: [requaredValidator, passwordLengthValidator, passwordValidator],
         placeholder: 'Повторите пароль',
-        className: 'registration-form__input',
+        className: formCn('input'),
         isPassword: true,
     });
 
@@ -85,7 +84,7 @@ export const RegistrationForm = () => {
         },
         validators: [],
         placeholder: 'Введите имя',
-        className: 'registration-form__input',
+        className: formCn('input'),
     });
 
     const LastNameInput = Input({
@@ -142,6 +141,8 @@ export const RegistrationForm = () => {
         isValid: false,
     };
 
+    const error = useDisplay(ID_AUTH_FORM_ERROR_MSG, DataTypes.text);
+
     const checkValid = () => {
         let isValid = true;
         for (let field in form.fields) {
@@ -152,7 +153,7 @@ export const RegistrationForm = () => {
     };
 
     const onSetError = (msg: string) => {
-        setText(ID_AUTH_FORM_ERROR_MSG, msg);
+        error.value = msg;
     };
 
     const onSubmitForm = (values: MouseEvent) => {
@@ -182,16 +183,16 @@ export const RegistrationForm = () => {
     };
 
     return (
-        <div class={'registration-form-wrapper'}>
-            <form onsubmit={onSubmitForm} class={'registration-form'}>
-                <div class={'registration-form__title'}>{'Регистрация'}</div>
+        <div class={formCn('wrapper', isMobile() ? 'mob' : '')}>
+            <form onsubmit={onSubmitForm} class={formCn()}>
+                <div class={formCn('title')}>{'Регистрация'}</div>
                 <EmailInput.element />
                 <LoginInput.element />
                 <PasswordInput.element />
                 <PasswordRepeatInput.element />
                 <NameInput.element />
                 <LastNameInput.element />
-                <div class='registration-form__error-msg' id={ID_AUTH_FORM_ERROR_MSG} />
+                <div class={formCn('error-msg')} id={ID_AUTH_FORM_ERROR_MSG} />
                 <button type='submit'>{'Зарегистрироваться'}</button>
                 <button onclick={onClickAuth}>{'Или войти'}</button>
             </form>

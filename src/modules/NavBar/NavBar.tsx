@@ -1,8 +1,8 @@
 import { JSX } from 'jsx/jsx';
-import { logoutUser } from '../../actions/registration/registration';
-import { Link } from '../../components/Link/Link';
-import { LINKS } from '../../constants/router';
-import { redirectTo } from '../../utils/router';
+import { logoutUser } from 'actions/registration/registration';
+import { Link } from 'components/Link/Link';
+import { LINKS } from 'utils/router-comp';
+import { redirectTo } from 'utils/router';
 
 import './style.scss';
 

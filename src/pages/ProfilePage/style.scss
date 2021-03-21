@@ -1,78 +1,90 @@
 @import '../../styles/colors.scss';
 
-.profile-page-wrapper {
+.profile-page {
+  width: 100%;
   height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  padding: 40px;
+  gap: 40px;
+  box-sizing: border-box;
 
-  .profile-page {
-    width: calc(100% - 125px);
-    position: absolute;
-    right: 0;
-    top: 0;
+  &__wrapper {
     height: 100%;
+  }
+
+  &__photo {
+    width: 250px;
+
+    img {
+      width: 100%;
+      border-radius: 40px;
+    }
+
+    input {
+      width: 0.1px;
+      height: 0.1px;
+      opacity: 0;
+      overflow: hidden;
+      position: absolute;
+      z-index: -1;
+    }
+  }
+
+  &__change-photo {
+    cursor: pointer;
+  }
+
+  &__main-info {
     display: flex;
-    align-items: center;
-    flex-direction: column;
+    align-items: flex-start;
+    background-color: $white;
+    padding: 15px;
+    border-radius: 30px;
+    grid-area: span 1 / span 4;
+  }
 
-    &__photo {
-      width: 250px;
+  &__text-info-container {
+    margin: 0 0 0 15px;
+  }
 
-      img {
+  &__text-info {
+    &--nickname {
+      font-size: 40px;
+    }
+
+    &--email {
+      font-size: 20px;
+    }
+  }
+
+  .change-data {
+    border-radius: 30px;
+    background-color: $white;
+    padding: 15px;
+    grid-area: span 1 / span 2;
+
+    &__input {
+      button {
+        background-color: $pink;
+        border-radius: 5px;
         width: 100%;
-        border-radius: 40px;
-      }
-    }
+        height: 50px;
+        color: $white;
+        font-size: 22px;
+        line-height: 25px;
+        font-weight: 500;
+        cursor: pointer;
+        transform: scale(0.975, 0.975);
+        transition: all 0.5s;
 
-    &__main-info {
-      display: flex;
-      align-items: flex-start;
-      background-color: $white;
-      padding: 15px;
-      border-radius: 30px;
-      margin-top: 15%;
-    }
+        &:nth-last-child(1) {
+          margin-top: 15px;
+        }
 
-    &__text-info-container {
-      margin: 0 0 0 15px;
-      width: 400px;
-    }
-
-    &__text-info {
-      &--nickname {
-        font-size: 40px;
-      }
-
-      &--email {
-        font-size: 20px;
-      }
-    }
-
-    .change-data {
-      border-radius: 30px;
-      margin-top: 10px;
-      background-color: $white;
-      padding: 15px;
-
-      &__input {
-        button {
-          background-color: $pink;
-          border-radius: 5px;
-          width: 325px;
-          height: 50px;
-          color: $white;
-          font-size: 22px;
-          line-height: 25px;
-          font-weight: 500;
-          cursor: pointer;
-          transform: scale(0.975, 0.975);
-          transition: all 0.5s;
-
-          &:nth-last-child(1) {
-            margin-top: 15px;
-          }
-
-          &:hover {
-            transform: scale(1, 1);
-          }
+        &:hover {
+          transform: scale(1, 1);
         }
       }
     }

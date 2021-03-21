@@ -1,19 +1,26 @@
 import { JSX } from 'jsx/jsx';
 import { changeUser, changeUserPhoto, getUser } from 'actions/user/user';
 import { Input } from 'components/Input/Input';
-import { NavBar } from 'modules/NavBar/NavBar';
 import { UserProfile } from 'types/requests/user';
-import { setText, setImgPath } from 'utils/inner-utils';
-import { HOST } from 'constants/api';
 import { Form } from 'types/registration';
+import { DataTypes, useDisplay } from 'jsx/hooks';
+import { emailValidator } from 'utils/form-validators';
+import { cn } from 'utils/cn';
 
 import './style.scss';
+
+const page = cn('profile-page');
+const change = cn('change-data');
 
 export const ProfilePage = () => {
     const ID_NICKNAME = 'ID_NICKNAME';
     const ID_EMAIL = 'ID_EMAIL';
     const ID_AVATAR = 'ID_AVATAR';
     const ID_IMAGE_INPUT = 'ID_IMAGE_INPUT';
+
+    const login = useDisplay(ID_NICKNAME, DataTypes.text);
+    const email = useDisplay(ID_EMAIL, DataTypes.text);
+    const photo = useDisplay(ID_AVATAR, DataTypes.img);
 
     const EmailInput = Input({
         onChange: (value) => {
@@ -23,7 +30,7 @@ export const ProfilePage = () => {
         onValid: (value) => {
             form.fields.email.isValid = value;
         },
-        validators: [],
+        validators: [emailValidator],
         placeholder: 'Измените email',
     });
 
@@ -66,10 +73,9 @@ export const ProfilePage = () => {
         });
 
     const onLoadProfile = (proflie: UserProfile) => {
-        setText(ID_NICKNAME, proflie?.login);
-        setText(ID_EMAIL, proflie?.email);
-        setImgPath(ID_AVATAR, HOST + proflie?.avatar);
-        localStorage.setItem('user_id', String(proflie?.user_id));
+        login.value = proflie?.login;
+        email.value = proflie?.email;
+        photo.value = proflie?.avatar;
     };
 
     const onSubmitChanges = (e: MouseEvent) => {
@@ -84,59 +90,59 @@ export const ProfilePage = () => {
         if (!form.fields.nickname.value) {
             delete body.nickname;
         }
-        changeUser(body, localStorage.getItem('user_id')).then((res) => {
-            if (res.ok) {
-                getUser()
-                    .then((res) => {
-                        onLoadProfile(res);
-                    })
-                    .catch((error) => {
-                        console.log(error);
-                    });
-            }
+        changeUser(body).then(() => {
+            getUser()
+                .then((res) => {
+                    onLoadProfile(res);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
         });
     };
 
     const onChacngePhoto = (e: MouseEvent) => {
-        changeUserPhoto(e.target, localStorage.getItem('user_id')).then((res) => {
-            if (res.ok) {
-                getUser()
-                    .then((res) => {
-                        onLoadProfile(res);
-                    })
-                    .catch((error) => {
-                        console.log(error);
-                    });
-            }
+        changeUserPhoto(e.target).then(() => {
+            getUser()
+                .then((res) => {
+                    onLoadProfile(res);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
         });
     };
 
+    const onClickLabel = () => {
+        (document.getElementById(ID_IMAGE_INPUT) as HTMLInputElement).click();
+    };
+
     return (
-        <div class={'profile-page-wrapper'}>
-            <NavBar />
-            <div class='profile-page'>
-                <div class={'profile-page__main-info'}>
-                    <div class={'profile-page__photo'}>
-                        <img src={'https://i.ibb.co/M6LdN5m/2.png'} id={ID_AVATAR} alt='' />
-                        <input
-                            type='file'
-                            id={ID_IMAGE_INPUT}
-                            accept={'image/jpeg,image/png,image/webp'}
-                            onchange={onChacngePhoto}
-                        />
-                    </div>
-                    <div class={'profile-page__text-info-container'}>
-                        <div class={'profile-page__text-info profile-page__text-info--nickname'} id={ID_NICKNAME} />
-                        <div class={'profile-page__text-info--email'} id={ID_EMAIL} />
-                    </div>
+        <div class={page()}>
+            <div class={page('main-info')}>
+                <div class={page('photo')}>
+                    <img src='' id={ID_AVATAR} alt='' />
+                    <input
+                        type='file'
+                        id={ID_IMAGE_INPUT}
+                        accept={'image/jpeg,image/png,image/webp,image/gif'}
+                        onchange={onChacngePhoto}
+                    />
+                    <label htmlFor={ID_IMAGE_INPUT} onclick={onClickLabel} class={page('change-photo')}>
+                        {'Изменить фото'}
+                    </label>
                 </div>
-                <div class='change-data'>
-                    <form class='change-data__input' onsubmit={onSubmitChanges}>
-                        <EmailInput.element />
-                        <LoginInput.element />
-                        <button type='submit'>{'Изменить'}</button>
-                    </form>
+                <div class={page('text-info-container')}>
+                    <div class={page('text-info', 'nickname')} id={ID_NICKNAME} />
+                    <div class={page('text-info', 'email')} id={ID_EMAIL} />
                 </div>
+            </div>
+            <div class={change()}>
+                <form class={change('input')} onsubmit={onSubmitChanges}>
+                    <EmailInput.element />
+                    <LoginInput.element />
+                    <button type='submit'>{'Изменить'}</button>
+                </form>
             </div>
         </div>
     );
