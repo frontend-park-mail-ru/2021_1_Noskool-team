@@ -1,16 +1,23 @@
 import { JSX } from 'jsx/jsx';
-import FeatureOfWeek from '../../components/featureWeek/featureOfWeek';
-import Single from '../../components/Singles/Single';
-import BillboardChart from '../../components/BillboardChart/BillboardChart';
-import TopArtists from '../../components/TopArtists/TopArtists';
-import DiscoverGenres from '../../components/Discover/Discover';
+// import FeatureOfWeek from '../../components/featureWeek/featureOfWeek';
+// import Single from '../../components/Singles/Single';
+// import BillboardChart from '../../components/BillboardChart/BillboardChart';
+// import TopArtists from '../../components/TopArtists/TopArtists';
+// import DiscoverGenres from '../../components/Discover/Discover';
 
 import './style.scss';
 
 export const MainPage = () => {
+    let gg = 0;
+
+    setInterval(() => {
+        gg += gg++;
+    }, 500);
+
     return (
         <div class='main-page'>
-            <div class='main'>
+            {String(gg)}
+            {/* <div class='main'>
                 <FeatureOfWeek />
                 <div class='weekly-top'>
                     <div class='legend'>
@@ -34,7 +41,7 @@ export const MainPage = () => {
                         <DiscoverGenres />
                     </div>
                 </div>
-            </div>
+            </div> */}
         </div>
     );
 };

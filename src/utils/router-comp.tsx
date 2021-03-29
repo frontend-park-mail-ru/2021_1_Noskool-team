@@ -1,7 +1,7 @@
 import { RegistrationPage } from 'pages/RegistrationPage/RegistrationPage';
 import { AuthPage } from 'pages/AuthPage/AuthPage';
 import { Routers } from 'types/router';
-import { MainPage } from 'pages/MainPage/MainPage';
+// import { MainPage } from 'pages/MainPage/MainPage';
 import { ProfilePage } from 'pages/ProfilePage/ProfilePage';
 import { AlbumPage } from 'pages/AlbumPage/AlbumPage';
 import { NavBar } from 'modules/NavBar/NavBar';
@@ -27,19 +27,23 @@ const ProfilePageWrapper = () => (
     </div>
 );
 
-const MainPageWrapper = () => (
-    <div class={pageWrapper()}>
-        <div class={pageWrapper('nav-bar')}>
-            <NavBar />
+const MainPageWrapper = (state: { gg: string }) => {
+    if (state.gg === '') {
+        setInterval(() => {
+            state.gg += 'a';
+        }, 2000);
+    }
+
+    return (
+        <div class={pageWrapper()}>
+            {state.gg}
+
+            <div class={pageWrapper('nav-bar')}>{/* <NavBar /> */}awdawd</div>
+            <div class={pageWrapper('page')}>{/* <MainPage /> */}awdawdawd</div>
+            <div class={pageWrapper('player')}>{/* <AudioLine /> */}adawdawd</div>
         </div>
-        <div class={pageWrapper('page')}>
-            <MainPage />
-        </div>
-        <div class={pageWrapper('player')}>
-            <AudioLine />
-        </div>
-    </div>
-);
+    );
+};
 
 export const LINKS = {
     reg: '/registration',
