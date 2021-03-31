@@ -16,7 +16,7 @@ export const NavBar = () => {
         <div class='nav-bar'>
             <Link to={LINKS.main} child={() => <div class='nav-bar__link nav-bar__link--main'>{'Главная'}</div>} />
             <Link
-                to={LINKS.profile}
+                to={LINKS.profile || ''}
                 child={() => <div class='nav-bar__link nav-bar__link--profile'>{'Профиль'}</div>}
             />
             <div class='nav-bar__link' onclick={logout}>

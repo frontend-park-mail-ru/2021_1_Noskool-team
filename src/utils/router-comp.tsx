@@ -31,16 +31,19 @@ const MainPageWrapper = (state: { gg: string }) => {
     if (state.gg === '') {
         setInterval(() => {
             state.gg += 'a';
-        }, 2000);
+        }, 1000);
     }
 
     return (
         <div class={pageWrapper()}>
-            {state.gg}
-
-            <div class={pageWrapper('nav-bar')}>{/* <NavBar /> */}awdawd</div>
-            <div class={pageWrapper('page')}>{/* <MainPage /> */}awdawdawd</div>
-            <div class={pageWrapper('player')}>{/* <AudioLine /> */}adawdawd</div>
+            <div class={pageWrapper('nav-bar')}>
+                <NavBar />
+            </div>
+            <div class={pageWrapper('page')}>
+                {state.gg}
+                {/* <MainPage /> */}
+            </div>
+            <div class={pageWrapper('player')}>{/* <AudioLine /> */}</div>
         </div>
     );
 };
