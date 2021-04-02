@@ -44,6 +44,7 @@ module.exports = {
             constants: srcPath('constants'),
             modules: srcPath('modules'),
             utils: srcPath('utils'),
+            store: srcPath('store'),
         }
     },
     output: {

@@ -3,8 +3,11 @@ import { logoutUser } from 'actions/registration/registration';
 import { Link } from 'components/Link/Link';
 import { LINKS } from 'utils/router-comp';
 import { redirectTo } from 'utils/router';
+import { cn } from 'utils/cn';
 
 import './style.scss';
+
+const navBar = cn('nav-bar');
 
 export const NavBar = () => {
     const logout = () => {
@@ -14,9 +17,9 @@ export const NavBar = () => {
 
     return (
         <div class='nav-bar'>
-            <Link to={LINKS.main} child={() => <div class='nav-bar__link nav-bar__link--main'>{'Главная'}</div>} />
+            <Link to={LINKS.main} child={() => <div class={navBar('link', 'main')}>{'Главная'}</div>} />
             <Link
-                to={LINKS.profile}
+                to={LINKS.profile || ''}
                 child={() => <div class='nav-bar__link nav-bar__link--profile'>{'Профиль'}</div>}
             />
             <div class='nav-bar__link' onclick={logout}>

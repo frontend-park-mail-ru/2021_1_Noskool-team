@@ -27,19 +27,21 @@ const ProfilePageWrapper = () => (
     </div>
 );
 
-const MainPageWrapper = () => (
-    <div class={pageWrapper()}>
-        <div class={pageWrapper('nav-bar')}>
-            <NavBar />
+const MainPageWrapper = () => {
+    return (
+        <div class={pageWrapper()}>
+            <div class={pageWrapper('nav-bar')}>
+                <NavBar />
+            </div>
+            <div class={pageWrapper('page')}>
+                <MainPage />
+            </div>
+            <div class={pageWrapper('player')}>
+                <AudioLine />
+            </div>
         </div>
-        <div class={pageWrapper('page')}>
-            <MainPage />
-        </div>
-        <div class={pageWrapper('player')}>
-            <AudioLine />
-        </div>
-    </div>
-);
+    );
+};
 
 export const LINKS = {
     reg: '/registration',

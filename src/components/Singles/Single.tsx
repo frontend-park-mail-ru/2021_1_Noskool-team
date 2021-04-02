@@ -5,8 +5,8 @@ import './style.scss';
 
 const Single = () => (
     <ul class='single-items'>
-        {topTrack.map((item, index) => (
-            <li class='item' key={index}>
+        {topTrack.map((item) => (
+            <li class='item'>
                 <button class={item.className}></button>
                 <a href='/' class='name-song'>
                     {item.name}
