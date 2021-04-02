@@ -41,6 +41,9 @@ const onSubmitForm = (values: MouseEvent) => {
             email: regFormStore.form.fields.email.value,
             nickname: regFormStore.form.fields.nickname.value,
             password: regFormStore.form.fields.password.value,
+            'first_name': regFormStore.form.fields.name.value,
+            'second_name': regFormStore.form.fields.lastName.value,
+            'favorite_genre': ['pop'],
         })
             .then((res) => {
                 if (res.status === 200) {
@@ -77,15 +80,17 @@ export const RegistrationForm = () => {
                 <Input
                     validators={[requaredValidator, passwordLengthValidator, passwordValidator]}
                     placeholder={'Введите пароль'}
+                    isPassword={true}
                     input={regFormStore.form.fields.password}
                 />
                 <Input
                     validators={[requaredValidator, passwordLengthValidator, passwordValidator]}
                     placeholder={'Повторите пароль'}
+                    isPassword={true}
                     input={regFormStore.form.fields.passwordRepeat}
                 />
                 <Input
-                    validators={[requaredValidator, emailValidator]}
+                    validators={[requaredValidator]}
                     placeholder={'Введите имя'}
                     input={regFormStore.form.fields.name}
                 />
