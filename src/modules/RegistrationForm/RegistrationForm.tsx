@@ -1,198 +1,100 @@
 import { JSX } from 'jsx/jsx';
 import { Input } from 'components/Input/Input';
-import { Form } from 'types/registration';
 import { requaredValidator, emailValidator, passwordValidator, passwordLengthValidator } from 'utils/form-validators';
 import { registerUser } from 'actions/registration/registration';
 import { redirectTo } from 'utils/router';
 import { LINKS } from 'utils/router-comp';
 import { ErrorFetch } from 'types/common';
-import { DataTypes, useDisplay } from 'jsx/hooks';
 import { isMobile } from 'utils/isMobile';
+import { regFormStore } from 'store/regForm';
 import { cn } from 'utils/cn';
 
 import './style.scss';
 
 const formCn = cn('registration-form');
 
-export const RegistrationForm = () => {
-    const ID_AUTH_FORM_ERROR_MSG = 'ID_AUTH_FORM_ERROR_MSG';
+const checkValid = () => {
+    regFormStore.form.fields.nickname.onCheckValid();
+    regFormStore.form.fields.password.onCheckValid();
+    regFormStore.form.fields.email.onCheckValid();
+    regFormStore.form.fields.lastName.onCheckValid();
+    regFormStore.form.fields.passwordRepeat.onCheckValid();
+    regFormStore.form.fields.name.onCheckValid();
+    regFormStore.form.isValid =
+        regFormStore.form.fields.nickname.isValid &&
+        regFormStore.form.fields.email.isValid &&
+        regFormStore.form.fields.lastName.isValid &&
+        regFormStore.form.fields.passwordRepeat.isValid &&
+        regFormStore.form.fields.passwordRepeat.isValid &&
+        regFormStore.form.fields.password.isValid;
+};
 
-    const EmailInput = Input({
-        onChange: (value) => {
-            form.fields.email.value = (value.target as HTMLInputElement).value;
-        },
-        name: 'email',
-        onValid: (value) => {
-            form.fields.email.isValid = value;
-        },
-        validators: [requaredValidator, emailValidator],
-        placeholder: 'Введите email',
-        className: formCn('input'),
-    });
+const onSetError = (msg: string) => {
+    regFormStore.form.errorMsg = msg;
+};
 
-    const LoginInput = Input({
-        onChange: (value) => {
-            form.fields.nickname.value = (value.target as HTMLInputElement).value;
-        },
-        name: 'nickname',
-        onValid: (value) => {
-            form.fields.nickname.isValid = value;
-        },
-        validators: [requaredValidator],
-        placeholder: 'Введите никнейм',
-        className: formCn('input'),
-    });
-
-    const PasswordInput = Input({
-        onChange: (value) => {
-            form.fields.password.value = (value.target as HTMLInputElement).value;
-        },
-        name: 'password',
-        onValid: (value) => {
-            form.fields.password.isValid = value;
-        },
-        validators: [requaredValidator, passwordLengthValidator, passwordValidator],
-        placeholder: 'Введите пароль',
-        className: formCn('input'),
-        isPassword: true,
-    });
-
-    const PasswordRepeatInput = Input({
-        onChange: (value) => {
-            form.fields.passwordRepeat.value = (value.target as HTMLInputElement).value;
-            form.fields.passwordRepeat.onSetError(
-                form.fields.passwordRepeat.value === form.fields.password.value ? '' : 'Пароли не совпадают'
-            );
-        },
-        name: 'passwordRepeat',
-        onValid: (value) => {
-            form.fields.passwordRepeat.isValid = value;
-        },
-        validators: [requaredValidator, passwordLengthValidator, passwordValidator],
-        placeholder: 'Повторите пароль',
-        className: formCn('input'),
-        isPassword: true,
-    });
-
-    const NameInput = Input({
-        onChange: (value) => {
-            form.fields.name.value = (value.target as HTMLInputElement).value;
-        },
-        name: 'name',
-        onValid: (value) => {
-            form.fields.name.isValid = value;
-        },
-        validators: [],
-        placeholder: 'Введите имя',
-        className: formCn('input'),
-    });
-
-    const LastNameInput = Input({
-        onChange: (value) => {
-            form.fields.lastName.value = (value.target as HTMLInputElement).value;
-        },
-        name: 'lastName',
-        onValid: (value) => {
-            form.fields.lastName.isValid = value;
-        },
-        validators: [],
-        placeholder: 'Введите фамилию',
-    });
-
-    const form: Form = {
-        fields: {
-            name: {
-                value: '',
-                isValid: false,
-                onSubmit: NameInput.onSubmit,
-                onSetError: NameInput.onSetError,
-            },
-            lastName: {
-                value: '',
-                isValid: false,
-                onSubmit: LastNameInput.onSubmit,
-                onSetError: LastNameInput.onSetError,
-            },
-            email: {
-                value: '',
-                isValid: false,
-                onSetError: EmailInput.onSetError,
-                onSubmit: EmailInput.onSubmit,
-            },
-            password: {
-                value: '',
-                isValid: false,
-                onSubmit: PasswordInput.onSubmit,
-                onSetError: PasswordInput.onSetError,
-            },
-            passwordRepeat: {
-                value: '',
-                isValid: false,
-                onSubmit: PasswordRepeatInput.onSubmit,
-                onSetError: PasswordRepeatInput.onSetError,
-            },
-            nickname: {
-                value: '',
-                isValid: false,
-                onSubmit: LoginInput.onSubmit,
-                onSetError: LoginInput.onSetError,
-            },
-        },
-        isValid: false,
-    };
-
-    const error = useDisplay(ID_AUTH_FORM_ERROR_MSG, DataTypes.text);
-
-    const checkValid = () => {
-        let isValid = true;
-        for (let field in form.fields) {
-            form.fields[field].onSubmit();
-            isValid = isValid && form.fields[field].isValid;
-        }
-        form.isValid = isValid;
-    };
-
-    const onSetError = (msg: string) => {
-        error.value = msg;
-    };
-
-    const onSubmitForm = (values: MouseEvent) => {
-        values.preventDefault();
-        checkValid();
-        if (form.isValid) {
-            registerUser({
-                email: form.fields.email.value,
-                nickname: form.fields.nickname.value,
-                password: form.fields.password.value,
+const onSubmitForm = (values: MouseEvent) => {
+    values.preventDefault();
+    checkValid();
+    if (regFormStore.form.isValid) {
+        registerUser({
+            email: regFormStore.form.fields.email.value,
+            nickname: regFormStore.form.fields.nickname.value,
+            password: regFormStore.form.fields.password.value,
+        })
+            .then((res) => {
+                if (res.status === 200) {
+                    redirectTo(LINKS.auth);
+                } else {
+                    res.json().then((res) => onSetError(res.error));
+                }
             })
-                .then((res) => {
-                    if (res.status === 200) {
-                        redirectTo(LINKS.auth);
-                    } else {
-                        res.json().then((res) => onSetError(res.error));
-                    }
-                })
-                .catch((error) => {
-                    error.json().then((res: ErrorFetch) => onSetError(res.error));
-                });
-        }
-    };
+            .catch((error) => {
+                error.json().then((res: ErrorFetch) => onSetError(res.error));
+            });
+    }
+};
 
-    const onClickAuth = () => {
-        redirectTo(LINKS.auth);
-    };
+const onClickAuth = () => {
+    redirectTo(LINKS.auth);
+};
 
+export const RegistrationForm = () => {
     return (
         <div class={formCn('wrapper', isMobile() ? 'mob' : '')}>
             <form onsubmit={onSubmitForm} class={formCn()}>
                 <div class={formCn('title')}>{'Регистрация'}</div>
-                <EmailInput.element />
-                <LoginInput.element />
-                <PasswordInput.element />
-                <PasswordRepeatInput.element />
-                <NameInput.element />
-                <LastNameInput.element />
-                <div class={formCn('error-msg')} id={ID_AUTH_FORM_ERROR_MSG} />
+                <Input
+                    validators={[requaredValidator, emailValidator]}
+                    placeholder={'Введите email'}
+                    input={regFormStore.form.fields.email}
+                />
+                <Input
+                    validators={[requaredValidator]}
+                    placeholder={'Введите ник'}
+                    input={regFormStore.form.fields.nickname}
+                />
+                <Input
+                    validators={[requaredValidator, passwordLengthValidator, passwordValidator]}
+                    placeholder={'Введите пароль'}
+                    input={regFormStore.form.fields.password}
+                />
+                <Input
+                    validators={[requaredValidator, passwordLengthValidator, passwordValidator]}
+                    placeholder={'Повторите пароль'}
+                    input={regFormStore.form.fields.passwordRepeat}
+                />
+                <Input
+                    validators={[requaredValidator, emailValidator]}
+                    placeholder={'Введите имя'}
+                    input={regFormStore.form.fields.name}
+                />
+                <Input
+                    validators={[requaredValidator]}
+                    placeholder={'Введите фамилию'}
+                    input={regFormStore.form.fields.lastName}
+                />
+                <div class={formCn('error-msg')}>{regFormStore.form.errorMsg}</div>
                 <button type='submit'>{'Зарегистрироваться'}</button>
                 <button onclick={onClickAuth}>{'Или войти'}</button>
             </form>

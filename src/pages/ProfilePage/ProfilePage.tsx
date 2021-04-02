@@ -1,10 +1,10 @@
 import { JSX } from 'jsx/jsx';
-import { changeUser, changeUserPhoto, getUser } from 'actions/user/user';
-import { Input } from 'components/Input/Input';
+import { changeUserPhoto, getUser } from 'actions/user/user';
+// import { Input } from 'components/Input/Input';
 import { UserProfile } from 'types/requests/user';
-import { Form } from 'types/registration';
+// import { Form } from 'types/registration';
 import { DataTypes, useDisplay } from 'jsx/hooks';
-import { emailValidator } from 'utils/form-validators';
+// import { emailValidator } from 'utils/form-validators';
 import { cn } from 'utils/cn';
 
 import './style.scss';
@@ -22,47 +22,47 @@ export const ProfilePage = () => {
     const email = useDisplay(ID_EMAIL, DataTypes.text);
     const photo = useDisplay(ID_AVATAR, DataTypes.img);
 
-    const EmailInput = Input({
-        onChange: (value) => {
-            form.fields.email.value = (value.target as HTMLInputElement).value;
-        },
-        name: 'email',
-        onValid: (value) => {
-            form.fields.email.isValid = value;
-        },
-        validators: [emailValidator],
-        placeholder: 'Измените email',
-    });
+    // const EmailInput = Input({
+    //     onChange: (value) => {
+    //         form.fields.email.value = (value.target as HTMLInputElement).value;
+    //     },
+    //     name: 'email',
+    //     onValid: (value) => {
+    //         form.fields.email.isValid = value;
+    //     },
+    //     validators: [emailValidator],
+    //     placeholder: 'Измените email',
+    // });
 
-    const LoginInput = Input({
-        onChange: (value) => {
-            form.fields.nickname.value = (value.target as HTMLInputElement).value;
-        },
-        name: 'nickname',
-        onValid: (value) => {
-            form.fields.nickname.isValid = value;
-        },
-        validators: [],
-        placeholder: 'Измените ник',
-    });
+    // const LoginInput = Input({
+    //     onChange: (value) => {
+    //         form.fields.nickname.value = (value.target as HTMLInputElement).value;
+    //     },
+    //     name: 'nickname',
+    //     onValid: (value) => {
+    //         form.fields.nickname.isValid = value;
+    //     },
+    //     validators: [],
+    //     placeholder: 'Измените ник',
+    // });
 
-    const form: Form = {
-        fields: {
-            email: {
-                value: '',
-                isValid: false,
-                onSubmit: EmailInput.onSubmit,
-                onSetError: EmailInput.onSetError,
-            },
-            nickname: {
-                value: '',
-                isValid: false,
-                onSubmit: LoginInput.onSubmit,
-                onSetError: LoginInput.onSetError,
-            },
-        },
-        isValid: true,
-    };
+    // const form: Form = {
+    //     fields: {
+    //         email: {
+    //             value: '',
+    //             isValid: false,
+    //             onSubmit: EmailInput.onSubmit,
+    //             onSetError: EmailInput.onSetError,
+    //         },
+    //         nickname: {
+    //             value: '',
+    //             isValid: false,
+    //             onSubmit: LoginInput.onSubmit,
+    //             onSetError: LoginInput.onSetError,
+    //         },
+    //     },
+    //     isValid: true,
+    // };
 
     getUser()
         .then((res) => {
@@ -80,25 +80,25 @@ export const ProfilePage = () => {
 
     const onSubmitChanges = (e: MouseEvent) => {
         e.preventDefault();
-        const body = {
-            email: form.fields.email.value,
-            nickname: form.fields.nickname.value,
-        };
-        if (!form.fields.email.value) {
-            delete body.email;
-        }
-        if (!form.fields.nickname.value) {
-            delete body.nickname;
-        }
-        changeUser(body).then(() => {
-            getUser()
-                .then((res) => {
-                    onLoadProfile(res);
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
-        });
+        // const body = {
+        //     email: form.fields.email.value,
+        //     nickname: form.fields.nickname.value,
+        // };
+        // if (!form.fields.email.value) {
+        //     delete body.email;
+        // }
+        // if (!form.fields.nickname.value) {
+        //     delete body.nickname;
+        // }
+        // changeUser(body).then(() => {
+        //     getUser()
+        //         .then((res) => {
+        //             onLoadProfile(res);
+        //         })
+        //         .catch((error) => {
+        //             console.log(error);
+        //         });
+        // });
     };
 
     const onChacngePhoto = (e: MouseEvent) => {
@@ -139,8 +139,8 @@ export const ProfilePage = () => {
             </div>
             <div class={change()}>
                 <form class={change('input')} onsubmit={onSubmitChanges}>
-                    <EmailInput.element />
-                    <LoginInput.element />
+                    {/* <EmailInput.element />
+                    <LoginInput.element /> */}
                     <button type='submit'>{'Изменить'}</button>
                 </form>
             </div>

@@ -1,7 +1,7 @@
 import { RegistrationPage } from 'pages/RegistrationPage/RegistrationPage';
 import { AuthPage } from 'pages/AuthPage/AuthPage';
 import { Routers } from 'types/router';
-// import { MainPage } from 'pages/MainPage/MainPage';
+import { MainPage } from 'pages/MainPage/MainPage';
 import { ProfilePage } from 'pages/ProfilePage/ProfilePage';
 import { AlbumPage } from 'pages/AlbumPage/AlbumPage';
 import { NavBar } from 'modules/NavBar/NavBar';
@@ -27,23 +27,18 @@ const ProfilePageWrapper = () => (
     </div>
 );
 
-const MainPageWrapper = (state: { gg: string }) => {
-    if (state.gg === '') {
-        setInterval(() => {
-            state.gg += 'a';
-        }, 1000);
-    }
-
+const MainPageWrapper = () => {
     return (
         <div class={pageWrapper()}>
             <div class={pageWrapper('nav-bar')}>
                 <NavBar />
             </div>
             <div class={pageWrapper('page')}>
-                {state.gg}
-                {/* <MainPage /> */}
+                <MainPage />
             </div>
-            <div class={pageWrapper('player')}>{/* <AudioLine /> */}</div>
+            <div class={pageWrapper('player')}>
+                <AudioLine />
+            </div>
         </div>
     );
 };
