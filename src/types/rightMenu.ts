@@ -1,9 +1,4 @@
-interface types {
+export interface RightMenu {
     className: string;
     text: string;
-}
-
-export interface RightMenu {
-    header: string;
-    items: types[];
 }

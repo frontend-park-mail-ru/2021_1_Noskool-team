@@ -1,6 +1,6 @@
 import { JSX } from '../../jsx/jsx';
 import { NavBar } from '../NavBar/NavBar';
-import HeaderButtons from '../../components/headerButtons/HeaderButtons';
+import HeaderButtons from 'components/HeaderButtons/HeaderButtons';
 import Songs from '../../components/Songs/Songs';
 
 import './style.scss';

@@ -1,5 +1,4 @@
 import { JSX } from 'jsx/jsx';
-import HeaderButtons from '../headerButtons/HeaderButtons';
 
 import './style.scss';
 
@@ -9,7 +8,6 @@ const FeatureOfWeek = () => {
 
     return (
         <div class='feature-week'>
-            <HeaderButtons />
             <div class='position-feature'>
                 <div class='title'>
                     <div class='title-text'>FEATURED OF THE WEEK</div>

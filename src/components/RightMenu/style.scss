@@ -1,67 +1,99 @@
+ul {
+  padding: 0;
+  margin: 0;
+}
+
 .right-menu {
   height: 100vh;
-  width: 15vw;
+  width: 200px;
   background-color: #fff;
   position: fixed;
+  padding-top: 15px;
 
-  .menu-items {
-    padding-top: 50px;
-    padding-left: 30px;
-    color: #8a8c99;
-
-    .menu-header {
-      font-family: 'M PLUS 1p', sans-serif;
-      font-size: 13px;
-      letter-spacing: 2px;
-    }
-
-    .item {
-      font-family: 'Comfortaa', cursive;
-      font-size: 18px;
-      letter-spacing: 1.5px;
-      padding: 10px 0;
-    }
+  .item {
+    font-family: 'Comfortaa', cursive;
+    font-size: 16px;
+    letter-spacing: 1.5px;
+    padding-bottom: 25px;
+    padding-left: 10px;
+    list-style: none;
+    cursor: pointer;
+    height: 25px;
 
     %icon {
-      width: 20vh;
-      background-color: #8a8c99;
+      width: 20px;
       display: inline;
       padding-right: 25px;
+      padding-bottom: 5px;
+      background-repeat: no-repeat;
+      background-position: center;
     }
 
     .icon-1 {
       @extend %icon;
 
-      -webkit-mask-image: url(../../icons/bubble_chart_black_24dp.svg);
-      mask-image: url(../../icons/bubble_chart_black_24dp.svg);
+      background-image: url(icons/home.svg);
     }
 
     .icon-2 {
       @extend %icon;
 
-      -webkit-mask-image: url(../../icons/campaign_black_24dp.svg);
-      mask-image: url(../../icons/campaign_black_24dp.svg);
+      background-image: url(icons/recommend.svg);
     }
 
     .icon-3 {
       @extend %icon;
 
-      -webkit-mask-image: url(../../icons/mic_black_24dp.svg);
-      mask-image: url(../../icons/mic_black_24dp.svg);
+      background-image: url(icons/radio.svg);
     }
 
     .icon-4 {
       @extend %icon;
 
-      -webkit-mask-image: url(../../icons/collections_black_24dp.svg);
-      mask-image: url(../../icons/collections_black_24dp.svg);
+      background-image: url(icons/talkshow.svg);
+    }
+
+    .icon-5 {
+      @extend %icon;
+
+      background-image: url(icons/music_note.svg);
+    }
+
+    .icon-6 {
+      @extend %icon;
+
+      background-image: url(icons/repeat.svg);
+      // mask-image: url(icons/repeat.svg);
+    }
+
+    .icon-7 {
+      @extend %icon;
+
+      background-image: url(icons/favourites.svg);
+      // mask-image: url(icons/favourites.svg);
+    }
+
+    .icon-8 {
+      @extend %icon;
+
+      background-image: url(icons/statistic.svg);
+      // mask-image: url(icons/statistic.svg);
+    }
+
+    .icon-9 {
+      @extend %icon;
+
+      background-image: url(icons/settings_black_24dp.svg);
+      // mask-image: url(icons/settings_black_24dp.svg);
     }
 
     .text {
       display: inline;
-      padding-left: 20px;
+      padding-left: 10px;
       color: #8a8c99;
       text-decoration: none;
+      margin-top: auto;
+      margin-bottom: auto;
     }
 
     .text:hover {
