@@ -39,19 +39,16 @@
     justify-content: space-between;
     padding: 0 20px;
 
-    %one-item {
-      width: 200px;
-      height: 148px;
-      background-position: center;
-      background-size: 100%;
-      border-radius: 15px;
-      cursor: pointer;
-    }
+    .find-album {
+      text-decoration: none;
 
-    .album {
-      @extend %one-item;
-
-      background-image: url(../../image/альбом3.png);
+      .album-photo {
+        width: 150px;
+        height: 148px;
+        border-radius: 20px;
+        cursor: pointer;
+        object-fit: cover;
+      }
     }
   }
 }

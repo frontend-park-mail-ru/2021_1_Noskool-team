@@ -4,16 +4,16 @@ import { songs } from '../../constants/songs';
 import './style.scss';
 
 const Songs = () => (
-    <div class='tracks'>
+    <div class='tracks-song'>
         {songs.map((item, index) => (
-            <div class='audio' key={index}>
-                <button class='number'>{item.sondId}</button>
-                <div class='song'>
-                    <div class='song-name'>{item.songName}</div>
+            <div class='audio-song' key={index}>
+                <button class='number-song'>{item.sondId}</button>
+                <div class='song-song'>
+                    <div class='song-name-song'>{item.songName}</div>
                 </div>
-                <div class='time'>{item.time}</div>
-                <button class='like'></button>
-                <button class='add'></button>
+                <div class='time-song'>{item.time}</div>
+                <button class='like-song'></button>
+                <button class='add-song'></button>
             </div>
         ))}
     </div>

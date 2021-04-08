@@ -1,6 +1,6 @@
 import { JSX } from '../../jsx/jsx';
 import RightMenu from '../../components/RightMenu/rightMenu';
-import FeatureOfWeek from '../../components/featureWeek/featureOfWeek';
+import FeatureOfWeek from '../../components/FeatureWeek/FeatureOfWeek';
 import Single from '../../components/Singles/Single';
 import BillboardChart from '../../components/BillboardChart/BillboardChart';
 import TopArtists from '../../components/TopArtists/TopArtists';

@@ -1,5 +1,5 @@
 import { JSX } from 'jsx/jsx';
-import FeatureOfWeek from '../../components/featureWeek/featureOfWeek';
+import FeatureOfWeek from '../../components/FeatureWeek/FeatureOfWeek';
 import Single from '../../components/Singles/Single';
 import BillboardChart from '../../components/BillboardChart/BillboardChart';
 import TopArtists from '../../components/TopArtists/TopArtists';
@@ -14,7 +14,7 @@ export const MainPage = () => {
                 <FeatureOfWeek />
                 <div class='weekly-top'>
                     <div class='legend'>
-                        <div class='title'>Weekly Top Track</div>
+                        <a class='title'>Weekly Top Track</a>
                         <div class='buttons'>
                             <button class='prev'></button>
                             <button class='next'></button>

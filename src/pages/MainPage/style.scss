@@ -26,7 +26,7 @@
     }
 
     .weekly-top {
-      margin: 41px 50px 0 41px;
+      margin: 31px 50px 40px 41px;
       box-sizing: border-box;
       font-family: 'Comfortaa', cursive;
 
@@ -41,6 +41,13 @@
         font-weight: 500;
         letter-spacing: 3px;
         color: #373944;
+        margin-top: auto;
+        margin-bottom: auto;
+        cursor: pointer;
+      }
+
+      .title:hover {
+        color: $pink;
       }
 
       .prev {
@@ -64,10 +71,10 @@
     }
 
     .top {
-      display: flex;
-      justify-content: space-between;
       font-family: 'Comfortaa', cursive;
       height: 550px;
+      display: grid;
+      grid-template-columns: repeat(2, 520px);
     }
 
     .discover {

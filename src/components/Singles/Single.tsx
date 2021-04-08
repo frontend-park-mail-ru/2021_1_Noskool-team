@@ -7,7 +7,8 @@ const Single = () => (
     <ul class='single-items'>
         {topTrack.map((item) => (
             <li class='item'>
-                <button class={item.className}></button>
+                {/* <button class={item.className}></button> */}
+                <img src='https://loremflickr.com/640/360' class='single-img'></img>
                 <a href='/' class='name-song'>
                     {item.name}
                 </a>
