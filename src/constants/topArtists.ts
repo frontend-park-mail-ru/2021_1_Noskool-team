@@ -13,7 +13,4 @@ export const topArtists: TopArtists[] = [
     {
         className: 'one-item-4',
     },
-    {
-        className: 'one-item-5',
-    },
 ];

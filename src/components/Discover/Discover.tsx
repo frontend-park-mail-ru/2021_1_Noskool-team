@@ -13,7 +13,9 @@ export const DiscoverGenres = () => (
         </div>
         <div class='section'>
             {genres.map((item, index) => (
-                <a class={item.className} key={index}></a>
+                <a href='/' class='find-album' key={index}>
+                    <img src='https://loremflickr.com/640/360' class='album-photo'></img>
+                </a>
             ))}
         </div>
     </div>

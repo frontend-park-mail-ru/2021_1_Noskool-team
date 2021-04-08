@@ -1,5 +1,5 @@
 import { JSX } from 'jsx/jsx';
-import { topArtists } from '../../constants/topArtists';
+import { topArtists } from 'constants/topArtists';
 
 import './style.scss';
 
@@ -13,7 +13,9 @@ export const TopArtists = () => (
         </div>
         <div class='artists'>
             {topArtists.map((item, index) => (
-                <a href='/' class={item.className} key={index}></a>
+                <a href='/' class='find-artist' key={index}>
+                    <img src='https://loremflickr.com/640/360' class='artists-photo'></img>
+                </a>
             ))}
         </div>
     </div>
