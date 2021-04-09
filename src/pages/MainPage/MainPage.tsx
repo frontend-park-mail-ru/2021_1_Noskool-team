@@ -14,7 +14,7 @@ export const MainPage = () => {
                 <FeatureOfWeek />
                 <div class='weekly-top'>
                     <div class='legend'>
-                        <div class='title'>Weekly Top Track</div>
+                        <a class='title'>Weekly Top Track</a>
                         <div class='buttons'>
                             <button class='prev'></button>
                             <button class='next'></button>

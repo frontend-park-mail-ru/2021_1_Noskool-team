@@ -1,7 +1,6 @@
 @import '../../styles/colors.scss';
 
 .billboard-charts {
-  width: 50%;
   margin: 5px 0 25px 50px;
 
   .title {
@@ -25,7 +24,7 @@
 
     .number {
       color: $gray;
-      font-size: 19px;
+      font-size: 16px;
       padding-top: 13px;
       padding-bottom: 16px;
       font-family: 'Heebo', sans-serif;
@@ -35,39 +34,30 @@
       content: 0;
     }
 
-    .sing-photo {
-      background-image: url(../../image/песня1.png);
-      background-size: 100%;
-      margin-left: 27px;
-      background-position: center;
+    .audio-photo {
       border-radius: 5px;
-      width: 56px;
+      width: 50px;
       height: 48px;
+      margin-left: 13px;
+      margin-right: 5px;
       cursor: pointer;
-      outline: none;
-      border: none;
-    }
-
-    .sing-photo:hover {
-      background-image: url(../../icons/play_circle_filled_black_24dp.svg), url(../../image/песня1.png);
-      background-repeat: no-repeat, no-repeat;
-      background-position: center, center;
-      background-size: 40px, 100%;
+      object-fit: cover;
     }
 
     .song {
       display: block;
-      padding: 2px 37px;
+      padding: 2px 7px;
 
       .song-name {
         color: #0f1e36;
-        font-size: 19px;
+        font-size: 15px;
         letter-spacing: 2px;
-        padding-bottom: 5px;
-        width: 400px;
+        padding-bottom: 3px;
+        width: 260px;
         display: block;
         cursor: pointer;
         text-decoration: none;
+        font-weight: 600;
       }
 
       .song-name:hover {
@@ -76,7 +66,7 @@
 
       .song-author {
         color: $gray;
-        font-size: 17px;
+        font-size: 13px;
         display: block;
         cursor: pointer;
         text-decoration: none;
@@ -89,26 +79,28 @@
 
     .time {
       font-family: 'Heebo', sans-serif;
-      font-size: 19px;
+      font-size: 16px;
       color: $gray;
       padding-top: 13px;
       padding-bottom: 16px;
     }
 
     %button-music {
-      padding-right: 25px;
+      width: 25px;
+      height: 23px;
       background-size: 23px;
       background-position: center;
       background-repeat: no-repeat;
       outline: none;
       border: none;
       cursor: pointer;
+      margin-top: 12px;
     }
 
     .like {
       @extend %button-music;
 
-      margin-left: 45px;
+      margin-left: 15px;
       margin-right: 5px;
       background-image: url(../../icons/favorite_black_24dp.svg);
     }
