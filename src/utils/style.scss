@@ -19,13 +19,12 @@
       padding-top: 60px;
       position: fixed;
       top: 0;
-      // left: 0;
       height: 100vh;
       width: 200px;
     }
 
     &--page {
-      padding-left: 200px;
+      margin-left: 200px;
       height: calc(100% - 95px);
       width: calc(100% - 200px);
     }
@@ -33,9 +32,17 @@
     &--player {
       position: fixed;
       bottom: 0;
-      // right: 0;
       height: 95px;
       width: calc(100% - 125px);
     }
   }
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+}
+
+form {
+  margin: 0;
 }

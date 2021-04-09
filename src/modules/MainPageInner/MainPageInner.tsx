@@ -1,12 +1,12 @@
 import { JSX } from '../../jsx/jsx';
-import RightMenu from 'components/RightMenu/RightMenu';
-import FeatureOfWeek from '../../components/FeatureWeek/FeatureOfWeek';
-import Single from '../../components/Singles/Single';
-import BillboardChart from '../../components/BillboardChart/BillboardChart';
-import TopArtists from '../../components/TopArtists/TopArtists';
-import DiscoverGenres from '../../components/Discover/Discover';
-import AudioLine from '../../components/AudioLine/AudioLine';
-import HeaderButtons from 'components/HeaderButtons/HeaderButtons';
+import { RightMenu } from 'components/RightMenu/RightMenu';
+import { FeatureOfWeek } from '../../components/FeatureWeek/FeatureOfWeek';
+import { Single } from '../../components/Singles/Single';
+import { BillboardChart } from '../../components/BillboardChart/BillboardChart';
+import { TopArtists } from '../../components/TopArtists/TopArtists';
+import { DiscoverGenres } from '../../components/Discover/Discover';
+import { AudioLine } from '../../components/AudioLine/AudioLine';
+import { HeaderButtons } from 'components/HeaderButtons/HeaderButtons';
 
 import './style.scss';
 

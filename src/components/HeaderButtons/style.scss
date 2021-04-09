@@ -28,10 +28,6 @@
     font-size: 20px;
   }
 
-  form {
-    margin: 0;
-  }
-
   .search-form {
     position: relative;
     top: 50%;
@@ -59,7 +55,7 @@
     top: 10px;
     left: 38px;
     background: none;
-    color: #8a8c99;
+    color: $gray;
     width: 300px;
     height: 20px;
     border: none;
@@ -93,7 +89,7 @@
     border: none;
     cursor: pointer;
     border-radius: 20px;
-    box-shadow: 5px 5px 5px 5px rgba($color: #8a8c99, $alpha: 0.3);
+    box-shadow: 5px 5px 5px 5px rgba($color: $gray, $alpha: 0.3);
     outline: none;
     float: right;
     margin-top: 10px;
@@ -125,7 +121,6 @@
 
       .data-profile {
         display: flex;
-        // justify-content: space-between;
         margin-top: 15px;
 
         .image-profile {
@@ -145,7 +140,7 @@
           padding-top: 5px;
           margin-right: 10px;
           margin-left: 20px;
-          color: #8a8c99;
+          color: $gray;
 
           .nickname {
             margin-bottom: 5px;
@@ -215,7 +210,7 @@
         .link {
           margin-top: 5px;
           text-decoration: none;
-          color: #8a8c99;
+          color: $gray;
           margin-right: 0;
           width: 200px;
         }
@@ -264,7 +259,7 @@
         margin-top: 13px;
         height: 1px;
         width: 100%;
-        border-bottom: 1px solid #8a8c99;
+        border-bottom: 1px solid $gray;
       }
     }
   }

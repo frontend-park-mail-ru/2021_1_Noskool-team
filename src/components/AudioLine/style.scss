@@ -41,7 +41,7 @@
     .singer {
       font-size: 16px;
       padding-top: 7px;
-      color: #8a8c99;
+      color: $gray;
       display: block;
       cursor: pointer;
       text-decoration: none;
@@ -149,7 +149,7 @@
     display: flex;
     margin: 32px 1.5vw;
     font-family: 'Heebo', sans-serif;
-    color: #8a8c99;
+    color: $gray;
 
     .current-time {
       margin: 7px 12px;

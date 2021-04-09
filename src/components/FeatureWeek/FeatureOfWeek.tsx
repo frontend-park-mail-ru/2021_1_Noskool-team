@@ -2,7 +2,7 @@ import { JSX } from 'jsx/jsx';
 
 import './style.scss';
 
-const FeatureOfWeek = () => {
+export const FeatureOfWeek = () => {
     const SONGNAME: string = 'Love The Way You Lie';
     const SINGERS: string = 'Eminem ft. Rihanna';
 
@@ -25,5 +25,3 @@ const FeatureOfWeek = () => {
         </div>
     );
 };
-
-export default FeatureOfWeek;

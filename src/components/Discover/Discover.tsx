@@ -3,7 +3,7 @@ import { genres } from '../../constants/genres';
 
 import './style.scss';
 
-const DiscoverGenres = () => (
+export const DiscoverGenres = () => (
     <div class='genres'>
         <div class='titles'>
             <div class='monthly-artists'>Discover Genres</div>
@@ -18,5 +18,3 @@ const DiscoverGenres = () => (
         </div>
     </div>
 );
-
-export default DiscoverGenres;

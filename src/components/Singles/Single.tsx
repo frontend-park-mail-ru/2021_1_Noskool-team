@@ -3,7 +3,7 @@ import { topTrack } from '../../constants/singles';
 
 import './style.scss';
 
-const Single = () => (
+export const Single = () => (
     <ul class='single-items'>
         {topTrack.map((item) => (
             <li class='item'>
@@ -18,5 +18,3 @@ const Single = () => (
         ))}
     </ul>
 );
-
-export default Single;

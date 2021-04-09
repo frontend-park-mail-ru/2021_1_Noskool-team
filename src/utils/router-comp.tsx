@@ -5,11 +5,11 @@ import { MainPage } from 'pages/MainPage/MainPage';
 import { ProfilePage } from 'pages/ProfilePage/ProfilePage';
 import { AlbumPage } from 'pages/AlbumPage/AlbumPage';
 import { NavBar } from 'modules/NavBar/NavBar';
-import AudioLine from 'components/AudioLine/AudioLine';
+import { AudioLine } from 'components/AudioLine/AudioLine';
 import { cn } from 'utils/cn';
 import { JSX } from 'jsx/jsx';
-import RightMenu from 'components/RightMenu/RightMenu';
-import HeaderButtons from 'components/HeaderButtons/HeaderButtons';
+import { RightMenu } from 'components/RightMenu/RightMenu';
+import { HeaderButtons } from 'components/HeaderButtons/HeaderButtons';
 
 import './style.scss';
 

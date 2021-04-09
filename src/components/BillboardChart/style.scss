@@ -24,7 +24,7 @@
     padding: 8px;
 
     .number {
-      color: #8a8c99;
+      color: $gray;
       font-size: 19px;
       padding-top: 13px;
       padding-bottom: 16px;
@@ -75,7 +75,7 @@
       }
 
       .song-author {
-        color: #8a8c99;
+        color: $gray;
         font-size: 17px;
         display: block;
         cursor: pointer;
@@ -90,7 +90,7 @@
     .time {
       font-family: 'Heebo', sans-serif;
       font-size: 19px;
-      color: #8a8c99;
+      color: $gray;
       padding-top: 13px;
       padding-bottom: 16px;
     }

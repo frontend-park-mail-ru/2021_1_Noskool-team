@@ -1,7 +1,7 @@
 import { JSX } from 'jsx/jsx';
 import { profileButton } from '../../constants/profileButton';
 
-const ProfileButton = () => (
+export const ProfileButton = () => (
     <ul class='items-user'>
         {profileButton.map((item, index) => (
             <li class='item' key={index}>
@@ -13,5 +13,3 @@ const ProfileButton = () => (
         ))}
     </ul>
 );
-
-export default ProfileButton;
