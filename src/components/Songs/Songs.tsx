@@ -5,8 +5,8 @@ import './style.scss';
 
 const Songs = () => (
     <div class='tracks-song'>
-        {songs.map((item, index) => (
-            <div class='audio-song' key={index}>
+        {songs.map((item) => (
+            <div class='audio-song'>
                 <button class='number-song'>{item.sondId}</button>
                 <div class='song-song'>
                     <div class='song-name-song'>{item.songName}</div>
