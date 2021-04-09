@@ -3,7 +3,7 @@ import { songs } from '../../constants/songs';
 
 import './style.scss';
 
-const Songs = () => (
+export const Songs = () => (
     <div class='tracks'>
         {songs.map((item, index) => (
             <div class='audio' key={index}>
@@ -18,5 +18,3 @@ const Songs = () => (
         ))}
     </div>
 );
-
-export default Songs;

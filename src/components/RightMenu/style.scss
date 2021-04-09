@@ -1,71 +1,210 @@
+@import '../../styles/colors.scss';
+
 .right-menu {
   height: 100vh;
-  width: 15vw;
+  width: 200px;
   background-color: #fff;
   position: fixed;
+  padding-top: 15px;
 
-  .menu-items {
-    padding-top: 50px;
-    padding-left: 30px;
-    color: #8a8c99;
-
-    .menu-header {
-      font-family: 'M PLUS 1p', sans-serif;
-      font-size: 13px;
-      letter-spacing: 2px;
-    }
-
-    .item {
-      font-family: 'Comfortaa', cursive;
-      font-size: 18px;
-      letter-spacing: 1.5px;
-      padding: 10px 0;
-    }
+  .item {
+    font-family: 'Comfortaa', cursive;
+    font-size: 16px;
+    letter-spacing: 1.5px;
+    padding-bottom: 25px;
+    list-style: none;
+    cursor: pointer;
+    height: 25px;
+    display: flex;
 
     %icon {
-      width: 20vh;
-      background-color: #8a8c99;
-      display: inline;
+      width: 20px;
       padding-right: 25px;
+      padding-bottom: 5px;
+      background-repeat: no-repeat;
+      background-position: center;
     }
 
     .icon-1 {
       @extend %icon;
 
-      -webkit-mask-image: url(../../icons/bubble_chart_black_24dp.svg);
-      mask-image: url(../../icons/bubble_chart_black_24dp.svg);
+      background-image: url(icons/home.svg);
     }
 
     .icon-2 {
       @extend %icon;
 
-      -webkit-mask-image: url(../../icons/campaign_black_24dp.svg);
-      mask-image: url(../../icons/campaign_black_24dp.svg);
+      background-image: url(icons/recommend.svg);
     }
 
     .icon-3 {
       @extend %icon;
 
-      -webkit-mask-image: url(../../icons/mic_black_24dp.svg);
-      mask-image: url(../../icons/mic_black_24dp.svg);
+      background-image: url(icons/radio.svg);
     }
 
     .icon-4 {
       @extend %icon;
 
-      -webkit-mask-image: url(../../icons/collections_black_24dp.svg);
-      mask-image: url(../../icons/collections_black_24dp.svg);
+      background-image: url(icons/talkshow.svg);
+    }
+
+    .icon-5 {
+      @extend %icon;
+
+      background-image: url(icons/music_note.svg);
+    }
+
+    .icon-6 {
+      @extend %icon;
+
+      background-image: url(icons/repeat.svg);
+    }
+
+    .icon-7 {
+      @extend %icon;
+
+      background-image: url(icons/favourites.svg);
+    }
+
+    .icon-8 {
+      @extend %icon;
+
+      background-image: url(icons/statistic.svg);
+    }
+
+    .icon-9 {
+      @extend %icon;
+
+      background-image: url(icons/settings_black_24dp.svg);
     }
 
     .text {
-      display: inline;
-      padding-left: 20px;
-      color: #8a8c99;
+      color: $gray;
       text-decoration: none;
+      margin-top: 5px;
+    }
+  }
+
+  .checked-0 {
+    .icon-1 {
+      background-image: url(icons/home_hover.svg);
     }
 
-    .text:hover {
-      text-decoration: underline;
+    .text {
+      color: $pink;
+    }
+  }
+
+  .checked-1 {
+    .icon-2 {
+      background-image: url(icons/recommend_hover.svg);
+    }
+
+    .text {
+      color: $pink;
+    }
+  }
+
+  .checked-2 {
+    .icon-3 {
+      background-image: url(icons/radio_hover.svg);
+    }
+
+    .text {
+      color: $pink;
+    }
+  }
+
+  .checked-3 {
+    .icon-4 {
+      background-image: url(icons/talkshow_hover.svg);
+    }
+
+    .text {
+      color: $pink;
+    }
+  }
+
+  .checked-4 {
+    .icon-5 {
+      background-image: url(icons/music_note_hover.svg);
+    }
+
+    .text {
+      color: $pink;
+    }
+  }
+
+  .checked-5 {
+    .icon-7 {
+      background-image: url(icons/favourites_hover.svg);
+    }
+
+    .text {
+      color: $pink;
+    }
+  }
+
+  .checked-6 {
+    .icon-8 {
+      background-image: url(icons/statistic_hover.svg);
+    }
+
+    .text {
+      color: $pink;
+    }
+  }
+
+  .checked-7 {
+    .icon-9 {
+      background-image: url(icons/settings_pink.svg);
+    }
+
+    .text {
+      color: $pink;
+    }
+  }
+
+  .item:hover {
+    .icon-1 {
+      background-image: url(icons/home_hover.svg);
+    }
+
+    .icon-2 {
+      background-image: url(icons/recommend_hover.svg);
+    }
+
+    .icon-3 {
+      background-image: url(icons/radio_hover.svg);
+    }
+
+    .icon-4 {
+      background-image: url(icons/talkshow_hover.svg);
+    }
+
+    .icon-5 {
+      background-image: url(icons/music_note_hover.svg);
+    }
+
+    .icon-6 {
+      background-image: url(icons/repeat_hover.svg);
+    }
+
+    .icon-7 {
+      background-image: url(icons/favourites_hover.svg);
+    }
+
+    .icon-8 {
+      background-image: url(icons/statistic_hover.svg);
+    }
+
+    .icon-9 {
+      background-image: url(icons/settings_pink.svg);
+    }
+
+    .text {
+      color: $pink;
     }
   }
 }

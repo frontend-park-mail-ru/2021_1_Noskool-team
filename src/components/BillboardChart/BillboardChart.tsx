@@ -3,7 +3,7 @@ import { billboardChart } from '../../constants/billboardChart';
 
 import './style.scss';
 
-const BillboardChart = () => (
+export const BillboardChart = () => (
     <div class='tracks'>
         {billboardChart.map((item, index) => (
             <div class='audio' key={index}>
@@ -24,5 +24,3 @@ const BillboardChart = () => (
         ))}
     </div>
 );
-
-export default BillboardChart;

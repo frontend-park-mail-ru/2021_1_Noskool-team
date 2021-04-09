@@ -41,7 +41,7 @@
     .singer {
       font-size: 16px;
       padding-top: 7px;
-      color: #8a8c99;
+      color: $gray;
       display: block;
       cursor: pointer;
       text-decoration: none;
@@ -111,7 +111,7 @@
 
   input[type='range'] {
     margin-top: 16px;
-    width: 670px;
+    width: 32.6vw;
     background-color: #d3d3d3;
     -webkit-appearance: none;
     height: 5px;
@@ -147,9 +147,9 @@
 
   .time-slider {
     display: flex;
-    margin: 32px;
+    margin: 32px 1.5vw;
     font-family: 'Heebo', sans-serif;
-    color: #8a8c99;
+    color: $gray;
 
     .current-time {
       margin: 7px 12px;
@@ -162,7 +162,7 @@
 
   .volume {
     display: flex;
-    margin: 29px 32px;
+    margin: 29px 0;
 
     .icon {
       @extend %music-button;
@@ -173,13 +173,13 @@
 
     input[type='range'] {
       margin-top: 19px;
-      width: 130px;
+      width: 8vw;
     }
   }
 
   .end-icons {
     display: flex;
-    margin: 29px 20px 39px 40px;
+    margin: 29px 20px 39px 10px;
 
     .settings {
       @extend %music-button;

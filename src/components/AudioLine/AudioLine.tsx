@@ -2,7 +2,7 @@ import { JSX } from 'jsx/jsx';
 
 import './style.scss';
 
-const AudioLine = () => {
+export const AudioLine = () => {
     const SONGNAME: string = 'Save Your Tears';
     const SINGER: string = 'The Weeknd';
     const TIME: string = '3:36';
@@ -41,5 +41,3 @@ const AudioLine = () => {
         </div>
     );
 };
-
-export default AudioLine;

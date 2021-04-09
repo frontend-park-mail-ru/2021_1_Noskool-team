@@ -3,7 +3,7 @@ import { topArtists } from '../../constants/topArtists';
 
 import './style.scss';
 
-const TopArtists = () => (
+export const TopArtists = () => (
     <div class='top-artists'>
         <div class='titles'>
             <div class='monthly-artists'>Monthly Top Artists</div>
@@ -18,5 +18,3 @@ const TopArtists = () => (
         </div>
     </div>
 );
-
-export default TopArtists;

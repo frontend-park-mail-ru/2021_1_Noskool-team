@@ -5,9 +5,11 @@ import { MainPage } from 'pages/MainPage/MainPage';
 import { ProfilePage } from 'pages/ProfilePage/ProfilePage';
 import { AlbumPage } from 'pages/AlbumPage/AlbumPage';
 import { NavBar } from 'modules/NavBar/NavBar';
-import AudioLine from 'components/AudioLine/AudioLine';
+import { AudioLine } from 'components/AudioLine/AudioLine';
 import { cn } from 'utils/cn';
 import { JSX } from 'jsx/jsx';
+import { RightMenu } from 'components/RightMenu/RightMenu';
+import { HeaderButtons } from 'components/HeaderButtons/HeaderButtons';
 
 import './style.scss';
 
@@ -30,14 +32,19 @@ const ProfilePageWrapper = () => (
 const MainPageWrapper = () => {
     return (
         <div class={pageWrapper()}>
-            <div class={pageWrapper('nav-bar')}>
-                <NavBar />
-            </div>
-            <div class={pageWrapper('page')}>
-                <MainPage />
-            </div>
-            <div class={pageWrapper('player')}>
-                <AudioLine />
+            <div class={pageWrapper('content')}>
+                <div class={pageWrapper('content', 'nav-header')}>
+                    <HeaderButtons />
+                </div>
+                <div class={pageWrapper('content', 'nav-bar')}>
+                    <RightMenu />
+                </div>
+                <div class={pageWrapper('content', 'page')}>
+                    <MainPage />
+                </div>
+                {/* <div class={pageWrapper('content', 'player')}>
+                    <AudioLine />
+                </div> */}
             </div>
         </div>
     );

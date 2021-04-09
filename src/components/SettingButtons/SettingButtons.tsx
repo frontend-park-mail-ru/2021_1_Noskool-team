@@ -1,7 +1,7 @@
 import { JSX } from 'jsx/jsx';
 import { settingButtons } from '../../constants/settingButtons';
 
-const SettingButtons = () => {
+export const SettingButtons = () => {
     return (
         <ul class='items-user'>
             {settingButtons.map((item, index) => (
@@ -14,5 +14,3 @@ const SettingButtons = () => {
         </ul>
     );
 };
-
-export default SettingButtons;

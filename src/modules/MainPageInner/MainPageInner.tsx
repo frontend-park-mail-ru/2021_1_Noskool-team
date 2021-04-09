@@ -1,11 +1,12 @@
 import { JSX } from '../../jsx/jsx';
-import RightMenu from '../../components/RightMenu/rightMenu';
-import FeatureOfWeek from '../../components/featureWeek/featureOfWeek';
-import Single from '../../components/Singles/Single';
-import BillboardChart from '../../components/BillboardChart/BillboardChart';
-import TopArtists from '../../components/TopArtists/TopArtists';
-import DiscoverGenres from '../../components/Discover/Discover';
-import AudioLine from '../../components/AudioLine/AudioLine';
+import { RightMenu } from 'components/RightMenu/RightMenu';
+import { FeatureOfWeek } from '../../components/FeatureWeek/FeatureOfWeek';
+import { Single } from '../../components/Singles/Single';
+import { BillboardChart } from '../../components/BillboardChart/BillboardChart';
+import { TopArtists } from '../../components/TopArtists/TopArtists';
+import { DiscoverGenres } from '../../components/Discover/Discover';
+import { AudioLine } from '../../components/AudioLine/AudioLine';
+import { HeaderButtons } from 'components/HeaderButtons/HeaderButtons';
 
 import './style.scss';
 
@@ -14,6 +15,7 @@ export const MainPageInner = () => {
         <div class='main-page'>
             <RightMenu />
             <div class='main'>
+                <HeaderButtons />
                 <FeatureOfWeek />
                 <div class='weekly-top'>
                     <div class='legend'>
