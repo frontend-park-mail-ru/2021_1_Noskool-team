@@ -12,11 +12,6 @@ export const RightMenu = () => {
         chooseElement.fill(false);
         chooseElement[index] = true;
         rightMenuStore.form.checked = [...chooseElement];
-        console.log(rightMenuStore.form.checked);
-
-        // rightMenuStore.form.checked.forEach((item, index) => item ? document.getElementById(ID_MENU).classList.add('checked-' + String(index)) : '');
-        console.log(document.getElementById(ID_MENU).classList);
-        console.log(document.getElementById(ID_MENU));
     };
 
     return (
