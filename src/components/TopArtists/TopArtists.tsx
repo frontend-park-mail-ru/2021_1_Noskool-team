@@ -12,9 +12,9 @@ export const TopArtists = () => (
             </a>
         </div>
         <div class='artists'>
-            {topArtists.map((item, index) => (
-                <a href='/' class='find-artist' key={index}>
-                    <img src='https://loremflickr.com/640/360' class='artists-photo'></img>
+            {topArtists.map((item) => (
+                <a href='/' class='find-artist'>
+                    <img src='https://loremflickr.com/640/360' class='artists-photo' alt={item}></img>
                 </a>
             ))}
         </div>
