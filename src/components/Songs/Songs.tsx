@@ -3,7 +3,7 @@ import { songs } from '../../constants/songs';
 
 import './style.scss';
 
-const Songs = () => (
+export const Songs = () => (
     <div class='tracks-song'>
         {songs.map((item) => (
             <div class='audio-song'>
