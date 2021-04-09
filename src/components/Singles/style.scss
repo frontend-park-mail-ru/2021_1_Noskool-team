@@ -5,11 +5,14 @@
   list-style: none;
   justify-content: space-between;
   overflow: hidden;
+  position: relative;
 
   .item {
+    left: 0;
+
     .single-img {
-      height: 150px;
-      width: 150px;
+      height: 140px;
+      width: 140px;
       border-radius: 10px;
       box-shadow: 5px 5px 5px 5px rgba($color: #8a8c99, $alpha: 0.3);
       margin-left: 25px;
@@ -18,8 +21,8 @@
     }
 
     .name-song {
-      width: 198px;
-      font-size: 20px;
+      width: 188px;
+      font-size: 18px;
       letter-spacing: 1px;
       text-align: center;
       color: #0f1e36;
@@ -35,8 +38,8 @@
     }
 
     .singer {
-      width: 198px;
-      font-size: 16px;
+      width: 188px;
+      font-size: 14px;
       letter-spacing: 1px;
       text-align: center;
       color: $gray;

@@ -2,7 +2,7 @@
 
 .genres {
   width: 100%;
-  margin: 50px 50px 25px 10px;
+  margin: 50px 30px 25px 10px;
 
   .titles {
     width: 100%;
@@ -11,7 +11,7 @@
     font-family: 'Comfortaa', cursive;
 
     .monthly-artists {
-      font-size: 28px;
+      font-size: 26px;
       font-weight: 500;
       letter-spacing: 3px;
       color: #373944;
@@ -43,8 +43,8 @@
       text-decoration: none;
 
       .album-photo {
-        width: 150px;
-        height: 148px;
+        width: 135px;
+        height: 133px;
         border-radius: 20px;
         cursor: pointer;
         object-fit: cover;

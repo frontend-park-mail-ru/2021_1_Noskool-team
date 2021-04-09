@@ -12,16 +12,7 @@ export const MainPage = () => {
         <div class='main-page'>
             <div class='main'>
                 <FeatureOfWeek />
-                <div class='weekly-top'>
-                    <div class='legend'>
-                        <a class='title'>Weekly Top Track</a>
-                        <div class='buttons'>
-                            <button class='prev'></button>
-                            <button class='next'></button>
-                        </div>
-                    </div>
-                    <Single />
-                </div>
+                <Single />
                 <div class='top'>
                     <div class='billboard-charts'>
                         <a href='/' class='title'>
