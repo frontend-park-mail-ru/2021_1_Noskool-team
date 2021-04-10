@@ -1,15 +1,15 @@
 @import '../../styles/colors.scss';
 
 .single-items {
+  position: relative;
   display: flex;
   list-style: none;
   justify-content: space-between;
   overflow: hidden;
-  position: relative;
+  left: 0;
+  transition: all ease 1s;
 
   .item {
-    left: 0;
-
     .single-img {
       height: 140px;
       width: 140px;

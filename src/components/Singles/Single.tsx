@@ -7,22 +7,40 @@ export const Single = () => {
     const SLIDER = 'slider';
 
     let offset = 0;
-    const sliderLine = document.getElementById(SLIDER);
+    let countNumbers = 5;
 
     const prevItem = () => {
-        console.log(sliderLine);
-        offset = offset - 195;
-        if (offset < 0) {
+        countNumbers = 5;
+        const firstScrollValue = 218;
+        const scrollValue = 188;
+
+        if (offset === firstScrollValue || offset <= 0) {
             offset = 0;
+        } else {
+            offset -= scrollValue;
         }
         document.getElementById(SLIDER).style.left = -offset + 'px';
     };
 
     const nextItem = () => {
-        offset = offset + 195;
-        if (offset > 3900) {
-            offset = 3900;
+        const numberElements = topTrack.length;
+        const firstScrollValue = 218;
+        const scrollValue = 188;
+
+        if (numberElements <= 5) {
+            offset = 0;
+        } else if (offset === 0) {
+            offset = firstScrollValue;
+        } else {
+            countNumbers = countNumbers + 1;
+            console.log(countNumbers);
+            if (countNumbers < numberElements) {
+                offset += scrollValue;
+            }
         }
+        console.log(countNumbers);
+        console.log(numberElements);
+
         document.getElementById(SLIDER).style.left = -offset + 'px';
     };
 
