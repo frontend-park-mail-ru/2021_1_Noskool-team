@@ -38,8 +38,6 @@ export const Single = () => {
                 offset += scrollValue;
             }
         }
-        console.log(countNumbers);
-        console.log(numberElements);
 
         document.getElementById(SLIDER).style.left = -offset + 'px';
     };
