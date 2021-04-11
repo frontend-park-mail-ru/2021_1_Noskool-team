@@ -1,5 +1,6 @@
 import { JSX } from 'jsx/jsx';
 import { topTrack } from '../../constants/singles';
+import { FIRST_SCROLL_VALUE, SCROLL_VALUE } from '../../constants/slider';
 
 import './style.scss';
 
@@ -11,31 +12,27 @@ export const Single = () => {
 
     const prevItem = () => {
         countNumbers = 5;
-        const firstScrollValue = 195;
-        const scrollValue = 188;
 
-        if (offset === firstScrollValue || offset <= 0) {
+        if (offset === FIRST_SCROLL_VALUE || offset <= 0) {
             offset = 0;
         } else {
-            offset -= scrollValue;
+            offset -= SCROLL_VALUE;
         }
         document.getElementById(SLIDER).style.left = -offset + 'px';
     };
 
     const nextItem = () => {
         const numberElements = topTrack.length;
-        const firstScrollValue = 195;
-        const scrollValue = 188;
 
         if (numberElements <= 5) {
             offset = 0;
         } else if (offset === 0) {
-            offset = firstScrollValue;
+            offset = FIRST_SCROLL_VALUE;
         } else {
             countNumbers = countNumbers + 1;
             console.log(countNumbers);
             if (countNumbers < numberElements) {
-                offset += scrollValue;
+                offset += SCROLL_VALUE;
             }
         }
 

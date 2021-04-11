@@ -1,15 +1,9 @@
 import { proxy } from 'jsx/store';
 import { RightMenu } from 'types/store/rightMenu';
 
-const fillArray = () => {
-    let arr = Array(8).fill(false);
-    arr[0] = true;
-    return arr;
-};
-
 export const rightMenuStore = {
     form: proxy<RightMenu>({
-        checked: fillArray(),
+        checked: Array(8).fill(false),
         classnames: [
             'checked-0',
             'checked-1',
