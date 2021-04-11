@@ -52,5 +52,11 @@ export const getcsrf = (url: string): Promise<Response> => {
     return fetch(url, {
         method: 'get',
         credentials: 'include',
+        headers: {
+            'X-Csrf-Token': document.cookie
+                .split(';')
+                .find((item) => item.startsWith('csrf'))
+                .split('=')[1],
+        },
     });
 };
