@@ -14,7 +14,7 @@ export const authUser = (body: AuthUser) => {
 
 export const logoutUser = async () => {
     const response = await get(LOGOUT_USER);
-    if (response.status === 401) {
+    if (response.status === 401 || response.status === 403) {
         redirectTo(LINKS.auth);
     }
     return response;

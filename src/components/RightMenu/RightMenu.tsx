@@ -1,5 +1,5 @@
 import { rightMenu } from 'constants/rightMenu';
-import { rightMenuStore } from 'store/rightMenu';
+import { routeStore } from 'store/routeStore';
 import { JSX } from 'jsx/jsx';
 
 import './style.scss';
@@ -11,7 +11,7 @@ export const RightMenu = () => {
         const chooseElement = Array(9).fill(false);
         chooseElement.fill(false);
         chooseElement[index] = true;
-        rightMenuStore.form.checked = [...chooseElement];
+        routeStore.checked = [...chooseElement];
     };
 
     return (
@@ -20,7 +20,7 @@ export const RightMenu = () => {
                 <li
                     key={index}
                     id={ID_MENU}
-                    class={'item ' + (rightMenuStore.form.checked[index] ? rightMenuStore.form.classnames[index] : '')}
+                    class={'item ' + (routeStore.checked[index] ? routeStore.classnames[index] : '')}
                     onclick={chooseItem(index)}
                 >
                     <div class={item.className}></div>
