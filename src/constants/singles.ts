@@ -1,4 +1,8 @@
-import { TopTrack } from '../types/topTrack';
+interface TopTrack {
+    className: string;
+    name: string;
+    singer: string;
+}
 
 export const topTrack: TopTrack[] = [
     {

@@ -1,6 +1,6 @@
 import { JSX } from 'jsx/jsx';
 import { Link } from 'components/Link/Link';
-import { LINKS } from 'utils/router-comp';
+import { LINKS } from 'constants/links';
 
 import './style.scss';
 

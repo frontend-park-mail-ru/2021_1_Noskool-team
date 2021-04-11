@@ -1,4 +1,9 @@
-import { Songs } from '../types/songs';
+interface Songs {
+    sondId: string;
+    className: string;
+    songName: string;
+    time: string;
+}
 
 export const songs: Songs[] = [
     {

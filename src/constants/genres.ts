@@ -1,4 +1,6 @@
-import { Genres } from '../types/genres';
+interface Genres {
+    className: string;
+}
 
 export const genres: Genres[] = [
     {

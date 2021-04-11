@@ -1,14 +1,12 @@
 import { JSX } from '../../jsx/jsx';
-import { NavBar } from '../NavBar/NavBar';
-import { HeaderButtons } from 'components/HeaderButtons/HeaderButtons';
-import { Songs } from '../../components/Songs/Songs';
+import { HeaderButtons } from 'modules/HeaderButtons/HeaderButtons';
+import { Songs } from 'modules/Songs/Songs';
 
 import './style.scss';
 
 export const AlbumPageInner = () => {
     return (
         <div class='main-page'>
-            <NavBar />
             <div class='main-part'>
                 <div class='header'>
                     <HeaderButtons />

@@ -1,6 +1,6 @@
-import { LINKS } from 'utils/router-comp';
+import { LINKS } from 'constants/links';
 import { UserProfile, UserChangeData } from 'types/requests/user';
-import { redirectTo } from 'utils/router';
+import { redirectTo } from 'utils/render';
 import { post, get, postImg } from '../common/common';
 import { PROFILE, CHANGE_PROFILE, CHANGE_USER_PHOTE } from './user.constants';
 

@@ -25,55 +25,49 @@
       background-position: center;
     }
 
-    .icon-1 {
+    .icon-0 {
       @extend %icon;
 
       background-image: url(icons/home.svg);
     }
 
-    .icon-2 {
+    .icon-1 {
       @extend %icon;
 
       background-image: url(icons/recommend.svg);
     }
 
-    .icon-3 {
+    .icon-2 {
       @extend %icon;
 
       background-image: url(icons/radio.svg);
     }
 
-    .icon-4 {
+    .icon-3 {
       @extend %icon;
 
       background-image: url(icons/talkshow.svg);
     }
 
-    .icon-5 {
+    .icon-4 {
       @extend %icon;
 
       background-image: url(icons/music_note.svg);
     }
 
-    .icon-6 {
-      @extend %icon;
-
-      background-image: url(icons/repeat.svg);
-    }
-
-    .icon-7 {
+    .icon-5 {
       @extend %icon;
 
       background-image: url(icons/favourites.svg);
     }
 
-    .icon-8 {
+    .icon-6 {
       @extend %icon;
 
       background-image: url(icons/statistic.svg);
     }
 
-    .icon-9 {
+    .icon-7 {
       @extend %icon;
 
       background-image: url(icons/settings_black_24dp.svg);
@@ -87,7 +81,7 @@
   }
 
   .checked-0 {
-    .icon-1 {
+    .icon-0 {
       background-image: url(icons/home_hover.svg);
     }
 
@@ -97,7 +91,7 @@
   }
 
   .checked-1 {
-    .icon-2 {
+    .icon-1 {
       background-image: url(icons/recommend_hover.svg);
     }
 
@@ -107,7 +101,7 @@
   }
 
   .checked-2 {
-    .icon-3 {
+    .icon-2 {
       background-image: url(icons/radio_hover.svg);
     }
 
@@ -117,7 +111,7 @@
   }
 
   .checked-3 {
-    .icon-4 {
+    .icon-3 {
       background-image: url(icons/talkshow_hover.svg);
     }
 
@@ -127,7 +121,7 @@
   }
 
   .checked-4 {
-    .icon-5 {
+    .icon-4 {
       background-image: url(icons/music_note_hover.svg);
     }
 
@@ -137,7 +131,7 @@
   }
 
   .checked-5 {
-    .icon-7 {
+    .icon-5 {
       background-image: url(icons/favourites_hover.svg);
     }
 
@@ -147,7 +141,7 @@
   }
 
   .checked-6 {
-    .icon-8 {
+    .icon-6 {
       background-image: url(icons/statistic_hover.svg);
     }
 
@@ -157,7 +151,7 @@
   }
 
   .checked-7 {
-    .icon-9 {
+    .icon-7 {
       background-image: url(icons/settings_pink.svg);
     }
 
@@ -167,39 +161,35 @@
   }
 
   .item:hover {
-    .icon-1 {
+    .icon-0 {
       background-image: url(icons/home_hover.svg);
     }
 
-    .icon-2 {
+    .icon-1 {
       background-image: url(icons/recommend_hover.svg);
     }
 
-    .icon-3 {
+    .icon-2 {
       background-image: url(icons/radio_hover.svg);
     }
 
-    .icon-4 {
+    .icon-3 {
       background-image: url(icons/talkshow_hover.svg);
     }
 
-    .icon-5 {
+    .icon-4 {
       background-image: url(icons/music_note_hover.svg);
     }
 
-    .icon-6 {
-      background-image: url(icons/repeat_hover.svg);
-    }
-
-    .icon-7 {
+    .icon-5 {
       background-image: url(icons/favourites_hover.svg);
     }
 
-    .icon-8 {
+    .icon-6 {
       background-image: url(icons/statistic_hover.svg);
     }
 
-    .icon-9 {
+    .icon-7 {
       background-image: url(icons/settings_pink.svg);
     }
 
