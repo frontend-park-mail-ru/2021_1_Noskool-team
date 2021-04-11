@@ -7,9 +7,7 @@ import './style.scss';
 export const RightMenu = () => {
     const ID_MENU = 'item';
     const chooseItem = (index: number) => () => {
-        document.getElementById(ID_MENU).className = 'item';
         const chooseElement = Array(9).fill(false);
-        chooseElement.fill(false);
         chooseElement[index] = true;
         routeStore.checked = [...chooseElement];
     };

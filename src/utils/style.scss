@@ -1,40 +1,44 @@
 .page-wrapper {
   height: 100%;
   width: 100%;
-  position: relative;
 
   &__content {
-    margin-left: auto;
-    margin-right: auto;
+    margin: 0 auto;
     width: 1200px;
+    height: 100vh;
     position: relative;
+    overflow: hidden;
+  }
 
-    &--nav-header {
-      position: fixed;
-      height: 60px;
-      z-index: 1;
-    }
+  &__page {
+    position: absolute;
+    top: 60px;
+    left: 200px;
+    height: calc(100vh - 135px);
+    width: 1000px;
+  }
 
-    &--nav-bar {
-      padding-top: 60px;
-      position: fixed;
-      top: 0;
-      height: 100vh;
-      width: 200px;
-    }
+  &__player {
+    position: absolute;
+    bottom: 0;
+    height: 75px;
+    width: 1200px;
+  }
 
-    &--page {
-      margin-left: 200px;
-      height: calc(100% - 95px);
-      width: calc(100% - 200px);
-    }
+  &__nav-bar {
+    position: absolute;
+    top: 60px;
+    height: calc(100vh - 135px);
+    width: 200px;
+  }
 
-    &--player {
-      position: fixed;
-      bottom: 0;
-      height: 95px;
-      width: calc(100% - 125px);
-    }
+  &__nav-header {
+    margin: 0 auto;
+    width: 1200px;
+    position: absolute;
+    height: 60px;
+    top: 0;
+    z-index: 1;
   }
 }
 

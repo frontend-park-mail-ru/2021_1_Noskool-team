@@ -2,7 +2,9 @@ import { proxy } from 'jsx/store';
 import { RouteStore } from 'types/store/routeStore';
 
 export const routeStore = proxy<RouteStore>({
-    checked: Array(8).fill(false),
+    checked: Array(9)
+        .fill(false)
+        .map((_, i) => (i === 0 ? true : false)),
     classnames: [
         'checked-0',
         'checked-1',
