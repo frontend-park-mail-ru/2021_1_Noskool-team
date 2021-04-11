@@ -20,3 +20,10 @@ export const postImg = (url: string, body: FormData) => {
         body: body,
     });
 };
+
+export const getcsrf = (url: string): Promise<Response> => {
+    return fetch(url, {
+        method: 'get',
+        credentials: 'include',
+    });
+};
