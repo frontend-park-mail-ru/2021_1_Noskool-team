@@ -13,6 +13,9 @@ const chooseItem = (index: number) => () => {
         case 0:
             link = LINKS.main;
             break;
+        case 5:
+            link = LINKS.favoriteTracks;
+            break;
         case 7:
             link = LINKS.profile;
             break;
@@ -54,6 +57,7 @@ export const RightMenu = () => {
             className: 'icon-5',
             text: 'Избранное',
             classNameActive: 'checked-5',
+            isActive: window.location.pathname.startsWith(LINKS.favorite),
         },
         {
             className: 'icon-6',

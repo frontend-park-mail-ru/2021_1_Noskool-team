@@ -24,7 +24,7 @@ export const changeUser = async (body: UserChangeData) => {
 
 export const changeUserPhoto = async (img: any): Promise<Response | undefined> => {
     const formData = new FormData();
-    formData.append('my_file', img.files[0]);
+    formData.append('user_photo', img.files[0]);
     const response = await postImg(CHANGE_USER_PHOTE, formData);
     if (response.status === 401 || response.status === 403) {
         redirectTo(LINKS.auth);

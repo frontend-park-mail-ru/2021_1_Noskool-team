@@ -4,4 +4,6 @@ export const LINKS = {
     main: '/',
     profile: '/profile',
     album: '/album',
+    favorite: '/favorite',
+    favoriteTracks: '/favorite/tracks',
 };
