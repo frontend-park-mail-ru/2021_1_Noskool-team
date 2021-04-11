@@ -11,7 +11,7 @@ export const Single = () => {
 
     const prevItem = () => {
         countNumbers = 5;
-        const firstScrollValue = 218;
+        const firstScrollValue = 195;
         const scrollValue = 188;
 
         if (offset === firstScrollValue || offset <= 0) {
@@ -24,7 +24,7 @@ export const Single = () => {
 
     const nextItem = () => {
         const numberElements = topTrack.length;
-        const firstScrollValue = 218;
+        const firstScrollValue = 195;
         const scrollValue = 188;
 
         if (numberElements <= 5) {
@@ -51,19 +51,21 @@ export const Single = () => {
                     <button class='next' onclick={nextItem}></button>
                 </div>
             </div>
-            <ul id={SLIDER} class='single-items'>
-                {topTrack.map((item) => (
-                    <li class='item'>
-                        <img src='https://loremflickr.com/640/360' class='single-img'></img>
-                        <a href='/' class='name-song'>
-                            {item.name}
-                        </a>
-                        <a href='/' class='singer'>
-                            {item.singer}
-                        </a>
-                    </li>
-                ))}
-            </ul>
+            <div class='slide-items'>
+                <ul id={SLIDER} class='single-items'>
+                    {topTrack.map((item) => (
+                        <li class='item'>
+                            <img src='https://loremflickr.com/640/360' class='single-img'></img>
+                            <a href='/' class='name-song'>
+                                {item.name}
+                            </a>
+                            <a href='/' class='singer'>
+                                {item.singer}
+                            </a>
+                        </li>
+                    ))}
+                </ul>
+            </div>
         </div>
     );
 };

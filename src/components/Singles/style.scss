@@ -1,56 +1,59 @@
 @import '../../styles/colors.scss';
 
-.single-items {
-  position: relative;
-  display: flex;
-  list-style: none;
-  justify-content: space-between;
+.slide-items {
   overflow: hidden;
-  left: 0;
-  transition: all ease 1s;
 
-  .item {
-    .single-img {
-      height: 140px;
-      width: 140px;
-      border-radius: 10px;
-      box-shadow: 5px 5px 5px 5px rgba($color: #8a8c99, $alpha: 0.3);
-      margin-left: 25px;
-      margin-top: 25px;
-      object-fit: cover;
-    }
+  .single-items {
+    position: relative;
+    display: flex;
+    list-style: none;
+    justify-content: space-between;
+    left: 0;
+    transition: all ease 1s;
 
-    .name-song {
-      width: 188px;
-      font-size: 18px;
-      letter-spacing: 1px;
-      text-align: center;
-      color: #0f1e36;
-      font-weight: 500;
-      padding-top: 32px;
-      display: block;
-      cursor: pointer;
-      text-decoration: none;
-    }
+    .item {
+      .single-img {
+        height: 140px;
+        width: 140px;
+        border-radius: 10px;
+        box-shadow: 5px 5px 5px 5px rgba($color: #8a8c99, $alpha: 0.3);
+        margin-left: 25px;
+        margin-top: 25px;
+        object-fit: cover;
+      }
 
-    .name-song:hover {
-      color: $pink;
-    }
+      .name-song {
+        width: 188px;
+        font-size: 18px;
+        letter-spacing: 1px;
+        text-align: center;
+        color: #0f1e36;
+        font-weight: 500;
+        padding-top: 32px;
+        display: block;
+        cursor: pointer;
+        text-decoration: none;
+      }
 
-    .singer {
-      width: 188px;
-      font-size: 14px;
-      letter-spacing: 1px;
-      text-align: center;
-      color: $gray;
-      padding-top: 12px;
-      display: block;
-      cursor: pointer;
-      text-decoration: none;
-    }
+      .name-song:hover {
+        color: $pink;
+      }
 
-    .singer:hover {
-      color: $pink;
+      .singer {
+        width: 188px;
+        font-size: 14px;
+        letter-spacing: 1px;
+        text-align: center;
+        color: $gray;
+        padding-top: 12px;
+        display: block;
+        cursor: pointer;
+        text-decoration: none;
+      }
+
+      .singer:hover {
+        color: $pink;
+      }
     }
   }
 }
