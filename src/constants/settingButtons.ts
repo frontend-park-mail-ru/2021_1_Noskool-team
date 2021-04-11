@@ -1,4 +1,9 @@
-import { ProfileButton } from '../types/profileButton';
+interface ProfileButton {
+    className: string;
+    text: string;
+    next: boolean;
+    classNext: string;
+}
 
 export const settingButtons: ProfileButton[] = [
     {

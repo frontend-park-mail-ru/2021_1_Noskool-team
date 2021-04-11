@@ -1,8 +1,8 @@
 import { RegisterUser, AuthUser } from 'types/registration';
 import { post, get } from '../common/common';
 import { REGISTER_USER, AUTH_USER, LOGOUT_USER } from 'constants/api';
-import { redirectTo } from 'utils/router';
-import { LINKS } from 'utils/router-comp';
+import { redirectTo } from 'utils/render';
+import { LINKS } from 'constants/links';
 
 export const registerUser = (body: RegisterUser) => {
     return post(REGISTER_USER, body);

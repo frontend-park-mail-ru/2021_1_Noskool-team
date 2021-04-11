@@ -1,5 +1,5 @@
 import { JSX } from 'jsx/jsx';
-import { onClickA } from '../../utils/router';
+import { onClickA } from '../../utils/render';
 
 interface LinkProps {
     to?: string;

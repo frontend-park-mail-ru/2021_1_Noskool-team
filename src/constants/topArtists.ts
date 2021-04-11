@@ -1,4 +1,6 @@
-import { TopArtists } from '../types/topArtists';
+interface TopArtists {
+    className: string;
+}
 
 export const topArtists: TopArtists[] = [
     {
