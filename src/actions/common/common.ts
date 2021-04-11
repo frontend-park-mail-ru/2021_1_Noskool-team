@@ -60,3 +60,10 @@ export const getcsrf = (): Promise<Response> => {
         credentials: 'include',
     });
 };
+
+export const getcsrf = (url: string): Promise<Response> => {
+    return fetch(url, {
+        method: 'get',
+        credentials: 'include',
+    });
+};
