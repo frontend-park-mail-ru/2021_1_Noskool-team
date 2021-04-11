@@ -106,7 +106,7 @@ const patchChildren = (parent: Element, vChildren: Array<VNode | string>, nextVC
         patchDom(childNode, vChildren[i], nextVChildren[i]);
     });
 
-    nextVChildren.slice(vChildren.length).forEach((vChild) => {
+    nextVChildren?.slice(vChildren.length).forEach((vChild) => {
         const child = createDOM(vChild);
         parent.appendChild(child);
     });

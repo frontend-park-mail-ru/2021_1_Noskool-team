@@ -1,4 +1,4 @@
-export interface RightMenu {
+export interface RouteStore {
     checked: Array<boolean>;
     classnames: Array<string>;
 }
