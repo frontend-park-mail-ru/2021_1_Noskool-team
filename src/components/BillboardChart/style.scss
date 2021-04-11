@@ -1,16 +1,17 @@
 @import '../../styles/colors.scss';
 
 .billboard-charts {
-  margin: 5px 0 25px 50px;
+  margin: 5px 0 25px 30px;
 
   .title {
-    font-size: 28px;
+    font-size: 26px;
     font-weight: 500;
     letter-spacing: 3px;
     color: #373944;
     margin-bottom: 25px;
     display: block;
     text-decoration: none;
+    margin-left: 15px;
   }
 
   .title:hover {
@@ -52,12 +53,13 @@
         color: #0f1e36;
         font-size: 15px;
         letter-spacing: 2px;
-        padding-bottom: 3px;
-        width: 260px;
+        padding-bottom: 5px;
+        width: 250px;
         display: block;
         cursor: pointer;
         text-decoration: none;
         font-weight: 600;
+        margin-top: 5px;
       }
 
       .song-name:hover {
