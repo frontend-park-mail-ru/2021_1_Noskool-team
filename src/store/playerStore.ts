@@ -4,9 +4,9 @@ import { PlayerStore, CurrentTrack } from 'types/store/playerStore';
 export const playerStore = proxy<PlayerStore>({
     currentTrack: proxy<CurrentTrack>({
         index: 0,
-        link: 'http://audiomod.ru/track/Radiohead%20-%20Creep.wav',
+        link: '/api/v1/data/audio/Joji_-_Mr._Hollywood.ogg',
         img: '',
-        name: 'Radiohead - Creep',
+        name: 'Joji - Mr. Hollywood',
     }),
     isPlay: false,
     volume: 2,
@@ -14,15 +14,9 @@ export const playerStore = proxy<PlayerStore>({
     durationTime: 0,
     playList: [
         {
-            link: 'http://audiomod.ru/track/Radiohead%20-%20Creep.wav',
+            link: '/api/v1/data/audio/Joji_-_Mr._Hollywood.ogg',
             img: '',
-            name: 'Radiohead - Creep',
-            index: null,
-        },
-        {
-            link: 'http://audiomod.ru/track/Daft%20Punk%20-%20Technologic.wav',
-            img: '',
-            name: 'Daft Punk - Technologic',
+            name: 'Joji - Mr. Hollywood',
             index: null,
         },
     ],

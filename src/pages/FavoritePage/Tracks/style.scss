@@ -17,50 +17,56 @@
 
   &__content {
     height: 100%;
+    font-family: 'Comfortaa', cursive;
+    color: #0094b6;
+    font-size: 16px;
+    line-height: 16px;
+    font-weight: lighter;
+  }
 
-    table {
-      height: 100%;
-      font-family: 'Comfortaa', cursive;
-      color: #0094b6;
-      font-size: 16px;
-      line-height: 16px;
-      font-weight: lighter;
+  &__row {
+    width: 100%;
+    display: flex;
+    align-items: center;
 
-      thead {
-        tr {
-          th {
-            font-weight: lighter;
+    &--header {
+      border-bottom: 1px solid $borders;
+    }
 
-            &:nth-child(1) {
-              width: 30px;
-              border-right: 1px solid $borders;
-              border-bottom: 1px solid $borders;
-            }
+    &--track {
+      cursor: pointer;
+      transition: all 0.3s;
 
-            &:nth-child(2) {
-              width: 270px;
-              border-right: 1px solid $borders;
-              border-bottom: 1px solid $borders;
-            }
+      &:hover {
+        background-color: $cyan-light;
+        color: $white;
+      }
+    }
 
-            &:nth-child(3) {
-              width: 220px;
-              border-right: 1px solid $borders;
-              border-bottom: 1px solid $borders;
-            }
-          }
-        }
+    div {
+      padding: 10px;
+
+      &:nth-child(1) {
+        border-right: 1px solid $borders;
+        width: 30px;
+        padding: 10px;
+        text-overflow: ellipsis;
+        overflow: hidden;
       }
 
-      tbody {
-        overflow: hidden;
+      &:nth-child(2) {
+        width: 270px;
+        border-right: 1px solid $borders;
+      }
 
-        tr {
-          th {
-            border-right: 1px solid $borders;
-            padding: 0;
-          }
-        }
+      &:nth-child(3) {
+        width: 220px;
+        border-right: 1px solid $borders;
+      }
+
+      &:nth-child(4) {
+        width: 50px;
+        border-right: 1px solid $borders;
       }
     }
   }

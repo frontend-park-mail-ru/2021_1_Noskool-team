@@ -7,6 +7,7 @@ import { PROFILE, CHANGE_PROFILE, CHANGE_USER_PHOTE } from './user.constants';
 export const getUser = async (): Promise<UserProfile | undefined> => {
     const response = await get(PROFILE);
     if (response.status === 401 || response.status === 403) {
+        localStorage.clear();
         redirectTo(LINKS.auth);
         return new Promise(() => {});
     }
@@ -16,6 +17,7 @@ export const getUser = async (): Promise<UserProfile | undefined> => {
 export const changeUser = async (body: UserChangeData) => {
     const response = await post(CHANGE_PROFILE, body);
     if (response.status === 401 || response.status === 403) {
+        localStorage.clear();
         redirectTo(LINKS.auth);
         return new Promise(() => {});
     }
@@ -27,6 +29,7 @@ export const changeUserPhoto = async (img: any): Promise<Response | undefined> =
     formData.append('user_photo', img.files[0]);
     const response = await postImg(CHANGE_USER_PHOTE, formData);
     if (response.status === 401 || response.status === 403) {
+        localStorage.clear();
         redirectTo(LINKS.auth);
         return new Promise(() => {});
     }

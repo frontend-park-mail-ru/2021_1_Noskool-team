@@ -28,7 +28,7 @@ const pageWrapper = cn('page-wrapper');
 export const App = () => {
     return (
         <div>
-            {localStorage.getItem('token') ? (
+            {localStorage.getItem('auth') ? (
                 <div class={pageWrapper()}>
                     <div class={pageWrapper('content')}>
                         <div class={pageWrapper('nav-header')}>
@@ -49,7 +49,7 @@ export const App = () => {
                     </div>
                 </div>
             ) : (
-                <div>
+                <div class={''}>
                     {window.location.pathname === LINKS.auth && <AuthPage />}
                     {window.location.pathname === LINKS.reg && <RegistrationPage />}
                     {isPageExistsNoneAuth() && <ErrorPage />}
