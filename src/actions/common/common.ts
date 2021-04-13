@@ -18,6 +18,12 @@ export const post = <R>(url: string, body: R) => {
         method: 'post',
         credentials: 'include',
         body: JSON.stringify(body),
+        headers: {
+            'X-Csrf-Token': document.cookie
+                ?.split(';')
+                ?.find((item) => item?.startsWith('csrf'))
+                ?.split('=')[1],
+        },
     });
 };
 
@@ -26,6 +32,12 @@ export const postImg = (url: string, body: FormData) => {
         method: 'post',
         credentials: 'include',
         body: body,
+        headers: {
+            'X-Csrf-Token': document.cookie
+                ?.split(';')
+                ?.find((item) => item?.startsWith('csrf'))
+                ?.split('=')[1],
+        },
     });
 };
 

@@ -4,7 +4,7 @@ import { SettingButtons } from '../SettingButtons/SettingButtons';
 
 import './style.scss';
 
-export const HeaderButtons = () => {
+export const Header = () => {
     const NICKNAME = 'lerakrya';
     const EMAIL = 'lerakrya8@gmail.com';
     const PROFILE_CLASS = 'profile-menu close';

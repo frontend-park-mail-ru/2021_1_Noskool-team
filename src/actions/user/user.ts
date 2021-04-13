@@ -11,13 +11,13 @@ export const getUser = async (): Promise<UserProfile | undefined> => {
         redirectTo(LINKS.auth);
         return new Promise(() => {});
     } else if (response.status === 403) {
-        const getCsrf = await getcsrf();
-        if (getCsrf.status === 200) {
+        const csrf = await getcsrf();
+        if (csrf.status === 200) {
             response = await get(PROFILE);
-            // if (response.status !== 200) {
-            //     redirectTo(LINKS.auth);
-            //     return new Promise(() => {});
-            // }
+            if (response.status !== 200) {
+                redirectTo(LINKS.auth);
+                return new Promise(() => {});
+            }
         } else {
             redirectTo(LINKS.auth);
             return new Promise(() => {});
@@ -33,13 +33,13 @@ export const changeUser = async (body: UserChangeData) => {
         redirectTo(LINKS.auth);
         return new Promise(() => {});
     } else if (response.status === 403) {
-        const getCsrf = await getcsrf();
-        if (getCsrf.status === 200) {
+        const csrf = await getcsrf();
+        if (csrf.status === 200) {
             response = await get(PROFILE);
-            // if (response.status !== 200) {
-            //     redirectTo(LINKS.auth);
-            //     return new Promise(() => {});
-            // }
+            if (response.status !== 200) {
+                redirectTo(LINKS.auth);
+                return new Promise(() => {});
+            }
         } else {
             redirectTo(LINKS.auth);
             return new Promise(() => {});
@@ -51,11 +51,23 @@ export const changeUser = async (body: UserChangeData) => {
 export const changeUserPhoto = async (img: any): Promise<Response | undefined> => {
     const formData = new FormData();
     formData.append('my_file', img.files[0]);
-    const response = await postImg(CHANGE_USER_PHOTE, formData);
-    if (response.status === 401 || response.status === 403) {
+    let response = await postImg(CHANGE_USER_PHOTE, formData);
+    if (response.status === 401) {
         localStorage.clear();
         redirectTo(LINKS.auth);
         return new Promise(() => {});
+    } else if (response.status === 403) {
+        const csrf = await getcsrf();
+        if (csrf.status === 200) {
+            response = await postImg(CHANGE_USER_PHOTE, formData);
+            if (response.status !== 200) {
+                redirectTo(LINKS.auth);
+                return new Promise(() => {});
+            }
+        } else {
+            redirectTo(LINKS.auth);
+            return new Promise(() => {});
+        }
     }
     return response;
 };

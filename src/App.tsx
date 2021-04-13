@@ -3,7 +3,7 @@ import { AudioLine } from 'modules/AudioLine/AudioLine';
 import { cn } from 'utils/cn';
 import { JSX } from 'jsx/jsx';
 import { RightMenu } from 'modules/RightMenu/RightMenu';
-import { HeaderButtons } from 'modules/HeaderButtons/HeaderButtons';
+import { Header } from 'modules/Header';
 import { LINKS } from 'constants/links';
 
 import { FavoritePage } from 'pages/FavoritePage/FavoritePage';
@@ -32,7 +32,7 @@ export const App = () => {
                 <div class={pageWrapper()}>
                     <div class={pageWrapper('content')}>
                         <div class={pageWrapper('nav-header')}>
-                            <HeaderButtons />
+                            <Header />
                         </div>
                         <div class={pageWrapper('nav-bar')}>
                             <RightMenu />

@@ -47,19 +47,21 @@ export const Tracks = () => {
             <div class={favoriteTracks('content')}>
                 <div class={favoriteTracks('table')}>
                     <div class={favoriteTracks('row', 'header')}>
-                        <div>{'#'}</div>
-                        <div>{'Название'}</div>
-                        <div>{'Исполнитель'}</div>
-                        <div>{''}</div>
-                        <div>{''}</div>
+                        <div class={favoriteTracks('cell')}>{'#'}</div>
+                        <div class={favoriteTracks('cell')}>{'Название'}</div>
+                        <div class={favoriteTracks('cell')}>{'Исполнитель'}</div>
+                        <div class={favoriteTracks('cell')}>{''}</div>
+                        <div class={favoriteTracks('cell')}>{''}</div>
                     </div>
                     {favoriteTracksStore.trackList.map((el, i) => (
                         <div class={favoriteTracks('row', 'track')} onclick={onClickTrack(i)}>
-                            <div>{`#${i + 1}`}</div>
-                            <div>{el?.tittle || '???'}</div>
-                            <div>{el?.musicians || '???'}</div>
-                            <div>{'3:32'}</div>
-                            <div>
+                            <div class={favoriteTracks('cell')}>{`#${i + 1}`}</div>
+                            <div class={favoriteTracks('cell')}>{el?.tittle || '???'}</div>
+                            <div class={favoriteTracks('cell')}>
+                                {el?.musicians?.map((el) => el?.name).join(', ') || '???'}
+                            </div>
+                            <div class={favoriteTracks('cell')}>{'3:32'}</div>
+                            <div class={favoriteTracks('cell')}>
                                 <div />
                             </div>
                         </div>

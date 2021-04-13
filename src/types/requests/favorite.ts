@@ -1,3 +1,17 @@
+export interface Album {
+    'album_id': number;
+    picture: string;
+    'release_date': string;
+    tittle: string;
+}
+
+export interface Artist {
+    'musician_id': number;
+    picture: string;
+    name: string;
+    description: string;
+}
+
 export interface FavoriteTarck {
     'track_id': string;
     tittle: string;
@@ -5,7 +19,7 @@ export interface FavoriteTarck {
     audio: string;
     picture: string;
     'release_date': string;
-    genres: null;
-    musicians: null;
-    album: null;
+    genres: [];
+    musicians: Artist[];
+    album: Album[];
 }

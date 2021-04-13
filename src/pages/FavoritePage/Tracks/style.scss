@@ -42,32 +42,34 @@
         color: $white;
       }
     }
+  }
 
-    div {
-      padding: 10px;
+  &__cell {
+    padding: 10px;
+    height: 36px;
+    box-sizing: border-box;
+    white-space: pre;
+    text-overflow: ellipsis;
+    overflow: hidden;
 
-      &:nth-child(1) {
-        border-right: 1px solid $borders;
-        width: 30px;
-        padding: 10px;
-        text-overflow: ellipsis;
-        overflow: hidden;
-      }
+    &:nth-child(1) {
+      border-right: 1px solid $borders;
+      width: 50px;
+    }
 
-      &:nth-child(2) {
-        width: 270px;
-        border-right: 1px solid $borders;
-      }
+    &:nth-child(2) {
+      width: 270px;
+      border-right: 1px solid $borders;
+    }
 
-      &:nth-child(3) {
-        width: 220px;
-        border-right: 1px solid $borders;
-      }
+    &:nth-child(3) {
+      width: 220px;
+      border-right: 1px solid $borders;
+    }
 
-      &:nth-child(4) {
-        width: 50px;
-        border-right: 1px solid $borders;
-      }
+    &:nth-child(4) {
+      width: 70px;
+      border-right: 1px solid $borders;
     }
   }
 }
