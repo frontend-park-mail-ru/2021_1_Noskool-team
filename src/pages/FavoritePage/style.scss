@@ -34,12 +34,12 @@
 
     &--active {
       color: $pink;
-      box-shadow: 4px 4px 8px rgba(239, 84, 142, 0.2);
+      box-shadow: -4px 4px 8px rgba(239, 84, 142, 0.2);
     }
 
     &:hover {
       color: $pink;
-      box-shadow: 4px 4px 8px rgba(239, 84, 142, 0.2);
+      box-shadow: -4px 4px 8px rgba(239, 84, 142, 0.2);
     }
   }
 

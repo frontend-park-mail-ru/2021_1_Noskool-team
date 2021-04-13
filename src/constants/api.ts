@@ -7,3 +7,4 @@ export const TRACK_HOST = DEBUG ? 'http://localhost:8888' : 'http://178.154.245.
 export const REGISTER_USER = HOST + '/api/v1/registrate';
 export const AUTH_USER = HOST + '/api/v1/login';
 export const LOGOUT_USER = HOST + '/api/v1/logout';
+export const GET_CSRF = HOST + '/api/v1/profile/csrf';
