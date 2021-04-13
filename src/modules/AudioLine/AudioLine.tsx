@@ -14,7 +14,7 @@ const getPlayer = (): HTMLAudioElement => document.getElementById(PLAYER_ID) as 
 const getVolume = (): HTMLInputElement => document.getElementById(VOLUME_ID) as HTMLInputElement;
 const getTrackLine = (): HTMLInputElement => document.getElementById(TRACK_LINE_ID) as HTMLInputElement;
 
-const onClickPlay = () => {
+export const onClickPlay = () => {
     const player = getPlayer();
     if (playerStore.isPlay) {
         player.pause();

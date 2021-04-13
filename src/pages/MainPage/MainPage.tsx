@@ -4,7 +4,6 @@ import { Single } from 'modules/Singles/Single';
 import { BillboardChart } from 'modules/BillboardChart/BillboardChart';
 import { TopArtists } from 'modules/TopArtists/TopArtists';
 import { DiscoverGenres } from 'modules/Discover/Discover';
-
 import './style.scss';
 
 export const MainPage = () => {
