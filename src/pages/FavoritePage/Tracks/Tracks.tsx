@@ -67,7 +67,6 @@ export const Tracks = () => {
                         </div>
                     ))}
                 </div>
-                <div class={favoriteTracks('info')}></div>
             </div>
         </div>
     );

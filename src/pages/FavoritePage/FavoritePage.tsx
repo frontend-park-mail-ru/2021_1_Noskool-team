@@ -1,10 +1,11 @@
 import { LINKS } from 'constants/links';
-import { Tracks } from './Tracks/Tracks';
+import { Tracks } from './Tracks';
+import { Albums } from './Albums';
 import { JSX } from 'jsx/jsx';
 import { cn } from 'utils/cn';
+import { redirectTo } from 'utils/render';
 
 import './style.scss';
-import { redirectTo } from 'utils/render';
 
 const favoritePage = cn('favorite-page');
 
@@ -55,6 +56,7 @@ export const FavoritePage = () => {
             </div>
             <div class={favoritePage('content-wrapper')}>
                 {window.location.pathname.startsWith(LINKS.favoriteTracks) && <Tracks />}
+                {window.location.pathname.startsWith(LINKS.favoriteAlbums) && <Albums />}
             </div>
         </div>
     );

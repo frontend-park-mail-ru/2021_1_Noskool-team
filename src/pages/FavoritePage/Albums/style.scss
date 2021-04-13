@@ -1,0 +1,55 @@
+@import '../../../styles/colors.scss';
+
+.favorite-albums {
+  background-color: $white;
+  border-radius: 50px 0 0 50px;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 30px;
+
+  &__title {
+    font-family: 'Comfortaa', cursive;
+    font-size: 30px;
+    line-height: 33px;
+    margin-bottom: 30px;
+  }
+
+  &__content {
+    height: 100%;
+    font-family: 'Comfortaa', cursive;
+    color: #0094b6;
+    font-size: 16px;
+    line-height: 16px;
+    font-weight: lighter;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+
+  &__album {
+    width: 200px;
+    padding: 10px;
+    margin: 5px;
+    height: 235px;
+    cursor: pointer;
+    overflow: hidden;
+
+    img {
+      width: 200px;
+      height: 200px;
+      transition: all 0.3s;
+
+      &:hover {
+        width: 220px;
+        height: 220px;
+        transform: translate(-10px, -10px);
+      }
+    }
+  }
+
+  &__album-title {
+    text-align: center;
+    padding-top: 5px;
+    color: $text-black;
+  }
+}
