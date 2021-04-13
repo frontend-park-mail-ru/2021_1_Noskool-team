@@ -1,5 +1,5 @@
-import { Albums } from 'types/requests/albums';
+import { Album } from 'types/requests/albums';
 
 export interface AlbumsStore {
-    albums: Albums[];
+    albums: Album[];
 }

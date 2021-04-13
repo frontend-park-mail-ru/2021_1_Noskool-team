@@ -3,7 +3,7 @@ import { redirectTo } from 'utils/render';
 import { get, getcsrf, postCategory } from '../common/common';
 import { TrackBack } from 'types/requests/tracks';
 import { Artists } from 'types/requests/artists';
-import { Albums } from 'types/requests/albums';
+import { Album } from 'types/requests/albums';
 import { TRACK_HOST, WEEKLY_TOP, BILLBOARD_CHART, TOP_ARTIST, DISCOVERS, TOP_ONE } from 'constants/api';
 
 export const topOne = async (): Promise<TrackBack[] | undefined> => {
@@ -93,7 +93,7 @@ export const getTopArtists = async (): Promise<Artists[] | undefined> => {
     return response.json();
 };
 
-export const getDiscovers = async (): Promise<Albums[] | undefined> => {
+export const getDiscovers = async (): Promise<Album[] | undefined> => {
     let response = await get(DISCOVERS);
     if (response.status === 401) {
         redirectTo(LINKS.auth);
