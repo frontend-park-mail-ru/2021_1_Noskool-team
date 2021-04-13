@@ -15,6 +15,7 @@ export const authUser = (body: AuthUser) => {
 export const logoutUser = async () => {
     const response = await get(LOGOUT_USER);
     if (response.status === 401 || response.status === 403) {
+        localStorage.clear();
         redirectTo(LINKS.auth);
     }
     return response;

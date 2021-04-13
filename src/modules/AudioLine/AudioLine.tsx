@@ -1,6 +1,7 @@
 import { JSX } from 'jsx/jsx';
 import { cn } from 'utils/cn';
 import { playerStore } from 'store/playerStore';
+import { TRACK_HOST } from 'constants/api';
 
 import './style.scss';
 
@@ -14,7 +15,7 @@ const getPlayer = (): HTMLAudioElement => document.getElementById(PLAYER_ID) as 
 const getVolume = (): HTMLInputElement => document.getElementById(VOLUME_ID) as HTMLInputElement;
 const getTrackLine = (): HTMLInputElement => document.getElementById(TRACK_LINE_ID) as HTMLInputElement;
 
-const onClickPlay = () => {
+export const onClickPlay = () => {
     const player = getPlayer();
     if (playerStore.isPlay) {
         player.pause();
@@ -29,7 +30,7 @@ const onClickNext = () => {
     const player = getPlayer();
     const index = (playerStore.currentTrack.index + 1) % playerStore.playList.length;
     playerStore.currentTrack = { ...playerStore.playList[index], index: index };
-    player.src = playerStore.playList[index].link;
+    player.src = TRACK_HOST + playerStore.playList[index].link;
     if (playerStore.isPlay) {
         player.play();
         playerStore.isPlay = true;
@@ -37,6 +38,10 @@ const onClickNext = () => {
         player.pause();
         playerStore.isPlay = false;
     }
+    setTimeout(() => {
+        const trackLine = getTrackLine();
+        trackLine.value = String(0);
+    }, 100);
 };
 
 const onClickPrev = () => {
@@ -49,7 +54,7 @@ const onClickPrev = () => {
         index = playerStore.playList.length - 1;
         playerStore.currentTrack = { ...playerStore.playList[index], index: index };
     }
-    player.src = playerStore.playList[index].link;
+    player.src = TRACK_HOST + playerStore.playList[index].link;
     if (playerStore.isPlay) {
         player.play();
         playerStore.isPlay = true;
@@ -57,6 +62,10 @@ const onClickPrev = () => {
         player.pause();
         playerStore.isPlay = false;
     }
+    setTimeout(() => {
+        const trackLine = getTrackLine();
+        trackLine.value = String(0);
+    }, 100);
 };
 
 const changeVolume = (volume: number) => {
@@ -120,18 +129,20 @@ const getVolumeClass = () => {
     }
 };
 
-const onCanplay = () => {
-    const trackLine = getTrackLine();
-    trackLine.value = String(0);
-};
-
 const player = cn('player');
 
 export const AudioLine = () => {
     return (
         <div class={player()}>
-            <audio id={PLAYER_ID} ontimeupdate={onTimeUpdate} oncanplay={onCanplay}>
-                <source src={playerStore.playList[playerStore.currentTrack.index].link} type='audio/mpeg' />
+            <audio
+                id={PLAYER_ID}
+                ontimeupdate={onTimeUpdate}
+                src={TRACK_HOST + playerStore.playList[playerStore.currentTrack.index].link}
+            >
+                <source
+                    src={TRACK_HOST + playerStore.playList[playerStore.currentTrack.index].link}
+                    type='audio/mpeg'
+                />
             </audio>
             <div class={player('name')}>{playerStore.playList[playerStore.currentTrack.index].name}</div>
             <div class={player('controls')}>

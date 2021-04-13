@@ -40,6 +40,7 @@ const onSubmitForm = (values: MouseEvent) => {
                 if (res.status === 401) {
                     onSetFormError('Пользователь не найден!');
                 } else if (res.status === 200) {
+                    localStorage.setItem('auth', 'ok');
                     redirectTo(LINKS.main);
                 } else {
                     res.json().then((res) => {
