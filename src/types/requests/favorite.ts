@@ -23,3 +23,10 @@ export interface FavoriteTarck {
     musicians: Artist[];
     album: Album[];
 }
+
+export interface FavoriteAlbum {
+    album_id: number;
+    picture: string;
+    'release_date': string;
+    tittle: string;
+}

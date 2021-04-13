@@ -1,4 +1,4 @@
-// import { AlbumPage } from 'pages/AlbumPage/AlbumPage';
+import { AlbumPage } from 'pages/AlbumPage/AlbumPage';
 import { AudioLine } from 'modules/AudioLine/AudioLine';
 import { cn } from 'utils/cn';
 import { JSX } from 'jsx/jsx';
@@ -18,7 +18,8 @@ import './app.scss';
 const isPageExistsAuth = (): boolean =>
     window.location.pathname !== LINKS.main &&
     window.location.pathname !== LINKS.profile &&
-    !window.location.pathname.startsWith(LINKS.favorite);
+    !window.location.pathname.startsWith(LINKS.favorite) &&
+    !window.location.pathname.startsWith(LINKS.album);
 
 const isPageExistsNoneAuth = (): boolean =>
     window.location.pathname !== LINKS.auth && window.location.pathname !== LINKS.reg;
@@ -40,6 +41,7 @@ export const App = () => {
                         <div class={pageWrapper('page')}>
                             {window.location.pathname === LINKS.main && <MainPage />}
                             {window.location.pathname === LINKS.profile && <ProfilePage />}
+                            {window.location.pathname.startsWith(LINKS.album) && <AlbumPage />}
                             {window.location.pathname.startsWith(LINKS.favorite) && <FavoritePage />}
                             {isPageExistsAuth() && <ErrorPage />}
                         </div>
