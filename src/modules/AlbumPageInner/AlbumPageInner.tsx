@@ -1,5 +1,5 @@
 import { JSX } from '../../jsx/jsx';
-import { HeaderButtons } from 'modules/HeaderButtons/HeaderButtons';
+import { Header } from 'modules/Header/Header';
 import { Songs } from 'modules/Songs/Songs';
 
 import './style.scss';
@@ -9,7 +9,7 @@ export const AlbumPageInner = () => {
         <div class='main-page'>
             <div class='main-part'>
                 <div class='header'>
-                    <HeaderButtons />
+                    <Header />
                 </div>
                 <div class='album-info'>
                     <div class='album-image'></div>

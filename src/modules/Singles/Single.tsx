@@ -1,10 +1,10 @@
 import { JSX } from 'jsx/jsx';
-// import { TrackBack } from 'types/requests/tracks';
 import { FIRST_SCROLL_VALUE, SCROLL_VALUE } from '../../constants/slider';
 import { tracksStore } from 'store/mainPageStore';
 import { playerStore } from 'store/playerStore';
 import { onClickPlay } from 'modules/AudioLine/AudioLine';
 import { getWeeklyTop } from 'actions/main_page/mainPage';
+import { TRACK_HOST } from 'constants/api';
 
 import './style.scss';
 
@@ -36,7 +36,7 @@ export const Single = () => {
     if (isNeedFetch) {
         isNeedFetch = false;
         getWeeklyTop().then((res) => {
-            tracksStore.trackList = res;
+            tracksStore.trackList = res.slice(1);
         });
     }
 
@@ -65,7 +65,6 @@ export const Single = () => {
             offset = FIRST_SCROLL_VALUE;
         } else {
             countNumbers = countNumbers + 1;
-            console.log(countNumbers);
             if (countNumbers < numberElements) {
                 offset += SCROLL_VALUE;
             }
@@ -87,12 +86,12 @@ export const Single = () => {
                 <ul id={SLIDER} class='single-items'>
                     {tracksStore.trackList.map((item, index) => (
                         <li class='item' onclick={onClickTrack(index)}>
-                            <img src={item.picture} class='single-img'></img>
+                            <img src={TRACK_HOST + item.picture} class='single-img'></img>
                             <a href='/' class='name-song'>
                                 {item.tittle}
                             </a>
                             <a href='/' class='singer'>
-                                {item.musicians.join(', ')}
+                                {item.musicians.map((itemM) => itemM.name)}
                             </a>
                         </li>
                     ))}
