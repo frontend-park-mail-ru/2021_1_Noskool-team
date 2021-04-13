@@ -43,16 +43,20 @@ export const Tracks = () => {
 
     return (
         <div class={favoriteTracks('')}>
-            <div class={favoriteTracks('title')}>{'Ваши избранные треки:'}</div>
+            {favoriteTracksStore.trackList.length !== 0 && (
+                <div class={favoriteTracks('title')}>{'Ваши избранные треки:'}</div>
+            )}
             <div class={favoriteTracks('content')}>
                 <div class={favoriteTracks('table')}>
-                    <div class={favoriteTracks('row', 'header')}>
-                        <div class={favoriteTracks('cell')}>{'#'}</div>
-                        <div class={favoriteTracks('cell')}>{'Название'}</div>
-                        <div class={favoriteTracks('cell')}>{'Исполнитель'}</div>
-                        <div class={favoriteTracks('cell')}>{''}</div>
-                        <div class={favoriteTracks('cell')}>{''}</div>
-                    </div>
+                    {favoriteTracksStore.trackList.length !== 0 && (
+                        <div class={favoriteTracks('row', 'header')}>
+                            <div class={favoriteTracks('cell')}>{'#'}</div>
+                            <div class={favoriteTracks('cell')}>{'Название'}</div>
+                            <div class={favoriteTracks('cell')}>{'Исполнитель'}</div>
+                            <div class={favoriteTracks('cell')}>{''}</div>
+                            <div class={favoriteTracks('cell')}>{''}</div>
+                        </div>
+                    )}
                     {favoriteTracksStore.trackList.map((el, i) => (
                         <div class={favoriteTracks('row', 'track')} onclick={onClickTrack(i)}>
                             <div class={favoriteTracks('cell')}>{`#${i + 1}`}</div>
@@ -66,6 +70,11 @@ export const Tracks = () => {
                             </div>
                         </div>
                     ))}
+                    {favoriteTracksStore.trackList.length === 0 && (
+                        <div class={favoriteTracks('not-found')}>
+                            {'Вы ещё не добавили ни одного трека в избранное :('}
+                        </div>
+                    )}
                 </div>
             </div>
         </div>
