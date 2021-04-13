@@ -40,43 +40,45 @@
     padding-top: 15px;
   }
 
-  .song-name {
-    font-size: 40px;
-    letter-spacing: 3px;
-    font-weight: 600;
-    color: $white;
-    margin-left: 41.8%;
-    display: block;
-    cursor: pointer;
-    text-decoration: none;
-  }
+  .class {
+    .song-name {
+      font-size: 40px;
+      letter-spacing: 3px;
+      font-weight: 600;
+      color: $white;
+      margin-left: 41.8%;
+      display: block;
+      cursor: pointer;
+      text-decoration: none;
+    }
 
-  .singers {
-    top: 234px;
-    margin-left: 41.8%;
-    font-size: 25px;
-    letter-spacing: 3px;
-    color: $white;
-    display: block;
-    cursor: pointer;
-    text-decoration: none;
-  }
+    .singers {
+      top: 234px;
+      margin-left: 41.8%;
+      font-size: 25px;
+      letter-spacing: 3px;
+      color: $white;
+      display: block;
+      cursor: pointer;
+      text-decoration: none;
+    }
 
-  .position-button {
-    padding-left: 41.8%;
-    padding-top: 20px;
-  }
+    .position-button {
+      padding-left: 41.8%;
+      padding-top: 20px;
+    }
 
-  .play {
-    @extend %button;
+    .play {
+      @extend %button;
 
-    height: 68px;
-    width: 68px;
-    top: 303px;
-    left: 767px;
-    background-color: $white;
-    background-image: url(../../icons/arrow_right_black_24dp.svg);
-    background-size: 70px;
-    background-repeat: no-repeat;
+      height: 68px;
+      width: 68px;
+      top: 303px;
+      left: 767px;
+      background-color: $white;
+      background-image: url(../../icons/arrow_right_black_24dp.svg);
+      background-size: 70px;
+      background-repeat: no-repeat;
+    }
   }
 }

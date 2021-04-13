@@ -2,6 +2,8 @@
 
 .billboard-charts {
   margin: 5px 0 25px 30px;
+  height: 440px;
+  overflow: hidden;
 
   .title {
     font-size: 26px;
@@ -60,6 +62,9 @@
         text-decoration: none;
         font-weight: 600;
         margin-top: 5px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
 
       .song-name:hover {
@@ -72,6 +77,9 @@
         display: block;
         cursor: pointer;
         text-decoration: none;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
 
       .song-author:hover {
@@ -102,9 +110,13 @@
     .like {
       @extend %button-music;
 
-      margin-left: 15px;
+      margin-left: 10px;
       margin-right: 5px;
       background-image: url(../../icons/favorite_black_24dp.svg);
+    }
+
+    .checked-like {
+      background-image: url(../../icons/favourite_pink.svg);
     }
 
     .like:hover {
@@ -117,6 +129,10 @@
       background-image: url(../../icons/add_black_24dp.svg);
       background-size: 27px;
       margin-right: 0;
+    }
+
+    .checked-add {
+      background-image: url(../../icons/add_pink.svg);
     }
 
     .add:hover {

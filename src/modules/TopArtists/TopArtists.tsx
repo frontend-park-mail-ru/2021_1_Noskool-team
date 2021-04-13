@@ -1,22 +1,35 @@
 import { JSX } from 'jsx/jsx';
-import { topArtists } from 'constants/topArtists';
+import { artistsStore } from 'store/mainPageStore';
+import { getTopArtists } from 'actions/main_page/mainPage';
+import { TRACK_HOST } from 'constants/api';
 
 import './style.scss';
 
-export const TopArtists = () => (
-    <div class='top-artists'>
-        <div class='titles'>
-            <div class='monthly-artists'>Monthly Top Artists</div>
-            <a href='/' class='see-all'>
-                See All
-            </a>
-        </div>
-        <div class='artists'>
-            {topArtists.map((item) => (
-                <a href='/' class='find-artist'>
-                    <img src='https://loremflickr.com/640/360' class='artists-photo' alt={item}></img>
+let isNeedFetch = true;
+
+export const TopArtists = () => {
+    if (isNeedFetch) {
+        isNeedFetch = false;
+        getTopArtists().then((res) => {
+            artistsStore.artists = res;
+        });
+    }
+
+    return (
+        <div class='top-artists'>
+            <div class='titles'>
+                <div class='monthly-artists'>Monthly Top Artists</div>
+                <a href='/' class='see-all'>
+                    See All
                 </a>
-            ))}
+            </div>
+            <div class='artists'>
+                {artistsStore.artists.map((item) => (
+                    <a href='/' class='find-artist'>
+                        <img src={TRACK_HOST + item.picture} class='artists-photo' title={item.name}></img>
+                    </a>
+                ))}
+            </div>
         </div>
-    </div>
-);
+    );
+};
