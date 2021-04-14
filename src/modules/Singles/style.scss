@@ -1,59 +1,114 @@
 @import '../../styles/colors.scss';
 
-.slide-items {
-  overflow: hidden;
+.weekly-top {
+  margin: 31px 30px 40px 31px;
+  box-sizing: border-box;
+  font-family: 'Comfortaa', cursive;
 
-  .single-items {
-    position: relative;
+  &__legend {
     display: flex;
-    list-style: none;
     justify-content: space-between;
-    left: 0;
-    transition: all ease 1s;
+  }
 
-    .item {
-      .single-img {
-        height: 140px;
-        width: 140px;
-        border-radius: 10px;
-        box-shadow: 5px 5px 5px 5px rgba($color: #8a8c99, $alpha: 0.3);
-        margin-left: 25px;
-        margin-top: 25px;
-        object-fit: cover;
-      }
+  &__title {
+    padding-left: 10px;
+    font-size: 26px;
+    font-weight: 500;
+    letter-spacing: 3px;
+    color: #373944;
+    margin-top: auto;
+    margin-bottom: auto;
+    cursor: pointer;
+  }
 
-      .name-song {
-        width: 188px;
-        font-size: 18px;
-        letter-spacing: 1px;
-        text-align: center;
-        color: #0f1e36;
-        font-weight: 500;
-        padding-top: 32px;
-        display: block;
-        cursor: pointer;
-        text-decoration: none;
-      }
+  &__title:hover {
+    color: $pink;
+  }
 
-      .name-song:hover {
-        color: $pink;
-      }
+  %button {
+    height: 48px;
+    width: 48px;
+    border: none;
+    cursor: pointer;
+    border-radius: 20px;
+    box-shadow: 5px 5px 5px 5px rgba($color: $gray, $alpha: 0.3);
+    outline: none;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
 
-      .singer {
-        width: 188px;
-        font-size: 14px;
-        letter-spacing: 1px;
-        text-align: center;
-        color: $gray;
-        padding-top: 12px;
-        display: block;
-        cursor: pointer;
-        text-decoration: none;
-      }
+  &__prev {
+    @extend %button;
 
-      .singer:hover {
-        color: $pink;
-      }
+    background-image: url(../../icons/chevron_left_black_24dp.svg);
+    margin-right: 20px;
+  }
+
+  &__next {
+    @extend %button;
+
+    background-image: url(../../icons/chevron_right_black_24dp.svg);
+    background-color: $pink;
+  }
+
+  ul {
+    padding: 0;
+    margin: 0;
+  }
+
+  .slide-items {
+    overflow: hidden;
+
+    &__single-items {
+      position: relative;
+      display: flex;
+      list-style: none;
+      justify-content: space-between;
+      left: 0;
+      transition: all ease 1s;
+    }
+
+    &__single-img {
+      height: 140px;
+      width: 140px;
+      border-radius: 10px;
+      box-shadow: 5px 5px 5px 5px rgba($color: #8a8c99, $alpha: 0.3);
+      margin-left: 25px;
+      margin-top: 25px;
+      object-fit: cover;
+    }
+
+    &__name-song {
+      width: 188px;
+      font-size: 18px;
+      letter-spacing: 1px;
+      text-align: center;
+      color: #0f1e36;
+      font-weight: 500;
+      padding-top: 32px;
+      display: block;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    &__name-song:hover {
+      color: $pink;
+    }
+
+    &__singer {
+      width: 188px;
+      font-size: 14px;
+      letter-spacing: 1px;
+      text-align: center;
+      color: $gray;
+      padding-top: 12px;
+      display: block;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    &__singer:hover {
+      color: $pink;
     }
   }
 }

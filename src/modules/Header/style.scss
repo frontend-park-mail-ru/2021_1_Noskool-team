@@ -103,8 +103,15 @@
   .profile {
     @extend %button;
 
-    background-image: url(../../image/артист4.png);
-    background-size: 120%;
+    // background-image: url(../../image/артист4.png);
+    // background-size: 120%;
+
+    .image-profile {
+      height: 38px;
+      width: 38px;
+      border-radius: 20px;
+      object-fit: cover;
+    }
 
     .close {
       display: none;
@@ -124,14 +131,15 @@
         display: flex;
         margin-top: 15px;
 
-        .image-profile {
-          background-image: url(../../image/артист4.png);
-          background-position: center;
-          background-size: 120%;
+        .photo-profile {
+          // background-image: url(../../image/артист4.png);
+          // background-position: center;
+          // background-size: 120%;
           height: 55px;
           width: 55px;
           margin-left: 15px;
           border-radius: 35px;
+          object-fit: cover;
         }
 
         .text {

@@ -27,6 +27,19 @@ export const post = <R>(url: string, body: R) => {
     });
 };
 
+export const postCategory = (url: string) => {
+    return fetch(url, {
+        method: 'post',
+        credentials: 'include',
+        headers: {
+            'X-Csrf-Token': document.cookie
+                ?.split(';')
+                ?.find((item) => item?.startsWith('csrf'))
+                ?.split('=')[1],
+        },
+    });
+};
+
 export const postImg = (url: string, body: FormData) => {
     return fetch(url, {
         method: 'post',
