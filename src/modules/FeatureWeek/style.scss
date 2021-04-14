@@ -13,25 +13,30 @@
 }
 
 .feature-week {
+  position: relative;
   height: 408px;
-  background-image: url(../../image/альбом1.png);
-  background-size: 100%;
-  background-position: center;
   font-family: 'M PLUS 1p', sans-serif;
 
-  .position-feature {
-    padding-top: 122px;
-    padding-left: 41.8%;
-
-    .title {
-      height: 39px;
-      width: 252px;
-      background-color: $white;
-      border-radius: 20px;
-    }
+  &__image {
+    height: 408px;
+    width: 100%;
+    object-fit: cover;
   }
 
-  .title-text {
+  &__position-feature {
+    position: absolute;
+    top: 122px;
+    left: 41.8%;
+  }
+
+  &__title {
+    height: 39px;
+    width: 252px;
+    background-color: $white;
+    border-radius: 20px;
+  }
+
+  &__title-text {
     color: $pink;
     letter-spacing: 2px;
     text-align: center;
@@ -40,45 +45,46 @@
     padding-top: 15px;
   }
 
-  .class {
-    .song-name {
-      font-size: 40px;
-      letter-spacing: 3px;
-      font-weight: 600;
-      color: $white;
-      margin-left: 41.8%;
-      display: block;
-      cursor: pointer;
-      text-decoration: none;
-    }
+  &__song-name {
+    position: absolute;
+    left: 41.8%;
+    top: 170px;
+    font-size: 40px;
+    letter-spacing: 3px;
+    font-weight: 600;
+    color: $white;
+    display: block;
+    cursor: pointer;
+    text-decoration: none;
+  }
 
-    .singers {
-      top: 234px;
-      margin-left: 41.8%;
-      font-size: 25px;
-      letter-spacing: 3px;
-      color: $white;
-      display: block;
-      cursor: pointer;
-      text-decoration: none;
-    }
+  &__singers {
+    position: absolute;
+    top: 229px;
+    left: 41.8%;
+    font-size: 25px;
+    letter-spacing: 3px;
+    color: $white;
+    display: block;
+    cursor: pointer;
+    text-decoration: none;
+  }
 
-    .position-button {
-      padding-left: 41.8%;
-      padding-top: 20px;
-    }
+  &__position-button {
+    padding-left: 41.8%;
+    padding-top: 20px;
+  }
 
-    .play {
-      @extend %button;
+  &__play {
+    @extend %button;
 
-      height: 68px;
-      width: 68px;
-      top: 303px;
-      left: 767px;
-      background-color: $white;
-      background-image: url(../../icons/arrow_right_black_24dp.svg);
-      background-size: 70px;
-      background-repeat: no-repeat;
-    }
+    position: absolute;
+    height: 68px;
+    width: 68px;
+    top: 303px;
+    background-color: $white;
+    background-image: url(../../icons/arrow_right_black_24dp.svg);
+    background-size: 70px;
+    background-repeat: no-repeat;
   }
 }

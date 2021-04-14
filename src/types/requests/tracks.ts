@@ -28,4 +28,5 @@ export interface TrackBack {
     album: Album[];
     in_favorite: boolean;
     in_mediateka: boolean;
+    duration: string;
 }

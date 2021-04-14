@@ -1,12 +1,14 @@
 @import '../../styles/colors.scss';
 
-.titles {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  font-family: 'Comfortaa', cursive;
+.top-artists {
+  &__titles {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Comfortaa', cursive;
+  }
 
-  .monthly-artists {
+  &__monthly-artists {
     font-size: 26px;
     font-weight: 500;
     letter-spacing: 3px;
@@ -15,7 +17,7 @@
     margin-left: 12px;
   }
 
-  .see-all {
+  &__see-all {
     color: #373944;
     font-size: 16px;
     margin-bottom: 25px;
@@ -24,27 +26,27 @@
     text-decoration: none;
   }
 
-  .see-all:hover {
+  &__see-all:hover {
     color: $pink;
   }
-}
 
-.artists {
-  display: flex;
-  list-style: none;
-  justify-content: space-between;
-  padding: 0 20px;
-  overflow: hidden;
+  &__artists {
+    display: flex;
+    list-style: none;
+    justify-content: space-between;
+    padding: 0 20px;
+    overflow: hidden;
+  }
 
-  .find-artist {
+  &__find-artist {
     text-decoration: none;
+  }
 
-    .artists-photo {
-      width: 102px;
-      height: 102px;
-      border-radius: 40px;
-      cursor: pointer;
-      object-fit: cover;
-    }
+  &__artists-photo {
+    width: 102px;
+    height: 102px;
+    border-radius: 40px;
+    cursor: pointer;
+    object-fit: cover;
   }
 }

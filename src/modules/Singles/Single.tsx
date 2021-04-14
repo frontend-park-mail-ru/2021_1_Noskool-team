@@ -1,10 +1,11 @@
 import { JSX } from 'jsx/jsx';
-import { FIRST_SCROLL_VALUE, SCROLL_VALUE } from '../../constants/slider';
+import { FIRST_SCROLL_VALUE, SCROLL_VALUE } from 'constants/slider';
 import { tracksStore } from 'store/mainPageStore';
 import { playerStore } from 'store/playerStore';
 import { onClickPlay } from 'modules/AudioLine/AudioLine';
-import { getWeeklyTop } from 'actions/main_page/mainPage';
+import { getWeeklyTop } from 'actions/main-page/main-page';
 import { TRACK_HOST } from 'constants/api';
+import { cn } from 'utils/cn';
 
 import './style.scss';
 
@@ -29,6 +30,9 @@ const onClickTrack = (index: number) => () => {
         onClickPlay();
     }
 };
+
+const weekly = cn('weekly-top');
+const slider = cn('slide-items');
 
 let isNeedFetch = true;
 
@@ -74,25 +78,23 @@ export const Single = () => {
     };
 
     return (
-        <div class='weekly-top'>
-            <div class='legend'>
-                <a class='title'>Weekly Top Track</a>
+        <div class={weekly()}>
+            <div class={weekly('legend')}>
+                <div class={weekly('title')}>Weekly Top Track</div>
                 <div class='buttons'>
-                    <button class='prev' onclick={prevItem}></button>
-                    <button class='next' onclick={nextItem}></button>
+                    <button class={weekly('prev')} onclick={prevItem}></button>
+                    <button class={weekly('next')} onclick={nextItem}></button>
                 </div>
             </div>
-            <div class='slide-items'>
-                <ul id={SLIDER} class='single-items'>
+            <div class={slider()}>
+                <ul id={SLIDER} class={slider('single-items')}>
                     {tracksStore.trackList.map((item, index) => (
-                        <li class='item' onclick={onClickTrack(index)}>
-                            <img src={TRACK_HOST + item.picture} class='single-img'></img>
-                            <a href='/' class='name-song'>
-                                {item.tittle}
-                            </a>
-                            <a href='/' class='singer'>
-                                {item.musicians.map((itemM) => itemM.name)}
-                            </a>
+                        <li class={slider('item')} onclick={onClickTrack(index)}>
+                            <img src={TRACK_HOST + item?.picture} class={slider('single-img')}></img>
+                            <div class={slider('name-song')}>{item?.tittle}</div>
+                            <div class={slider('singer')}>
+                                {item?.musicians.map((artist) => artist?.name).join(', ')}
+                            </div>
                         </li>
                     ))}
                 </ul>
