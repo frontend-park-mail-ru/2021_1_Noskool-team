@@ -33,6 +33,10 @@ const onClickTrack = (index: number) => () => {
 
 let isNeedFetch = true;
 
+export const refreshFavoriteTracks = () => {
+    isNeedFetch = true;
+};
+
 export const Tracks = () => {
     if (isNeedFetch) {
         isNeedFetch = false;

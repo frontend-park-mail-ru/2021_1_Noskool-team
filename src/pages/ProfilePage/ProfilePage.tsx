@@ -20,7 +20,7 @@ getUser()
         console.log(error);
     });
 
-const onLoadProfile = (proflie: UserProfile) => {
+export const onLoadProfile = (proflie: UserProfile) => {
     profileStore.profile.login = proflie?.login;
     profileStore.profile.email = proflie?.email;
     profileStore.profile.photo = proflie?.avatar;

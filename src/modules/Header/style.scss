@@ -103,18 +103,11 @@
   .profile {
     @extend %button;
 
-    // background-image: url(../../image/артист4.png);
-    // background-size: 120%;
-
     .image-profile {
       height: 38px;
       width: 38px;
       border-radius: 20px;
       object-fit: cover;
-    }
-
-    .close {
-      display: none;
     }
 
     .profile-menu {
@@ -132,9 +125,6 @@
         margin-top: 15px;
 
         .photo-profile {
-          // background-image: url(../../image/артист4.png);
-          // background-position: center;
-          // background-size: 120%;
           height: 55px;
           width: 55px;
           margin-left: 15px;

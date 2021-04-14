@@ -2,13 +2,7 @@ import { JSX } from 'jsx/jsx';
 import { billboardChartStore } from 'store/mainPageStore';
 import { playerStore } from 'store/playerStore';
 import { onClickPlay } from 'modules/AudioLine/AudioLine';
-import {
-    getBillboardChart,
-    addToFavourites,
-    addToMediateca,
-    deleteFromFavourites,
-    deleteFromMediateca,
-} from 'actions/main-page/main-page';
+import { getBillboardChart, addToFavourites, addToMediateca, deleteFromFavourites } from 'actions/main-page/main-page';
 import { TRACK_HOST } from 'constants/api';
 import { cn } from 'utils/cn';
 
@@ -36,52 +30,34 @@ const onClickTrack = (index: number) => () => {
     }
 };
 
-const onClickFavourite = (index: number, id: number) => () => {
-    addToFavourites(id);
-    addToMediateca(id);
-    const buffer = [...billboardChartStore.trackList];
-    buffer[index].in_mediateka = true;
-    buffer[index].in_favorite = true;
-    billboardChartStore.trackList = buffer;
-    console.log('index' + String(index));
-    console.log('id ' + String(id));
-    console.log(billboardChartStore.trackList[index].in_favorite);
-    console.log(billboardChartStore.trackList[index].in_mediateka);
+const onClickFavorite = (index: number, id: number) => () => {
+    if (!billboardChartStore.trackList[index].in_favorite) {
+        addToFavourites(id);
+        const buffer = [...billboardChartStore.trackList];
+        buffer[index].in_mediateka = true;
+        buffer[index].in_favorite = true;
+        billboardChartStore.trackList = buffer;
+    } else {
+        deleteFromFavourites(id);
+        const buffer = [...billboardChartStore.trackList];
+        buffer[index].in_favorite = false;
+        billboardChartStore.trackList = buffer;
+    }
 };
 
-const onClickPlus = (index: number, id: number) => () => {
-    addToMediateca(id);
-    const buffer = [...billboardChartStore.trackList];
-    buffer[index].in_mediateka = true;
-    billboardChartStore.trackList = buffer;
-    console.log('index' + String(index));
-    console.log('id ' + String(id));
-    console.log(billboardChartStore.trackList[index].in_favorite);
-    console.log(billboardChartStore.trackList[index].in_mediateka);
-};
-
-const onClickDeletePlus = (index: number, id: number) => () => {
-    deleteFromMediateca(id);
-    deleteFromFavourites(id);
-    const buffer = [...billboardChartStore.trackList];
-    buffer[index].in_mediateka = false;
-    buffer[index].in_favorite = false;
-    billboardChartStore.trackList = buffer;
-    console.log('index' + String(index));
-    console.log('id ' + String(id));
-    console.log(billboardChartStore.trackList[index].in_favorite);
-    console.log(billboardChartStore.trackList[index].in_mediateka);
-};
-
-const onClickDeleteFavourite = (index: number, id: number) => () => {
-    deleteFromFavourites(id);
-    const buffer = [...billboardChartStore.trackList];
-    buffer[index].in_favorite = false;
-    billboardChartStore.trackList = buffer;
-    console.log('index' + String(index));
-    console.log('id ' + String(id));
-    console.log(billboardChartStore.trackList[index].in_favorite);
-    console.log(billboardChartStore.trackList[index].in_mediateka);
+const onClickMedia = (index: number, id: number) => () => {
+    if (!billboardChartStore.trackList[index].in_mediateka) {
+        addToMediateca(id);
+        const buffer = [...billboardChartStore.trackList];
+        buffer[index].in_mediateka = true;
+        billboardChartStore.trackList = buffer;
+    } else {
+        deleteFromFavourites(id);
+        const buffer = [...billboardChartStore.trackList];
+        buffer[index].in_mediateka = false;
+        buffer[index].in_favorite = false;
+        billboardChartStore.trackList = buffer;
+    }
 };
 
 const tracks = cn('tracks');
@@ -116,20 +92,12 @@ export const BillboardChart = () => {
                     <button
                         id={`like-${index}`}
                         class={tracks('like', item?.in_favorite ? 'checked-like' : '')}
-                        onclick={
-                            item?.in_favorite
-                                ? onClickDeleteFavourite(index, item?.track_id)
-                                : onClickFavourite(index, item?.track_id)
-                        }
+                        onclick={onClickFavorite(index, item?.track_id)}
                     ></button>
                     <button
                         id={`add-${index}`}
                         class={tracks('add', item?.in_mediateka ? 'checked-add' : '')}
-                        onclick={
-                            item?.in_mediateka
-                                ? onClickDeletePlus(index, item?.track_id)
-                                : onClickPlus(index, item?.track_id)
-                        }
+                        onclick={onClickMedia(index, item?.track_id)}
                     ></button>
                 </div>
             ))}
