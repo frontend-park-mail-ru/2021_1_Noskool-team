@@ -1,112 +1,78 @@
 import { JSX } from 'jsx/jsx';
-import { Input } from '../../components/Input/Input';
-import { Form } from '../../types/registration';
-import { requaredValidator } from '../../utils/form-validators';
-import { authUser } from '../../actions/registration/registration';
-import { redirectTo } from '../../utils/router';
-import { LINKS } from '../../constants/router';
-import { setText } from '../../utils/inner-utils';
-import { ErrorFetch } from '../../types/common';
+import { Input } from 'components/Input/Input';
+import { requaredValidator } from 'utils/form-validators';
+import { authUser } from 'actions/registration/registration';
+import { redirectTo } from 'utils/render';
+import { LINKS } from 'constants/links';
+import { ErrorFetch } from 'types/common';
+import { cn } from 'utils/cn';
+import { isMobile } from 'utils/isMobile';
+import { authFormStore } from 'store/authForm';
 
 import './style.scss';
 
-export const AuthForm = () => {
-    const ID_REG_FORM_ERROR_MSG = 'ID_REG_FORM_ERROR_MSG';
+const formCn = cn('auth-form');
 
-    const form: Form = {
-        fields: {
-            nickname: {
-                value: '',
-                isValid: false,
-                onSubmit: undefined,
-                onSetError: undefined,
-            },
-            password: {
-                value: '',
-                isValid: false,
-                onSubmit: undefined,
-                onSetError: undefined,
-            },
-        },
-        isValid: false,
-    };
+const checkValid = () => {
+    authFormStore.form.fields.nickname.onCheckValid();
+    authFormStore.form.fields.password.onCheckValid();
+    authFormStore.form.isValid =
+        authFormStore.form.fields.nickname.isValid && authFormStore.form.fields.password.isValid;
+};
 
-    const checkValid = () => {
-        let isValid = true;
-        for (let field in form.fields) {
-            form.fields[field].onSubmit();
-            isValid = isValid && form.fields[field].isValid;
-        }
-        form.isValid = isValid;
-    };
+const onSetFormError = (msg: string) => {
+    authFormStore.form.errorMsg = msg;
+};
 
-    const onSetError = (msg: string) => {
-        setText(ID_REG_FORM_ERROR_MSG, msg);
-    };
+const onClickReg = () => {
+    redirectTo(LINKS.reg);
+};
 
-    const onClickReg = () => {
-        redirectTo(LINKS.reg);
-    };
-
-    const onSubmitForm = (values: MouseEvent) => {
-        values.preventDefault();
-        checkValid();
-        if (form.isValid) {
-            authUser({
-                nickname: form.fields.nickname.value,
-                password: form.fields.password.value,
-            })
-                .then((res) => {
-                    if (res.status === 401) {
-                        onSetError('Пользователь не найден!');
-                    } else if (res.status === 200) {
-                        redirectTo(LINKS.main);
-                    } else {
-                        res.json().then((res) => {
-                            onSetError(res.error);
-                        });
-                    }
-                })
-                .catch((error) => {
-                    error.json().then((res: ErrorFetch) => {
-                        onSetError(res.error);
+const onSubmitForm = (values: MouseEvent) => {
+    values.preventDefault();
+    checkValid();
+    if (authFormStore.form.isValid) {
+        authUser({
+            nickname: String(authFormStore.form.fields.nickname.value),
+            password: String(authFormStore.form.fields.password.value),
+        })
+            .then((res) => {
+                if (res.status === 401) {
+                    onSetFormError('Пользователь не найден!');
+                } else if (res.status === 200) {
+                    localStorage.setItem('auth', 'ok');
+                    redirectTo(LINKS.main);
+                } else {
+                    res.json().then((res) => {
+                        onSetFormError(res.error);
                     });
+                }
+            })
+            .catch((error) => {
+                error.json().then((res: ErrorFetch) => {
+                    onSetFormError(res.error);
                 });
-        }
-    };
+            });
+    }
+};
 
+export const AuthForm = () => {
     return (
-        <div class={'auth-form-wrapper'}>
-            <form onsubmit={onSubmitForm} class={'auth-form'}>
-                <div class={'auth-form__title'}>{'Вход'}</div>
+        <div class={formCn('wrapper', isMobile() ? 'mob' : '')}>
+            <form onsubmit={onSubmitForm} class={formCn()}>
+                <div class={formCn('title')}>{'Вход'}</div>
                 <Input
-                    onChange={(value) => {
-                        form.fields.nickname.value = (value.target as HTMLInputElement).value;
-                    }}
-                    name='nickname'
-                    onValid={(value) => {
-                        form.fields.nickname.isValid = value;
-                    }}
                     validators={[requaredValidator]}
-                    placeholder='Введите ник'
-                    onSubmit={form.fields.nickname}
-                    className={'auth-form__input'}
+                    placeholder={'Введите ник'}
+                    input={authFormStore.form.fields.nickname}
                 />
                 <Input
-                    onChange={(value) => {
-                        form.fields.password.value = (value.target as HTMLInputElement).value;
-                    }}
-                    name='password'
-                    onValid={(value) => {
-                        form.fields.password.isValid = value;
-                    }}
                     validators={[requaredValidator]}
-                    placeholder='Введите пароль'
-                    onSubmit={form.fields.password}
-                    className={'auth-form__input'}
-                    isPassword
+                    placeholder={'Введите пароль'}
+                    isPassword={true}
+                    input={authFormStore.form.fields.password}
                 />
-                <div class='auth-form__error' id={ID_REG_FORM_ERROR_MSG} />
+                <div class={formCn('error')}>{authFormStore.form.errorMsg}</div>
                 <button type='submit'>{'Войти'}</button>
                 <button onclick={onClickReg}>{'Или зарегистрироваться'}</button>
             </form>

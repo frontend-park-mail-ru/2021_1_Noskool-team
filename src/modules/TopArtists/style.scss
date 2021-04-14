@@ -1,0 +1,52 @@
+@import '../../styles/colors.scss';
+
+.top-artists {
+  &__titles {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Comfortaa', cursive;
+  }
+
+  &__monthly-artists {
+    font-size: 26px;
+    font-weight: 500;
+    letter-spacing: 3px;
+    color: #373944;
+    margin-bottom: 25px;
+    margin-left: 12px;
+  }
+
+  &__see-all {
+    color: #373944;
+    font-size: 16px;
+    margin-bottom: 25px;
+    padding-top: 7px;
+    padding-right: 15px;
+    text-decoration: none;
+  }
+
+  &__see-all:hover {
+    color: $pink;
+  }
+
+  &__artists {
+    display: flex;
+    list-style: none;
+    justify-content: space-between;
+    padding: 0 20px;
+    overflow: hidden;
+  }
+
+  &__find-artist {
+    text-decoration: none;
+  }
+
+  &__artists-photo {
+    width: 102px;
+    height: 102px;
+    border-radius: 40px;
+    cursor: pointer;
+    object-fit: cover;
+  }
+}

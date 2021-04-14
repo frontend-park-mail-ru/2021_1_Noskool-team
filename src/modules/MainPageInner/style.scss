@@ -19,7 +19,7 @@
       border: none;
       cursor: pointer;
       border-radius: 20px;
-      box-shadow: 5px 5px 5px 5px rgba($color: #8a8c99, $alpha: 0.3);
+      box-shadow: 5px 5px 5px 5px rgba($color: $gray, $alpha: 0.3);
       outline: none;
       position: absolute;
       background-position: center;
@@ -28,7 +28,7 @@
     }
 
     .weekly-top {
-      margin: 41px 50px 0 41px;
+      margin: 41px 30px 0 31px;
       font-family: 'Comfortaa', cursive;
 
       .legend {
@@ -70,7 +70,6 @@
     .top {
       display: flex;
       justify-content: space-between;
-      // width: 50%;
       font-family: 'Comfortaa', cursive;
     }
 

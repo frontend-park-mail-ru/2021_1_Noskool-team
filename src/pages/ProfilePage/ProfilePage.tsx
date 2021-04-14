@@ -1,130 +1,105 @@
 import { JSX } from 'jsx/jsx';
-import { changeUser, changeUserPhoto, getUser } from '../../actions/user/user';
-import { Input } from '../../components/Input/Input';
-import { NavBar } from '../../modules/NavBar/NavBar';
-import { UserProfile } from '../../types/requests/user';
-import { setText, setImgPath } from '../../utils/inner-utils';
-import { HOST } from '../../constants/api';
-import { Form } from '../../types/registration';
+import { changeUserPhoto, getUser, changeUser } from 'actions/user/user';
+import { Input } from 'components/Input/Input';
+import { UserProfile } from 'types/requests/user';
+import { emailValidator } from 'utils/form-validators';
+import { profileStore, profileForm } from 'store/profileStore';
+import { HOST } from 'constants/api';
+import { cn } from 'utils/cn';
 
 import './style.scss';
 
+const page = cn('profile-page');
+const change = cn('change-data');
+
+getUser()
+    .then((res) => {
+        onLoadProfile(res);
+    })
+    .catch((error) => {
+        console.log(error);
+    });
+
+const onLoadProfile = (proflie: UserProfile) => {
+    profileStore.profile.login = proflie?.login;
+    profileStore.profile.email = proflie?.email;
+    profileStore.profile.photo = proflie?.avatar;
+};
+
 export const ProfilePage = () => {
-    const ID_NICKNAME = 'ID_NICKNAME';
-    const ID_EMAIL = 'ID_EMAIL';
-    const ID_AVATAR = 'ID_AVATAR';
     const ID_IMAGE_INPUT = 'ID_IMAGE_INPUT';
-
-    const form: Form = {
-        fields: {
-            email: {
-                value: '',
-                isValid: false,
-                onSubmit: undefined,
-                onSetError: undefined,
-            },
-            nickname: {
-                value: '',
-                isValid: false,
-                onSubmit: undefined,
-                onSetError: undefined,
-            },
-        },
-        isValid: true,
-    };
-
-    getUser()
-        .then((res) => {
-            onLoadProfile(res);
-        })
-        .catch((error) => {
-            console.log(error);
-        });
-
-    const onLoadProfile = (proflie: UserProfile) => {
-        setText(ID_NICKNAME, proflie?.login);
-        setText(ID_EMAIL, proflie?.email);
-        setImgPath(ID_AVATAR, HOST + proflie?.avatar);
-        localStorage.setItem('user_id', String(proflie?.user_id));
-    };
 
     const onSubmitChanges = (e: MouseEvent) => {
         e.preventDefault();
         const body = {
-            email: form.fields.email.value,
-            nickname: form.fields.nickname.value,
+            email: profileForm.form.email.value,
+            nickname: profileForm.form.nickname.value,
         };
-        if (!form.fields.email.value) {
+        if (!profileForm.form.email.value) {
             delete body.email;
         }
-        if (!form.fields.nickname.value) {
+        if (!profileForm.form.nickname.value) {
             delete body.nickname;
         }
-        changeUser(body, localStorage.getItem('user_id')).then((res) => {
-            if (res.ok) {
-                getUser()
-                    .then((res) => {
-                        onLoadProfile(res);
-                    })
-                    .catch((error) => {
-                        console.log(error);
-                    });
-            }
+        changeUser(body).then(() => {
+            profileForm.form.nickname.value = '';
+            profileForm.form.email.value = '';
+            getUser()
+                .then((res) => {
+                    onLoadProfile(res);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
         });
     };
 
     const onChacngePhoto = (e: MouseEvent) => {
-        changeUserPhoto(e.target, localStorage.getItem('user_id'));
+        changeUserPhoto(e.target).then(() => {
+            getUser()
+                .then((res) => {
+                    onLoadProfile(res);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        });
+    };
+
+    const onClickLabel = () => {
+        (document.getElementById(ID_IMAGE_INPUT) as HTMLInputElement).click();
     };
 
     return (
-        <div class={'profile-page-wrapper'}>
-            <NavBar />
-            <div class='profile-page'>
-                <div class={'profile-page__main-info'}>
-                    <div class={'profile-page__photo'}>
-                        <img src={'https://i.ibb.co/M6LdN5m/2.png'} id={ID_AVATAR} alt='' />
-                        <input
-                            type='file'
-                            id={ID_IMAGE_INPUT}
-                            accept={'image/jpeg,image/png,image/webp'}
-                            onchange={onChacngePhoto}
-                        />
-                    </div>
-                    <div class={'profile-page__text-info-container'}>
-                        <div class={'profile-page__text-info profile-page__text-info--nickname'} id={ID_NICKNAME} />
-                        <div class={'profile-page__text-info--email'} id={ID_EMAIL} />
-                    </div>
+        <div class={page()}>
+            <div class={page('main-info')}>
+                <div class={page('photo')}>
+                    <img src={HOST + profileStore.profile.photo} alt='' />
+                    <input
+                        type='file'
+                        id={ID_IMAGE_INPUT}
+                        accept={'image/jpeg,image/png,image/webp,image/gif'}
+                        onchange={onChacngePhoto}
+                    />
+                    <label htmlFor={ID_IMAGE_INPUT} onclick={onClickLabel} class={page('change-photo')}>
+                        {'Изменить фото'}
+                    </label>
                 </div>
-                <div class='change-data'>
-                    <form class='change-data__input' onsubmit={onSubmitChanges}>
-                        <Input
-                            onChange={(value) => {
-                                form.fields.email.value = (value.target as HTMLInputElement).value;
-                            }}
-                            name='email'
-                            onValid={(value) => {
-                                form.fields.email.isValid = value;
-                            }}
-                            validators={[]}
-                            placeholder='Измените email'
-                            onSubmit={form.fields.email}
-                        />
-                        <Input
-                            onChange={(value) => {
-                                form.fields.nickname.value = (value.target as HTMLInputElement).value;
-                            }}
-                            name='nickname'
-                            onValid={(value) => {
-                                form.fields.nickname.isValid = value;
-                            }}
-                            validators={[]}
-                            placeholder='Измените ник'
-                            onSubmit={form.fields.nickname}
-                        />
-                        <button type='submit'>{'Изменить'}</button>
-                    </form>
+                <div class={page('text-info-container')}>
+                    <div class={page('text-info', 'nickname')}>{profileStore.profile.login}</div>
+                    <div class={page('text-info', 'email')}>{profileStore.profile.email}</div>
                 </div>
+            </div>
+            <div class={change()}>
+                <form class={change('input')} onsubmit={onSubmitChanges}>
+                    <Input input={profileForm.form.nickname} placeholder={'Измените ник'} validators={[]} />
+                    <Input
+                        input={profileForm.form.email}
+                        placeholder={'Измените email'}
+                        validators={[emailValidator]}
+                    />
+                    <button type='submit'>{'Изменить'}</button>
+                </form>
             </div>
         </div>
     );

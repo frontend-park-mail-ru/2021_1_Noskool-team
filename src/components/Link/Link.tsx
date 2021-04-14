@@ -1,13 +1,13 @@
 import { JSX } from 'jsx/jsx';
-import { onClickA } from '../../utils/router';
+import { onClickA } from '../../utils/render';
 
 interface LinkProps {
-    to: string;
+    to?: string;
     text?: string;
     child?: () => any;
 }
 
-export const Link = ({ to, text = '', child = () => <div></div> }: LinkProps) => {
+export const Link = ({ to = '', text = '', child = () => <div></div> }: LinkProps) => {
     return (
         <a href={''} onclick={onClickA(to)}>
             {text}

@@ -1,0 +1,90 @@
+@import '../../styles/colors.scss';
+
+%button {
+  height: 48px;
+  width: 48px;
+  border: none;
+  cursor: pointer;
+  border-radius: 20px;
+  box-shadow: 5px 5px 5px 5px rgba($color: $gray, $alpha: 0.3);
+  outline: none;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.feature-week {
+  position: relative;
+  height: 408px;
+  font-family: 'M PLUS 1p', sans-serif;
+
+  &__image {
+    height: 408px;
+    width: 100%;
+    object-fit: cover;
+  }
+
+  &__position-feature {
+    position: absolute;
+    top: 122px;
+    left: 41.8%;
+  }
+
+  &__title {
+    height: 39px;
+    width: 252px;
+    background-color: $white;
+    border-radius: 20px;
+  }
+
+  &__title-text {
+    color: $pink;
+    letter-spacing: 2px;
+    text-align: center;
+    font-size: 15px;
+    line-height: 12px;
+    padding-top: 15px;
+  }
+
+  &__song-name {
+    position: absolute;
+    left: 41.8%;
+    top: 170px;
+    font-size: 40px;
+    letter-spacing: 3px;
+    font-weight: 600;
+    color: $white;
+    display: block;
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  &__singers {
+    position: absolute;
+    top: 229px;
+    left: 41.8%;
+    font-size: 25px;
+    letter-spacing: 3px;
+    color: $white;
+    display: block;
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  &__position-button {
+    padding-left: 41.8%;
+    padding-top: 20px;
+  }
+
+  &__play {
+    @extend %button;
+
+    position: absolute;
+    height: 68px;
+    width: 68px;
+    top: 303px;
+    background-color: $white;
+    background-image: url(../../icons/arrow_right_black_24dp.svg);
+    background-size: 70px;
+    background-repeat: no-repeat;
+  }
+}

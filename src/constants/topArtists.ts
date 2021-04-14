@@ -1,4 +1,6 @@
-import { TopArtists } from '../types/topArtists';
+interface TopArtists {
+    className: string;
+}
 
 export const topArtists: TopArtists[] = [
     {
@@ -12,8 +14,5 @@ export const topArtists: TopArtists[] = [
     },
     {
         className: 'one-item-4',
-    },
-    {
-        className: 'one-item-5',
     },
 ];

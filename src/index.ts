@@ -1,8 +1,7 @@
-import { router } from './utils/router';
-import { ROUTERS } from './constants/router';
+import { render } from './utils/render';
 
 import './style.scss';
 
-window.addEventListener('load', router(ROUTERS));
-window.addEventListener('hashchange', router(ROUTERS));
-window.addEventListener('popstate', router(ROUTERS));
+window.addEventListener('load', render);
+window.addEventListener('hashchange', render);
+window.addEventListener('popstate', render);

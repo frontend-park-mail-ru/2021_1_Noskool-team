@@ -37,7 +37,14 @@ module.exports = {
         extensions: [".ts", ".tsx", ".js", ".json"],
         alias: {
             components: srcPath('components'),
-            jsx: srcPath('jsx')
+            jsx: srcPath('jsx'),
+            pages: srcPath('pages'),
+            types: srcPath('types'),
+            actions: srcPath('actions'),
+            constants: srcPath('constants'),
+            modules: srcPath('modules'),
+            utils: srcPath('utils'),
+            store: srcPath('store'),
         }
     },
     output: {

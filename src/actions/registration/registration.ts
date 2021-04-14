@@ -1,8 +1,8 @@
-import { RegisterUser, AuthUser } from '../../types/registration';
+import { RegisterUser, AuthUser } from 'types/registration';
 import { post, get } from '../common/common';
-import { REGISTER_USER, AUTH_USER, LOGOUT_USER } from '../../constants/api';
-import { redirectTo } from '../../utils/router';
-import { LINKS } from '../../constants/router';
+import { REGISTER_USER, AUTH_USER, LOGOUT_USER } from 'constants/api';
+import { redirectTo } from 'utils/render';
+import { LINKS } from 'constants/links';
 
 export const registerUser = (body: RegisterUser) => {
     return post(REGISTER_USER, body);
@@ -14,7 +14,8 @@ export const authUser = (body: AuthUser) => {
 
 export const logoutUser = async () => {
     const response = await get(LOGOUT_USER);
-    if (response.status === 401) {
+    if (response.status === 401 || response.status === 403) {
+        localStorage.clear();
         redirectTo(LINKS.auth);
     }
     return response;

@@ -1,0 +1,54 @@
+@import '../../styles/colors.scss';
+
+.genres {
+  width: 100%;
+  margin: 50px 30px 25px 10px;
+
+  &__titles {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Comfortaa', cursive;
+  }
+
+  &__monthly-artists {
+    font-size: 26px;
+    font-weight: 500;
+    letter-spacing: 3px;
+    color: #373944;
+    margin-bottom: 25px;
+    margin-left: 12px;
+  }
+
+  &__see-all {
+    color: #373944;
+    font-size: 16px;
+    margin-bottom: 25px;
+    padding-top: 7px;
+    padding-right: 25px;
+    text-decoration: none;
+  }
+
+  &__see-all:hover {
+    color: $pink;
+  }
+
+  &__section {
+    display: flex;
+    list-style: none;
+    justify-content: space-between;
+    padding: 0 20px;
+  }
+
+  &__find-album {
+    text-decoration: none;
+  }
+
+  &__album-photo {
+    width: 135px;
+    height: 133px;
+    border-radius: 20px;
+    cursor: pointer;
+    object-fit: cover;
+  }
+}

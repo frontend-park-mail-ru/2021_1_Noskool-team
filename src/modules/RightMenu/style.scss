@@ -1,0 +1,200 @@
+@import '../../styles/colors.scss';
+
+.right-menu {
+  height: 100vh;
+  width: 200px;
+  background-color: #fff;
+  position: fixed;
+  padding-top: 15px;
+
+  .item {
+    font-family: 'Comfortaa', cursive;
+    font-size: 16px;
+    letter-spacing: 1.5px;
+    padding-bottom: 25px;
+    list-style: none;
+    cursor: pointer;
+    height: 25px;
+    display: flex;
+
+    %icon {
+      width: 20px;
+      padding-right: 25px;
+      padding-bottom: 5px;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    .icon-0 {
+      @extend %icon;
+
+      background-image: url(icons/home.svg);
+    }
+
+    .icon-1 {
+      @extend %icon;
+
+      background-image: url(icons/recommend.svg);
+    }
+
+    .icon-2 {
+      @extend %icon;
+
+      background-image: url(icons/radio.svg);
+    }
+
+    .icon-3 {
+      @extend %icon;
+
+      background-image: url(icons/talkshow.svg);
+    }
+
+    .icon-4 {
+      @extend %icon;
+
+      background-image: url(icons/music_note.svg);
+    }
+
+    .icon-5 {
+      @extend %icon;
+
+      background-image: url(icons/favourites.svg);
+    }
+
+    .icon-6 {
+      @extend %icon;
+
+      background-image: url(icons/statistic.svg);
+    }
+
+    .icon-7 {
+      @extend %icon;
+
+      background-image: url(icons/settings_black_24dp.svg);
+    }
+
+    .text {
+      color: $gray;
+      text-decoration: none;
+      margin-top: 5px;
+    }
+  }
+
+  .checked-0 {
+    .icon-0 {
+      background-image: url(icons/home_hover.svg);
+    }
+
+    .text {
+      color: $pink;
+    }
+  }
+
+  .checked-1 {
+    .icon-1 {
+      background-image: url(icons/recommend_hover.svg);
+    }
+
+    .text {
+      color: $pink;
+    }
+  }
+
+  .checked-2 {
+    .icon-2 {
+      background-image: url(icons/radio_hover.svg);
+    }
+
+    .text {
+      color: $pink;
+    }
+  }
+
+  .checked-3 {
+    .icon-3 {
+      background-image: url(icons/talkshow_hover.svg);
+    }
+
+    .text {
+      color: $pink;
+    }
+  }
+
+  .checked-4 {
+    .icon-4 {
+      background-image: url(icons/music_note_hover.svg);
+    }
+
+    .text {
+      color: $pink;
+    }
+  }
+
+  .checked-5 {
+    .icon-5 {
+      background-image: url(icons/favourites_hover.svg);
+    }
+
+    .text {
+      color: $pink;
+    }
+  }
+
+  .checked-6 {
+    .icon-6 {
+      background-image: url(icons/statistic_hover.svg);
+    }
+
+    .text {
+      color: $pink;
+    }
+  }
+
+  .checked-7 {
+    .icon-7 {
+      background-image: url(icons/settings_pink.svg);
+    }
+
+    .text {
+      color: $pink;
+    }
+  }
+
+  .item:hover {
+    .icon-0 {
+      background-image: url(icons/home_hover.svg);
+    }
+
+    .icon-1 {
+      background-image: url(icons/recommend_hover.svg);
+    }
+
+    .icon-2 {
+      background-image: url(icons/radio_hover.svg);
+    }
+
+    .icon-3 {
+      background-image: url(icons/talkshow_hover.svg);
+    }
+
+    .icon-4 {
+      background-image: url(icons/music_note_hover.svg);
+    }
+
+    .icon-5 {
+      background-image: url(icons/favourites_hover.svg);
+    }
+
+    .icon-6 {
+      background-image: url(icons/statistic_hover.svg);
+    }
+
+    .icon-7 {
+      background-image: url(icons/settings_pink.svg);
+    }
+
+    .text {
+      color: $pink;
+    }
+  }
+}

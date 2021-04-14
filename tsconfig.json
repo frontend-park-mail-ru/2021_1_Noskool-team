@@ -7,5 +7,33 @@
     "jsx": "react",
     "jsxFactory": "JSX",
     "allowJs": true,
-  }
+    "moduleResolution": "node",
+    "baseUrl": "src",
+    "paths": {
+      "components/*": [
+        "components/*"
+      ],
+      "jsx/*": [
+        "jsx/*"
+      ],
+      "actions/*": [
+        "actions/*"
+      ],
+      "pages/*": [
+        "pages/*"
+      ],
+      "constants/*": [
+        "constants/*"
+      ],
+      "modules/*": [
+        "modules/*"
+      ],
+      "utils/*": [
+        "utils/*"
+      ],
+      "types/*": [
+        "types/*"
+      ]
+    }
+  },
 }
