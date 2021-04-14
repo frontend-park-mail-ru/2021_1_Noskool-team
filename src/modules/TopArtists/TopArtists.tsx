@@ -1,9 +1,12 @@
 import { JSX } from 'jsx/jsx';
 import { artistsStore } from 'store/mainPageStore';
-import { getTopArtists } from 'actions/main_page/mainPage';
+import { getTopArtists } from 'actions/main-page/main-page';
 import { TRACK_HOST } from 'constants/api';
+import { cn } from 'utils/cn';
 
 import './style.scss';
+
+const topArtists = cn('top-artists');
 
 let isNeedFetch = true;
 
@@ -16,18 +19,20 @@ export const TopArtists = () => {
     }
 
     return (
-        <div class='top-artists'>
-            <div class='titles'>
-                <div class='monthly-artists'>Monthly Top Artists</div>
-                <a href='/' class='see-all'>
-                    See All
-                </a>
+        <div class={topArtists()}>
+            <div class={topArtists('titles')}>
+                <div class={topArtists('monthly-artists')}>Monthly Top Artists</div>
+                <div class={topArtists('see-all')}>See All</div>
             </div>
-            <div class='artists'>
+            <div class={topArtists('artists')}>
                 {artistsStore.artists.map((item) => (
-                    <a href='/' class='find-artist'>
-                        <img src={TRACK_HOST + item.picture} class='artists-photo' title={item.name}></img>
-                    </a>
+                    <div class={topArtists('find-artist')}>
+                        <img
+                            src={TRACK_HOST + item?.picture}
+                            class={topArtists('artists-photo')}
+                            title={item?.name}
+                        ></img>
+                    </div>
                 ))}
             </div>
         </div>

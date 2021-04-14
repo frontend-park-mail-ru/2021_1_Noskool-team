@@ -4,7 +4,8 @@ import { get, getcsrf, postCategory } from '../common/common';
 import { TrackBack } from 'types/requests/tracks';
 import { Artists } from 'types/requests/artists';
 import { Album } from 'types/requests/albums';
-import { TRACK_HOST, WEEKLY_TOP, BILLBOARD_CHART, TOP_ARTIST, DISCOVERS, TOP_ONE } from 'constants/api';
+import { WEEKLY_TOP, BILLBOARD_CHART, TOP_ARTIST, DISCOVERS, TOP_ONE } from 'actions/main-page/main-page.constants';
+import { TRACK_HOST } from 'constants/api';
 
 export const topOne = async (): Promise<TrackBack[] | undefined> => {
     let response = await get(TOP_ONE);
@@ -133,7 +134,29 @@ export const addToMediateca = async (id: number): Promise<Response | undefined> 
             return new Promise(() => {});
         }
     }
-    return response.json();
+    return response;
+};
+
+export const deleteFromMediateca = async (id: number): Promise<Response | undefined> => {
+    const ADD_TO_MEDIATECA = TRACK_HOST + `/api/v1/track/${id}/mediateka?type=delete`;
+    let response = await postCategory(ADD_TO_MEDIATECA);
+    if (response.status === 401) {
+        redirectTo(LINKS.auth);
+        return new Promise(() => {});
+    } else if (response.status === 403) {
+        const csrf = await getcsrf();
+        if (csrf.status === 200) {
+            response = await postCategory(ADD_TO_MEDIATECA);
+            if (response.status !== 200) {
+                redirectTo(LINKS.auth);
+                return new Promise(() => {});
+            }
+        } else {
+            redirectTo(LINKS.auth);
+            return new Promise(() => {});
+        }
+    }
+    return response;
 };
 
 export const addToFavourites = async (id: number): Promise<Response | undefined> => {
@@ -155,5 +178,27 @@ export const addToFavourites = async (id: number): Promise<Response | undefined>
             return new Promise(() => {});
         }
     }
-    return response.json();
+    return response;
+};
+
+export const deleteFromFavourites = async (id: number): Promise<Response | undefined> => {
+    const ADD_TO_FAVOURITES = TRACK_HOST + `/api/v1/track/${id}/favorite?type=delete`;
+    let response = await postCategory(ADD_TO_FAVOURITES);
+    if (response.status === 401) {
+        redirectTo(LINKS.auth);
+        return new Promise(() => {});
+    } else if (response.status === 403) {
+        const csrf = await getcsrf();
+        if (csrf.status === 200) {
+            response = await postCategory(ADD_TO_FAVOURITES);
+            if (response.status !== 200) {
+                redirectTo(LINKS.auth);
+                return new Promise(() => {});
+            }
+        } else {
+            redirectTo(LINKS.auth);
+            return new Promise(() => {});
+        }
+    }
+    return response;
 };
