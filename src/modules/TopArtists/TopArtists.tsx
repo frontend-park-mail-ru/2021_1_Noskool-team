@@ -1,5 +1,5 @@
 import { JSX } from 'jsx/jsx';
-import { artistsStore } from 'store/mainPageStore';
+import { artistsStore } from 'store/main-page.store';
 import { getTopArtists } from 'actions/main-page/main-page';
 import { TRACK_HOST } from 'constants/api';
 import { cn } from 'utils/cn';

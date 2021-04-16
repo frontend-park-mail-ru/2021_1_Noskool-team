@@ -1,5 +1,5 @@
 import { proxy } from 'jsx/store';
-import { PlayerStore, CurrentTrack } from 'types/store/playerStore';
+import { PlayerStore, CurrentTrack } from 'types/store/player-store';
 
 export const playerStore = proxy<PlayerStore>({
     currentTrack: proxy<CurrentTrack>({

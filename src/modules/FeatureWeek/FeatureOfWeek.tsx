@@ -1,6 +1,6 @@
 import { JSX } from 'jsx/jsx';
-import { topTrack } from 'store/topTrack';
-import { playerStore } from 'store/playerStore';
+import { topTrack } from 'store/top-track.store';
+import { playerStore } from 'store/player.store';
 import { onClickPlay } from 'modules/AudioLine/AudioLine';
 import { topOne } from 'actions/main-page/main-page';
 import { TRACK_HOST } from 'constants/api';
@@ -9,19 +9,20 @@ import { cn } from 'utils/cn';
 import './style.scss';
 
 const onClickTrack = (index: number) => () => {
-    playerStore.playList = topTrack.trackList.map((el, i) => ({
-        img: el?.picture,
-        index: i,
-        link: el?.audio,
-        name: el?.tittle,
-    }));
     playerStore.currentTrack = {
         img: topTrack.trackList[index]?.picture,
         index: index,
         link: topTrack.trackList[index]?.audio,
         name: topTrack.trackList[index]?.tittle,
     };
+    playerStore.playList = topTrack.trackList.map((el, i) => ({
+        img: el?.picture,
+        index: i,
+        link: el?.audio,
+        name: el?.tittle,
+    }));
     playerStore.currentTime = 0;
+    console.log(playerStore);
     if (!playerStore.isPlay) {
         onClickPlay();
     } else {
@@ -44,7 +45,7 @@ export const FeatureOfWeek = () => {
 
     return (
         <div id='feature' class={feature()}>
-            <img src={TRACK_HOST + topTrack.trackList[0].picture} class={feature('image')}></img>
+            <img src={TRACK_HOST + topTrack.trackList[0]?.picture} class={feature('image')}></img>
             <div class={feature('position-feature')}>
                 <div class={feature('title')}>
                     <div class={feature('title-text')}>FEATURED OF THE WEEK</div>

@@ -1,7 +1,7 @@
 import { JSX } from 'jsx/jsx';
 import { FIRST_SCROLL_VALUE, SCROLL_VALUE } from 'constants/slider';
-import { tracksStore } from 'store/mainPageStore';
-import { playerStore } from 'store/playerStore';
+import { tracksStore } from 'store/main-page.store';
+import { playerStore } from 'store/player.store';
 import { onClickPlay } from 'modules/AudioLine/AudioLine';
 import { getWeeklyTop } from 'actions/main-page/main-page';
 import { TRACK_HOST } from 'constants/api';

@@ -1,8 +1,8 @@
 import { getFavoriteTracks } from 'actions/favorite/favorite';
 import { JSX } from 'jsx/jsx';
 import { onClickPlay } from 'modules/AudioLine/AudioLine';
-import { favoriteTracksStore } from 'store/favoriteTrack';
-import { playerStore } from 'store/playerStore';
+import { favoriteTracksStore } from 'store/favorite-track.store';
+import { playerStore } from 'store/player.store';
 import { cn } from 'utils/cn';
 
 import './style.scss';
@@ -61,20 +61,21 @@ export const Tracks = () => {
                             <div class={favoriteTracks('cell')}>{''}</div>
                         </div>
                     )}
-                    {favoriteTracksStore.trackList.map((el, i) => (
-                        <div class={favoriteTracks('row', 'track')} onclick={onClickTrack(i)}>
-                            <div class={favoriteTracks('cell')}>{`#${i + 1}`}</div>
-                            <div class={favoriteTracks('cell')}>{el?.tittle || '???'}</div>
-                            <div class={favoriteTracks('cell')}>
-                                {el?.musicians?.map((el) => el?.name).join(', ') || '???'}
+                    {favoriteTracksStore.trackList.length !== 0 ? (
+                        favoriteTracksStore.trackList.map((el, i) => (
+                            <div class={favoriteTracks('row', 'track')} onclick={onClickTrack(i)}>
+                                <div class={favoriteTracks('cell')}>{`#${i + 1}`}</div>
+                                <div class={favoriteTracks('cell')}>{el?.tittle || '???'}</div>
+                                <div class={favoriteTracks('cell')}>
+                                    {el?.musicians?.map((el) => el?.name).join(', ') || '???'}
+                                </div>
+                                <div class={favoriteTracks('cell')}>{'3:32'}</div>
+                                <div class={favoriteTracks('cell')}>
+                                    <div />
+                                </div>
                             </div>
-                            <div class={favoriteTracks('cell')}>{'3:32'}</div>
-                            <div class={favoriteTracks('cell')}>
-                                <div />
-                            </div>
-                        </div>
-                    ))}
-                    {favoriteTracksStore.trackList.length === 0 && (
+                        ))
+                    ) : (
                         <div class={favoriteTracks('not-found')}>
                             {'Вы ещё не добавили ни одного трека в избранное :('}
                         </div>

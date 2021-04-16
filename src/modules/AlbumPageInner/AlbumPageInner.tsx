@@ -1,7 +1,8 @@
-import { JSX } from '../../jsx/jsx';
+import { JSX } from 'jsx/jsx';
 import { getAlbumById } from 'actions/albums/albums';
-import { songs } from '../../constants/songs';
+import { TRACK_HOST } from 'constants/api';
 import { cn } from 'utils/cn';
+import { albumPageStore } from 'store/album-page.store';
 
 import './style.scss';
 
@@ -15,6 +16,12 @@ export const AlbumPageInner = () => {
     if (isNeedFetch) {
         isNeedFetch = false;
         getAlbumById(Number(id[id.length - 1])).then((res) => {
+            albumPageStore.album = {
+                date: res?.release_date,
+                id: res?.album_id,
+                picture: res?.picture,
+                title: res?.tittle,
+            };
             console.log(res);
         });
     }
@@ -22,12 +29,13 @@ export const AlbumPageInner = () => {
     return (
         <div class={albumPage()}>
             <div class={albumPage('content')}>
-                <img src='http://localhost:8888/api/v1/data/img/tracks/Nectar.png' alt='' />
+                <img src={TRACK_HOST + albumPageStore.album.picture} alt='' />
+                <div class={albumPage('title')}>{albumPageStore.album.title}</div>
                 <div class={albumPage('singer')}>Xavier Haas / A Road Through Synthwave</div>
                 <div class={albumPage('songs-background')} />
                 <div class={albumPage('songs-block')}>
                     <div class={albumPage('songs')}>
-                        {songs.map((item) => (
+                        {/* {songs.map((item) => (
                             <div class={albumPage('song')}>
                                 <div class={albumPage('number-song')}>{item.sondId}</div>
                                 <div class='song-name-song'>{item.songName}</div>
@@ -37,7 +45,7 @@ export const AlbumPageInner = () => {
                                     <div class={albumPage('add-song')} />
                                 </div>
                             </div>
-                        ))}
+                        ))} */}
                     </div>
                 </div>
             </div>

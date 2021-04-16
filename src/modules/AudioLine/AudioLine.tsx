@@ -1,6 +1,6 @@
 import { JSX } from 'jsx/jsx';
 import { cn } from 'utils/cn';
-import { playerStore } from 'store/playerStore';
+import { playerStore } from 'store/player.store';
 import { TRACK_HOST } from 'constants/api';
 
 import './style.scss';
@@ -48,7 +48,7 @@ const onClickPrev = () => {
     const player = getPlayer();
     let index = 0;
     if (playerStore.currentTrack.index !== 0) {
-        index = (playerStore.currentTrack.index + 1) % playerStore.playList.length;
+        index = (playerStore.currentTrack.index - 1) % playerStore.playList.length;
         playerStore.currentTrack = { ...playerStore.playList[index], index: index };
     } else {
         index = playerStore.playList.length - 1;
@@ -137,14 +137,14 @@ export const AudioLine = () => {
             <audio
                 id={PLAYER_ID}
                 ontimeupdate={onTimeUpdate}
-                src={TRACK_HOST + playerStore.playList[playerStore.currentTrack.index].link}
+                src={TRACK_HOST + playerStore.playList[playerStore.currentTrack.index]?.link}
             >
                 <source
-                    src={TRACK_HOST + playerStore.playList[playerStore.currentTrack.index].link}
+                    src={TRACK_HOST + playerStore.playList[playerStore.currentTrack.index]?.link}
                     type='audio/mpeg'
                 />
             </audio>
-            <div class={player('name')}>{playerStore.playList[playerStore.currentTrack.index].name}</div>
+            <div class={player('name')}>{playerStore.playList[playerStore.currentTrack.index]?.name}</div>
             <div class={player('controls')}>
                 <div class={player('prev-btn')} onclick={onClickPrev} />
                 <div class={player('play-btn', playerStore.isPlay ? 'play' : '')} onclick={onClickPlay} />

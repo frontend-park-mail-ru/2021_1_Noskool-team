@@ -1,7 +1,7 @@
 import { JSX } from 'jsx/jsx';
 import { LINKS } from 'constants/links';
 import { redirectTo } from 'utils/render';
-import { RightMenu as RightMenuStore } from 'types/rightMenu';
+import { RightMenu as RightMenuStore } from 'types/right-menu';
 
 import './style.scss';
 

@@ -1,33 +1,35 @@
 import { JSX } from 'jsx/jsx';
 import { changeUserPhoto, getUser, changeUser } from 'actions/user/user';
 import { Input } from 'components/Input/Input';
-import { UserProfile } from 'types/requests/user';
 import { emailValidator } from 'utils/form-validators';
-import { profileStore, profileForm } from 'store/profileStore';
+import { profileStore, profileForm } from 'store/profile.store';
 import { HOST } from 'constants/api';
 import { cn } from 'utils/cn';
 
 import './style.scss';
+import { requestsStore } from 'store/requests.store';
 
 const page = cn('profile-page');
 const change = cn('change-data');
 
-getUser()
-    .then((res) => {
-        onLoadProfile(res);
-    })
-    .catch((error) => {
-        console.log(error);
-    });
-
-export const onLoadProfile = (proflie: UserProfile) => {
-    profileStore.profile.login = proflie?.login;
-    profileStore.profile.email = proflie?.email;
-    profileStore.profile.photo = proflie?.avatar;
-};
-
 export const ProfilePage = () => {
     const ID_IMAGE_INPUT = 'ID_IMAGE_INPUT';
+
+    if (requestsStore.profile) {
+        requestsStore.profile = false;
+        getUser()
+            .then((res) => {
+                profileStore.profile = {
+                    ...profileStore.profile,
+                    email: res?.email,
+                    login: res?.login,
+                    photo: res?.avatar,
+                };
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }
 
     const onSubmitChanges = (e: MouseEvent) => {
         e.preventDefault();
@@ -44,25 +46,13 @@ export const ProfilePage = () => {
         changeUser(body).then(() => {
             profileForm.form.nickname.value = '';
             profileForm.form.email.value = '';
-            getUser()
-                .then((res) => {
-                    onLoadProfile(res);
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
+            requestsStore.profile = true;
         });
     };
 
     const onChacngePhoto = (e: MouseEvent) => {
         changeUserPhoto(e.target).then(() => {
-            getUser()
-                .then((res) => {
-                    onLoadProfile(res);
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
+            requestsStore.profile = true;
         });
     };
 

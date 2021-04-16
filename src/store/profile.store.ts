@@ -1,5 +1,5 @@
 import { proxy } from 'jsx/store';
-import { Profile, ProfileForm } from 'types/store/profileStore';
+import { Profile, ProfileForm } from 'types/store/profile-store';
 import { FieldState } from 'types/common';
 
 export const profileStore = {
