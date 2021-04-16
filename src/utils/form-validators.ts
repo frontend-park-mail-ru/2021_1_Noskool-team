@@ -1,3 +1,5 @@
+import { FieldState } from 'types/common';
+
 export const requaredValidator = (value: string) => (value ? undefined : 'Это обязательное поле');
 
 export const emailValidator = (value: string) => {
@@ -13,4 +15,18 @@ export const passwordValidator = (value: string) => {
 export const passwordLengthValidator = (value: string) => {
     const re = /[0-9a-zA-Z!@#$%^&*]{6,}/g;
     return re.test(value) ? undefined : 'Пароль должен быть длиннее 6 символов';
+};
+
+export const nicknameLengthValidator = (value: string) => {
+    const re = /[0-9a-zA-Z_-]{6,}/g;
+    return re.test(value) ? undefined : 'Ник должен содержать минимум 6 символов';
+};
+
+export const nicknameValidator = (value: string) => {
+    const re = /[^0-9a-zA-Z_-]/g;
+    return re.test(value) ? 'Недопустимые символы в нике!' : undefined;
+};
+
+export const passwordEqualValidator = (firstPass: FieldState) => (secondPass: string) => {
+    return firstPass.value === secondPass ? undefined : 'Пароли несовпадают';
 };

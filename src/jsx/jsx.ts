@@ -33,6 +33,10 @@ export const createDOM = (element: VNode | string): Element | Text => {
         return document.createTextNode(element);
     }
 
+    if (typeof element === undefined) {
+        return document.createTextNode('');
+    }
+
     const node = document.createElement(element.tagName);
 
     if (element.props) {
@@ -54,6 +58,7 @@ export const createDOM = (element: VNode | string): Element | Text => {
 
 export const patchDom = (node: Element, vNode: VNode | string, vNewNode: VNode | string): void => {
     if (vNewNode === undefined) {
+        console.log(vNewNode);
         node.remove();
         return;
     }

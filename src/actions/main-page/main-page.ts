@@ -6,7 +6,6 @@ import { Artists } from 'types/requests/artists';
 import { Album } from 'types/requests/albums';
 import { WEEKLY_TOP, BILLBOARD_CHART, TOP_ARTIST, DISCOVERS, TOP_ONE } from 'actions/main-page/main-page.constants';
 import { TRACK_HOST } from 'constants/api';
-import { refreshFavoriteTracks } from 'pages/FavoritePage/Tracks/Tracks';
 
 export const topOne = async (): Promise<TrackBack[] | undefined> => {
     let response = await get(TOP_ONE);
@@ -179,7 +178,6 @@ export const addToFavourites = async (id: number): Promise<Response | undefined>
             return new Promise(() => {});
         }
     }
-    refreshFavoriteTracks();
     return response;
 };
 
@@ -202,6 +200,5 @@ export const deleteFromFavourites = async (id: number): Promise<Response | undef
             return new Promise(() => {});
         }
     }
-    refreshFavoriteTracks();
     return response;
 };

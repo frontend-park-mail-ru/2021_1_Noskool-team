@@ -7,7 +7,8 @@ import { LINKS } from 'constants/links';
 import { ErrorFetch } from 'types/common';
 import { cn } from 'utils/cn';
 import { isMobile } from 'utils/isMobile';
-import { authFormStore } from 'store/authForm';
+import { authFormStore } from 'store/auth-form.store';
+import { requestsStore } from 'store/requests.store';
 
 import './style.scss';
 
@@ -42,6 +43,7 @@ const onSubmitForm = (values: MouseEvent) => {
                 } else if (res.status === 200) {
                     localStorage.setItem('auth', 'ok');
                     redirectTo(LINKS.main);
+                    requestsStore.profile = true;
                 } else {
                     res.json().then((res) => {
                         onSetFormError(res.error);

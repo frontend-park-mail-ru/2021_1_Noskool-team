@@ -1,6 +1,6 @@
 import { proxy } from 'jsx/store';
 import { FieldState } from 'types/common';
-import { Form } from 'types/store/authForm';
+import { Form } from 'types/store/auth-form';
 
 export const authFormStore = {
     form: proxy<Form>({

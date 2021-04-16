@@ -3,7 +3,8 @@ import { FeatureOfWeek } from 'modules/FeatureWeek/FeatureOfWeek';
 import { Single } from 'modules/Singles/Single';
 import { BillboardChart } from 'modules/BillboardChart/BillboardChart';
 import { TopArtists } from 'modules/TopArtists/TopArtists';
-import { DiscoverGenres } from 'modules/Discover/Discover';
+// import { DiscoverGenres } from 'modules/Discover/Discover';
+
 import './style.scss';
 
 export const MainPage = () => {
@@ -21,7 +22,7 @@ export const MainPage = () => {
                     </div>
                     <div class='discover'>
                         <TopArtists />
-                        <DiscoverGenres />
+                        {/* <DiscoverGenres /> */}
                     </div>
                 </div>
             </div>

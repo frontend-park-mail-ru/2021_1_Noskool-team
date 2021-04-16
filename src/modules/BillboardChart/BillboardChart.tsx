@@ -1,10 +1,12 @@
 import { JSX } from 'jsx/jsx';
-import { billboardChartStore } from 'store/mainPageStore';
-import { playerStore } from 'store/playerStore';
+import { billboardChartStore } from 'store/main-page.store';
+import { playerStore } from 'store/player.store';
 import { onClickPlay } from 'modules/AudioLine/AudioLine';
 import { getBillboardChart, addToFavourites, addToMediateca, deleteFromFavourites } from 'actions/main-page/main-page';
 import { TRACK_HOST } from 'constants/api';
 import { cn } from 'utils/cn';
+import { favoriteTracksStore } from 'store/favorite-track.store';
+import { getFavoriteTracks } from 'actions/favorite/favorite';
 
 import './style.scss';
 
@@ -32,13 +34,21 @@ const onClickTrack = (index: number) => () => {
 
 const onClickFavorite = (index: number, id: number) => () => {
     if (!billboardChartStore.trackList[index].in_favorite) {
-        addToFavourites(id);
+        addToFavourites(id).then(() => {
+            getFavoriteTracks().then((res) => {
+                favoriteTracksStore.trackList = res;
+            });
+        });
         const buffer = [...billboardChartStore.trackList];
         buffer[index].in_mediateka = true;
         buffer[index].in_favorite = true;
         billboardChartStore.trackList = buffer;
     } else {
-        deleteFromFavourites(id);
+        deleteFromFavourites(id).then(() => {
+            getFavoriteTracks().then((res) => {
+                favoriteTracksStore.trackList = res;
+            });
+        });
         const buffer = [...billboardChartStore.trackList];
         buffer[index].in_favorite = false;
         billboardChartStore.trackList = buffer;

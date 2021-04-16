@@ -12,21 +12,45 @@ import { RegistrationPage } from 'pages/RegistrationPage/RegistrationPage';
 import { AuthPage } from 'pages/AuthPage/AuthPage';
 import { MainPage } from 'pages/MainPage/MainPage';
 import { ProfilePage } from 'pages/ProfilePage/ProfilePage';
+import { profileStore } from 'store/profile.store';
+import { getUser } from 'actions/user/user';
+import { requestsStore } from 'store/requests.store';
 
 import './app.scss';
 
-const isPageExistsAuth = (): boolean =>
-    window.location.pathname !== LINKS.main &&
-    window.location.pathname !== LINKS.profile &&
-    !window.location.pathname.startsWith(LINKS.favorite) &&
-    !window.location.pathname.startsWith(LINKS.album);
+const isPageExistsAuth = (): boolean => {
+    const path = window.location.pathname;
+    return (
+        path !== LINKS.main &&
+        path !== LINKS.profile &&
+        !path.startsWith(LINKS.favorite) &&
+        !path.startsWith(LINKS.album)
+    );
+};
 
-const isPageExistsNoneAuth = (): boolean =>
-    window.location.pathname !== LINKS.auth && window.location.pathname !== LINKS.reg;
+const isPageExistsNoneAuth = (): boolean => {
+    const path = window.location.pathname;
+    return path !== LINKS.auth && path !== LINKS.reg;
+};
+
+getUser()
+    .then((res) => {
+        profileStore.profile = {
+            ...profileStore.profile,
+            email: res?.email,
+            login: res?.login,
+            photo: res?.avatar,
+        };
+        requestsStore.profile = false;
+    })
+    .catch((error) => {
+        console.log(error);
+    });
 
 const pageWrapper = cn('page-wrapper');
 
 export const App = () => {
+    const path = window.location.pathname;
     return (
         <div>
             {localStorage.getItem('auth') ? (
@@ -39,10 +63,10 @@ export const App = () => {
                             <RightMenu />
                         </div>
                         <div class={pageWrapper('page')}>
-                            {window.location.pathname === LINKS.main && <MainPage />}
-                            {window.location.pathname === LINKS.profile && <ProfilePage />}
-                            {window.location.pathname.startsWith(LINKS.album) && <AlbumPage />}
-                            {window.location.pathname.startsWith(LINKS.favorite) && <FavoritePage />}
+                            {path === LINKS.main && <MainPage />}
+                            {path === LINKS.profile && <ProfilePage />}
+                            {path.startsWith(LINKS.album) && <AlbumPage />}
+                            {path.startsWith(LINKS.favorite) && <FavoritePage />}
                             {isPageExistsAuth() && <ErrorPage />}
                         </div>
                         <div class={pageWrapper('player')}>
@@ -52,8 +76,8 @@ export const App = () => {
                 </div>
             ) : (
                 <div class={''}>
-                    {window.location.pathname === LINKS.auth && <AuthPage />}
-                    {window.location.pathname === LINKS.reg && <RegistrationPage />}
+                    {path === LINKS.auth && <AuthPage />}
+                    {path === LINKS.reg && <RegistrationPage />}
                     {isPageExistsNoneAuth() && <ErrorPage />}
                 </div>
             )}

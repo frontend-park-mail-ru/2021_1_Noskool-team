@@ -1,5 +1,5 @@
 import { JSX } from 'jsx/jsx';
-import { albumsStore } from 'store/mainPageStore';
+import { albumsStore } from 'store/main-page.store';
 import { getDiscovers } from 'actions/main-page/main-page';
 import { TRACK_HOST } from 'constants/api';
 import { redirectTo } from 'utils/render';

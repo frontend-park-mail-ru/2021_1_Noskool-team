@@ -2,7 +2,7 @@ import { getFavoriteAlbums } from 'actions/favorite/favorite';
 import { TRACK_HOST } from 'constants/api';
 import { LINKS } from 'constants/links';
 import { JSX } from 'jsx/jsx';
-import { favoriteAlbumsStore } from 'store/favoriteAlbums';
+import { favoriteAlbumsStore } from 'store/favorite-albums.store';
 import { cn } from 'utils/cn';
 import { redirectTo } from 'utils/render';
 
