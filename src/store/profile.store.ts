@@ -34,5 +34,25 @@ export const profileForm = {
             },
             ['onCheckValid']
         ),
+        name: proxy<FieldState>(
+            {
+                value: '',
+                isValid: null,
+                onCheckValid: undefined,
+                isFocuse: false,
+                errorMsg: '',
+            },
+            ['onCheckValid']
+        ),
+        lastName: proxy<FieldState>(
+            {
+                value: '',
+                isValid: null,
+                onCheckValid: undefined,
+                isFocuse: false,
+                errorMsg: '',
+            },
+            ['onCheckValid']
+        ),
     }),
 };
