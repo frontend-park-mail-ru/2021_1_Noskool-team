@@ -7,7 +7,7 @@ import { TRACK_HOST } from 'constants/api';
 import { cn } from 'utils/cn';
 import { favoriteTracksStore } from 'store/favorite-track.store';
 import { getFavoriteTracks } from 'actions/favorite/favorite';
-import { PlusIcon } from 'assets/icons';
+import { PlusIcon, LikeIcon } from 'assets/icons';
 
 import './style.scss';
 
@@ -102,18 +102,18 @@ export const BillboardChart = () => {
                         </div>
                     </div>
                     <div class={tracks('time')}>{item?.duration}</div>
-                    <button
-                        id={`like-${index}`}
+                    <div
                         class={tracks('like', item?.in_favorite ? 'checked-like' : '')}
                         onclick={onClickFavorite(index, item?.track_id)}
-                    ></button>
-                    <button
-                        id={`add-${index}`}
+                    >
+                        <LikeIcon />
+                    </div>
+                    <div
                         class={tracks('add', item?.in_mediateka ? 'checked-add' : '')}
                         onclick={onClickMedia(index, item?.track_id)}
                     >
                         <PlusIcon />
-                    </button>
+                    </div>
                 </div>
             ))}
         </div>

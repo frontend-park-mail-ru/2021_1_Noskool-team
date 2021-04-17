@@ -105,6 +105,16 @@
     border: none;
     cursor: pointer;
     margin-top: 12px;
+
+    svg {
+      width: 20px;
+      height: 20px;
+
+      path {
+        transition: all 0.3s;
+        fill: $gray;
+      }
+    }
   }
 
   &__like {
@@ -112,15 +122,22 @@
 
     margin-left: 10px;
     margin-right: 5px;
-    background-image: url(../../icons/favorite_black_24dp.svg);
 
     &--checked-like {
-      background-image: url(../../icons/favourite_pink.svg);
+      svg {
+        path {
+          fill: $pink;
+        }
+      }
     }
   }
 
   &__like:hover {
-    background-image: url(../../icons/favourite_pink.svg);
+    svg {
+      path {
+        fill: $pink;
+      }
+    }
   }
 
   &__add {
@@ -130,14 +147,15 @@
     margin-right: 0;
 
     svg {
-      width: 20px;
-      height: 20px;
+      path {
+        stroke: $gray;
+      }
     }
 
     &--checked-add {
       svg {
         path {
-          stroke: #ef548e;
+          stroke: $pink;
         }
       }
     }
