@@ -11,4 +11,6 @@ export interface Profile {
 export interface ProfileForm {
     email: FieldState;
     nickname: FieldState;
+    name: FieldState;
+    lastName: FieldState;
 }

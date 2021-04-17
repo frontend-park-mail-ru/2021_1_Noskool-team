@@ -1,6 +1,7 @@
 import { JSX } from 'jsx/jsx';
 import { changeUserPhoto, getUser, changeUser } from 'actions/user/user';
-import { Input } from 'components/Input/Input';
+// import { Input } from 'components/Input/Input';
+import { ProfileInput } from 'components/ProfileInput/ProfileInput';
 import { emailValidator } from 'utils/form-validators';
 import { profileStore, profileForm } from 'store/profile.store';
 import { HOST } from 'constants/api';
@@ -24,6 +25,8 @@ export const ProfilePage = () => {
                     email: res?.email,
                     login: res?.login,
                     photo: res?.avatar,
+                    name: res?.first_name,
+                    lastName: res?.second_name,
                 };
             })
             .catch((error) => {
@@ -36,6 +39,8 @@ export const ProfilePage = () => {
         const body = {
             email: profileForm.form.email.value,
             nickname: profileForm.form.nickname.value,
+            name: profileForm.form.name.value,
+            lastName: profileForm.form.lastName.value,
         };
         if (!profileForm.form.email.value) {
             delete body.email;
@@ -43,9 +48,17 @@ export const ProfilePage = () => {
         if (!profileForm.form.nickname.value) {
             delete body.nickname;
         }
+        if (!profileForm.form.name.value) {
+            delete body.name;
+        }
+        if (!profileForm.form.lastName.value) {
+            delete body.lastName;
+        }
         changeUser(body).then(() => {
             profileForm.form.nickname.value = '';
             profileForm.form.email.value = '';
+            profileForm.form.name.value = '';
+            profileForm.form.lastName.value = '';
             requestsStore.profile = true;
         });
     };
@@ -60,34 +73,55 @@ export const ProfilePage = () => {
         (document.getElementById(ID_IMAGE_INPUT) as HTMLInputElement).click();
     };
 
+    console.log(profileStore);
+
     return (
         <div class={page()}>
-            <div class={page('main-info')}>
-                <div class={page('photo')}>
-                    <img src={HOST + profileStore.profile.photo} alt='' />
-                    <input
-                        type='file'
-                        id={ID_IMAGE_INPUT}
-                        accept={'image/jpeg,image/png,image/webp,image/gif'}
-                        onchange={onChacngePhoto}
-                    />
-                    <label htmlFor={ID_IMAGE_INPUT} onclick={onClickLabel} class={page('change-photo')}>
-                        {'Изменить фото'}
-                    </label>
-                </div>
-                <div class={page('text-info-container')}>
-                    <div class={page('text-info', 'nickname')}>{profileStore.profile.login}</div>
-                    <div class={page('text-info', 'email')}>{profileStore.profile.email}</div>
-                </div>
-            </div>
             <div class={change()}>
                 <form class={change('input')} onsubmit={onSubmitChanges}>
-                    <Input input={profileForm.form.nickname} placeholder={'Измените ник'} validators={[]} />
-                    <Input
+                    <ProfileInput
                         input={profileForm.form.email}
                         placeholder={'Измените email'}
                         validators={[emailValidator]}
+                        initialName={profileStore.profile.email}
+                        inputName={'Email'}
                     />
+                    <ProfileInput
+                        input={profileForm.form.nickname}
+                        placeholder={'Измените email'}
+                        validators={[]}
+                        initialName={profileStore.profile.login}
+                        inputName={'Логин'}
+                    />
+                    <ProfileInput
+                        input={profileForm.form.name}
+                        placeholder={'Измените email'}
+                        validators={[]}
+                        initialName={profileStore.profile.name}
+                        inputName={'Имя'}
+                    />
+                    <ProfileInput
+                        input={profileForm.form.lastName}
+                        placeholder={'Измените email'}
+                        validators={[]}
+                        initialName={profileStore.profile.lastName}
+                        inputName={'Фамилия'}
+                    />
+                    <div class={page('div-photo')}>
+                        <div class={page('name')}>Фото</div>
+                        <div class={page('photo')}>
+                            <img src={HOST + profileStore.profile.photo} alt='' />
+                            <input
+                                type='file'
+                                id={ID_IMAGE_INPUT}
+                                accept={'image/jpeg,image/png,image/webp,image/gif'}
+                                onchange={onChacngePhoto}
+                            />
+                            <label htmlFor={ID_IMAGE_INPUT} onclick={onClickLabel} class={page('change-photo')}>
+                                {'Изменить фото'}
+                            </label>
+                        </div>
+                    </div>
                     <button type='submit'>{'Изменить'}</button>
                 </form>
             </div>
