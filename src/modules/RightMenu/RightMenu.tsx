@@ -2,10 +2,21 @@ import { JSX } from 'jsx/jsx';
 import { LINKS } from 'constants/links';
 import { redirectTo } from 'utils/render';
 import { RightMenu as RightMenuStore } from 'types/right-menu';
+import {
+    HomeIcon,
+    SoundOnIcon,
+    HeadPhonesIcon,
+    MicroPhone,
+    LikeInRoundIcon,
+    TargetIcon,
+    DiagramIcon,
+    SettingsIcon,
+} from 'assets/icons';
+import { cn } from 'utils/cn';
 
 import './style.scss';
 
-const ID_MENU = 'item';
+const rightMenuCn = cn('right-menu');
 
 const chooseItem = (index: number) => () => {
     let link = '';
@@ -28,61 +39,62 @@ const chooseItem = (index: number) => () => {
 export const RightMenu = () => {
     const rightMenu: RightMenuStore[] = [
         {
-            className: 'icon-0',
-            classNameActive: 'checked-0',
             text: 'Главная',
+            icon: HomeIcon,
             isActive: window.location.pathname === LINKS.main,
         },
         {
-            className: 'icon-1',
             text: 'Рекомендации',
-            classNameActive: 'checked-1',
+            icon: SoundOnIcon,
+            isActive: false,
         },
         {
-            className: 'icon-2',
             text: 'Радио',
-            classNameActive: 'checked-2',
+            icon: HeadPhonesIcon,
+            isActive: false,
+            className: 'not-fill',
         },
         {
-            className: 'icon-3',
             text: 'Подкасты',
-            classNameActive: 'checked-3',
+            icon: MicroPhone,
+            isActive: false,
+            className: 'not-fill',
         },
         {
-            className: 'icon-4',
             text: 'Медиатека',
-            classNameActive: 'checked-4',
+            icon: TargetIcon,
+            isActive: false,
+            className: 'not-fill',
         },
         {
-            className: 'icon-5',
             text: 'Избранное',
-            classNameActive: 'checked-5',
+            icon: LikeInRoundIcon,
             isActive: window.location.pathname.startsWith(LINKS.favorite),
+            className: 'not-fill',
         },
         {
-            className: 'icon-6',
             text: 'Статистика',
-            classNameActive: 'checked-6',
+            icon: DiagramIcon,
+            isActive: false,
         },
         {
-            className: 'icon-7',
             text: 'Настройки',
-            classNameActive: 'checked-7',
+            icon: SettingsIcon,
             isActive: window.location.pathname === LINKS.profile,
+            className: 'not-fill',
         },
     ];
 
     return (
-        <ul class='right-menu'>
+        <ul class={rightMenuCn()}>
             {rightMenu.map((item, index) => (
                 <li
                     key={index}
-                    id={ID_MENU}
-                    class={'item ' + (item?.isActive ? item.classNameActive : '')}
+                    class={rightMenuCn('item', item?.isActive ? 'checked' : '')}
                     onclick={chooseItem(index)}
                 >
-                    <div class={item.className}></div>
-                    <div class='text'>{item.text}</div>
+                    <div class={rightMenuCn('icon', item?.className)}>{item?.icon()}</div>
+                    <div class={rightMenuCn('text')}>{item.text}</div>
                 </li>
             ))}
         </ul>

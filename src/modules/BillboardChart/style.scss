@@ -112,7 +112,6 @@
 
       path {
         transition: all 0.3s;
-        fill: $gray;
       }
     }
   }
@@ -123,19 +122,25 @@
     margin-left: 10px;
     margin-right: 5px;
 
-    &--checked-like {
+    svg {
+      path {
+        fill: $gray;
+      }
+    }
+
+    &:hover {
       svg {
         path {
           fill: $pink;
         }
       }
     }
-  }
 
-  &__like:hover {
-    svg {
-      path {
-        fill: $pink;
+    &--checked {
+      svg {
+        path {
+          fill: $pink;
+        }
       }
     }
   }
@@ -146,25 +151,25 @@
     background-size: 27px;
     margin-right: 0;
 
+    &:hover {
+      svg {
+        path {
+          stroke: #ef548e;
+        }
+      }
+    }
+
     svg {
       path {
         stroke: $gray;
       }
     }
 
-    &--checked-add {
+    &--checked {
       svg {
         path {
           stroke: $pink;
         }
-      }
-    }
-  }
-
-  &__add:hover {
-    svg {
-      path {
-        stroke: #ef548e;
       }
     }
   }

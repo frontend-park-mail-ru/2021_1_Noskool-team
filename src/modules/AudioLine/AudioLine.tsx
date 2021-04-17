@@ -2,6 +2,16 @@ import { JSX } from 'jsx/jsx';
 import { cn } from 'utils/cn';
 import { playerStore } from 'store/player.store';
 import { TRACK_HOST } from 'constants/api';
+import {
+    NextBtnIcon,
+    PauseIcon,
+    PlayIcon,
+    PrevBtnIcon,
+    SoundOffIcon,
+    VolumeOneIcon,
+    VolumeThreeIcon,
+    VolumeTwoIcon,
+} from 'assets/icons';
 
 import './style.scss';
 
@@ -114,18 +124,16 @@ const onTimeUpdate = () => {
     trackLine.value = String(player.currentTime / player.duration);
 };
 
-const getVolumeClass = () => {
+const getVolumeIcon = () => {
     switch (playerStore.volume) {
         case 0:
-            return 'volume-not';
+            return SoundOffIcon;
         case 1:
-            return 'volume-small';
+            return VolumeOneIcon;
         case 2:
-            return 'volume-medium';
+            return VolumeTwoIcon;
         case 3:
-            return 'volume-max';
-        default:
-            return '';
+            return VolumeThreeIcon;
     }
 };
 
@@ -152,9 +160,15 @@ export const AudioLine = () => {
                 </div>
             </div>
             <div class={player('controls')}>
-                <div class={player('prev-btn')} onclick={onClickPrev} />
-                <div class={player('play-btn', playerStore.isPlay ? 'play' : '')} onclick={onClickPlay} />
-                <div class={player('next-btn')} onclick={onClickNext} />
+                <div class={player('prev-btn')} onclick={onClickPrev}>
+                    <PrevBtnIcon />
+                </div>
+                <div class={player('play-btn', playerStore.isPlay ? 'pause' : '')} onclick={onClickPlay}>
+                    {playerStore.isPlay ? <PauseIcon /> : <PlayIcon />}
+                </div>
+                <div class={player('next-btn')} onclick={onClickNext}>
+                    <NextBtnIcon />
+                </div>
             </div>
             <div class={player('track-line')}>
                 <input
@@ -168,7 +182,9 @@ export const AudioLine = () => {
                 />
             </div>
             <div class={player('volume')}>
-                <div class={player('volume-icon', getVolumeClass())} onclick={onClickVolume} />
+                <div class={player('volume-icon')} onclick={onClickVolume}>
+                    {getVolumeIcon()()}
+                </div>
                 <input id={VOLUME_ID} oninput={onChangeVolume} type='range' min='0' max='1' step='0.01' value='1' />
             </div>
         </div>

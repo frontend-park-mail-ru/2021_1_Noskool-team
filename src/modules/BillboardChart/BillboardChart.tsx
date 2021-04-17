@@ -103,13 +103,13 @@ export const BillboardChart = () => {
                     </div>
                     <div class={tracks('time')}>{item?.duration}</div>
                     <div
-                        class={tracks('like', item?.in_favorite ? 'checked-like' : '')}
+                        class={tracks('like', item?.in_favorite ? 'checked' : '')}
                         onclick={onClickFavorite(index, item?.track_id)}
                     >
                         <LikeIcon />
                     </div>
                     <div
-                        class={tracks('add', item?.in_mediateka ? 'checked-add' : '')}
+                        class={tracks('add', item?.in_mediateka ? 'checked' : '')}
                         onclick={onClickMedia(index, item?.track_id)}
                     >
                         <PlusIcon />
