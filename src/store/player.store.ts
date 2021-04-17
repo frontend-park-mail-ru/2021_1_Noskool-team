@@ -4,9 +4,10 @@ import { PlayerStore, CurrentTrack } from 'types/store/player-store';
 export const playerStore = proxy<PlayerStore>({
     currentTrack: proxy<CurrentTrack>({
         index: 0,
-        link: '/api/v1/data/audio/Joji_-_Mr._Hollywood.ogg',
-        img: '',
-        name: 'Joji - Mr. Hollywood',
+        link: '/api/v1/data/audio/mon_every_time.ogg',
+        img: '/api/v1/data/img/tracks/monetohka.webp',
+        name: 'Каждый раз',
+        artist: 'Монеточка',
     }),
     isPlay: false,
     volume: 2,
@@ -14,10 +15,11 @@ export const playerStore = proxy<PlayerStore>({
     durationTime: 0,
     playList: [
         {
-            link: '/api/v1/data/audio/Joji_-_Mr._Hollywood.ogg',
-            img: '',
-            name: 'Joji - Mr. Hollywood',
-            index: null,
+            link: '/api/v1/data/audio/mon_every_time.ogg',
+            img: '/api/v1/data/img/tracks/monetohka.webp',
+            name: 'Каждый раз',
+            artist: 'Монеточка',
+            index: 0,
         },
     ],
 });

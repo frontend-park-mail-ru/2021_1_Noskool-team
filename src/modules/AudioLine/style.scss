@@ -29,6 +29,26 @@
     white-space: pre;
     overflow: hidden;
     text-overflow: ellipsis;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    div {
+      font-size: 12px;
+      margin-top: 2px;
+      color: $gray;
+    }
+  }
+
+  &__title {
+    display: flex;
+    align-items: center;
+
+    img {
+      height: 55px;
+      width: 55px;
+      margin-right: 15px;
+    }
   }
 
   &__track-line {

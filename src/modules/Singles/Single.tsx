@@ -15,12 +15,14 @@ const onClickTrack = (index: number) => () => {
         index: i,
         link: el?.audio,
         name: el?.tittle,
+        artist: el?.musicians?.map((el) => el?.name).join(', '),
     }));
     playerStore.currentTrack = {
         img: tracksStore.trackList[index]?.picture,
         index: index,
         link: tracksStore.trackList[index]?.audio,
         name: tracksStore.trackList[index]?.tittle,
+        artist: tracksStore.trackList[index]?.musicians?.map((el) => el?.name).join(', '),
     };
     playerStore.currentTime = 0;
     if (!playerStore.isPlay) {

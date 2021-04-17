@@ -65,7 +65,7 @@
       list-style: none;
       justify-content: space-between;
       left: 0;
-      transition: all ease 1s;
+      transition: all ease 0.3s;
     }
 
     &__single-img {
@@ -76,6 +76,7 @@
       margin-left: 25px;
       margin-top: 25px;
       object-fit: cover;
+      cursor: pointer;
     }
 
     &__name-song {

@@ -144,7 +144,13 @@ export const AudioLine = () => {
                     type='audio/mpeg'
                 />
             </audio>
-            <div class={player('name')}>{playerStore.playList[playerStore.currentTrack.index]?.name}</div>
+            <div class={player('title')}>
+                <img src={TRACK_HOST + playerStore.playList[playerStore.currentTrack.index]?.img} alt='' />
+                <div class={player('name')}>
+                    {playerStore.playList[playerStore.currentTrack.index]?.name}
+                    <div>{playerStore.playList[playerStore.currentTrack.index]?.artist}</div>
+                </div>
+            </div>
             <div class={player('controls')}>
                 <div class={player('prev-btn')} onclick={onClickPrev} />
                 <div class={player('play-btn', playerStore.isPlay ? 'play' : '')} onclick={onClickPlay} />
