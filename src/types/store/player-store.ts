@@ -3,6 +3,7 @@ export interface CurrentTrack {
     link: string;
     img: string;
     name: string;
+    artist: string;
 }
 
 export interface PlayerStore {
