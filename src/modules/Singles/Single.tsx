@@ -82,7 +82,7 @@ export const Single = () => {
     return (
         <div class={weekly()}>
             <div class={weekly('legend')}>
-                <div class={weekly('title')}>Weekly Top Track</div>
+                <div class={weekly('title')}>{'Weekly Top Track'}</div>
                 <div class='buttons'>
                     <button class={weekly('prev')} onclick={prevItem}></button>
                     <button class={weekly('next')} onclick={nextItem}></button>
