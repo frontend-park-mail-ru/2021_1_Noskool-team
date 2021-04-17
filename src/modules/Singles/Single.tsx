@@ -6,6 +6,7 @@ import { onClickPlay } from 'modules/AudioLine/AudioLine';
 import { getWeeklyTop } from 'actions/main-page/main-page';
 import { TRACK_HOST } from 'constants/api';
 import { cn } from 'utils/cn';
+import { LeftChevronIcon, RightChevronIcon } from 'assets/icons';
 
 import './style.scss';
 
@@ -82,17 +83,21 @@ export const Single = () => {
     return (
         <div class={weekly()}>
             <div class={weekly('legend')}>
-                <div class={weekly('title')}>Weekly Top Track</div>
-                <div class='buttons'>
-                    <button class={weekly('prev')} onclick={prevItem}></button>
-                    <button class={weekly('next')} onclick={nextItem}></button>
+                <div class={weekly('title')}>{'Weekly Top Track'}</div>
+                <div class={weekly('buttons')}>
+                    <div onclick={prevItem} class={weekly('btn')}>
+                        <LeftChevronIcon />
+                    </div>
+                    <div onclick={nextItem} class={weekly('btn')}>
+                        <RightChevronIcon />
+                    </div>
                 </div>
             </div>
             <div class={slider()}>
                 <ul id={SLIDER} class={slider('single-items')}>
                     {tracksStore.trackList.map((item, index) => (
                         <li class={slider('item')} onclick={onClickTrack(index)}>
-                            <img src={TRACK_HOST + item?.picture} class={slider('single-img')}></img>
+                            <img src={TRACK_HOST + item?.picture} class={slider('single-img')} />
                             <div class={slider('name-song')}>{item?.tittle}</div>
                             <div class={slider('singer')}>
                                 {item?.musicians.map((artist) => artist?.name).join(', ')}

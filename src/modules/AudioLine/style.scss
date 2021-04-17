@@ -5,6 +5,24 @@
   width: 30px;
   height: 30px;
   margin: 0 10px;
+
+  &:hover {
+    svg {
+      path {
+        fill: $pink;
+      }
+    }
+  }
+
+  svg {
+    width: 30px;
+    height: 30px;
+
+    path {
+      transition: all 0.3s;
+      fill: $gray;
+    }
+  }
 }
 
 .player {
@@ -71,67 +89,39 @@
   }
 
   &__volume-icon {
-    &--volume-not {
-      background: url(./icons/volume-not.svg) no-repeat;
-      background-size: contain;
-
-      @include btn;
-    }
-
-    &--volume-small {
-      background: url(./icons/volume-small.svg) no-repeat;
-      background-size: contain;
-
-      @include btn;
-    }
-
-    &--volume-medium {
-      background: url(./icons/volume-medium.svg) no-repeat;
-      background-size: contain;
-
-      @include btn;
-    }
-
-    &--volume-max {
-      background: url(./icons/volume-max.svg) no-repeat;
-      background-size: contain;
-
-      @include btn;
-    }
+    @include btn;
   }
 
   &__prev-btn {
-    background: url(./icons/prev.svg) no-repeat;
-    background-size: cover;
-
     @include btn;
   }
 
   &__play-btn {
-    background: url(./icons/play.svg) no-repeat;
-    background-size: cover;
-
-    &--play {
-      background: url(./icons/pause.svg) no-repeat;
-      background-size: cover;
-    }
-
     @include btn;
+
+    &--pause {
+      &:hover {
+        svg {
+          path {
+            fill: none;
+            stroke: $pink;
+          }
+        }
+      }
+
+      svg {
+        width: 30px;
+        height: 30px;
+
+        path {
+          stroke: $gray;
+          fill: none;
+        }
+      }
+    }
   }
 
   &__next-btn {
-    background: url(./icons/next.svg) no-repeat;
-    background-size: cover;
-
     @include btn;
   }
-
-  // .buttons {
-  //   background-image: url(../../icons/repeat_black_24dp.svg);
-  //   background-image: url(../../icons/skip_previous_black_24dp.svg);
-  //   background-size: 25px;
-  //   background-image: url(../../icons/arrow.svg);
-  //   background-image: url(../../icons/skip_next_black_24dp.svg);
-  //   background-image: url(../../icons/shuffle_black_24dp.svg);
-  // }
 }

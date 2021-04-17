@@ -1,6 +1,6 @@
 export interface RightMenu {
-    className: string;
+    icon: () => any;
     text: string;
-    isActive?: boolean;
-    classNameActive: string;
+    isActive: boolean;
+    className?: string;
 }

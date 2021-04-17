@@ -8,6 +8,7 @@ import { LINKS } from 'constants/links';
 import { redirectTo } from 'utils/render';
 
 import './style.scss';
+import { ExiteIcon, SettingsIcon } from 'assets/icons';
 
 const header = cn('header');
 const profile = cn('profile');
@@ -46,13 +47,13 @@ export const Header = () => {
                     <div class={profile('line')}></div>
                     <ul class={profile('items-user')}>
                         <li class={profile('item')}>
-                            <div class={'icon-1'} />
+                            <div class={profile('icon')}>{SettingsIcon()}</div>
                             <div class={profile('link')} onclick={toSettings}>
                                 {'Настройки'}
                             </div>
                         </li>
                         <li class={profile('item')}>
-                            <div class={'icon-2'} />
+                            <div class={profile('icon')}>{ExiteIcon()}</div>
                             <div class={profile('link')}>{'Выйти'}</div>
                         </li>
                     </ul>

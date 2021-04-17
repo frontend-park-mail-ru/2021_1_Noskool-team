@@ -129,22 +129,22 @@
 
     margin-left: 20px;
     margin-right: 5px;
-    background-image: url(../../icons/favorite_black_24dp.svg);
+    // background-image: url(../../icons/favorite_black_24dp.svg);
 
     &:hover {
-      background-image: url(../../icons/favourite_pink.svg);
+      // background-image: url(../../icons/favourite_pink.svg);
     }
   }
 
   &__add-song {
     @extend %button-music;
 
-    background-image: url(../../icons/add_black_24dp.svg);
+    // background-image: url(../../icons/add_black_24dp.svg);
     background-size: 27px;
     margin-right: 0;
 
     &:hover {
-      background-image: url(../../icons/add_pink.svg);
+      // background-image: url(../../icons/add_pink.svg);
     }
   }
 }

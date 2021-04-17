@@ -147,45 +147,41 @@
       align-items: center;
       cursor: pointer;
 
-      %icon {
-        height: 25px;
-        width: 25px;
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: 100%;
-        margin-right: 10px;
-        transition: all 0.5s;
-      }
-
-      .icon-1 {
-        @extend %icon;
-
-        background-image: url(../../assets/icons/interface/settings_black_24dp.svg);
-      }
-
-      .icon-2 {
-        @extend %icon;
-
-        background-image: url(./icons/exit_to_app_black_24dp.svg);
-      }
-
       &:hover {
         .profile__link {
           color: $pink;
         }
 
-        .icon-1 {
-          background-image: url(../../assets/icons/interface/settings_pink.svg);
-        }
+        .profile__icon {
+          svg {
+            height: 25px;
+            width: 25px;
 
-        .icon-2 {
-          background-image: url(./icons/exit_pink.svg);
+            path {
+              stroke: $pink;
+            }
+          }
+        }
+      }
+    }
+
+    &__icon {
+      height: 25px;
+      width: 25px;
+      transition: all 0.5s;
+      margin: 0 15px 0 0;
+
+      svg {
+        height: 25px;
+        width: 25px;
+
+        path {
+          stroke: $gray;
         }
       }
     }
 
     &__link {
-      margin-top: 5px;
       text-decoration: none;
       color: $gray;
       margin-right: 0;
