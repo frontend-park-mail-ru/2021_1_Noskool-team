@@ -100,10 +100,7 @@
 
   %button-music {
     width: 25px;
-    height: 23px;
-    background-size: 23px;
-    background-position: center;
-    background-repeat: no-repeat;
+    height: 25px;
     outline: none;
     border: none;
     cursor: pointer;
@@ -129,16 +126,28 @@
   &__add {
     @extend %button-music;
 
-    background-image: url(../../icons/add_black_24dp.svg);
     background-size: 27px;
     margin-right: 0;
 
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+
     &--checked-add {
-      background-image: url(../../icons/add_pink.svg);
+      svg {
+        path {
+          stroke: #ef548e;
+        }
+      }
     }
   }
 
   &__add:hover {
-    background-image: url(../../icons/add_pink.svg);
+    svg {
+      path {
+        stroke: #ef548e;
+      }
+    }
   }
 }

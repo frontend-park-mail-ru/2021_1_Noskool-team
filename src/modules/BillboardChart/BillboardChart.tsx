@@ -7,6 +7,7 @@ import { TRACK_HOST } from 'constants/api';
 import { cn } from 'utils/cn';
 import { favoriteTracksStore } from 'store/favorite-track.store';
 import { getFavoriteTracks } from 'actions/favorite/favorite';
+import { PlusIcon } from 'assets/icons';
 
 import './style.scss';
 
@@ -110,7 +111,9 @@ export const BillboardChart = () => {
                         id={`add-${index}`}
                         class={tracks('add', item?.in_mediateka ? 'checked-add' : '')}
                         onclick={onClickMedia(index, item?.track_id)}
-                    ></button>
+                    >
+                        <PlusIcon />
+                    </button>
                 </div>
             ))}
         </div>
