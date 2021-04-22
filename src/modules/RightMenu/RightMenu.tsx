@@ -41,7 +41,7 @@ export const RightMenu = () => {
         {
             text: 'Главная',
             icon: HomeIcon,
-            isActive: window.location.pathname === LINKS.main,
+            isActive: window.location.pathname === '/',
         },
         {
             text: 'Рекомендации',

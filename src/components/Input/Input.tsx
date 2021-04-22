@@ -1,5 +1,6 @@
 import { JSX } from 'jsx/jsx';
 import { FieldState } from 'types/common';
+import { OkIcon, NotValidIcon } from 'assets/icons';
 
 import './style.scss';
 
@@ -60,7 +61,7 @@ export const Input = ({ validators, placeholder, isPassword = false, input }: In
             />
             <div class={'input-text__error-msg'}>{input.errorMsg}</div>
             <div class={'input-text__placeholder'}>{`${placeholder}`}</div>
-            <div class={input.isValid !== null ? (input.isValid ? 'ok' : 'not-valid') : ''} />
+            <div class={'icon'}>{input.isValid !== null ? input.isValid ? <OkIcon /> : <NotValidIcon /> : <div />}</div>
         </div>
     );
 };

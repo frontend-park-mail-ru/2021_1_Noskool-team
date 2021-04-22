@@ -9,6 +9,7 @@ import { redirectTo } from 'utils/render';
 
 import './style.scss';
 import { ExiteIcon, SettingsIcon } from 'assets/icons';
+import { logoutUser } from 'actions/registration/registration';
 
 const header = cn('header');
 const profile = cn('profile');
@@ -52,7 +53,7 @@ export const Header = () => {
                                 {'Настройки'}
                             </div>
                         </li>
-                        <li class={profile('item')}>
+                        <li class={profile('item')} onclick={logoutUser}>
                             <div class={profile('icon')}>{ExiteIcon()}</div>
                             <div class={profile('link')}>{'Выйти'}</div>
                         </li>

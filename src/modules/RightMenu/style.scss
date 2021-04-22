@@ -71,5 +71,28 @@
         }
       }
     }
+
+    &--checked {
+      .right-menu__text {
+        color: $pink;
+      }
+
+      .right-menu__icon {
+        svg {
+          path {
+            fill: $pink;
+          }
+        }
+      }
+
+      .right-menu__icon--not-fill {
+        svg {
+          path {
+            stroke: $pink;
+            fill: none;
+          }
+        }
+      }
+    }
   }
 }

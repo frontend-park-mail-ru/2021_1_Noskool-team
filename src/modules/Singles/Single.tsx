@@ -42,9 +42,7 @@ let isNeedFetch = true;
 export const Single = () => {
     if (isNeedFetch) {
         isNeedFetch = false;
-        getWeeklyTop().then((res) => {
-            tracksStore.trackList = res.slice(1);
-        });
+        getWeeklyTop();
     }
 
     const SLIDER = 'slider';
@@ -95,12 +93,12 @@ export const Single = () => {
             </div>
             <div class={slider()}>
                 <ul id={SLIDER} class={slider('single-items')}>
-                    {tracksStore.trackList.map((item, index) => (
+                    {tracksStore.trackList?.map((item, index) => (
                         <li class={slider('item')} onclick={onClickTrack(index)}>
                             <img src={TRACK_HOST + item?.picture} class={slider('single-img')} />
                             <div class={slider('name-song')}>{item?.tittle}</div>
                             <div class={slider('singer')}>
-                                {item?.musicians.map((artist) => artist?.name).join(', ')}
+                                {item?.musicians?.map((artist) => artist?.name).join(', ')}
                             </div>
                         </li>
                     ))}

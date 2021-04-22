@@ -19,9 +19,7 @@ let isNeedFetch = true;
 export const DiscoverGenres = () => {
     if (isNeedFetch) {
         isNeedFetch = false;
-        getDiscovers().then((res) => {
-            albumsStore.albums = res;
-        });
+        getDiscovers();
     }
 
     return (

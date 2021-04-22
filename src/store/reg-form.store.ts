@@ -23,26 +23,6 @@ export const regFormStore = proxy<Form>({
         },
         ['onCheckValid']
     ),
-    name: proxy<FieldState>(
-        {
-            value: '',
-            isValid: null,
-            onCheckValid: undefined,
-            isFocuse: false,
-            errorMsg: '',
-        },
-        ['onCheckValid']
-    ),
-    lastName: proxy<FieldState>(
-        {
-            value: '',
-            isValid: null,
-            onCheckValid: undefined,
-            isFocuse: false,
-            errorMsg: '',
-        },
-        ['onCheckValid']
-    ),
     email: proxy<FieldState>(
         {
             value: '',

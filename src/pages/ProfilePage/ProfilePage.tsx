@@ -1,6 +1,5 @@
 import { JSX } from 'jsx/jsx';
 import { changeUserPhoto, getUser, changeUser } from 'actions/user/user';
-// import { Input } from 'components/Input/Input';
 import { ProfileInput } from 'components/ProfileInput/ProfileInput';
 import { emailValidator } from 'utils/form-validators';
 import { profileStore, profileForm } from 'store/profile.store';
@@ -18,20 +17,7 @@ export const ProfilePage = () => {
 
     if (requestsStore.profile) {
         requestsStore.profile = false;
-        getUser()
-            .then((res) => {
-                profileStore.profile = {
-                    ...profileStore.profile,
-                    email: res?.email,
-                    login: res?.login,
-                    photo: res?.avatar,
-                    name: res?.first_name,
-                    lastName: res?.second_name,
-                };
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+        getUser();
     }
 
     const onSubmitChanges = (e: MouseEvent) => {
@@ -72,8 +58,6 @@ export const ProfilePage = () => {
     const onClickLabel = () => {
         (document.getElementById(ID_IMAGE_INPUT) as HTMLInputElement).click();
     };
-
-    console.log(profileStore);
 
     return (
         <div class={page()}>

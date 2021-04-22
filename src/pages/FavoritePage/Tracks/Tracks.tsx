@@ -3,6 +3,7 @@ import { JSX } from 'jsx/jsx';
 import { onClickPlay } from 'modules/AudioLine/AudioLine';
 import { favoriteTracksStore } from 'store/favorite-track.store';
 import { playerStore } from 'store/player.store';
+import { requestsStore } from 'store/requests.store';
 import { cn } from 'utils/cn';
 
 import './style.scss';
@@ -10,6 +11,7 @@ import './style.scss';
 const favoriteTracks = cn('favorite-tracks');
 
 const onClickTrack = (index: number) => () => {
+    console.log(123);
     playerStore.playList = favoriteTracksStore.trackList.map((el, i) => ({
         img: el?.picture,
         index: i,
@@ -33,18 +35,10 @@ const onClickTrack = (index: number) => () => {
     }
 };
 
-let isNeedFetch = true;
-
-export const refreshFavoriteTracks = () => {
-    isNeedFetch = true;
-};
-
 export const Tracks = () => {
-    if (isNeedFetch) {
-        isNeedFetch = false;
-        getFavoriteTracks().then((res) => {
-            favoriteTracksStore.trackList = res;
-        });
+    if (requestsStore.favoriteTracks) {
+        requestsStore.favoriteTracks = false;
+        getFavoriteTracks();
     }
 
     return (

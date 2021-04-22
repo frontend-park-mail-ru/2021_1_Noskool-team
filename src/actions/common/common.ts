@@ -1,6 +1,6 @@
 import { GET_CSRF } from 'constants/api';
 
-export const get = (url: string): Promise<Response> => {
+const getAuth = (url: string): Promise<Response> => {
     return fetch(url, {
         method: 'get',
         credentials: 'include',
@@ -13,7 +13,13 @@ export const get = (url: string): Promise<Response> => {
     });
 };
 
-export const post = <R>(url: string, body: R) => {
+const getNoneAuth = (url: string): Promise<Response> => {
+    return fetch(url, {
+        method: 'get',
+    });
+};
+
+export const postAuth = <R>(url: string, body: R) => {
     return fetch(url, {
         method: 'post',
         credentials: 'include',
@@ -27,16 +33,10 @@ export const post = <R>(url: string, body: R) => {
     });
 };
 
-export const postCategory = (url: string) => {
+export const post = <R>(url: string, body: R) => {
     return fetch(url, {
         method: 'post',
-        credentials: 'include',
-        headers: {
-            'X-Csrf-Token': document.cookie
-                ?.split(';')
-                ?.find((item) => item?.startsWith('csrf'))
-                ?.split('=')[1],
-        },
+        body: JSON.stringify(body),
     });
 };
 
@@ -59,4 +59,58 @@ export const getcsrf = (): Promise<Response> => {
         method: 'get',
         credentials: 'include',
     });
+};
+
+export const getMainPage = async <P>(url: string): Promise<P | undefined> => {
+    let response: Promise<P | undefined>;
+    let resBuff;
+    if (localStorage.getItem('auth') === 'ok') {
+        resBuff = await getAuth(url);
+        if (resBuff.status === 401) {
+            localStorage.clear();
+            resBuff = await getNoneAuth(url + '/notauth');
+            response = resBuff.ok ? resBuff.json() : new Promise(() => {});
+        } else if (resBuff.status === 403) {
+            const csrf = await getcsrf();
+            if (csrf.status === 200) {
+                resBuff = await getAuth(url);
+                response = resBuff.ok ? resBuff.json() : new Promise(() => {});
+            } else {
+                localStorage.clear();
+                resBuff = await getNoneAuth(url + '/notauth');
+                response = resBuff.ok ? resBuff.json() : new Promise(() => {});
+            }
+        } else if (resBuff.ok) {
+            response = resBuff.json();
+        } else {
+            response = new Promise(() => {});
+        }
+    } else {
+        resBuff = await getNoneAuth(url + '/notauth');
+        response = resBuff.ok ? resBuff.json() : new Promise(() => {});
+    }
+    return response;
+};
+
+export const get = async <P>(url: string): Promise<P | undefined> => {
+    let response: Promise<P | undefined>;
+    let resBuff = await getAuth(url);
+    if (resBuff.status === 401) {
+        localStorage.clear();
+        response = resBuff.ok ? resBuff.json() : new Promise(() => {});
+    } else if (resBuff.status === 403) {
+        const csrf = await getcsrf();
+        if (csrf.status === 200) {
+            resBuff = await getAuth(url);
+            response = resBuff.ok ? resBuff.json() : new Promise(() => {});
+        } else {
+            localStorage.clear();
+            response = resBuff.ok ? resBuff.json() : new Promise(() => {});
+        }
+    } else if (resBuff.ok) {
+        response = resBuff.json();
+    } else {
+        response = new Promise(() => {});
+    }
+    return response;
 };

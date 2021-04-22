@@ -1,33 +1,27 @@
 import { LINKS } from 'constants/links';
-import { UserProfile, UserChangeData } from 'types/requests/user';
-import { redirectTo } from 'utils/render';
-import { post, get, postImg, getcsrf } from '../common/common';
+import { profileStore } from 'store/profile.store';
+import { UserProfile, UserChangeData, instanceOfUserProfile } from 'types/requests/user';
+import { redirectTo, render } from 'utils/render';
+import { postImg, getcsrf, postAuth, get } from '../common/common';
 import { PROFILE, CHANGE_PROFILE, CHANGE_USER_PHOTE } from './user.constants';
 
-export const getUser = async (): Promise<UserProfile | undefined> => {
-    let response = await get(PROFILE);
-    if (response.status === 401) {
-        localStorage.clear();
-        redirectTo(LINKS.auth);
-        return new Promise(() => {});
-    } else if (response.status === 403) {
-        const csrf = await getcsrf();
-        if (csrf.status === 200) {
-            response = await get(PROFILE);
-            if (response.status !== 200) {
-                redirectTo(LINKS.auth);
-                return new Promise(() => {});
-            }
-        } else {
-            redirectTo(LINKS.auth);
-            return new Promise(() => {});
-        }
+export const getUser = async () => {
+    const response = await get<UserProfile | {}>(PROFILE);
+    if (instanceOfUserProfile(response)) {
+        profileStore.profile = {
+            ...profileStore.profile,
+            email: response?.email,
+            login: response?.login,
+            photo: response?.avatar,
+            name: response?.first_name,
+            lastName: response?.second_name,
+        };
     }
-    return response.json();
+    render();
 };
 
 export const changeUser = async (body: UserChangeData) => {
-    let response = await post(CHANGE_PROFILE, body);
+    let response = await postAuth(CHANGE_PROFILE, body);
     if (response.status === 401) {
         localStorage.clear();
         redirectTo(LINKS.auth);
@@ -35,7 +29,7 @@ export const changeUser = async (body: UserChangeData) => {
     } else if (response.status === 403) {
         const csrf = await getcsrf();
         if (csrf.status === 200) {
-            response = await get(PROFILE);
+            response = await postAuth(CHANGE_PROFILE, body);
             if (response.status !== 200) {
                 redirectTo(LINKS.auth);
                 return new Promise(() => {});

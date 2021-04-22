@@ -5,11 +5,10 @@ import { onClickPlay } from 'modules/AudioLine/AudioLine';
 import { getBillboardChart, addToFavourites, addToMediateca, deleteFromFavourites } from 'actions/main-page/main-page';
 import { TRACK_HOST } from 'constants/api';
 import { cn } from 'utils/cn';
-import { favoriteTracksStore } from 'store/favorite-track.store';
-import { getFavoriteTracks } from 'actions/favorite/favorite';
 import { PlusIcon, LikeIcon } from 'assets/icons';
 
 import './style.scss';
+import { requestsStore } from 'store/requests.store';
 
 const onClickTrack = (index: number) => () => {
     playerStore.playList = billboardChartStore.trackList.map((el, i) => ({
@@ -38,9 +37,7 @@ const onClickTrack = (index: number) => () => {
 const onClickFavorite = (index: number, id: number) => () => {
     if (!billboardChartStore.trackList[index].in_favorite) {
         addToFavourites(id).then(() => {
-            getFavoriteTracks().then((res) => {
-                favoriteTracksStore.trackList = res;
-            });
+            requestsStore.favoriteTracks = true;
         });
         const buffer = [...billboardChartStore.trackList];
         buffer[index].in_mediateka = true;
@@ -48,9 +45,7 @@ const onClickFavorite = (index: number, id: number) => () => {
         billboardChartStore.trackList = buffer;
     } else {
         deleteFromFavourites(id).then(() => {
-            getFavoriteTracks().then((res) => {
-                favoriteTracksStore.trackList = res;
-            });
+            requestsStore.favoriteTracks = true;
         });
         const buffer = [...billboardChartStore.trackList];
         buffer[index].in_favorite = false;
@@ -80,9 +75,7 @@ let isNeedFetch = true;
 export const BillboardChart = () => {
     if (isNeedFetch) {
         isNeedFetch = false;
-        getBillboardChart().then((res) => {
-            billboardChartStore.trackList = res;
-        });
+        getBillboardChart();
     }
 
     return (

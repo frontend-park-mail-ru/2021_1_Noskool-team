@@ -40,9 +40,7 @@ let isNeedFetch = true;
 export const FeatureOfWeek = () => {
     if (isNeedFetch) {
         isNeedFetch = false;
-        topOne().then((res) => {
-            topTrack.trackList = res;
-        });
+        topOne();
     }
 
     return (

@@ -25,14 +25,10 @@ const checkValid = () => {
     regFormStore.nickname.onCheckValid();
     regFormStore.password.onCheckValid();
     regFormStore.email.onCheckValid();
-    regFormStore.lastName.onCheckValid();
     regFormStore.passwordRepeat.onCheckValid();
-    regFormStore.name.onCheckValid();
     regFormStore.isValid =
         regFormStore.nickname.isValid &&
         regFormStore.email.isValid &&
-        regFormStore.lastName.isValid &&
-        regFormStore.passwordRepeat.isValid &&
         regFormStore.passwordRepeat.isValid &&
         regFormStore.password.isValid;
 };
@@ -49,8 +45,6 @@ const onSubmitForm = (values: MouseEvent) => {
             email: regFormStore.email.value,
             nickname: regFormStore.nickname.value,
             password: regFormStore.password.value,
-            'first_name': regFormStore.name.value,
-            'second_name': regFormStore.lastName.value,
             'favorite_genre': ['pop'],
         })
             .then((res) => {
@@ -103,8 +97,6 @@ export const RegistrationForm = () => {
                     isPassword={true}
                     input={regFormStore.passwordRepeat}
                 />
-                <Input validators={[requaredValidator]} placeholder={'Введите имя'} input={regFormStore.name} />
-                <Input validators={[requaredValidator]} placeholder={'Введите фамилию'} input={regFormStore.lastName} />
                 <div class={formCn('error-msg')}>{regFormStore.errorMsg}</div>
                 <button type='submit'>{'Зарегистрироваться'}</button>
                 <button onclick={onClickAuth}>{'Или войти'}</button>

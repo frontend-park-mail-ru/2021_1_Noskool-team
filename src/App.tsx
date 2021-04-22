@@ -12,8 +12,8 @@ import { RegistrationPage } from 'pages/RegistrationPage/RegistrationPage';
 import { AuthPage } from 'pages/AuthPage/AuthPage';
 import { MainPage } from 'pages/MainPage/MainPage';
 import { ProfilePage } from 'pages/ProfilePage/ProfilePage';
-import { profileStore } from 'store/profile.store';
 import { getUser } from 'actions/user/user';
+import { PromoutePage } from 'pages/PromoutePage';
 import { requestsStore } from 'store/requests.store';
 
 import './app.scss';
@@ -24,63 +24,48 @@ const isPageExistsAuth = (): boolean => {
         path !== LINKS.main &&
         path !== LINKS.profile &&
         !path.startsWith(LINKS.favorite) &&
-        !path.startsWith(LINKS.album)
+        !path.startsWith(LINKS.album) &&
+        path !== LINKS.auth &&
+        path !== LINKS.reg
     );
 };
-
-const isPageExistsNoneAuth = (): boolean => {
-    const path = window.location.pathname;
-    return path !== LINKS.auth && path !== LINKS.reg;
-};
-
-getUser()
-    .then((res) => {
-        profileStore.profile = {
-            ...profileStore.profile,
-            email: res?.email,
-            login: res?.login,
-            photo: res?.avatar,
-        };
-        requestsStore.profile = false;
-    })
-    .catch((error) => {
-        console.log(error);
-    });
 
 const pageWrapper = cn('page-wrapper');
 
 export const App = () => {
     const path = window.location.pathname;
+    const isAuth = localStorage.getItem('auth') === 'ok';
+
+    if (requestsStore.profile) {
+        requestsStore.profile = false;
+        getUser();
+    }
+
     return (
         <div>
-            {localStorage.getItem('auth') ? (
-                <div class={pageWrapper()}>
-                    <div class={pageWrapper('content')}>
-                        <div class={pageWrapper('nav-header')}>
-                            <Header />
-                        </div>
-                        <div class={pageWrapper('nav-bar')}>
-                            <RightMenu />
-                        </div>
-                        <div class={pageWrapper('page')}>
-                            {path === LINKS.main && <MainPage />}
-                            {path === LINKS.profile && <ProfilePage />}
-                            {path.startsWith(LINKS.album) && <AlbumPage />}
-                            {path.startsWith(LINKS.favorite) && <FavoritePage />}
-                            {isPageExistsAuth() && <ErrorPage />}
-                        </div>
-                        <div class={pageWrapper('player')}>
-                            <AudioLine />
-                        </div>
+            <div class={pageWrapper()}>
+                <div class={pageWrapper('content')}>
+                    <div class={pageWrapper('nav-header')}>
+                        <Header />
+                    </div>
+                    <div class={pageWrapper('nav-bar')}>
+                        <RightMenu />
+                    </div>
+                    <div class={pageWrapper('page')}>
+                        {path === LINKS.main && <MainPage />}
+                        {path === LINKS.profile && (isAuth ? <ProfilePage /> : <PromoutePage />)}
+                        {path.startsWith(LINKS.album) && <AlbumPage />}
+                        {path.startsWith(LINKS.favorite) && (isAuth ? <FavoritePage /> : <PromoutePage />)}
+                        {isPageExistsAuth() && <ErrorPage />}
+                        {path === LINKS.auth && <AuthPage />}
+                        {path === LINKS.reg && <RegistrationPage />}
+                    </div>
+                    <div class={pageWrapper('player')}>
+                        <AudioLine />
                     </div>
                 </div>
-            ) : (
-                <div class={''}>
-                    {path === LINKS.auth && <AuthPage />}
-                    {path === LINKS.reg && <RegistrationPage />}
-                    {isPageExistsNoneAuth() && <ErrorPage />}
-                </div>
-            )}
+            </div>
+            <div class={''}></div>
         </div>
     );
 };

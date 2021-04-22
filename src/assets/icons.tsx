@@ -188,3 +188,15 @@ export const PauseIcon = () => (
         />
     </svg>
 );
+
+export const OkIcon = () => (
+    <svg width='25' height='25' viewBox='0 0 25 25' fill='none' xmlns='http://www.w3.org/2000/svg'>
+        <path d='M1.66669 11.6667L9.16669 19.1667L23.3334 5' stroke='#61B15A' stroke-linecap='square' />
+    </svg>
+);
+
+export const NotValidIcon = () => (
+    <svg width='25' height='25' viewBox='0 0 25 25' fill='none' xmlns='http://www.w3.org/2000/svg'>
+        <path d='M2.5 2.5L22.5 22.5M2.5 22.5L22.5 2.5' stroke='#FD0101' />
+    </svg>
+);

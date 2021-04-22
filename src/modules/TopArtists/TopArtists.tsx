@@ -13,9 +13,7 @@ let isNeedFetch = true;
 export const TopArtists = () => {
     if (isNeedFetch) {
         isNeedFetch = false;
-        getTopArtists().then((res) => {
-            artistsStore.artists = res;
-        });
+        getTopArtists();
     }
 
     return (
