@@ -22,6 +22,7 @@ export interface FavoriteTarck {
     genres: [];
     musicians: Artist[];
     album: Album[];
+    duration: string;
 }
 
 export interface FavoriteAlbum {
