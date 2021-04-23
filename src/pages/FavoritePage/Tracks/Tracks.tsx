@@ -4,6 +4,7 @@ import { onClickPlay } from 'modules/AudioLine/AudioLine';
 import { favoriteTracksStore } from 'store/favorite-track.store';
 import { playerStore } from 'store/player.store';
 import { requestsStore } from 'store/requests.store';
+import { TRACK_HOST } from 'constants/api';
 import { cn } from 'utils/cn';
 
 import './style.scss';
@@ -65,12 +66,15 @@ export const Tracks = () => {
                     {favoriteTracksStore.trackList.length !== 0 ? (
                         favoriteTracksStore.trackList.map((el, i) => (
                             <div class={favoriteTracks('row', 'track')} onclick={onClickTrack(i)}>
-                                <div class={favoriteTracks('cell')}>{`#${i + 1}`}</div>
-                                <div class={favoriteTracks('cell')}>{el?.tittle || '???'}</div>
+                                <div class={favoriteTracks('cell')}>{String(i + 1).padStart(2, '0')}</div>
+                                <div class={favoriteTracks('cell')}>
+                                    <img src={TRACK_HOST + el.picture} class={favoriteTracks('photo')} />
+                                    <div class={favoriteTracks('name')}>{el?.tittle || '???'}</div>
+                                </div>
                                 <div class={favoriteTracks('cell')}>
                                     {el?.musicians?.map((el) => el?.name).join(', ') || '???'}
                                 </div>
-                                <div class={favoriteTracks('cell')}>{'3:32'}</div>
+                                <div class={favoriteTracks('cell')}>{el.duration}</div>
                                 <div class={favoriteTracks('cell')}>
                                     <div />
                                 </div>

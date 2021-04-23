@@ -9,4 +9,7 @@ export const LINKS = {
     favoriteAlbums: '/favorite/albums',
     favoriteArtists: '/favorite/artists',
     favoritePodcasts: '/favorite/podcasts',
+    weeklyTop: '/weekly',
+    artistsTop: '/artists',
+    billboard: '/billboard',
 };
