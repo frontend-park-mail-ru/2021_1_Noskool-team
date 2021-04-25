@@ -11,13 +11,15 @@ import './style.scss';
 const favoriteTracks = cn('favorite-tracks');
 
 const onClickTrack = (index: number) => () => {
-    console.log(123);
     playerStore.playList = favoriteTracksStore.trackList.map((el, i) => ({
         img: el?.picture,
         index: i,
         link: el?.audio,
         name: el?.tittle,
         artist: el?.musicians?.map((el) => el?.name).join(', '),
+        isFavorite: el?.in_favorite,
+        isMediateca: el?.in_mediateka,
+        trackId: el?.track_id,
     }));
     playerStore.currentTrack = {
         img: favoriteTracksStore.trackList[index]?.picture,
@@ -25,6 +27,9 @@ const onClickTrack = (index: number) => () => {
         link: favoriteTracksStore.trackList[index]?.audio,
         name: favoriteTracksStore.trackList[index]?.tittle,
         artist: favoriteTracksStore.trackList[index]?.musicians?.map((el) => el?.name).join(', '),
+        isFavorite: favoriteTracksStore.trackList[index]?.in_favorite,
+        isMediateca: favoriteTracksStore.trackList[index]?.in_mediateka,
+        trackId: favoriteTracksStore.trackList[index]?.track_id,
     };
     playerStore.currentTime = 0;
     if (!playerStore.isPlay) {

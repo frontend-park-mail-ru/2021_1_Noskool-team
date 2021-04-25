@@ -5,6 +5,7 @@ import { onClickPlay } from 'modules/AudioLine/AudioLine';
 import { topOne } from 'actions/main-page/main-page';
 import { TRACK_HOST } from 'constants/api';
 import { cn } from 'utils/cn';
+import { PlayerFrom } from 'types/store/player-store';
 
 import './style.scss';
 
@@ -15,6 +16,9 @@ const onClickTrack = (index: number) => () => {
         link: topTrack.trackList[index]?.audio,
         name: topTrack.trackList[index]?.tittle,
         artist: topTrack.trackList[index]?.musicians?.map((el) => el?.name).join(', '),
+        isFavorite: topTrack.trackList[index]?.in_favorite,
+        isMediateca: topTrack.trackList[index]?.in_mediateka,
+        trackId: topTrack.trackList[index]?.track_id,
     };
     playerStore.playList = topTrack.trackList.map((el, i) => ({
         img: el?.picture,
@@ -22,9 +26,12 @@ const onClickTrack = (index: number) => () => {
         link: el?.audio,
         name: el?.tittle,
         artist: el?.musicians.map((el) => el?.name).join(', '),
+        isFavorite: el?.in_favorite,
+        isMediateca: el?.in_mediateka,
+        trackId: el?.track_id,
     }));
     playerStore.currentTime = 0;
-    console.log(playerStore);
+    playerStore.from = PlayerFrom.FeatureOfWeek;
     if (!playerStore.isPlay) {
         onClickPlay();
     } else {

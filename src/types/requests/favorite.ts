@@ -13,7 +13,7 @@ export interface Artist {
 }
 
 export interface FavoriteTarck {
-    'track_id': string;
+    'track_id': number;
     tittle: string;
     text: string;
     audio: string;
@@ -22,6 +22,9 @@ export interface FavoriteTarck {
     genres: [];
     musicians: Artist[];
     album: Album[];
+    'in_mediateka': boolean;
+    'in_favorite': boolean;
+    duration: string;
 }
 
 export interface FavoriteAlbum {

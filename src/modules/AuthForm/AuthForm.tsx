@@ -4,7 +4,6 @@ import { requaredValidator } from 'utils/form-validators';
 import { authUser } from 'actions/registration/registration';
 import { redirectTo } from 'utils/render';
 import { LINKS } from 'constants/links';
-import { ErrorFetch } from 'types/common';
 import { cn } from 'utils/cn';
 import { isMobile } from 'utils/isMobile';
 import { authFormStore } from 'store/auth-form.store';
@@ -51,9 +50,7 @@ const onSubmitForm = (values: MouseEvent) => {
                 }
             })
             .catch((error) => {
-                error.json().then((res: ErrorFetch) => {
-                    onSetFormError(res.error);
-                });
+                onSetFormError(error);
             });
     }
 };
