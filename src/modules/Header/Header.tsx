@@ -6,10 +6,11 @@ import { cn } from 'utils/cn';
 import { Link } from 'components/Link/Link';
 import { LINKS } from 'constants/links';
 import { redirectTo } from 'utils/render';
+import { ExiteIcon, LogInIcon, SettingsIcon } from 'assets/icons';
+import { logoutUser } from 'actions/registration/registration';
 
 import './style.scss';
-import { ExiteIcon, SettingsIcon } from 'assets/icons';
-import { logoutUser } from 'actions/registration/registration';
+import { isMobile } from 'utils/isMobile';
 
 const header = cn('header');
 const profile = cn('profile');
@@ -23,6 +24,25 @@ export const Header = () => {
         redirectTo(LINKS.profile);
     };
 
+    const toLogin = () => {
+        redirectTo(LINKS.auth);
+    };
+
+    const isAuth = Boolean(localStorage.getItem('auth'));
+
+    if (isMobile()) {
+        return (
+            <div class={header('', 'mob')}>
+                <form class={header('search-form')}>
+                    <input type='search' value='' placeholder='Search' class={header('search-input')} />
+                    <button type='submit' class={header('search-button')}>
+                        <div class={header('search-icon')} />
+                    </button>
+                </form>
+            </div>
+        );
+    }
+
     return (
         <div class={header()}>
             <div class={header('left')}>
@@ -35,31 +55,37 @@ export const Header = () => {
                     </button>
                 </form>
             </div>
-            <button class={profile()} onclick={toggle}>
-                <img src={HOST + profileStore.profile.photo} class={profile('image')} />
-                <div class={profile('menu', headerStore.isExpand ? 'expand' : '')}>
-                    <div class={profile('data')}>
-                        <img src={HOST + profileStore.profile.photo} class={profile('photo')} />
-                        <div class={profile('text')}>
-                            <div class={profile('nickname')}>{profileStore.profile.login}</div>
-                            <div class={profile('email')}>{profileStore.profile.email}</div>
-                        </div>
-                    </div>
-                    <div class={profile('line')}></div>
-                    <ul class={profile('items-user')}>
-                        <li class={profile('item')}>
-                            <div class={profile('icon')}>{SettingsIcon()}</div>
-                            <div class={profile('link')} onclick={toSettings}>
-                                {'Настройки'}
+            {isAuth ? (
+                <button class={profile()} onclick={toggle}>
+                    <img src={HOST + profileStore.profile.photo} class={profile('image')} />
+                    <div class={profile('menu', headerStore.isExpand ? 'expand' : '')}>
+                        <div class={profile('data')}>
+                            <img src={HOST + profileStore.profile.photo} class={profile('photo')} />
+                            <div class={profile('text')}>
+                                <div class={profile('nickname')}>{profileStore.profile.login}</div>
+                                <div class={profile('email')}>{profileStore.profile.email}</div>
                             </div>
-                        </li>
-                        <li class={profile('item')} onclick={logoutUser}>
-                            <div class={profile('icon')}>{ExiteIcon()}</div>
-                            <div class={profile('link')}>{'Выйти'}</div>
-                        </li>
-                    </ul>
+                        </div>
+                        <div class={profile('line')}></div>
+                        <ul class={profile('items-user')}>
+                            <li class={profile('item')}>
+                                <div class={profile('icon')}>{SettingsIcon()}</div>
+                                <div class={profile('link')} onclick={toSettings}>
+                                    {'Настройки'}
+                                </div>
+                            </li>
+                            <li class={profile('item')} onclick={logoutUser}>
+                                <div class={profile('icon')}>{ExiteIcon()}</div>
+                                <div class={profile('link')}>{'Выйти'}</div>
+                            </li>
+                        </ul>
+                    </div>
+                </button>
+            ) : (
+                <div class={profile('login')} onclick={toLogin}>
+                    <LogInIcon />
                 </div>
-            </button>
+            )}
         </div>
     );
 };

@@ -1,5 +1,5 @@
 import { proxy } from 'jsx/store';
-import { PlayerStore, CurrentTrack } from 'types/store/player-store';
+import { PlayerStore, CurrentTrack, PlayerFrom } from 'types/store/player-store';
 
 export const playerStore = proxy<PlayerStore>({
     currentTrack: proxy<CurrentTrack>({
@@ -8,6 +8,9 @@ export const playerStore = proxy<PlayerStore>({
         img: '/api/v1/data/img/tracks/monetohka.webp',
         name: 'Каждый раз',
         artist: 'Монеточка',
+        trackId: 1,
+        isFavorite: false,
+        isMediateca: false,
     }),
     isPlay: false,
     volume: 2,
@@ -20,6 +23,10 @@ export const playerStore = proxy<PlayerStore>({
             name: 'Каждый раз',
             artist: 'Монеточка',
             index: 0,
+            trackId: 1,
+            isFavorite: false,
+            isMediateca: false,
         },
     ],
+    from: PlayerFrom.BilboardCharts,
 });

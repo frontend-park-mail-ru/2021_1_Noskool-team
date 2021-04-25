@@ -108,7 +108,7 @@ export const get = async <P>(url: string): Promise<P | undefined> => {
             response = resBuff.ok ? resBuff.json() : new Promise(() => {});
         }
     } else if (resBuff.ok) {
-        response = resBuff.json();
+        response = resBuff?.json();
     } else {
         response = new Promise(() => {});
     }

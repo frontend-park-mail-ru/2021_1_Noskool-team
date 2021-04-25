@@ -25,6 +25,31 @@
   }
 }
 
+@mixin btn-mob {
+  cursor: pointer;
+  width: 25px;
+  height: 25px;
+  margin: 0 5px;
+
+  &:hover {
+    svg {
+      path {
+        fill: $pink;
+      }
+    }
+  }
+
+  svg {
+    width: 25px;
+    height: 25px;
+
+    path {
+      transition: all 0.3s;
+      fill: $gray;
+    }
+  }
+}
+
 .player {
   width: 100%;
   height: 100%;
@@ -66,6 +91,78 @@
       height: 55px;
       width: 55px;
       margin-right: 15px;
+    }
+  }
+
+  &__like-btns {
+    display: flex;
+    align-items: center;
+    height: 100%;
+  }
+
+  &__like {
+    cursor: pointer;
+    width: 25px;
+    height: 25px;
+    margin: 0 10px;
+
+    svg {
+      width: 25px;
+      height: 25px;
+
+      path {
+        transition: all 0.3s;
+        fill: $gray;
+      }
+    }
+
+    &--checked {
+      svg {
+        path {
+          fill: $pink;
+        }
+      }
+    }
+
+    &:hover {
+      svg {
+        path {
+          fill: $pink;
+        }
+      }
+    }
+  }
+
+  &__add {
+    cursor: pointer;
+    width: 25px;
+    height: 25px;
+    margin: 0 10px;
+
+    svg {
+      width: 25px;
+      height: 25px;
+
+      path {
+        transition: all 0.3s;
+        stroke: $gray;
+      }
+    }
+
+    &--checked {
+      svg {
+        path {
+          stroke: $pink;
+        }
+      }
+    }
+
+    &:hover {
+      svg {
+        path {
+          stroke: $pink;
+        }
+      }
     }
   }
 
@@ -123,5 +220,75 @@
 
   &__next-btn {
     @include btn;
+  }
+}
+
+.player--mob {
+  justify-content: space-between;
+
+  .player {
+    &__title {
+      img {
+        height: 40px;
+        width: 40px;
+      }
+    }
+
+    &__like {
+      width: 25px;
+      height: 25px;
+      margin: 0 5px;
+
+      svg {
+        width: 25px;
+        height: 25px;
+      }
+
+      &:hover {
+        svg {
+          path {
+            fill: $gray;
+          }
+        }
+      }
+    }
+
+    &__add {
+      width: 25px;
+      height: 25px;
+      margin: 0 5px;
+
+      svg {
+        width: 25px;
+        height: 25px;
+      }
+
+      &:hover {
+        svg {
+          path {
+            stroke: $gray;
+          }
+        }
+      }
+    }
+
+    &__play-btn {
+      @include btn-mob;
+
+      &--pause {
+        &:hover {
+          svg {
+            path {
+              stroke: $gray;
+            }
+          }
+        }
+
+        svg {
+          width: 25px;
+          height: 25px;
+        }
+      }
+    }
   }
 }

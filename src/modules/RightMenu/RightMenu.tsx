@@ -11,29 +11,49 @@ import {
     TargetIcon,
     DiagramIcon,
     SettingsIcon,
+    YetMobIcon,
+    CrossIcon,
 } from 'assets/icons';
 import { cn } from 'utils/cn';
 
 import './style.scss';
+import { isMobile } from 'utils/isMobile';
+import { rightMenuStore } from 'store/right-menu.store';
 
 const rightMenuCn = cn('right-menu');
 
-const chooseItem = (index: number) => () => {
+const chooseItem = (index: number, isMobile: boolean) => () => {
     let link = '';
-    switch (index) {
-        case 0:
-            link = LINKS.main;
-            break;
-        case 5:
-            link = LINKS.favoriteTracks;
-            break;
-        case 7:
-            link = LINKS.profile;
-            break;
+    if (isMobile) {
+        switch (index) {
+            case 0:
+                link = LINKS.main;
+                break;
+            case 3:
+                link = LINKS.favoriteTracks;
+                break;
+        }
+    } else {
+        switch (index) {
+            case 0:
+                link = LINKS.main;
+                break;
+            case 5:
+                link = LINKS.favoriteTracks;
+                break;
+            case 7:
+                link = LINKS.profile;
+                break;
+        }
     }
+    rightMenuStore.isExpand = false;
     if (link !== '') {
         redirectTo(link);
     }
+};
+
+const toggleExpand = () => {
+    rightMenuStore.isExpand = !rightMenuStore.isExpand;
 };
 
 export const RightMenu = () => {
@@ -85,18 +105,79 @@ export const RightMenu = () => {
         },
     ];
 
+    const rightMenuMob: RightMenuStore[] = [
+        {
+            text: 'Главная',
+            icon: HomeIcon,
+            isActive: window.location.pathname === '/',
+        },
+        {
+            text: 'Подкасты',
+            icon: MicroPhone,
+            isActive: false,
+            className: 'not-fill',
+        },
+        {
+            text: 'Радио',
+            icon: HeadPhonesIcon,
+            isActive: false,
+            className: 'not-fill',
+        },
+        {
+            text: 'Избранное',
+            icon: LikeInRoundIcon,
+            isActive: window.location.pathname.startsWith(LINKS.favorite),
+            className: 'not-fill',
+        },
+        {
+            text: 'Ещё',
+            icon: YetMobIcon,
+            isActive: false,
+            className: 'not-fill',
+        },
+    ];
+
     return (
-        <ul class={rightMenuCn()}>
-            {rightMenu.map((item, index) => (
+        <ul class={rightMenuCn('', isMobile() ? 'mob' : '')}>
+            {(isMobile() ? rightMenuMob : rightMenu).map((item, index) => (
                 <li
-                    key={index}
-                    class={rightMenuCn('item', item?.isActive ? 'checked' : '')}
-                    onclick={chooseItem(index)}
+                    class={rightMenuCn(
+                        'item',
+                        (item?.isActive ? 'checked' : '') + (rightMenuStore.isExpand ? 'expand' : '')
+                    )}
+                    onclick={isMobile() && index === 4 ? toggleExpand : chooseItem(index, isMobile())}
                 >
                     <div class={rightMenuCn('icon', item?.className)}>{item?.icon()}</div>
                     <div class={rightMenuCn('text')}>{item.text}</div>
                 </li>
             ))}
+            {isMobile() && (
+                <div class={rightMenuCn('mob-menu', rightMenuStore.isExpand ? 'expand' : '')}>
+                    {rightMenu.map((item, index) => (
+                        <li
+                            class={rightMenuCn('item-mob-menu', item?.isActive ? 'checked' : '')}
+                            onclick={chooseItem(index, false)}
+                        >
+                            <div class={rightMenuCn('icon-mob-menu', item?.className)}>{item?.icon()}</div>
+                            <div class={rightMenuCn('text-mob-menu')}>{item.text}</div>
+                        </li>
+                    ))}
+                </div>
+            )}
+            {isMobile() && (
+                <div
+                    class={rightMenuCn('undeground', rightMenuStore.isExpand ? 'expand' : '')}
+                    onclick={toggleExpand}
+                />
+            )}
+            {isMobile() && (
+                <div class={rightMenuCn('new-menu', rightMenuStore.isExpand ? 'expand' : '')}>
+                    <li class={rightMenuCn('item-new')} onclick={toggleExpand}>
+                        <div class={rightMenuCn('cross-icon')}>{CrossIcon()}</div>
+                        <div class={rightMenuCn('text-new')}>{'Закрыть'}</div>
+                    </li>
+                </div>
+            )}
         </ul>
     );
 };

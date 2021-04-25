@@ -2,13 +2,12 @@ import { JSX } from 'jsx/jsx';
 import { billboardChartStore } from 'store/main-page.store';
 import { playerStore } from 'store/player.store';
 import { onClickPlay } from 'modules/AudioLine/AudioLine';
-import { getBillboardChart, addToFavourites, addToMediateca, deleteFromFavourites } from 'actions/main-page/main-page';
+import { getBillboardChart } from 'actions/main-page/main-page';
 import { TRACK_HOST } from 'constants/api';
 import { cn } from 'utils/cn';
-import { PlusIcon, LikeIcon } from 'assets/icons';
+import { PlayerFrom } from 'types/store/player-store';
 
 import './style.scss';
-import { requestsStore } from 'store/requests.store';
 
 const onClickTrack = (index: number) => () => {
     playerStore.playList = billboardChartStore.trackList.map((el, i) => ({
@@ -17,6 +16,9 @@ const onClickTrack = (index: number) => () => {
         link: el?.audio,
         name: el?.tittle,
         artist: el?.musicians?.map((el) => el?.name).join(', '),
+        isFavorite: el?.in_favorite,
+        isMediateca: el?.in_mediateka,
+        trackId: el?.track_id,
     }));
     playerStore.currentTrack = {
         img: billboardChartStore.trackList[index]?.picture,
@@ -24,47 +26,17 @@ const onClickTrack = (index: number) => () => {
         link: billboardChartStore.trackList[index]?.audio,
         name: billboardChartStore.trackList[index]?.tittle,
         artist: billboardChartStore.trackList[index]?.musicians?.map((el) => el?.name).join(', '),
+        isFavorite: billboardChartStore.trackList[index].in_favorite,
+        isMediateca: billboardChartStore.trackList[index].in_mediateka,
+        trackId: billboardChartStore.trackList[index].track_id,
     };
     playerStore.currentTime = 0;
+    playerStore.from = PlayerFrom.BilboardCharts;
     if (!playerStore.isPlay) {
         onClickPlay();
     } else {
         onClickPlay();
         onClickPlay();
-    }
-};
-
-const onClickFavorite = (index: number, id: number) => () => {
-    if (!billboardChartStore.trackList[index].in_favorite) {
-        addToFavourites(id).then(() => {
-            requestsStore.favoriteTracks = true;
-        });
-        const buffer = [...billboardChartStore.trackList];
-        buffer[index].in_mediateka = true;
-        buffer[index].in_favorite = true;
-        billboardChartStore.trackList = buffer;
-    } else {
-        deleteFromFavourites(id).then(() => {
-            requestsStore.favoriteTracks = true;
-        });
-        const buffer = [...billboardChartStore.trackList];
-        buffer[index].in_favorite = false;
-        billboardChartStore.trackList = buffer;
-    }
-};
-
-const onClickMedia = (index: number, id: number) => () => {
-    if (!billboardChartStore.trackList[index].in_mediateka) {
-        addToMediateca(id);
-        const buffer = [...billboardChartStore.trackList];
-        buffer[index].in_mediateka = true;
-        billboardChartStore.trackList = buffer;
-    } else {
-        deleteFromFavourites(id);
-        const buffer = [...billboardChartStore.trackList];
-        buffer[index].in_mediateka = false;
-        buffer[index].in_favorite = false;
-        billboardChartStore.trackList = buffer;
     }
 };
 
@@ -95,18 +67,6 @@ export const BillboardChart = () => {
                         </div>
                     </div>
                     <div class={tracks('time')}>{item?.duration}</div>
-                    <div
-                        class={tracks('like', item?.in_favorite ? 'checked' : '')}
-                        onclick={onClickFavorite(index, item?.track_id)}
-                    >
-                        <LikeIcon />
-                    </div>
-                    <div
-                        class={tracks('add', item?.in_mediateka ? 'checked' : '')}
-                        onclick={onClickMedia(index, item?.track_id)}
-                    >
-                        <PlusIcon />
-                    </div>
                 </div>
             ))}
         </div>

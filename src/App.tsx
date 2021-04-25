@@ -17,6 +17,8 @@ import { PromoutePage } from 'pages/PromoutePage';
 import { requestsStore } from 'store/requests.store';
 
 import './app.scss';
+import { isMobile } from 'utils/isMobile';
+import { rightMenuStore } from 'store/right-menu.store';
 
 const isPageExistsAuth = (): boolean => {
     const path = window.location.pathname;
@@ -42,15 +44,15 @@ export const App = () => {
     }
 
     return (
-        <div>
-            <div class={pageWrapper()}>
-                <div class={pageWrapper('content')}>
-                    <div class={pageWrapper('nav-header')}>
-                        <Header />
-                    </div>
-                    <div class={pageWrapper('nav-bar')}>
-                        <RightMenu />
-                    </div>
+        <div class={pageWrapper('', isMobile() ? 'mob' : '')}>
+            <div class={pageWrapper('content')}>
+                <div class={pageWrapper('nav-header', rightMenuStore.isExpand ? 'expand' : '')}>
+                    <Header />
+                </div>
+                <div class={pageWrapper('nav-bar')}>
+                    <RightMenu />
+                </div>
+                {!isMobile() ? (
                     <div class={pageWrapper('page')}>
                         {path === LINKS.main && <MainPage />}
                         {path === LINKS.profile && (isAuth ? <ProfilePage /> : <PromoutePage />)}
@@ -60,12 +62,13 @@ export const App = () => {
                         {path === LINKS.auth && <AuthPage />}
                         {path === LINKS.reg && <RegistrationPage />}
                     </div>
-                    <div class={pageWrapper('player')}>
-                        <AudioLine />
-                    </div>
+                ) : (
+                    <div />
+                )}
+                <div class={pageWrapper('player')}>
+                    <AudioLine />
                 </div>
             </div>
-            <div class={''}></div>
         </div>
     );
 };

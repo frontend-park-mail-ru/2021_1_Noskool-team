@@ -54,7 +54,7 @@ export const createDOM = (element: VNode | string): Element | Text => {
         return document.createTextNode(element);
     }
 
-    if (typeof element === undefined) {
+    if (element === null || element === undefined) {
         return document.createTextNode('');
     }
 
@@ -116,20 +116,19 @@ const patchProps = (node: Element, props: Props, nextProps: Props) => {
     const mergedProps = { ...props, ...nextProps };
 
     Object.keys(mergedProps).forEach((key: string) => {
-        if (props[key] !== nextProps[key]) {
-            if (!nextProps[key]) {
-                if (key.startsWith('on')) {
-                    node.removeEventListener(String(key.startsWith('on')), props[key]);
-                } else {
-                    node.removeAttribute(key);
+        if (props !== null && nextProps !== null) {
+            if (props[key] !== nextProps[key]) {
+                if (!nextProps[key]) {
+                    if (key.startsWith('on')) {
+                        node.removeEventListener(String(key.startsWith('on')), props[key]);
+                    } else {
+                        node.removeAttribute(key);
+                    }
+                    return;
                 }
-                return;
-            }
-            if (key.startsWith('on')) {
-                // node.removeEventListener(String(key.startsWith('on')), props[key]);
-                // node.addEventListener(key.substr(2), props[key]);
-            } else {
-                node.setAttribute(key, nextProps[key]);
+                if (!key.startsWith('on')) {
+                    node.setAttribute(key, nextProps[key]);
+                }
             }
         }
     });

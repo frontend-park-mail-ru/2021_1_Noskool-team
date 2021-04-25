@@ -7,6 +7,7 @@ import { getWeeklyTop } from 'actions/main-page/main-page';
 import { TRACK_HOST } from 'constants/api';
 import { cn } from 'utils/cn';
 import { LeftChevronIcon, RightChevronIcon } from 'assets/icons';
+import { PlayerFrom } from 'types/store/player-store';
 
 import './style.scss';
 
@@ -17,6 +18,9 @@ const onClickTrack = (index: number) => () => {
         link: el?.audio,
         name: el?.tittle,
         artist: el?.musicians?.map((el) => el?.name).join(', '),
+        isFavorite: el?.in_favorite,
+        isMediateca: el?.in_mediateka,
+        trackId: el?.track_id,
     }));
     playerStore.currentTrack = {
         img: tracksStore.trackList[index]?.picture,
@@ -24,8 +28,12 @@ const onClickTrack = (index: number) => () => {
         link: tracksStore.trackList[index]?.audio,
         name: tracksStore.trackList[index]?.tittle,
         artist: tracksStore.trackList[index]?.musicians?.map((el) => el?.name).join(', '),
+        isFavorite: tracksStore.trackList[index]?.in_favorite,
+        isMediateca: tracksStore.trackList[index]?.in_mediateka,
+        trackId: tracksStore.trackList[index]?.track_id,
     };
     playerStore.currentTime = 0;
+    playerStore.from = PlayerFrom.Single;
     if (!playerStore.isPlay) {
         onClickPlay();
     } else {
