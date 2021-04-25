@@ -7,7 +7,7 @@ import { Header } from 'modules/Header';
 import { LINKS } from 'constants/links';
 
 import { FavoritePage } from 'pages/FavoritePage/FavoritePage';
-import { ErrorPage } from 'pages/ErrorPage/ErrorPage';
+import { ErrorPage } from 'pages/ErrorPage';
 import { RegistrationPage } from 'pages/RegistrationPage/RegistrationPage';
 import { AuthPage } from 'pages/AuthPage/AuthPage';
 import { MainPage } from 'pages/MainPage/MainPage';
