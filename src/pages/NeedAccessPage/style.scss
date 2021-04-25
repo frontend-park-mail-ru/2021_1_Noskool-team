@@ -1,0 +1,32 @@
+@import '../../style.scss';
+
+.not-access-page {
+  width: 100%;
+  height: calc(100vh - 325px);
+
+  .photo {
+    margin: auto;
+    width: 200px;
+    height: 200px;
+    margin-top: 250px;
+    background-image: url(./img/imgonline-com-ua-Transparent-backgr-TgU0hb6yC4mQZBS.png);
+    background-position: center;
+    background-size: 100%;
+    background-repeat: no-repeat;
+  }
+
+  .text {
+    margin: auto;
+    width: 450px;
+    font-size: 21px;
+    text-align: center;
+    margin-top: 20px;
+    color: #8a8c99;
+    font-weight: 600;
+
+    .login {
+      color: $pink;
+      cursor: pointer;
+    }
+  }
+}
