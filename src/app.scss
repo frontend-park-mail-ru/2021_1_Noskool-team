@@ -17,6 +17,7 @@
     left: 200px;
     width: 1000px;
     background: $page-background;
+    height: calc(100vh - 75px);
   }
 
   &__player {
