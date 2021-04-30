@@ -1,0 +1,79 @@
+@import '../../../styles/colors.scss';
+
+.top-tracks {
+  background-color: $white;
+  border-radius: 50px 0 0 50px;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 30px;
+
+  &__title {
+    font-family: 'Comfortaa', cursive;
+    font-size: 30px;
+    line-height: 33px;
+    margin-bottom: 30px;
+  }
+
+  &__content {
+    font-family: 'Comfortaa', cursive;
+    color: #0094b6;
+    font-size: 16px;
+    line-height: 16px;
+    font-weight: lighter;
+  }
+
+  &__not-found {
+    text-align: center;
+    padding: 50px;
+    font-size: 20px;
+  }
+
+  &__row {
+    width: 100%;
+    display: flex;
+    align-items: center;
+
+    &--header {
+      border-bottom: 1px solid $borders;
+    }
+
+    &--track {
+      cursor: pointer;
+      transition: all 0.3s;
+
+      &:hover {
+        background-color: $cyan-light;
+        color: $white;
+      }
+    }
+  }
+
+  &__cell {
+    padding: 10px;
+    height: 36px;
+    box-sizing: border-box;
+    white-space: pre;
+    text-overflow: ellipsis;
+    overflow: hidden;
+
+    &:nth-child(1) {
+      border-right: 1px solid $borders;
+      width: 50px;
+    }
+
+    &:nth-child(2) {
+      width: 270px;
+      border-right: 1px solid $borders;
+    }
+
+    &:nth-child(3) {
+      width: 220px;
+      border-right: 1px solid $borders;
+    }
+
+    &:nth-child(4) {
+      width: 70px;
+      border-right: 1px solid $borders;
+    }
+  }
+}

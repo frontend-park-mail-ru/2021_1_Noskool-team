@@ -5,4 +5,8 @@ export const requestsStore = proxy<RequestsStore>({
     profile: true,
     favoriteTracks: true,
     favoriteAlbums: true,
+    getBillboardChart: true,
+    getTopArtists: true,
+    getTopTracks: true,
+    getTopAlbums: true,
 });
