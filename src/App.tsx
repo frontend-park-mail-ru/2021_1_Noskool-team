@@ -16,10 +16,13 @@ import { getUser } from 'actions/user/user';
 import { PromoutePage } from 'pages/PromoutePage';
 import { requestsStore } from 'store/requests.store';
 import { Artists } from 'pages/TopArtists';
+<<<<<<< HEAD
 import { MediatekaPage } from 'pages/Mediateka';
 import { Playlists } from 'pages/Playlists';
 import { CreatePlaylist } from 'pages/Playlists/CreatePlaylist';
 import { Albums } from 'pages/TopAlbums/TopAlbums';
+=======
+>>>>>>> artist page
 
 import './app.scss';
 import { isMobile } from 'utils/isMobile';
@@ -34,11 +37,15 @@ const isPageExistsAuth = (): boolean => {
         !path.startsWith(LINKS.album) &&
         path !== LINKS.auth &&
         path !== LINKS.reg &&
+<<<<<<< HEAD
         path !== LINKS.topArtists &&
         !path.startsWith(LINKS.mediateka) &&
         !path.startsWith(LINKS.playlist) &&
         path !== LINKS.createPlaylist &&
         path !== LINKS.topAlbums
+=======
+        path !== LINKS.topArtists
+>>>>>>> artist page
     );
 };
 
@@ -72,10 +79,13 @@ export const App = () => {
                         {path === LINKS.auth && <AuthPage />}
                         {path === LINKS.reg && <RegistrationPage />}
                         {path === LINKS.topArtists && <Artists />}
+<<<<<<< HEAD
                         {path.startsWith(LINKS.mediateka) && (isAuth ? <MediatekaPage /> : <PromoutePage />)}
                         {path.startsWith(LINKS.playlist) && (isAuth ? <Playlists /> : <PromoutePage />)}
                         {path === LINKS.createPlaylist && <CreatePlaylist />}
                         {path === LINKS.topAlbums && <Albums />}
+=======
+>>>>>>> artist page
                     </div>
                 ) : (
                     <div />

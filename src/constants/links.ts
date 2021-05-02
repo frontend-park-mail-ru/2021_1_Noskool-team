@@ -14,6 +14,7 @@ export const LINKS = {
     artistsTop: '/artists',
     billboard: '/billboard',
     topArtists: '/artists',
+<<<<<<< HEAD
     topAlbums: '/albums',
 =======
     topArtists: '/top/artists',
@@ -28,4 +29,6 @@ export const LINKS = {
     billboard: '/billboard',
     playlist: '/playlist',
     createPlaylist: '/create',
+=======
+>>>>>>> artist page
 };
