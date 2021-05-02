@@ -15,6 +15,7 @@ import { ProfilePage } from 'pages/ProfilePage/ProfilePage';
 import { getUser } from 'actions/user/user';
 import { PromoutePage } from 'pages/PromoutePage';
 import { requestsStore } from 'store/requests.store';
+import { Artists } from 'pages/TopArtists';
 
 import './app.scss';
 import { isMobile } from 'utils/isMobile';
@@ -28,7 +29,8 @@ const isPageExistsAuth = (): boolean => {
         !path.startsWith(LINKS.favorite) &&
         !path.startsWith(LINKS.album) &&
         path !== LINKS.auth &&
-        path !== LINKS.reg
+        path !== LINKS.reg &&
+        path !== LINKS.topArtists
     );
 };
 
@@ -61,6 +63,7 @@ export const App = () => {
                         {isPageExistsAuth() && <ErrorPage />}
                         {path === LINKS.auth && <AuthPage />}
                         {path === LINKS.reg && <RegistrationPage />}
+                        {path === LINKS.topArtists && <Artists />}
                     </div>
                 ) : (
                     <div />

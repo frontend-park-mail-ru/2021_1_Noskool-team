@@ -12,4 +12,5 @@ export const LINKS = {
     weeklyTop: '/weekly',
     artistsTop: '/artists',
     billboard: '/billboard',
+    topArtists: '/artists',
 };

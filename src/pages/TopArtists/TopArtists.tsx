@@ -7,7 +7,7 @@ import { cn } from 'utils/cn';
 
 import './style.scss';
 
-const topArtists = cn('top-artists');
+const topArtists = cn('top-artists-page');
 
 export const Artists = () => {
     if (requestsStore.getTopArtists) {
@@ -17,9 +17,16 @@ export const Artists = () => {
 
     return (
         <div class={topArtists()}>
-            {artistsStore.artists.map((item) => (
-                <img class={topArtists('artist')} src={TRACK_HOST + item.picture} title={item.name} />
-            ))}
+            <div class={topArtists('title')}>Топ артистов</div>
+            <div class={topArtists('top-artists')}>
+                {artistsStore.artists.map((item) => (
+                    <div class={topArtists('artist')}>
+                        <img class={topArtists('photo')} src={TRACK_HOST + item?.picture} />
+                        <div class={topArtists('name')}>{item?.name}</div>
+                        {/* <div class={topArtists('genre')}>{item?.genres.map((genre) => genre?.title).join(', ')}</div> */}
+                    </div>
+                ))}
+            </div>
         </div>
     );
 };
