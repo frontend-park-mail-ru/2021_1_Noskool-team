@@ -40,8 +40,10 @@ const getPlayer = (): HTMLAudioElement => document.getElementById(PLAYER_ID) as 
 const getVolume = (): HTMLInputElement => document.getElementById(VOLUME_ID) as HTMLInputElement;
 const getTrackLine = (): HTMLInputElement => document.getElementById(TRACK_LINE_ID) as HTMLInputElement;
 
+const windowName = String(new Date().getTime());
+
 export const onClickPlay = () => {
-    localStorage.setItem('name', name);
+    localStorage.setItem('name', windowName);
     const player = getPlayer();
     if (playerStore.isPlay) {
         player.pause();
@@ -51,8 +53,6 @@ export const onClickPlay = () => {
         player.play();
     }
 };
-
-const windowName = String(new Date().getTime());
 
 window.name = windowName;
 window.onload = () => {
