@@ -26,9 +26,9 @@ import { LINKS } from 'constants/links';
 import { PlayerFrom } from 'types/store/player-store';
 import { billboardChartStore, tracksStore } from 'store/main-page.store';
 import { topTrack } from 'store/top-track.store';
+import { isMobile } from 'utils/isMobile';
 
 import './style.scss';
-import { isMobile } from 'utils/isMobile';
 
 const PLAYER_ID = 'PLAYER_ID';
 const VOLUME_ID = 'VOLUME_ID';
@@ -41,6 +41,7 @@ const getVolume = (): HTMLInputElement => document.getElementById(VOLUME_ID) as 
 const getTrackLine = (): HTMLInputElement => document.getElementById(TRACK_LINE_ID) as HTMLInputElement;
 
 export const onClickPlay = () => {
+    localStorage.setItem('name', name);
     const player = getPlayer();
     if (playerStore.isPlay) {
         player.pause();
@@ -48,6 +49,22 @@ export const onClickPlay = () => {
     } else {
         playerStore.isPlay = true;
         player.play();
+    }
+};
+
+const windowName = String(new Date().getTime());
+
+window.name = windowName;
+window.onload = () => {
+    localStorage.setItem('name', windowName);
+};
+window.onstorage = () => {
+    if (localStorage.getItem('name') !== windowName) {
+        if (playerStore.isPlay) {
+            const player = getPlayer();
+            player.pause();
+            playerStore.isPlay = false;
+        }
     }
 };
 
@@ -292,9 +309,6 @@ export const AudioLine = () => {
                     {playerStore.playList[playerStore.currentTrack.index]?.name}
                     <div>{playerStore.playList[playerStore.currentTrack.index]?.artist}</div>
                 </div>
-            </div>
-            <div class={player('play-btn', playerStore.isPlay ? 'pause' : '')} onclick={onClickPlay}>
-                {playerStore.isPlay ? <PauseIcon /> : <PlayIcon />}
             </div>
             {localStorage.getItem('auth') ? (
                 <div class={player('like-btns')}>

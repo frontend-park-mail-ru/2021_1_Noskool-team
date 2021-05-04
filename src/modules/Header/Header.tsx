@@ -8,12 +8,28 @@ import { LINKS } from 'constants/links';
 import { redirectTo } from 'utils/render';
 import { ExiteIcon, LogInIcon, SettingsIcon } from 'assets/icons';
 import { logoutUser } from 'actions/registration/registration';
+import { getSearch } from 'actions/header/header';
+import { isMobile } from 'utils/isMobile';
 
 import './style.scss';
-import { isMobile } from 'utils/isMobile';
 
 const header = cn('header');
 const profile = cn('profile');
+
+const onBlureSearch = () => {
+    headerStore.serachResultTracks = [];
+    headerStore.searchResultAlbums = [];
+    headerStore.searchResultArtists = [];
+    headerStore.search = '';
+};
+
+const handleClickOutside = (event: any) => {
+    if (document.getElementById('search-input') && !document.getElementById('search-input').contains(event.target)) {
+        onBlureSearch();
+    }
+};
+
+document.addEventListener('mousedown', handleClickOutside);
 
 export const Header = () => {
     const toggle = () => {
@@ -28,16 +44,40 @@ export const Header = () => {
         redirectTo(LINKS.auth);
     };
 
+    const onInputSearch = (e: InputEvent) => {
+        const value = (e.target as HTMLInputElement).value;
+        headerStore.search = value;
+        getSearch(value);
+    };
+
     const isAuth = Boolean(localStorage.getItem('auth'));
 
     if (isMobile()) {
         return (
             <div class={header('', 'mob')}>
                 <form class={header('search-form')}>
-                    <input type='search' value='' placeholder='Search' class={header('search-input')} />
-                    <button type='submit' class={header('search-button')}>
+                    <input
+                        type='search'
+                        value={headerStore.search}
+                        placeholder='Search'
+                        class={header('search-input')}
+                        oninput={onInputSearch}
+                    />
+                    <div class={header('search-button')}>
                         <div class={header('search-icon')} />
-                    </button>
+                    </div>
+                    <div class={header('search-result')}>
+                        {headerStore.serachResultTracks.length && (
+                            <div>
+                                <div class={header('serach-title')}>{'Треки:'}</div>
+                                <div>
+                                    {headerStore.serachResultTracks.slice(0, 4).map((el) => (
+                                        <div>{el.tittle}</div>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+                    </div>
                 </form>
             </div>
         );
@@ -48,11 +88,53 @@ export const Header = () => {
             <div class={header('left')}>
                 <div class={header('logo')} />
                 <Link child={() => <div class={header('logo-text')}>{'NoSkool-Music'}</div>} to={LINKS.main} />
-                <form class={header('search-form')}>
-                    <input type='search' value='' placeholder='Search' class={header('search-input')} />
+                <form class={header('search-form')} id={'search-input'}>
+                    <input
+                        type='search'
+                        value={headerStore.search}
+                        placeholder='Search'
+                        class={header('search-input')}
+                        oninput={onInputSearch}
+                    />
                     <button type='submit' class={header('search-button')}>
                         <div class={header('search-icon')} />
                     </button>
+                    <div class={header('search-result')}>
+                        {headerStore.serachResultTracks.length && (
+                            <div>
+                                <div class={header('serach-title')}>{'Треки:'}</div>
+                                <div class={header('search-item')}>
+                                    {headerStore.serachResultTracks.slice(0, 4).map((el) => (
+                                        <div>{el.tittle}</div>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+                        {headerStore.searchResultArtists.length && (
+                            <div>
+                                <div class={header('serach-title')}>{'Артисты:'}</div>
+                                <div class={header('search-item')}>
+                                    {headerStore.searchResultArtists.slice(0, 4).map((el) => (
+                                        <div>{el.name}</div>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+                        {headerStore.searchResultAlbums.length && (
+                            <div>
+                                <div class={header('serach-title')}>{'Альбомы:'}</div>
+                                <div class={header('search-item')}>
+                                    {headerStore.searchResultAlbums.slice(0, 4).map((el) => (
+                                        <Link
+                                            text={el.tittle}
+                                            to={`${LINKS.album}/${el.album_id}`}
+                                            onClick={onBlureSearch}
+                                        />
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+                    </div>
                 </form>
             </div>
             {isAuth ? (
