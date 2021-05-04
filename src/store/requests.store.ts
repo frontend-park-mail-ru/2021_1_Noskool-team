@@ -9,4 +9,8 @@ export const requestsStore = proxy<RequestsStore>({
     getTopArtists: true,
     getTopTracks: true,
     getTopAlbums: true,
+    mediatekaTracks: true,
+    mediatekaAlbums: true,
+    allPlaylists: true,
+    onePlaylist: true,
 });

@@ -41,7 +41,13 @@ const chooseItem = (index: number, isMobile: boolean) => () => {
             case 5:
                 link = LINKS.favoriteTracks;
                 break;
+            case 4:
+                link = LINKS.mediatekaTracks;
+                break;
             case 7:
+                link = LINKS.playlist;
+                break;
+            case 8:
                 link = LINKS.profile;
                 break;
         }
@@ -83,7 +89,7 @@ export const RightMenu = () => {
         {
             text: 'Медиатека',
             icon: TargetIcon,
-            isActive: false,
+            isActive: window.location.pathname.startsWith(LINKS.mediateka),
             className: 'not-fill',
         },
         {
@@ -96,6 +102,12 @@ export const RightMenu = () => {
             text: 'Статистика',
             icon: DiagramIcon,
             isActive: false,
+        },
+        {
+            text: 'Плейлисты',
+            icon: DiagramIcon,
+            isActive: window.location.pathname.startsWith(LINKS.playlist),
+            className: 'not-fill',
         },
         {
             text: 'Настройки',

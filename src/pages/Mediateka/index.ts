@@ -1,0 +1,1 @@
+export { MediatekaPage } from './Mediateka';

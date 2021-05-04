@@ -6,4 +6,8 @@ export interface RequestsStore {
     getTopArtists: boolean;
     getTopTracks: boolean;
     getTopAlbums: boolean;
+    mediatekaTracks: boolean;
+    mediatekaAlbums: boolean;
+    allPlaylists: boolean;
+    onePlaylist: boolean;
 }
