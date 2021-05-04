@@ -15,11 +15,15 @@ export const LINKS = {
     billboard: '/billboard',
     topArtists: '/artists',
 <<<<<<< HEAD
+<<<<<<< HEAD
     topAlbums: '/albums',
 =======
     topArtists: '/top/artists',
     topAlbums: '/top/albums',
 >>>>>>> MEGA FIX
+=======
+    topAlbums: '/albums',
+>>>>>>> MEGA UPDATE
     mediateka: '/mediateka',
     mediatekaTracks: '/mediateka/tracks',
     mediatekaAlbums: '/mediateka/albums',
@@ -29,6 +33,9 @@ export const LINKS = {
     billboard: '/billboard',
     playlist: '/playlist',
     createPlaylist: '/create',
+<<<<<<< HEAD
 =======
 >>>>>>> artist page
+=======
+>>>>>>> MEGA UPDATE
 };
