@@ -12,6 +12,7 @@ export const LINKS = {
 <<<<<<< HEAD
     weeklyTop: '/weekly',
     artistsTop: '/artists',
+<<<<<<< HEAD
     billboard: '/billboard',
     topArtists: '/artists',
 <<<<<<< HEAD
@@ -24,6 +25,10 @@ export const LINKS = {
 =======
     topAlbums: '/albums',
 >>>>>>> MEGA UPDATE
+=======
+    topArtists: '/top/artists',
+    topAlbums: '/top/albums',
+>>>>>>> MEGA FIX
     mediateka: '/mediateka',
     mediatekaTracks: '/mediateka/tracks',
     mediatekaAlbums: '/mediateka/albums',

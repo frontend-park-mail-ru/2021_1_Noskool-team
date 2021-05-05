@@ -22,6 +22,7 @@ import { MediatekaPage } from 'pages/Mediateka';
 import { Playlists } from 'pages/Playlists';
 import { CreatePlaylist } from 'pages/Playlists/CreatePlaylist';
 import { Albums } from 'pages/TopAlbums/TopAlbums';
+<<<<<<< HEAD
 =======
 >>>>>>> artist page
 =======
@@ -29,6 +30,8 @@ import { MediatekaPage } from 'pages/Mediateka';
 import { Playlists } from 'pages/Playlists';
 import { CreatePlaylist } from 'pages/Playlists/CreatePlaylist';
 >>>>>>> MEGA UPDATE
+=======
+>>>>>>> MEGA FIX
 
 import './app.scss';
 import { isMobile } from 'utils/isMobile';
@@ -57,8 +60,13 @@ const isPageExistsAuth = (): boolean => {
         path !== LINKS.topArtists &&
         !path.startsWith(LINKS.mediateka) &&
         !path.startsWith(LINKS.playlist) &&
+<<<<<<< HEAD
         path !== LINKS.createPlaylist
 >>>>>>> MEGA UPDATE
+=======
+        path !== LINKS.createPlaylist &&
+        path !== LINKS.topAlbums
+>>>>>>> MEGA FIX
     );
 };
 
@@ -104,7 +112,11 @@ export const App = () => {
                         {path.startsWith(LINKS.mediateka) && (isAuth ? <MediatekaPage /> : <PromoutePage />)}
                         {path.startsWith(LINKS.playlist) && (isAuth ? <Playlists /> : <PromoutePage />)}
                         {path === LINKS.createPlaylist && <CreatePlaylist />}
+<<<<<<< HEAD
 >>>>>>> MEGA UPDATE
+=======
+                        {path === LINKS.topAlbums && <Albums />}
+>>>>>>> MEGA FIX
                     </div>
                 ) : (
                     <div />
