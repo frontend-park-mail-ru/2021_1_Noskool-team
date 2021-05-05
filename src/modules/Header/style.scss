@@ -30,9 +30,24 @@
     color: $gray;
   }
 
+  &__search-together {
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+  }
+
+  &__search-photo {
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
+    margin-right: 15px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+  }
+
   &__serach-title {
-    font-size: 24px;
-    padding: 10px 0;
+    font-size: 18px;
+    padding: 10px;
   }
 
   &__search-item {

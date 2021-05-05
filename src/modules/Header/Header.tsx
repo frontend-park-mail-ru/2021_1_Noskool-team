@@ -1,6 +1,6 @@
 import { JSX } from 'jsx/jsx';
 import { profileStore } from 'store/profile.store';
-import { HOST } from 'constants/api';
+import { HOST, TRACK_HOST } from 'constants/api';
 import { headerStore } from 'store/header.store';
 import { cn } from 'utils/cn';
 import { Link } from 'components/Link/Link';
@@ -105,7 +105,10 @@ export const Header = () => {
                                 <div class={header('serach-title')}>{'Треки:'}</div>
                                 <div class={header('search-item')}>
                                     {headerStore.serachResultTracks.slice(0, 4).map((el) => (
-                                        <div>{el.tittle}</div>
+                                        <div class={header('search-together')}>
+                                            <img src={TRACK_HOST + el.picture} class={header('search-photo')} />
+                                            <div>{el.tittle}</div>
+                                        </div>
                                     ))}
                                 </div>
                             </div>
@@ -115,7 +118,10 @@ export const Header = () => {
                                 <div class={header('serach-title')}>{'Артисты:'}</div>
                                 <div class={header('search-item')}>
                                     {headerStore.searchResultArtists.slice(0, 4).map((el) => (
-                                        <div>{el.name}</div>
+                                        <div class={header('search-together')}>
+                                            <img src={TRACK_HOST + el.picture} class={header('search-photo')} />
+                                            <div>{el.name}</div>
+                                        </div>
                                     ))}
                                 </div>
                             </div>
@@ -125,11 +131,14 @@ export const Header = () => {
                                 <div class={header('serach-title')}>{'Альбомы:'}</div>
                                 <div class={header('search-item')}>
                                     {headerStore.searchResultAlbums.slice(0, 4).map((el) => (
-                                        <Link
-                                            text={el.tittle}
-                                            to={`${LINKS.album}/${el.album_id}`}
-                                            onClick={onBlureSearch}
-                                        />
+                                        <div class={header('search-together')}>
+                                            <img src={TRACK_HOST + el.picture} class={header('search-photo')} />
+                                            <Link
+                                                text={el.tittle}
+                                                to={`${LINKS.album}/${el.album_id}`}
+                                                onClick={onBlureSearch}
+                                            />
+                                        </div>
                                     ))}
                                 </div>
                             </div>
