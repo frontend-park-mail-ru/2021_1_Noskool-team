@@ -3,10 +3,7 @@ import { JSX } from 'jsx/jsx';
 import { onClickPlay } from 'modules/AudioLine/AudioLine';
 import { favoriteTracksStore } from 'store/favorite-track.store';
 import { playerStore } from 'store/player.store';
-<<<<<<< HEAD
 import { requestsStore } from 'store/requests.store';
-=======
->>>>>>> add photo in track in favourites
 import { TRACK_HOST } from 'constants/api';
 import { cn } from 'utils/cn';
 
