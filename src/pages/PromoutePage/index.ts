@@ -1,0 +1,1 @@
+export { PromoutePage } from './PromoutePage';

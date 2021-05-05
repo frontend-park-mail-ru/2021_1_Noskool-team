@@ -45,6 +45,7 @@ module.exports = {
             modules: srcPath('modules'),
             utils: srcPath('utils'),
             store: srcPath('store'),
+            assets: srcPath('assets'),
         }
     },
     output: {

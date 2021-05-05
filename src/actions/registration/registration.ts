@@ -1,22 +1,18 @@
 import { RegisterUser, AuthUser } from 'types/registration';
-import { post, get } from '../common/common';
+import { post, get, postAuth } from '../common/common';
 import { REGISTER_USER, AUTH_USER, LOGOUT_USER } from 'constants/api';
-import { redirectTo } from 'utils/render';
-import { LINKS } from 'constants/links';
+import { render } from 'utils/render';
 
 export const registerUser = (body: RegisterUser) => {
     return post(REGISTER_USER, body);
 };
 
 export const authUser = (body: AuthUser) => {
-    return post(AUTH_USER, body);
+    return postAuth(AUTH_USER, body);
 };
 
-export const logoutUser = async () => {
-    const response = await get(LOGOUT_USER);
-    if (response.status === 401 || response.status === 403) {
-        localStorage.clear();
-        redirectTo(LINKS.auth);
-    }
-    return response;
+export const logoutUser = () => {
+    get<Response>(LOGOUT_USER);
+    localStorage.clear();
+    render();
 };

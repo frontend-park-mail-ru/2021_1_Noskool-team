@@ -1,7 +1,35 @@
 import { JSX } from 'jsx/jsx';
 import { cn } from 'utils/cn';
-import { playerStore } from 'store/playerStore';
+import { playerStore, expandStore } from 'store/player.store';
+import { playlistStore } from 'store/playlist.store';
 import { TRACK_HOST } from 'constants/api';
+import { addTrackToPlaylist } from 'actions/playlist/playlist';
+import {
+    NextBtnIcon,
+    PauseIcon,
+    PlayIcon,
+    PrevBtnIcon,
+    SoundOffIcon,
+    VolumeOneIcon,
+    VolumeThreeIcon,
+    VolumeTwoIcon,
+    PlusIcon,
+    LikeIcon,
+    PlaylistsIcon,
+} from 'assets/icons';
+import { requestsStore } from 'store/requests.store';
+import {
+    addToFavourites,
+    deleteFromFavourites,
+    addToMediateca,
+    deleteFromMediateca,
+    getBillboardChart,
+} from 'actions/main-page/main-page';
+import { LINKS } from 'constants/links';
+import { PlayerFrom } from 'types/store/player-store';
+import { billboardChartStore, tracksStore } from 'store/main-page.store';
+import { topTrack } from 'store/top-track.store';
+import { isMobile } from 'utils/isMobile';
 
 import './style.scss';
 
@@ -15,7 +43,10 @@ const getPlayer = (): HTMLAudioElement => document.getElementById(PLAYER_ID) as 
 const getVolume = (): HTMLInputElement => document.getElementById(VOLUME_ID) as HTMLInputElement;
 const getTrackLine = (): HTMLInputElement => document.getElementById(TRACK_LINE_ID) as HTMLInputElement;
 
+const windowName = String(new Date().getTime());
+
 export const onClickPlay = () => {
+    localStorage.setItem('name', windowName);
     const player = getPlayer();
     if (playerStore.isPlay) {
         player.pause();
@@ -23,6 +54,20 @@ export const onClickPlay = () => {
     } else {
         playerStore.isPlay = true;
         player.play();
+    }
+};
+
+window.name = windowName;
+window.onload = () => {
+    localStorage.setItem('name', windowName);
+};
+window.onstorage = () => {
+    if (localStorage.getItem('name') !== windowName) {
+        if (playerStore.isPlay) {
+            const player = getPlayer();
+            player.pause();
+            playerStore.isPlay = false;
+        }
     }
 };
 
@@ -48,7 +93,7 @@ const onClickPrev = () => {
     const player = getPlayer();
     let index = 0;
     if (playerStore.currentTrack.index !== 0) {
-        index = (playerStore.currentTrack.index + 1) % playerStore.playList.length;
+        index = (playerStore.currentTrack.index - 1) % playerStore.playList.length;
         playerStore.currentTrack = { ...playerStore.playList[index], index: index };
     } else {
         index = playerStore.playList.length - 1;
@@ -114,41 +159,207 @@ const onTimeUpdate = () => {
     trackLine.value = String(player.currentTime / player.duration);
 };
 
-const getVolumeClass = () => {
+const getVolumeIcon = () => {
     switch (playerStore.volume) {
         case 0:
-            return 'volume-not';
+            return SoundOffIcon;
         case 1:
-            return 'volume-small';
+            return VolumeOneIcon;
         case 2:
-            return 'volume-medium';
+            return VolumeTwoIcon;
         case 3:
-            return 'volume-max';
-        default:
-            return '';
+            return VolumeThreeIcon;
     }
 };
 
 const player = cn('player');
 
+const fixState = (favorite: boolean, mediateca: boolean, index: number): void => {
+    switch (playerStore.from) {
+        case PlayerFrom.BilboardCharts:
+            billboardChartStore.trackList[index].in_mediateka = mediateca;
+            billboardChartStore.trackList[index].in_favorite = favorite;
+            break;
+        case PlayerFrom.FeatureOfWeek:
+            topTrack.trackList[index].in_mediateka = mediateca;
+            topTrack.trackList[index].in_favorite = favorite;
+            break;
+        case PlayerFrom.Single:
+            tracksStore.trackList[index].in_mediateka = mediateca;
+            tracksStore.trackList[index].in_favorite = favorite;
+            break;
+        default:
+            break;
+    }
+};
+
+const onClickFavorite = () => {
+    const index = playerStore.currentTrack.index;
+    if (!playerStore.currentTrack.isFavorite) {
+        addToFavourites(playerStore.currentTrack.trackId).then(() => {
+            requestsStore.favoriteTracks = true;
+            const buffer = [...playerStore.playList];
+            buffer[index].isMediateca = true;
+            buffer[index].isFavorite = true;
+            playerStore.currentTrack.isFavorite = true;
+            playerStore.currentTrack.isMediateca = true;
+            playerStore.playList = buffer;
+            fixState(true, true, index);
+        });
+    } else {
+        deleteFromFavourites(playerStore.currentTrack.trackId).then(() => {
+            requestsStore.favoriteTracks = true;
+            const buffer = [...playerStore.playList];
+            buffer[index].isFavorite = false;
+            playerStore.currentTrack.isFavorite = false;
+            playerStore.playList = buffer;
+            fixState(false, true, index);
+        });
+    }
+};
+
+const onClickMedia = () => {
+    const index = playerStore.currentTrack.index;
+    if (!playerStore.playList[index].isMediateca) {
+        addToMediateca(playerStore.currentTrack.trackId).then(() => {
+            const buffer = [...playerStore.playList];
+            buffer[index].isMediateca = true;
+            playerStore.currentTrack.isMediateca = true;
+            playerStore.playList = buffer;
+            fixState(false, true, index);
+        });
+    } else {
+        deleteFromMediateca(playerStore.currentTrack.trackId).then(() => {
+            const buffer = [...playerStore.playList];
+            buffer[index].isMediateca = false;
+            buffer[index].isFavorite = false;
+            playerStore.currentTrack.isFavorite = false;
+            playerStore.currentTrack.isMediateca = false;
+            playerStore.playList = buffer;
+            fixState(false, false, index);
+        });
+    }
+    if (location.pathname === LINKS.main) {
+        getBillboardChart();
+    }
+};
+
+const onSwipeTrack = () => {
+    console.log(123);
+};
+
+const toggle = () => {
+    expandStore.isExpand = !expandStore.isExpand;
+    console.log(playlistStore.albumList.map((item) => item.tittle));
+};
+
+const onClickAddToPlaylist = (id_playlist: number) => () => {
+    addTrackToPlaylist(id_playlist, playerStore.currentTrack.trackId);
+};
+
 export const AudioLine = () => {
+    if (isMobile()) {
+        return (
+            <div class={player('', isMobile() ? 'mob' : '')} onswipe={isMobile() ? onSwipeTrack : undefined}>
+                <audio
+                    id={PLAYER_ID}
+                    ontimeupdate={onTimeUpdate}
+                    src={TRACK_HOST + playerStore.playList[playerStore.currentTrack.index]?.link}
+                >
+                    <source
+                        src={TRACK_HOST + playerStore.playList[playerStore.currentTrack.index]?.link}
+                        type='audio/mpeg'
+                    />
+                </audio>
+                <div class={player('title')}>
+                    <img src={TRACK_HOST + playerStore.playList[playerStore.currentTrack.index]?.img} alt='' />
+                    <div class={player('name')}>
+                        {playerStore.playList[playerStore.currentTrack.index]?.name}
+                        <div>{playerStore.playList[playerStore.currentTrack.index]?.artist}</div>
+                    </div>
+                </div>
+                <div class={player('play-btn', playerStore.isPlay ? 'pause' : '')} onclick={onClickPlay}>
+                    {playerStore.isPlay ? <PauseIcon /> : <PlayIcon />}
+                </div>
+                {localStorage.getItem('auth') ? (
+                    <div class={player('like-btns')}>
+                        <div
+                            class={player('like', playerStore.currentTrack.isFavorite ? 'checked' : '')}
+                            onclick={onClickFavorite}
+                        >
+                            <LikeIcon />
+                        </div>
+                        <div
+                            class={player('add', playerStore.currentTrack.isMediateca ? 'checked' : '')}
+                            onclick={onClickMedia}
+                        >
+                            <PlusIcon />
+                        </div>
+                    </div>
+                ) : (
+                    <div />
+                )}
+            </div>
+        );
+    }
+
     return (
-        <div class={player()}>
+        <div class={player('', isMobile() ? 'mob' : '')} onswipe={isMobile() ? onSwipeTrack : undefined}>
             <audio
                 id={PLAYER_ID}
                 ontimeupdate={onTimeUpdate}
-                src={TRACK_HOST + playerStore.playList[playerStore.currentTrack.index].link}
+                src={TRACK_HOST + playerStore.playList[playerStore.currentTrack.index]?.link}
             >
                 <source
-                    src={TRACK_HOST + playerStore.playList[playerStore.currentTrack.index].link}
+                    src={TRACK_HOST + playerStore.playList[playerStore.currentTrack.index]?.link}
                     type='audio/mpeg'
                 />
             </audio>
-            <div class={player('name')}>{playerStore.playList[playerStore.currentTrack.index].name}</div>
+            <div class={player('title')}>
+                <img src={TRACK_HOST + playerStore.playList[playerStore.currentTrack.index]?.img} alt='' />
+                <div class={player('name')}>
+                    {playerStore.playList[playerStore.currentTrack.index]?.name}
+                    <div>{playerStore.playList[playerStore.currentTrack.index]?.artist}</div>
+                </div>
+            </div>
+            <div class={player('like')} onclick={toggle}>
+                <PlaylistsIcon />
+                <div class={player('menu', expandStore.isExpand ? 'expand' : '')}>
+                    <ul class={player('items-user')}>
+                        {playlistStore.albumList.map((item) => (
+                            <li onclick={onClickAddToPlaylist(item.playlist_id)}>{item.tittle}</li>
+                        ))}
+                    </ul>
+                </div>
+            </div>
+            {localStorage.getItem('auth') ? (
+                <div class={player('like-btns')}>
+                    <div
+                        class={player('like', playerStore.currentTrack.isFavorite ? 'checked' : '')}
+                        onclick={onClickFavorite}
+                    >
+                        <LikeIcon />
+                    </div>
+                    <div
+                        class={player('add', playerStore.currentTrack.isMediateca ? 'checked' : '')}
+                        onclick={onClickMedia}
+                    >
+                        <PlusIcon />
+                    </div>
+                </div>
+            ) : (
+                <div />
+            )}
             <div class={player('controls')}>
-                <div class={player('prev-btn')} onclick={onClickPrev} />
-                <div class={player('play-btn', playerStore.isPlay ? 'play' : '')} onclick={onClickPlay} />
-                <div class={player('next-btn')} onclick={onClickNext} />
+                <div class={player('prev-btn')} onclick={onClickPrev}>
+                    <PrevBtnIcon />
+                </div>
+                <div class={player('play-btn', playerStore.isPlay ? 'pause' : '')} onclick={onClickPlay}>
+                    {playerStore.isPlay ? <PauseIcon /> : <PlayIcon />}
+                </div>
+                <div class={player('next-btn')} onclick={onClickNext}>
+                    <NextBtnIcon />
+                </div>
             </div>
             <div class={player('track-line')}>
                 <input
@@ -162,7 +373,9 @@ export const AudioLine = () => {
                 />
             </div>
             <div class={player('volume')}>
-                <div class={player('volume-icon', getVolumeClass())} onclick={onClickVolume} />
+                <div class={player('volume-icon')} onclick={onClickVolume}>
+                    {getVolumeIcon()()}
+                </div>
                 <input id={VOLUME_ID} oninput={onChangeVolume} type='range' min='0' max='1' step='0.01' value='1' />
             </div>
         </div>

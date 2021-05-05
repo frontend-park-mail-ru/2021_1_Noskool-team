@@ -1,7 +1,9 @@
 import { JSX } from 'jsx/jsx';
-import { artistsStore } from 'store/mainPageStore';
+import { artistsStore } from 'store/main-page.store';
 import { getTopArtists } from 'actions/main-page/main-page';
 import { TRACK_HOST } from 'constants/api';
+import { LINKS } from 'constants/links';
+import { redirectTo } from 'utils/render';
 import { cn } from 'utils/cn';
 
 import './style.scss';
@@ -10,19 +12,25 @@ const topArtists = cn('top-artists');
 
 let isNeedFetch = true;
 
+const onClickArtists = () => {
+    redirectTo(LINKS.topArtists);
+};
+
 export const TopArtists = () => {
     if (isNeedFetch) {
         isNeedFetch = false;
-        getTopArtists().then((res) => {
-            artistsStore.artists = res;
-        });
+        getTopArtists();
     }
 
     return (
         <div class={topArtists()}>
             <div class={topArtists('titles')}>
-                <div class={topArtists('monthly-artists')}>Monthly Top Artists</div>
-                <div class={topArtists('see-all')}>See All</div>
+                <div class={topArtists('monthly-artists')} onclick={onClickArtists}>
+                    Monthly Top Artists
+                </div>
+                <div class={topArtists('see-all')} onclick={onClickArtists}>
+                    See All
+                </div>
             </div>
             <div class={topArtists('artists')}>
                 {artistsStore.artists.map((item) => (

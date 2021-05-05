@@ -28,9 +28,38 @@ export const JSX = (
     };
 };
 
+export const createSVG = (vElement: VNode): Element => {
+    const element = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    for (let key in vElement.props) {
+        element.setAttribute(key, vElement.props[key]);
+    }
+    const paths = vElement?.children.map((el) => {
+        if (typeof el !== 'string' && el.tagName === 'path') {
+            const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+            for (let key in el.props) {
+                path.setAttribute(key, el.props[key]);
+            }
+            return path;
+        }
+        return null;
+    });
+    paths.forEach((path) => {
+        element.appendChild(path);
+    });
+    return element;
+};
+
 export const createDOM = (element: VNode | string): Element | Text => {
     if (typeof element === 'string') {
         return document.createTextNode(element);
+    }
+
+    if (element === null || element === undefined) {
+        return document.createTextNode('');
+    }
+
+    if (element.tagName === 'svg') {
+        return createSVG(element);
     }
 
     const node = document.createElement(element.tagName);
@@ -66,7 +95,12 @@ export const patchDom = (node: Element, vNode: VNode | string, vNewNode: VNode |
     }
 
     if (vNode.tagName !== vNewNode.tagName) {
-        const nextNode = createDOM(vNewNode);
+        let nextNode;
+        if (vNewNode.tagName === 'svg') {
+            nextNode = createSVG(vNewNode);
+        } else {
+            nextNode = createDOM(vNewNode);
+        }
         node.replaceWith(nextNode);
         return;
     }
@@ -82,20 +116,19 @@ const patchProps = (node: Element, props: Props, nextProps: Props) => {
     const mergedProps = { ...props, ...nextProps };
 
     Object.keys(mergedProps).forEach((key: string) => {
-        if (props[key] !== nextProps[key]) {
-            if (!nextProps[key]) {
-                if (key.startsWith('on')) {
-                    node.removeEventListener(String(key.startsWith('on')), props[key]);
-                } else {
-                    node.removeAttribute(key);
+        if (props !== null && nextProps !== null) {
+            if (props[key] !== nextProps[key]) {
+                if (!nextProps[key]) {
+                    if (key.startsWith('on')) {
+                        node.removeEventListener(String(key.startsWith('on')), props[key]);
+                    } else {
+                        node.removeAttribute(key);
+                    }
+                    return;
                 }
-                return;
-            }
-            if (key.startsWith('on')) {
-                // node.removeEventListener(String(key.startsWith('on')), props[key]);
-                // node.addEventListener(key.substr(2), props[key]);
-            } else {
-                node.setAttribute(key, nextProps[key]);
+                if (!key.startsWith('on')) {
+                    node.setAttribute(key, nextProps[key]);
+                }
             }
         }
     });

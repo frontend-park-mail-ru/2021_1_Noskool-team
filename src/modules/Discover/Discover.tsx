@@ -1,5 +1,5 @@
 import { JSX } from 'jsx/jsx';
-import { albumsStore } from 'store/mainPageStore';
+import { albumsStore } from 'store/main-page.store';
 import { getDiscovers } from 'actions/main-page/main-page';
 import { TRACK_HOST } from 'constants/api';
 import { redirectTo } from 'utils/render';
@@ -16,19 +16,25 @@ const genres = cn('genres');
 
 let isNeedFetch = true;
 
+const onClickBillboard = () => {
+    redirectTo(LINKS.topAlbums);
+};
+
 export const DiscoverGenres = () => {
     if (isNeedFetch) {
         isNeedFetch = false;
-        getDiscovers().then((res) => {
-            albumsStore.albums = res;
-        });
+        getDiscovers();
     }
 
     return (
         <div class={genres()}>
             <div class={genres('titles')}>
-                <div class={genres('monthly-artists')}>Discover Genres</div>
-                <div class={genres('see-all')}>See All</div>
+                <div class={genres('monthly-artists')} onclick={onClickBillboard}>
+                    Discover Genres
+                </div>
+                <div class={genres('see-all')} onclick={onClickBillboard}>
+                    See All
+                </div>
             </div>
             <div class={genres('section')}>
                 {albumsStore.albums.map((item) => (

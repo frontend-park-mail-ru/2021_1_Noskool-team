@@ -4,10 +4,10 @@ import { requaredValidator } from 'utils/form-validators';
 import { authUser } from 'actions/registration/registration';
 import { redirectTo } from 'utils/render';
 import { LINKS } from 'constants/links';
-import { ErrorFetch } from 'types/common';
 import { cn } from 'utils/cn';
 import { isMobile } from 'utils/isMobile';
-import { authFormStore } from 'store/authForm';
+import { authFormStore } from 'store/auth-form.store';
+import { requestsStore } from 'store/requests.store';
 
 import './style.scss';
 
@@ -41,6 +41,7 @@ const onSubmitForm = (values: MouseEvent) => {
                     onSetFormError('Пользователь не найден!');
                 } else if (res.status === 200) {
                     localStorage.setItem('auth', 'ok');
+                    requestsStore.profile = true;
                     redirectTo(LINKS.main);
                 } else {
                     res.json().then((res) => {
@@ -49,9 +50,7 @@ const onSubmitForm = (values: MouseEvent) => {
                 }
             })
             .catch((error) => {
-                error.json().then((res: ErrorFetch) => {
-                    onSetFormError(res.error);
-                });
+                onSetFormError(error);
             });
     }
 };
@@ -73,8 +72,18 @@ export const AuthForm = () => {
                     input={authFormStore.form.fields.password}
                 />
                 <div class={formCn('error')}>{authFormStore.form.errorMsg}</div>
-                <button type='submit'>{'Войти'}</button>
-                <button onclick={onClickReg}>{'Или зарегистрироваться'}</button>
+                <button type='submit' class={formCn('sign-in')}>
+                    {'Войти'}
+                </button>
+                <div class={formCn('alternative')}>{'Войти через'}</div>
+                <div class={formCn('buttons')}>
+                    <button class={formCn('button', 'vk')}></button>
+                    <button class={formCn('button', 'google')}></button>
+                </div>
+                <div class={formCn('alternative')}>{'Нет аккаунта?'}</div>
+                <div class={formCn('reg')} onclick={onClickReg}>
+                    {'Регистрация'}
+                </div>
             </form>
         </div>
     );

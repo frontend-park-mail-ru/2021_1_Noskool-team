@@ -5,13 +5,13 @@
   width: 100%;
   background-color: $white;
   display: flex;
+  align-items: center;
+  padding: 0 15px;
   box-sizing: border-box;
   border-bottom: 1px solid $borders;
+  justify-content: space-between;
 
-  .logo {
-    margin-top: auto;
-    margin-bottom: auto;
-    margin-left: 20px;
+  &__logo {
     width: 60px;
     height: 50px;
     background-image: url(icons/Logo_solo_mockup.svg);
@@ -20,29 +20,64 @@
     background-repeat: no-repeat;
   }
 
-  .logo-text {
-    margin-top: auto;
-    margin-bottom: auto;
-    margin-left: 20px;
+  &__search-result {
+    position: absolute;
+    top: calc(100% + 15px);
+    background-color: $white;
+    width: 100%;
+    box-shadow: 0 2px 8px rgb(0 0 0 / 15%);
+    border-radius: 5px;
+    color: $gray;
+  }
+
+  &__search-together {
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+  }
+
+  &__search-photo {
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
+    margin-right: 15px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+  }
+
+  &__serach-title {
+    font-size: 18px;
+    padding: 10px;
+  }
+
+  &__search-item {
+    padding: 5px;
+    cursor: pointer;
+  }
+
+  &__left {
+    display: flex;
+    align-items: center;
+  }
+
+  &__logo-text {
+    margin: 0 20px;
     font-family: 'Comfortaa', cursive;
     font-size: 20px;
     color: $cyan;
   }
 
-  .search-form {
+  &__search-form {
     position: relative;
-    top: 50%;
-    left: 250px;
     width: 350px;
     height: 40px;
     border-radius: 40px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-    transform: translate(-50%, -50%);
     background: #fff;
     transition: all 0.3s ease;
   }
 
-  .search-icon {
+  &__search-icon {
     height: 20px;
     width: 20px;
     background-image: url(icons/search_black_24dp.svg);
@@ -51,7 +86,7 @@
     background-repeat: no-repeat;
   }
 
-  .search-input {
+  &__search-input {
     position: absolute;
     top: 10px;
     left: 38px;
@@ -70,7 +105,7 @@
     }
   }
 
-  .search-button {
+  &__search-button {
     position: absolute;
     top: 10px;
     left: 15px;
@@ -84,182 +119,171 @@
     cursor: pointer;
   }
 
-  %button {
+  .profile {
     height: 38px;
     width: 38px;
     border: none;
-    cursor: pointer;
     border-radius: 20px;
-    box-shadow: 5px 5px 5px 5px rgba($color: $gray, $alpha: 0.3);
-    outline: none;
-    float: right;
-    margin-top: 10px;
-    margin-right: 50px;
-    background-position: center;
-    background-repeat: no-repeat;
-    transform: translate(1300%, 10%);
-  }
+    box-shadow: 0 2px 8px rgb(0 0 0 / 35%);
 
-  .profile {
-    @extend %button;
-
-    .image-profile {
+    &__image {
       height: 38px;
       width: 38px;
       border-radius: 20px;
       object-fit: cover;
+      cursor: pointer;
     }
 
-    .profile-menu {
-      position: absolute;
-      background-color: $white;
-      width: 300px;
-      height: 300px;
-      top: 75px;
-      right: -50px;
-      border-radius: 10px;
-      z-index: 50;
+    ul {
+      padding: 0;
+      margin: 0;
+    }
 
-      .data-profile {
-        display: flex;
-        margin-top: 15px;
+    &__login {
+      svg {
+        height: 25px;
+        width: 25px;
+        cursor: pointer;
 
-        .photo-profile {
-          height: 55px;
-          width: 55px;
-          margin-left: 15px;
-          border-radius: 35px;
-          object-fit: cover;
+        path {
+          stroke: $gray;
+          transition: all 0.5s;
         }
 
-        .text {
-          text-align: start;
-          font-family: 'Comfortaa', cursive;
-          font-size: 15px;
-          padding-top: 5px;
-          margin-right: 10px;
-          margin-left: 20px;
-          color: $gray;
-
-          .nickname {
-            margin-bottom: 5px;
-            font-size: 20px;
-            font-weight: 600;
+        &:hover {
+          path {
+            stroke: $pink;
           }
         }
       }
+    }
 
-      ul {
-        padding: 0;
-        margin: 0;
+    &__menu {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+      background-color: $white;
+      width: 300px;
+      top: 75px;
+      right: -15px;
+      border-radius: 10px;
+      z-index: 100;
+      transition: all 0.3s;
+      padding: 15px;
+      box-sizing: border-box;
+      box-shadow: 2px 2px 12px rgb(0 0 0 / 25%);
+
+      &::before {
+        content: '';
+        display: inline-block;
+        position: absolute;
+        height: 16px;
+        width: 16px;
+        background-color: $white;
+        right: 40px;
+        top: -8px;
+        transform: rotate(45deg);
       }
 
-      .item {
-        padding-bottom: 7px;
-        width: 100%;
-        display: flex;
-
-        %icon {
-          height: 25px;
-          width: 25px;
-          background-position: center;
-          background-repeat: no-repeat;
-          background-size: 100%;
-          margin-right: 10px;
-        }
-
-        .icon-1 {
-          @extend %icon;
-
-          background-image: url(./icons/settings_black_24dp.svg);
-        }
-
-        .icon-2 {
-          @extend %icon;
-
-          background-image: url(./icons/exit_to_app_black_24dp.svg);
-        }
-
-        .icon-3 {
-          @extend %icon;
-
-          background-image: url(./icons/brightness_4_black_24dp.svg);
-        }
-
-        .icon-4 {
-          @extend %icon;
-
-          background-image: url(./icons/help_outline_black_24dp.svg);
-        }
-
-        .icon-5 {
-          @extend %icon;
-
-          background-image: url(./icons/language_black_24dp.svg);
-        }
-
-        .next {
-          margin-right: 0;
-          height: 25px;
-          width: 25px;
-          margin-left: 10px;
-          background-image: url(./icons/chevron_right_black_24dp.svg);
-        }
-
-        .link {
-          margin-top: 5px;
-          text-decoration: none;
-          color: $gray;
-          margin-right: 0;
-          width: 200px;
-        }
+      &--expand {
+        opacity: 1;
+        pointer-events: all;
       }
+    }
 
-      .item:hover {
-        .link {
+    &__item {
+      padding: 5px 0;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+
+      &:hover {
+        .profile__link {
           color: $pink;
         }
 
-        .icon-1 {
-          background-image: url(./icons//settings_pink.svg);
+        .profile__icon {
+          svg {
+            height: 25px;
+            width: 25px;
+
+            path {
+              stroke: $pink;
+            }
+          }
         }
-
-        .icon-2 {
-          background-image: url(./icons/exit_pink.svg);
-        }
-
-        .icon-3 {
-          background-image: url(./icons/brightness_pink.svg);
-        }
-
-        .icon-4 {
-          background-image: url(./icons/help_pink.svg);
-        }
-
-        .icon-5 {
-          background-image: url(./icons/language_pink.svg);
-        }
-
-        .next {
-          background-image: url(./icons/chevron_pink.svg);
-        }
-      }
-
-      .items-user {
-        margin-top: 13px;
-        list-style: none;
-        font-family: 'Comfortaa', cursive;
-        text-align: start;
-        font-size: 18px;
-        margin-left: 20px;
-      }
-
-      .line {
-        margin-top: 13px;
-        height: 1px;
-        width: 100%;
-        border-bottom: 1px solid $gray;
       }
     }
+
+    &__icon {
+      height: 25px;
+      width: 25px;
+      margin: 0 15px 0 0;
+
+      svg {
+        height: 25px;
+        width: 25px;
+
+        path {
+          transition: all 0.5s;
+          stroke: $gray;
+        }
+      }
+    }
+
+    &__link {
+      text-decoration: none;
+      color: $gray;
+      margin-right: 0;
+      width: 200px;
+      transition: all 0.5s;
+    }
+
+    &__items-user {
+      margin-top: 13px;
+      list-style: none;
+      font-family: 'Comfortaa', cursive;
+      text-align: start;
+      font-size: 18px;
+      margin-left: 20px;
+    }
+
+    &__line {
+      margin: 10px 0;
+      height: 1px;
+      width: 100%;
+      border-bottom: 1px solid $borders;
+    }
+
+    &__data {
+      display: flex;
+      align-items: center;
+    }
+
+    &__photo {
+      height: 55px;
+      width: 55px;
+      border-radius: 35px;
+      object-fit: cover;
+      margin-right: 20px;
+    }
+
+    &__text {
+      text-align: start;
+      font-family: 'Comfortaa', cursive;
+      font-size: 15px;
+      color: $gray;
+    }
+
+    &__nickname {
+      margin-bottom: 5px;
+      font-size: 20px;
+      font-weight: 600;
+    }
   }
+}
+
+.header--mob {
+  width: 100%;
 }

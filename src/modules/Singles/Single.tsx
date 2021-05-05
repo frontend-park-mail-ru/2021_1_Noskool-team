@@ -1,13 +1,17 @@
 import { JSX } from 'jsx/jsx';
 import { FIRST_SCROLL_VALUE, SCROLL_VALUE } from 'constants/slider';
-import { tracksStore } from 'store/mainPageStore';
-import { playerStore } from 'store/playerStore';
+import { tracksStore } from 'store/main-page.store';
+import { playerStore } from 'store/player.store';
 import { onClickPlay } from 'modules/AudioLine/AudioLine';
 import { getWeeklyTop } from 'actions/main-page/main-page';
 import { TRACK_HOST } from 'constants/api';
 import { cn } from 'utils/cn';
+import { LeftChevronIcon, RightChevronIcon } from 'assets/icons';
+import { PlayerFrom } from 'types/store/player-store';
 
 import './style.scss';
+import { redirectTo } from 'utils/render';
+import { LINKS } from 'constants/links';
 
 const onClickTrack = (index: number) => () => {
     playerStore.playList = tracksStore.trackList.map((el, i) => ({
@@ -15,14 +19,23 @@ const onClickTrack = (index: number) => () => {
         index: i,
         link: el?.audio,
         name: el?.tittle,
+        artist: el?.musicians?.map((el) => el?.name).join(', '),
+        isFavorite: el?.in_favorite,
+        isMediateca: el?.in_mediateka,
+        trackId: el?.track_id,
     }));
     playerStore.currentTrack = {
         img: tracksStore.trackList[index]?.picture,
         index: index,
         link: tracksStore.trackList[index]?.audio,
         name: tracksStore.trackList[index]?.tittle,
+        artist: tracksStore.trackList[index]?.musicians?.map((el) => el?.name).join(', '),
+        isFavorite: tracksStore.trackList[index]?.in_favorite,
+        isMediateca: tracksStore.trackList[index]?.in_mediateka,
+        trackId: tracksStore.trackList[index]?.track_id,
     };
     playerStore.currentTime = 0;
+    playerStore.from = PlayerFrom.Single;
     if (!playerStore.isPlay) {
         onClickPlay();
     } else {
@@ -34,14 +47,16 @@ const onClickTrack = (index: number) => () => {
 const weekly = cn('weekly-top');
 const slider = cn('slide-items');
 
+const onClickWeekly = () => {
+    redirectTo(LINKS.topTracks);
+};
+
 let isNeedFetch = true;
 
 export const Single = () => {
     if (isNeedFetch) {
         isNeedFetch = false;
-        getWeeklyTop().then((res) => {
-            tracksStore.trackList = res.slice(1);
-        });
+        getWeeklyTop();
     }
 
     const SLIDER = 'slider';
@@ -80,20 +95,26 @@ export const Single = () => {
     return (
         <div class={weekly()}>
             <div class={weekly('legend')}>
-                <div class={weekly('title')}>Weekly Top Track</div>
-                <div class='buttons'>
-                    <button class={weekly('prev')} onclick={prevItem}></button>
-                    <button class={weekly('next')} onclick={nextItem}></button>
+                <div class={weekly('title')} onclick={onClickWeekly}>
+                    {'Weekly Top Track'}
+                </div>
+                <div class={weekly('buttons')}>
+                    <div onclick={prevItem} class={weekly('btn')}>
+                        <LeftChevronIcon />
+                    </div>
+                    <div onclick={nextItem} class={weekly('btn')}>
+                        <RightChevronIcon />
+                    </div>
                 </div>
             </div>
             <div class={slider()}>
                 <ul id={SLIDER} class={slider('single-items')}>
-                    {tracksStore.trackList.map((item, index) => (
+                    {tracksStore.trackList?.map((item, index) => (
                         <li class={slider('item')} onclick={onClickTrack(index)}>
-                            <img src={TRACK_HOST + item?.picture} class={slider('single-img')}></img>
+                            <img src={TRACK_HOST + item?.picture} class={slider('single-img')} />
                             <div class={slider('name-song')}>{item?.tittle}</div>
                             <div class={slider('singer')}>
-                                {item?.musicians.map((artist) => artist?.name).join(', ')}
+                                {item?.musicians?.map((artist) => artist?.name).join(', ')}
                             </div>
                         </li>
                     ))}

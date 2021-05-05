@@ -2,7 +2,8 @@ import { getFavoriteAlbums } from 'actions/favorite/favorite';
 import { TRACK_HOST } from 'constants/api';
 import { LINKS } from 'constants/links';
 import { JSX } from 'jsx/jsx';
-import { favoriteAlbumsStore } from 'store/favoriteAlbums';
+import { favoriteAlbumsStore } from 'store/favorite-albums.store';
+import { requestsStore } from 'store/requests.store';
 import { cn } from 'utils/cn';
 import { redirectTo } from 'utils/render';
 
@@ -14,14 +15,10 @@ const onClickAlbum = (id: number) => () => {
     redirectTo(LINKS.album + `/${id}`);
 };
 
-let isNeedFetch = true;
-
 export const Albums = () => {
-    if (isNeedFetch) {
-        isNeedFetch = false;
-        getFavoriteAlbums().then((res) => {
-            favoriteAlbumsStore.albumList = res;
-        });
+    if (requestsStore.favoriteAlbums) {
+        requestsStore.favoriteAlbums = false;
+        getFavoriteAlbums();
     }
 
     return (

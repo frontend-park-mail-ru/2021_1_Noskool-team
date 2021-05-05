@@ -1,45 +1,223 @@
 import { JSX } from 'jsx/jsx';
-import { ProfileButton } from '../ProfileButtons/ProfileButtons';
-import { SettingButtons } from '../SettingButtons/SettingButtons';
-import { profileStore } from 'store/profileStore';
-import { HOST } from 'constants/api';
+import { profileStore } from 'store/profile.store';
+import { HOST, TRACK_HOST } from 'constants/api';
+import { headerStore } from 'store/header.store';
+import { cn } from 'utils/cn';
+import { Link } from 'components/Link/Link';
+import { LINKS } from 'constants/links';
+import { redirectTo } from 'utils/render';
+import { ExiteIcon, LogInIcon, SettingsIcon } from 'assets/icons';
+import { logoutUser } from 'actions/registration/registration';
+import { getSearch } from 'actions/header/header';
+import { isMobile } from 'utils/isMobile';
 
 import './style.scss';
-import { headerStore } from 'store/header-store';
+
+const header = cn('header');
+const profile = cn('profile');
+
+const onBlureSearch = () => {
+    headerStore.serachResultTracks = [];
+    headerStore.searchResultAlbums = [];
+    headerStore.searchResultArtists = [];
+    headerStore.search = '';
+};
+
+const handleClickOutside = (event: any) => {
+    if (document.getElementById('search-input') && !document.getElementById('search-input').contains(event.target)) {
+        onBlureSearch();
+    }
+};
+
+document.addEventListener('mousedown', handleClickOutside);
 
 export const Header = () => {
     const toggle = () => {
         headerStore.isExpand = !headerStore.isExpand;
     };
 
+    const toSettings = () => {
+        redirectTo(LINKS.profile);
+    };
+
+    const toLogin = () => {
+        redirectTo(LINKS.auth);
+    };
+
+    const onInputSearch = (e: InputEvent) => {
+        const value = (e.target as HTMLInputElement).value;
+        headerStore.search = value;
+        getSearch(value);
+    };
+
+    const isAuth = Boolean(localStorage.getItem('auth'));
+
+    if (isMobile()) {
+        return (
+            <div class={header('', 'mob')}>
+                <form class={header('search-form')}>
+                    <input
+                        type='search'
+                        value={headerStore.search}
+                        placeholder='Search'
+                        class={header('search-input')}
+                        oninput={onInputSearch}
+                    />
+                    <div class={header('search-button')}>
+                        <div class={header('search-icon')} />
+                    </div>
+                    <div class={header('search-result')}>
+                        {headerStore.serachResultTracks.length && (
+                            <div>
+                                <div class={header('serach-title')}>{'Треки:'}</div>
+                                <div class={header('search-item')}>
+                                    {headerStore.serachResultTracks.slice(0, 4).map((el) => (
+                                        <div class={header('search-together')}>
+                                            <img src={TRACK_HOST + el.picture} class={header('search-photo')} />
+                                            <Link
+                                                text={el?.tittle}
+                                                to={LINKS.album + `/${el?.Album}`}
+                                                onClick={onBlureSearch}
+                                            />
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+                        {headerStore.searchResultArtists.length && (
+                            <div>
+                                <div class={header('serach-title')}>{'Артисты:'}</div>
+                                <div class={header('search-item')}>
+                                    {headerStore.searchResultArtists.slice(0, 4).map((el) => (
+                                        <div class={header('search-together')}>
+                                            <img src={TRACK_HOST + el.picture} class={header('search-photo')} />
+                                            {/* <Link text={el.name} to={} /> */}
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+                        {headerStore.searchResultAlbums.length && (
+                            <div>
+                                <div class={header('serach-title')}>{'Альбомы:'}</div>
+                                <div class={header('search-item')}>
+                                    {headerStore.searchResultAlbums.slice(0, 4).map((el) => (
+                                        <div class={header('search-together')}>
+                                            <img src={TRACK_HOST + el.picture} class={header('search-photo')} />
+                                            <Link
+                                                text={el.tittle}
+                                                to={`${LINKS.album}/${el.album_id}`}
+                                                onClick={onBlureSearch}
+                                            />
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+                    </div>
+                </form>
+            </div>
+        );
+    }
+
     return (
-        <div class='header'>
-            <div class='logo'></div>
-            <div class='logo-text'>NoSkool-Music</div>
-            <form class='search-form'>
-                <input type='search' value='' placeholder='Search' class='search-input' />
-                <button type='submit' class='search-button'>
-                    <div class='search-icon'></div>
-                </button>
-            </form>
-            <button class='profile' onclick={toggle}>
-                <img src={HOST + profileStore.profile.photo} class='image-profile'></img>
-                {headerStore.isExpand && (
-                    <div class={'profile-menu'}>
-                        <div class='data-profile'>
-                            <img src={HOST + profileStore.profile.photo} class='photo-profile'></img>
-                            <div class='text'>
-                                <div class='nickname'>{profileStore.profile.login}</div>
-                                <div class='email'>{profileStore.profile.email}</div>
+        <div class={header()}>
+            <div class={header('left')}>
+                <div class={header('logo')} />
+                <Link child={() => <div class={header('logo-text')}>{'NoSkool-Music'}</div>} to={LINKS.main} />
+                <form class={header('search-form')} id={'search-input'}>
+                    <input
+                        type='search'
+                        value={headerStore.search}
+                        placeholder='Search'
+                        class={header('search-input')}
+                        oninput={onInputSearch}
+                    />
+                    <button type='submit' class={header('search-button')}>
+                        <div class={header('search-icon')} />
+                    </button>
+                    <div class={header('search-result')}>
+                        {headerStore.serachResultTracks.length && (
+                            <div>
+                                <div class={header('serach-title')}>{'Треки:'}</div>
+                                <div class={header('search-item')}>
+                                    {headerStore.serachResultTracks.slice(0, 4).map((el) => (
+                                        <div class={header('search-together')}>
+                                            <img src={TRACK_HOST + el.picture} class={header('search-photo')} />
+                                            <Link
+                                                text={el?.tittle}
+                                                to={LINKS.album + `/${el?.Album}`}
+                                                onClick={onBlureSearch}
+                                            />
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+                        {headerStore.searchResultArtists.length && (
+                            <div>
+                                <div class={header('serach-title')}>{'Артисты:'}</div>
+                                <div class={header('search-item')}>
+                                    {headerStore.searchResultArtists.slice(0, 4).map((el) => (
+                                        <div class={header('search-together')}>
+                                            <img src={TRACK_HOST + el.picture} class={header('search-photo')} />
+                                            {/* <Link text={el.name} to={} /> */}
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+                        {headerStore.searchResultAlbums.length && (
+                            <div>
+                                <div class={header('serach-title')}>{'Альбомы:'}</div>
+                                <div class={header('search-item')}>
+                                    {headerStore.searchResultAlbums.slice(0, 4).map((el) => (
+                                        <div class={header('search-together')}>
+                                            <img src={TRACK_HOST + el.picture} class={header('search-photo')} />
+                                            <Link
+                                                text={el.tittle}
+                                                to={`${LINKS.album}/${el.album_id}`}
+                                                onClick={onBlureSearch}
+                                            />
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+                    </div>
+                </form>
+            </div>
+            {isAuth ? (
+                <button class={profile()} onclick={toggle}>
+                    <img src={HOST + profileStore.profile.photo} class={profile('image')} />
+                    <div class={profile('menu', headerStore.isExpand ? 'expand' : '')}>
+                        <div class={profile('data')}>
+                            <img src={HOST + profileStore.profile.photo} class={profile('photo')} />
+                            <div class={profile('text')}>
+                                <div class={profile('nickname')}>{profileStore.profile.login}</div>
+                                <div class={profile('email')}>{profileStore.profile.email}</div>
                             </div>
                         </div>
-                        <div class='line'></div>
-                        <ProfileButton />
-                        <div class='line'></div>
-                        <SettingButtons />
+                        <div class={profile('line')}></div>
+                        <ul class={profile('items-user')}>
+                            <li class={profile('item')}>
+                                <div class={profile('icon')}>{SettingsIcon()}</div>
+                                <div class={profile('link')} onclick={toSettings}>
+                                    {'Настройки'}
+                                </div>
+                            </li>
+                            <li class={profile('item')} onclick={logoutUser}>
+                                <div class={profile('icon')}>{ExiteIcon()}</div>
+                                <div class={profile('link')}>{'Выйти'}</div>
+                            </li>
+                        </ul>
                     </div>
-                )}
-            </button>
+                </button>
+            ) : (
+                <div class={profile('login')} onclick={toLogin}>
+                    <LogInIcon />
+                </div>
+            )}
         </div>
     );
 };

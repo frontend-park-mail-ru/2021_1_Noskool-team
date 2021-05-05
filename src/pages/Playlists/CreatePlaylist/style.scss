@@ -1,0 +1,68 @@
+@import '../../../styles/colors.scss';
+
+.create {
+  width: 600px;
+  background-color: $white;
+  border-radius: 30px;
+  padding: 50px 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 15%;
+  box-sizing: border-box;
+
+  &__wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__title {
+    color: $black;
+    font-size: 30px;
+    line-height: 45px;
+    margin-bottom: 30px;
+  }
+
+  &__input {
+    margin-bottom: 30px;
+  }
+
+  &__error-msg {
+    height: 50px;
+    color: $error;
+  }
+
+  button {
+    background-color: $pink;
+    border-radius: 5px;
+    width: 325px;
+    height: 50px;
+    color: $white;
+    font-size: 22px;
+    line-height: 25px;
+    font-weight: 500;
+    cursor: pointer;
+    transform: scale(0.975, 0.975);
+    transition: all 0.5s;
+
+    &:nth-last-child(1) {
+      margin-top: 15px;
+    }
+
+    &:hover {
+      transform: scale(1, 1);
+    }
+  }
+}
+
+.create__wrapper--mob {
+  padding: 0 15px;
+  box-sizing: border-box;
+
+  .create {
+    width: 100%;
+    padding: 30px 20px;
+  }
+}

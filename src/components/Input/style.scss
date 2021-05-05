@@ -1,29 +1,17 @@
 @import '../../styles/colors.scss';
 
-@mixin input-icon {
-  position: absolute;
-  right: 20px;
-  top: 50%;
-  transform: translateY(-50%);
-  height: 25px;
-  width: 25px;
-}
-
 .input-text {
   margin-bottom: 20px;
   width: 100%;
   position: relative;
 
-  .ok {
-    @include input-icon;
-
-    background: url('./icons/ok.svg');
-  }
-
-  .not-valid {
-    @include input-icon;
-
-    background: url('./icons/not-valid.svg');
+  .icon {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 25px;
+    width: 25px;
   }
 
   input {
@@ -47,7 +35,7 @@
     transform: translateY(-50%);
     font-size: 18px;
     line-height: 18px;
-    color: $input-text;
+    color: $gray;
     transition: all 0.3s;
     pointer-events: none;
   }

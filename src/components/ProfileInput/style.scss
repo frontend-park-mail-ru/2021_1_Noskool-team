@@ -1,0 +1,103 @@
+@import '../../styles/colors.scss';
+
+.input-name {
+  width: 800px;
+  display: grid;
+  grid-template-columns: 150px 450px;
+  gap: 50px;
+
+  &__name {
+    height: 45px;
+    font-family: 'Comfortaa', cursive;
+    font-size: 25px;
+    text-align: right;
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+}
+
+@mixin input-icon {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 25px;
+  width: 25px;
+}
+
+.input-text {
+  margin-bottom: 20px;
+  width: 100%;
+  position: relative;
+
+  .ok {
+    @include input-icon;
+
+    background: url('./icons/ok.svg');
+  }
+
+  .not-valid {
+    @include input-icon;
+
+    background: url('./icons/not-valid.svg');
+  }
+
+  input {
+    width: 100%;
+    box-shadow: 0 3px 6px rgba(75, 81, 91, 0.15), 0 1px 3px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+    height: 50px;
+    border: none;
+    padding: 0 0 0 20px;
+    text-overflow: ellipsis;
+    font-size: 20px;
+    line-height: 26px;
+    color: $black;
+    box-sizing: border-box;
+  }
+
+  &__placeholder {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+    line-height: 18px;
+    color: $gray;
+    transition: all 0.3s;
+    pointer-events: none;
+  }
+
+  &__error-msg {
+    position: absolute;
+    top: calc(100% + 5px);
+    left: 50%;
+    transform: translateX(-50%);
+    color: $error;
+    font-size: 10px;
+    line-height: 10px;
+    width: 100%;
+    text-align: center;
+  }
+
+  &__icon {
+    svg {
+      height: 25px;
+      width: 25px;
+    }
+  }
+
+  &--focus {
+    input {
+      padding: 12px 55px 0 20px;
+    }
+
+    .input-text {
+      &__placeholder {
+        top: 10px;
+        font-size: 12px;
+        line-height: 10px;
+      }
+    }
+  }
+}

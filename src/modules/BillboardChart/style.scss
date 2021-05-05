@@ -14,6 +14,7 @@
     display: block;
     text-decoration: none;
     margin-left: 15px;
+    cursor: pointer;
   }
 
   .title:hover {
@@ -26,6 +27,7 @@
     height: 48px;
     display: flex;
     padding: 8px;
+    justify-content: space-around;
   }
 
   &__number {
@@ -100,14 +102,20 @@
 
   %button-music {
     width: 25px;
-    height: 23px;
-    background-size: 23px;
-    background-position: center;
-    background-repeat: no-repeat;
+    height: 25px;
     outline: none;
     border: none;
     cursor: pointer;
     margin-top: 12px;
+
+    svg {
+      width: 20px;
+      height: 20px;
+
+      path {
+        transition: all 0.3s;
+      }
+    }
   }
 
   &__like {
@@ -115,30 +123,56 @@
 
     margin-left: 10px;
     margin-right: 5px;
-    background-image: url(../../icons/favorite_black_24dp.svg);
 
-    &--checked-like {
-      background-image: url(../../icons/favourite_pink.svg);
+    svg {
+      path {
+        fill: $gray;
+      }
     }
-  }
 
-  &__like:hover {
-    background-image: url(../../icons/favourite_pink.svg);
+    &:hover {
+      svg {
+        path {
+          fill: $pink;
+        }
+      }
+    }
+
+    &--checked {
+      svg {
+        path {
+          fill: $pink;
+        }
+      }
+    }
   }
 
   &__add {
     @extend %button-music;
 
-    background-image: url(../../icons/add_black_24dp.svg);
     background-size: 27px;
     margin-right: 0;
 
-    &--checked-add {
-      background-image: url(../../icons/add_pink.svg);
+    &:hover {
+      svg {
+        path {
+          stroke: #ef548e;
+        }
+      }
     }
-  }
 
-  &__add:hover {
-    background-image: url(../../icons/add_pink.svg);
+    svg {
+      path {
+        stroke: $gray;
+      }
+    }
+
+    &--checked {
+      svg {
+        path {
+          stroke: $pink;
+        }
+      }
+    }
   }
 }

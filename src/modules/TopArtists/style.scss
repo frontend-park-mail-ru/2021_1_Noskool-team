@@ -6,6 +6,11 @@
     display: flex;
     justify-content: space-between;
     font-family: 'Comfortaa', cursive;
+
+    &:hover {
+      color: $pink;
+      cursor: pointer;
+    }
   }
 
   &__monthly-artists {
@@ -15,6 +20,11 @@
     color: #373944;
     margin-bottom: 25px;
     margin-left: 12px;
+
+    &:hover {
+      color: $pink;
+      cursor: pointer;
+    }
   }
 
   &__see-all {
@@ -24,6 +34,7 @@
     padding-top: 7px;
     padding-right: 15px;
     text-decoration: none;
+    cursor: pointer;
   }
 
   &__see-all:hover {
@@ -40,6 +51,7 @@
 
   &__find-artist {
     text-decoration: none;
+    margin-right: 17px;
   }
 
   &__artists-photo {

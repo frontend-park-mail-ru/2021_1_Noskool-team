@@ -18,6 +18,11 @@
     color: #373944;
     margin-bottom: 25px;
     margin-left: 12px;
+    cursor: pointer;
+
+    &:hover {
+      color: $pink;
+    }
   }
 
   &__see-all {
@@ -27,10 +32,11 @@
     padding-top: 7px;
     padding-right: 25px;
     text-decoration: none;
-  }
+    cursor: pointer;
 
-  &__see-all:hover {
-    color: $pink;
+    &:hover {
+      color: $pink;
+    }
   }
 
   &__section {
@@ -38,10 +44,12 @@
     list-style: none;
     justify-content: space-between;
     padding: 0 20px;
+    overflow: hidden;
   }
 
   &__find-album {
     text-decoration: none;
+    margin-right: 20px;
   }
 
   &__album-photo {

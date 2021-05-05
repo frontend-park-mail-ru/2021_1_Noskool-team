@@ -1,90 +1,195 @@
 import { JSX } from 'jsx/jsx';
 import { LINKS } from 'constants/links';
 import { redirectTo } from 'utils/render';
-import { RightMenu as RightMenuStore } from 'types/rightMenu';
+import { RightMenu as RightMenuStore } from 'types/right-menu';
+import {
+    HomeIcon,
+    SoundOnIcon,
+    HeadPhonesIcon,
+    MicroPhone,
+    LikeInRoundIcon,
+    TargetIcon,
+    DiagramIcon,
+    SettingsIcon,
+    YetMobIcon,
+    CrossIcon,
+} from 'assets/icons';
+import { cn } from 'utils/cn';
 
 import './style.scss';
+import { isMobile } from 'utils/isMobile';
+import { rightMenuStore } from 'store/right-menu.store';
 
-const ID_MENU = 'item';
+const rightMenuCn = cn('right-menu');
 
-const chooseItem = (index: number) => () => {
+const chooseItem = (index: number, isMobile: boolean) => () => {
     let link = '';
-    switch (index) {
-        case 0:
-            link = LINKS.main;
-            break;
-        case 5:
-            link = LINKS.favoriteTracks;
-            break;
-        case 7:
-            link = LINKS.profile;
-            break;
+    if (isMobile) {
+        switch (index) {
+            case 0:
+                link = LINKS.main;
+                break;
+            case 3:
+                link = LINKS.favoriteTracks;
+                break;
+        }
+    } else {
+        switch (index) {
+            case 0:
+                link = LINKS.main;
+                break;
+            case 5:
+                link = LINKS.favoriteTracks;
+                break;
+            case 4:
+                link = LINKS.mediatekaTracks;
+                break;
+            case 7:
+                link = LINKS.myPlaylists;
+                break;
+            case 8:
+                link = LINKS.profile;
+                break;
+        }
     }
+    rightMenuStore.isExpand = false;
     if (link !== '') {
         redirectTo(link);
     }
 };
 
+const toggleExpand = () => {
+    rightMenuStore.isExpand = !rightMenuStore.isExpand;
+};
+
 export const RightMenu = () => {
     const rightMenu: RightMenuStore[] = [
         {
-            className: 'icon-0',
-            classNameActive: 'checked-0',
             text: 'Главная',
-            isActive: window.location.pathname === LINKS.main,
+            icon: HomeIcon,
+            isActive: window.location.pathname === '/',
         },
         {
-            className: 'icon-1',
             text: 'Рекомендации',
-            classNameActive: 'checked-1',
+            icon: SoundOnIcon,
+            isActive: false,
         },
         {
-            className: 'icon-2',
             text: 'Радио',
-            classNameActive: 'checked-2',
+            icon: HeadPhonesIcon,
+            isActive: false,
+            className: 'not-fill',
         },
         {
-            className: 'icon-3',
             text: 'Подкасты',
-            classNameActive: 'checked-3',
+            icon: MicroPhone,
+            isActive: false,
+            className: 'not-fill',
         },
         {
-            className: 'icon-4',
             text: 'Медиатека',
-            classNameActive: 'checked-4',
+            icon: TargetIcon,
+            isActive: window.location.pathname.startsWith(LINKS.mediateka),
+            className: 'not-fill',
         },
         {
-            className: 'icon-5',
             text: 'Избранное',
-            classNameActive: 'checked-5',
+            icon: LikeInRoundIcon,
             isActive: window.location.pathname.startsWith(LINKS.favorite),
+            className: 'not-fill',
         },
         {
-            className: 'icon-6',
             text: 'Статистика',
-            classNameActive: 'checked-6',
+            icon: DiagramIcon,
+            isActive: false,
         },
         {
-            className: 'icon-7',
+            text: 'Плейлисты',
+            icon: DiagramIcon,
+            isActive: window.location.pathname.startsWith(LINKS.myPlaylists),
+            className: 'not-fill',
+        },
+        {
             text: 'Настройки',
-            classNameActive: 'checked-7',
+            icon: SettingsIcon,
             isActive: window.location.pathname === LINKS.profile,
+            className: 'not-fill',
+        },
+    ];
+
+    const rightMenuMob: RightMenuStore[] = [
+        {
+            text: 'Главная',
+            icon: HomeIcon,
+            isActive: window.location.pathname === '/',
+        },
+        {
+            text: 'Подкасты',
+            icon: MicroPhone,
+            isActive: false,
+            className: 'not-fill',
+        },
+        {
+            text: 'Радио',
+            icon: HeadPhonesIcon,
+            isActive: false,
+            className: 'not-fill',
+        },
+        {
+            text: 'Избранное',
+            icon: LikeInRoundIcon,
+            isActive: window.location.pathname.startsWith(LINKS.favorite),
+            className: 'not-fill',
+        },
+        {
+            text: 'Ещё',
+            icon: YetMobIcon,
+            isActive: false,
+            className: 'not-fill',
         },
     ];
 
     return (
-        <ul class='right-menu'>
-            {rightMenu.map((item, index) => (
+        <ul class={rightMenuCn('', isMobile() ? 'mob' : '')}>
+            {(isMobile() ? rightMenuMob : rightMenu).map((item, index) => (
                 <li
-                    key={index}
-                    id={ID_MENU}
-                    class={'item ' + (item?.isActive ? item.classNameActive : '')}
-                    onclick={chooseItem(index)}
+                    class={rightMenuCn(
+                        'item',
+                        (item?.isActive ? 'checked' : '') + (rightMenuStore.isExpand ? 'expand' : '')
+                    )}
+                    onclick={isMobile() && index === 4 ? toggleExpand : chooseItem(index, isMobile())}
                 >
-                    <div class={item.className}></div>
-                    <div class='text'>{item.text}</div>
+                    <div class={rightMenuCn('icon', item?.className)}>{item?.icon()}</div>
+                    <div class={rightMenuCn('text')}>{item.text}</div>
                 </li>
             ))}
+            {isMobile() && (
+                <div class={rightMenuCn('mob-menu', rightMenuStore.isExpand ? 'expand' : '')}>
+                    {rightMenu.map((item, index) => (
+                        <li
+                            class={rightMenuCn('item-mob-menu', item?.isActive ? 'checked' : '')}
+                            onclick={chooseItem(index, false)}
+                        >
+                            <div class={rightMenuCn('icon-mob-menu', item?.className)}>{item?.icon()}</div>
+                            <div class={rightMenuCn('text-mob-menu')}>{item.text}</div>
+                        </li>
+                    ))}
+                </div>
+            )}
+            {isMobile() && (
+                <div
+                    class={rightMenuCn('undeground', rightMenuStore.isExpand ? 'expand' : '')}
+                    onclick={toggleExpand}
+                />
+            )}
+            {isMobile() && (
+                <div class={rightMenuCn('new-menu', rightMenuStore.isExpand ? 'expand' : '')}>
+                    <li class={rightMenuCn('item-new')} onclick={toggleExpand}>
+                        <div class={rightMenuCn('cross-icon')}>{CrossIcon()}</div>
+                        <div class={rightMenuCn('text-new')}>{'Закрыть'}</div>
+                    </li>
+                </div>
+            )}
         </ul>
     );
 };
