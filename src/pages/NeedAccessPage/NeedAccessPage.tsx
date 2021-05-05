@@ -19,8 +19,8 @@ export const NeedAccessPage = () => {
             <div class='text'>
                 <span class='login' onclick={onClickLogin}>
                     {'Войдите'}{' '}
-                </span>{' '}
-                {' или '}{' '}
+                </span>
+                {` или `}
                 <span class='login' onclick={onClickReg}>
                     {'зарегистрируйтесь'}
                 </span>
