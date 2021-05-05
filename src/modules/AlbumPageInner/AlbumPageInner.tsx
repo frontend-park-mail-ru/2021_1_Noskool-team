@@ -15,37 +15,31 @@ export const AlbumPageInner = () => {
 
     if (isNeedFetch) {
         isNeedFetch = false;
-        getAlbumById(Number(id[id.length - 1])).then((res) => {
-            albumPageStore.album = {
-                date: res?.release_date,
-                id: res?.album_id,
-                picture: res?.picture,
-                title: res?.tittle,
-            };
-            console.log(res);
-        });
+        getAlbumById(Number(id[id.length - 1]));
     }
 
     return (
         <div class={albumPage()}>
             <div class={albumPage('content')}>
                 <img src={TRACK_HOST + albumPageStore.album.picture} alt='' />
-                <div class={albumPage('title')}>{albumPageStore.album.title}</div>
-                <div class={albumPage('singer')}>Xavier Haas / A Road Through Synthwave</div>
+                <div class={albumPage('title')}>{albumPageStore.album.tittle}</div>
+                <div class={albumPage('singer')}>
+                    {albumPageStore.album.musicians.map((musician) => musician?.name).join(', ')}
+                </div>
                 <div class={albumPage('songs-background')} />
                 <div class={albumPage('songs-block')}>
                     <div class={albumPage('songs')}>
-                        {/* {songs.map((item) => (
+                        {albumPageStore.album.tracks.map((item) => (
                             <div class={albumPage('song')}>
-                                <div class={albumPage('number-song')}>{item.sondId}</div>
-                                <div class='song-name-song'>{item.songName}</div>
-                                <div class={albumPage('time-song')}>{item.time}</div>
+                                <div class={albumPage('number-song')}>{item.track_id}</div>
+                                <div class='song-name-song'>{item.tittle}</div>
+                                <div class={albumPage('time-song')}>{item.duration}</div>
                                 <div class={albumPage('icons')}>
                                     <div class={albumPage('like')} />
                                     <div class={albumPage('add-song')} />
                                 </div>
                             </div>
-                        ))} */}
+                        ))}
                     </div>
                 </div>
             </div>

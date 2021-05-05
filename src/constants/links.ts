@@ -9,11 +9,16 @@ export const LINKS = {
     favoriteAlbums: '/favorite/albums',
     favoriteArtists: '/favorite/artists',
     favoritePodcasts: '/favorite/podcasts',
+<<<<<<< HEAD
     weeklyTop: '/weekly',
     artistsTop: '/artists',
     billboard: '/billboard',
     topArtists: '/artists',
     topAlbums: '/albums',
+=======
+    topArtists: '/top/artists',
+    topAlbums: '/top/albums',
+>>>>>>> MEGA FIX
     mediateka: '/mediateka',
     mediatekaTracks: '/mediateka/tracks',
     mediatekaAlbums: '/mediateka/albums',

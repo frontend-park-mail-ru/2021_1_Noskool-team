@@ -25,3 +25,7 @@ export interface PlayerStore {
     durationTime: number;
     from: PlayerFrom;
 }
+
+export interface Expand {
+    isExpand: boolean;
+}

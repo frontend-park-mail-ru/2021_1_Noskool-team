@@ -3,7 +3,7 @@ interface Genres {
     title: string;
 }
 
-interface Musician {
+export interface Musician {
     'musician_id': number;
     name: string;
     description: string;

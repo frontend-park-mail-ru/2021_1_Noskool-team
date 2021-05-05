@@ -1,5 +1,5 @@
 import { proxy } from 'jsx/store';
-import { PlayerStore, CurrentTrack, PlayerFrom } from 'types/store/player-store';
+import { PlayerStore, CurrentTrack, PlayerFrom, Expand } from 'types/store/player-store';
 
 export const playerStore = proxy<PlayerStore>({
     currentTrack: proxy<CurrentTrack>({
@@ -29,4 +29,8 @@ export const playerStore = proxy<PlayerStore>({
         },
     ],
     from: PlayerFrom.BilboardCharts,
+});
+
+export const expandStore = proxy<Expand>({
+    isExpand: false,
 });

@@ -1,7 +1,9 @@
 import { JSX } from 'jsx/jsx';
 import { cn } from 'utils/cn';
-import { playerStore } from 'store/player.store';
+import { playerStore, expandStore } from 'store/player.store';
+import { playlistStore } from 'store/playlist.store';
 import { TRACK_HOST } from 'constants/api';
+import { addTrackToPlaylist } from 'actions/playlist/playlist';
 import {
     NextBtnIcon,
     PauseIcon,
@@ -13,6 +15,7 @@ import {
     VolumeTwoIcon,
     PlusIcon,
     LikeIcon,
+    // PlaylistsIcon,
 } from 'assets/icons';
 import { requestsStore } from 'store/requests.store';
 import {
@@ -245,6 +248,15 @@ const onSwipeTrack = () => {
     console.log(123);
 };
 
+const toggle = () => {
+    expandStore.isExpand = !expandStore.isExpand;
+    console.log(playlistStore.albumList.map((item) => item.tittle));
+};
+
+const onClickAddToPlaylist = (id_playlist: number, id_track: number) => () => {
+    addTrackToPlaylist(id_playlist, id_track);
+};
+
 export const AudioLine = () => {
     if (isMobile()) {
         return (
@@ -310,6 +322,21 @@ export const AudioLine = () => {
                     <div>{playerStore.playList[playerStore.currentTrack.index]?.artist}</div>
                 </div>
             </div>
+            <div class={player('like')} onclick={toggle}>
+                <LikeIcon />
+                <div class={player('menu', expandStore.isExpand ? 'expand' : '')}>
+                    <ul class={player('items-user')}>
+                        {playlistStore.albumList.map((item) => (
+                            <li onclick={onClickAddToPlaylist(item.playlist_id, playerStore.currentTrack.trackId)}>
+                                {item.tittle}
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            </div>
+            {/* <div class={player('play-btn', playerStore.isPlay ? 'pause' : '')} onclick={onClickPlay}>
+                {playerStore.isPlay ? <PauseIcon /> : <PlayIcon />}
+            </div> */}
             {localStorage.getItem('auth') ? (
                 <div class={player('like-btns')}>
                     <div

@@ -15,7 +15,8 @@ const onClickPlaylist = (id: number) => () => {
     redirectTo(LINKS.playlist + `/${id}`);
 };
 
-const onClickAdd = () => () => {
+const onClickAdd = () => {
+    console.log('jdh');
     redirectTo(LINKS.createPlaylist);
 };
 
@@ -27,11 +28,11 @@ export const Playlists = () => {
 
     return (
         <div class={mediatekaAlbums('')}>
-            {playlistStore.albumList.length !== 0 && (
-                <div class={mediatekaAlbums('title')}>{'Ваши избранные альбомы:'}</div>
-            )}
-            <div class={mediatekaAlbums('add')} onclick={onClickAdd}>
-                addaddadd
+            <div class={mediatekaAlbums('header')}>
+                <div class={mediatekaAlbums('title')}>{'Ваши плейлисты:'}</div>
+                <div class={mediatekaAlbums('add')} onclick={onClickAdd}>
+                    Создать плейлист
+                </div>
             </div>
             <div class={mediatekaAlbums('content-wrapper')}>
                 <div class={mediatekaAlbums('content')}>
@@ -43,9 +44,7 @@ export const Playlists = () => {
                     ))}
                 </div>
                 {playlistStore.albumList.length === 0 && (
-                    <div class={mediatekaAlbums('not-found')}>
-                        {'Вы ещё не добавили ни одного альбома в медиатеку :('}
-                    </div>
+                    <div class={mediatekaAlbums('not-found')}>{'Вы ещё не создали ни одного плейлиста :('}</div>
                 )}
             </div>
         </div>

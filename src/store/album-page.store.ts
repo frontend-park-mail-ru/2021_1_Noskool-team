@@ -3,9 +3,11 @@ import { Album, AlbumPageStore } from 'types/store/albums-page';
 
 export const albumPageStore = proxy<AlbumPageStore>({
     album: proxy<Album>({
-        id: '1',
+        'album_id': '1',
         picture: '',
-        date: '',
-        title: '',
+        'release_date': '',
+        tittle: '',
+        tracks: [],
+        musicians: [],
     }),
 });
