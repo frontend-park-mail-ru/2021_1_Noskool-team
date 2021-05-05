@@ -67,7 +67,7 @@ export const getMainPage = async <P>(url: string): Promise<P | undefined> => {
     if (localStorage.getItem('auth') === 'ok') {
         resBuff = await getAuth(url);
         if (resBuff.status === 401) {
-            localStorage.clear();
+            localStorage.removeItem('auth');
             resBuff = await getNoneAuth(url + '/notauth');
             response = resBuff.ok ? resBuff.json() : new Promise(() => {});
         } else if (resBuff.status === 403) {
@@ -76,7 +76,7 @@ export const getMainPage = async <P>(url: string): Promise<P | undefined> => {
                 resBuff = await getAuth(url);
                 response = resBuff.ok ? resBuff.json() : new Promise(() => {});
             } else {
-                localStorage.clear();
+                localStorage.removeItem('auth');
                 resBuff = await getNoneAuth(url + '/notauth');
                 response = resBuff.ok ? resBuff.json() : new Promise(() => {});
             }
@@ -96,7 +96,7 @@ export const get = async <P>(url: string): Promise<P | undefined> => {
     let response: Promise<P | undefined>;
     let resBuff = await getAuth(url);
     if (resBuff.status === 401) {
-        localStorage.clear();
+        localStorage.removeItem('auth');
         response = resBuff.ok ? resBuff.json() : new Promise(() => {});
     } else if (resBuff.status === 403) {
         const csrf = await getcsrf();
@@ -104,7 +104,7 @@ export const get = async <P>(url: string): Promise<P | undefined> => {
             resBuff = await getAuth(url);
             response = resBuff.ok ? resBuff.json() : new Promise(() => {});
         } else {
-            localStorage.clear();
+            localStorage.removeItem('auth');
             response = resBuff.ok ? resBuff.json() : new Promise(() => {});
         }
     } else if (resBuff.ok) {
