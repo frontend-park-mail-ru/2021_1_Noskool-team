@@ -107,7 +107,7 @@ export const Header = () => {
                                     {headerStore.serachResultTracks.slice(0, 4).map((el) => (
                                         <div class={header('search-together')}>
                                             <img src={TRACK_HOST + el.picture} class={header('search-photo')} />
-                                            <div>{el.tittle}</div>
+                                            <Link text={el?.tittle} to={LINKS.album + `/${el?.Album}`} />
                                         </div>
                                     ))}
                                 </div>
@@ -120,7 +120,7 @@ export const Header = () => {
                                     {headerStore.searchResultArtists.slice(0, 4).map((el) => (
                                         <div class={header('search-together')}>
                                             <img src={TRACK_HOST + el.picture} class={header('search-photo')} />
-                                            <div>{el.name}</div>
+                                            {/* <Link text={el.name} to={} /> */}
                                         </div>
                                     ))}
                                 </div>

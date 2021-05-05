@@ -20,6 +20,7 @@ export interface Track {
     picture: string;
     release_date: string;
     duration: string;
+    'Album': number;
 }
 
 export interface HeaderStore {
