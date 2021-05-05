@@ -13,8 +13,16 @@ import { AuthPage } from 'pages/AuthPage/AuthPage';
 import { MainPage } from 'pages/MainPage/MainPage';
 import { ProfilePage } from 'pages/ProfilePage/ProfilePage';
 import { getUser } from 'actions/user/user';
-import { PromoutePage } from 'pages/PromoutePage';
 import { requestsStore } from 'store/requests.store';
+import { Artists } from 'pages/TopArtists';
+import { MediatekaPage } from 'pages/Mediateka';
+import { Playlists } from 'pages/Playlists';
+import { CreatePlaylist } from 'pages/Playlists/CreatePlaylist';
+import { Albums } from 'pages/TopAlbums/TopAlbums';
+import { NeedAccessPage } from 'pages/NeedAccessPage/NeedAccessPage';
+import { Tracks } from 'pages/TopTracksPage';
+import { BillboardChart } from 'pages/BillboardChart';
+import { Playlist } from 'pages/Playlists/Playlist';
 
 import './app.scss';
 import { isMobile } from 'utils/isMobile';
@@ -28,7 +36,15 @@ const isPageExistsAuth = (): boolean => {
         !path.startsWith(LINKS.favorite) &&
         !path.startsWith(LINKS.album) &&
         path !== LINKS.auth &&
-        path !== LINKS.reg
+        path !== LINKS.reg &&
+        path !== LINKS.topArtists &&
+        !path.startsWith(LINKS.mediateka) &&
+        path !== LINKS.myPlaylists &&
+        path !== LINKS.createPlaylist &&
+        path !== LINKS.topAlbums &&
+        path !== LINKS.topTracks &&
+        path !== LINKS.billboard &&
+        !path.startsWith(LINKS.playlist)
     );
 };
 
@@ -55,12 +71,20 @@ export const App = () => {
                 {!isMobile() ? (
                     <div class={pageWrapper('page')}>
                         {path === LINKS.main && <MainPage />}
-                        {path === LINKS.profile && (isAuth ? <ProfilePage /> : <PromoutePage />)}
+                        {path === LINKS.profile && (isAuth ? <ProfilePage /> : <NeedAccessPage />)}
                         {path.startsWith(LINKS.album) && <AlbumPage />}
-                        {path.startsWith(LINKS.favorite) && (isAuth ? <FavoritePage /> : <PromoutePage />)}
+                        {path.startsWith(LINKS.favorite) && (isAuth ? <FavoritePage /> : <NeedAccessPage />)}
                         {isPageExistsAuth() && <ErrorPage />}
                         {path === LINKS.auth && <AuthPage />}
                         {path === LINKS.reg && <RegistrationPage />}
+                        {path === LINKS.topArtists && <Artists />}
+                        {path.startsWith(LINKS.mediateka) && (isAuth ? <MediatekaPage /> : <NeedAccessPage />)}
+                        {path === LINKS.myPlaylists && (isAuth ? <Playlists /> : <NeedAccessPage />)}
+                        {path === LINKS.createPlaylist && <CreatePlaylist />}
+                        {path === LINKS.topAlbums && <Albums />}
+                        {path === LINKS.topTracks && <Tracks />}
+                        {path === LINKS.billboard && <BillboardChart />}
+                        {path.startsWith(LINKS.playlist) && <Playlist />}
                     </div>
                 ) : (
                     <div />

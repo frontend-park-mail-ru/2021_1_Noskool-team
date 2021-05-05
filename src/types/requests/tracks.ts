@@ -3,7 +3,7 @@ interface Genres {
     title: string;
 }
 
-interface Musician {
+export interface Musician {
     'musician_id': number;
     name: string;
     description: string;
@@ -26,7 +26,7 @@ export interface TrackBack {
     genres: Genres[];
     musicians: Musician[];
     album: Album[];
-    in_favorite: boolean;
-    in_mediateka: boolean;
+    'in_favorite': boolean;
+    'in_mediateka': boolean;
     duration: string;
 }

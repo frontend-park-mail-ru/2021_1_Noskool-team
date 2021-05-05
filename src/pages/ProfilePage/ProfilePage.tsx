@@ -77,20 +77,6 @@ export const ProfilePage = () => {
                         initialName={profileStore.profile.login}
                         inputName={'Логин'}
                     />
-                    <ProfileInput
-                        input={profileForm.form.name}
-                        placeholder={'Измените email'}
-                        validators={[]}
-                        initialName={profileStore.profile.name}
-                        inputName={'Имя'}
-                    />
-                    <ProfileInput
-                        input={profileForm.form.lastName}
-                        placeholder={'Измените email'}
-                        validators={[]}
-                        initialName={profileStore.profile.lastName}
-                        inputName={'Фамилия'}
-                    />
                     <div class={page('div-photo')}>
                         <div class={page('name')}>Фото</div>
                         <div class={page('photo')}>

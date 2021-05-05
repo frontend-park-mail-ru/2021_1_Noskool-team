@@ -10,6 +10,8 @@ import { LeftChevronIcon, RightChevronIcon } from 'assets/icons';
 import { PlayerFrom } from 'types/store/player-store';
 
 import './style.scss';
+import { redirectTo } from 'utils/render';
+import { LINKS } from 'constants/links';
 
 const onClickTrack = (index: number) => () => {
     playerStore.playList = tracksStore.trackList.map((el, i) => ({
@@ -44,6 +46,10 @@ const onClickTrack = (index: number) => () => {
 
 const weekly = cn('weekly-top');
 const slider = cn('slide-items');
+
+const onClickWeekly = () => {
+    redirectTo(LINKS.topTracks);
+};
 
 let isNeedFetch = true;
 
@@ -89,7 +95,9 @@ export const Single = () => {
     return (
         <div class={weekly()}>
             <div class={weekly('legend')}>
-                <div class={weekly('title')}>{'Weekly Top Track'}</div>
+                <div class={weekly('title')} onclick={onClickWeekly}>
+                    {'Weekly Top Track'}
+                </div>
                 <div class={weekly('buttons')}>
                     <div onclick={prevItem} class={weekly('btn')}>
                         <LeftChevronIcon />

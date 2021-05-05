@@ -8,7 +8,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 15%;
+  margin-top: 30px;
   box-sizing: border-box;
 
   &__wrapper {
@@ -34,26 +34,65 @@
     color: $error;
   }
 
-  button {
+  &__sign-in {
     background-color: $pink;
     border-radius: 5px;
-    width: 325px;
+    width: 270px;
     height: 50px;
     color: $white;
-    font-size: 22px;
+    font-size: 21px;
     line-height: 25px;
     font-weight: 500;
     cursor: pointer;
     transform: scale(0.975, 0.975);
     transition: all 0.5s;
-
-    &:nth-last-child(1) {
-      margin-top: 15px;
-    }
+    margin-top: 15px;
 
     &:hover {
       transform: scale(1, 1);
     }
+  }
+
+  &__alternative {
+    margin-top: 60px;
+    color: $gray;
+  }
+
+  &__buttons {
+    display: flex;
+    margin-top: 15px;
+  }
+
+  &__button {
+    width: 48px;
+    height: 46px;
+    border-radius: 50px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    transform: scale(1, 1);
+    transition: all 0.5s;
+    cursor: pointer;
+
+    &:hover {
+      transform: scale(1.1, 1.1);
+    }
+
+    &--vk {
+      background-image: url(./img/vk.png);
+      margin-right: 20px;
+    }
+
+    &--google {
+      background-image: url(./img/gmail.png);
+      background-size: 90%;
+    }
+  }
+
+  &__reg {
+    margin-top: 5px;
+    color: $pink;
+    cursor: pointer;
   }
 }
 

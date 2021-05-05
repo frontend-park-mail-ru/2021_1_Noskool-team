@@ -16,6 +16,10 @@ const genres = cn('genres');
 
 let isNeedFetch = true;
 
+const onClickBillboard = () => {
+    redirectTo(LINKS.topAlbums);
+};
+
 export const DiscoverGenres = () => {
     if (isNeedFetch) {
         isNeedFetch = false;
@@ -25,8 +29,12 @@ export const DiscoverGenres = () => {
     return (
         <div class={genres()}>
             <div class={genres('titles')}>
-                <div class={genres('monthly-artists')}>Discover Genres</div>
-                <div class={genres('see-all')}>See All</div>
+                <div class={genres('monthly-artists')} onclick={onClickBillboard}>
+                    Discover Genres
+                </div>
+                <div class={genres('see-all')} onclick={onClickBillboard}>
+                    See All
+                </div>
             </div>
             <div class={genres('section')}>
                 {albumsStore.albums.map((item) => (
