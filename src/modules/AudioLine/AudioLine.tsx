@@ -245,16 +245,16 @@ const onClickMedia = () => {
 };
 
 const onSwipeTrack = () => {
-    console.log(123);
+    // console.log(123);
 };
 
 const toggle = () => {
     expandStore.isExpand = !expandStore.isExpand;
-    console.log(playlistStore.albumList.map((item) => item.tittle));
 };
 
 const onClickAddToPlaylist = (id_playlist: number) => () => {
     addTrackToPlaylist(id_playlist, playerStore.currentTrack.trackId);
+    requestsStore.onePlaylist = true;
 };
 
 export const AudioLine = () => {
@@ -322,33 +322,35 @@ export const AudioLine = () => {
                     <div>{playerStore.playList[playerStore.currentTrack.index]?.artist}</div>
                 </div>
             </div>
-            <div class={player('like')} onclick={toggle}>
-                <PlaylistsIcon />
-                <div class={player('menu', expandStore.isExpand ? 'expand' : '')}>
-                    <ul class={player('items-user')}>
-                        {playlistStore.albumList.map((item) => (
-                            <li onclick={onClickAddToPlaylist(item.playlist_id)}>{item.tittle}</li>
-                        ))}
-                    </ul>
-                </div>
-            </div>
-            {localStorage.getItem('auth') ? (
-                <div class={player('like-btns')}>
-                    <div
-                        class={player('like', playerStore.currentTrack.isFavorite ? 'checked' : '')}
-                        onclick={onClickFavorite}
-                    >
-                        <LikeIcon />
+            {localStorage.getItem('auth') === 'ok' && (
+                <div class={player('playlist-btns')}>
+                    <div class={player('playlist')} onclick={toggle}>
+                        <div class={player('playlist-btn')}>
+                            <PlaylistsIcon />
+                        </div>
+                        <div class={player('menu', expandStore.isExpand ? 'expand' : '')}>
+                            <ul class={player('items-user')}>
+                                {playlistStore.albumList.map((item) => (
+                                    <li onclick={onClickAddToPlaylist(item.playlist_id)}>{item.tittle}</li>
+                                ))}
+                            </ul>
+                        </div>
                     </div>
-                    <div
-                        class={player('add', playerStore.currentTrack.isMediateca ? 'checked' : '')}
-                        onclick={onClickMedia}
-                    >
-                        <PlusIcon />
+                    <div class={player('like-btns')}>
+                        <div
+                            class={player('like', playerStore.currentTrack.isFavorite ? 'checked' : '')}
+                            onclick={onClickFavorite}
+                        >
+                            <LikeIcon />
+                        </div>
+                        <div
+                            class={player('add', playerStore.currentTrack.isMediateca ? 'checked' : '')}
+                            onclick={onClickMedia}
+                        >
+                            <PlusIcon />
+                        </div>
                     </div>
                 </div>
-            ) : (
-                <div />
             )}
             <div class={player('controls')}>
                 <div class={player('prev-btn')} onclick={onClickPrev}>

@@ -7,6 +7,7 @@ import { playerStore } from 'store/player.store';
 import { onClickPlay } from 'modules/AudioLine/AudioLine';
 
 import './style.scss';
+import { requestsStore } from 'store/requests.store';
 
 const playlistPage = cn('playlist-page');
 
@@ -45,6 +46,11 @@ let previosId: number;
 export const Playlist = () => {
     const id = window.location.pathname.split('/');
 
+    if (requestsStore.onePlaylist) {
+        requestsStore.onePlaylist = false;
+        getOnePlaylist(id[id.length - 1]);
+    }
+
     if (Number(id[id.length - 1]) !== previosId) {
         previosId = Number(id[id.length - 1]);
         getOnePlaylist(id[id.length - 1]);
@@ -53,16 +59,16 @@ export const Playlist = () => {
     return (
         <div class={playlistPage()}>
             <div class={playlistPage('content')}>
-                <img src={TRACK_HOST + onePlaylistStore.playlist.picture} alt='' />
-                <div class={playlistPage('title')}>{onePlaylistStore.playlist.tittle}</div>
+                <img src={TRACK_HOST + onePlaylistStore.playlist?.picture} alt='' />
+                <div class={playlistPage('title')}>{onePlaylistStore.playlist?.tittle}</div>
                 <div class={playlistPage('songs-background')} />
                 <div class={playlistPage('songs-block')}>
                     <div class={playlistPage('songs')}>
                         {onePlaylistStore.playlist.tracks?.map((item, index) => (
                             <div class={playlistPage('song')} onclick={onClickTrack(index)}>
-                                <div class={playlistPage('number-song')}>{item.track_id}</div>
-                                <div class='song-name-song'>{item.tittle}</div>
-                                <div class={playlistPage('time-song')}>{item.duration}</div>
+                                <div class={playlistPage('number-song')}>{item?.track_id}</div>
+                                <div class='song-name-song'>{item?.tittle}</div>
+                                <div class={playlistPage('time-song')}>{item?.duration}</div>
                                 <div class={playlistPage('icons')}>
                                     <div class={playlistPage('like')} />
                                     <div class={playlistPage('add-song')} />

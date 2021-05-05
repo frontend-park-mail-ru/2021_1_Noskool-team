@@ -208,6 +208,28 @@
     }
   }
 
+  &__playlist-btn {
+    cursor: pointer;
+
+    svg {
+      width: 25px;
+      height: 25px;
+
+      path {
+        transition: all 0.3s;
+        stroke: $gray;
+      }
+    }
+
+    &:hover {
+      svg {
+        path {
+          stroke: $pink;
+        }
+      }
+    }
+  }
+
   &__track-line {
     flex-grow: 1;
     margin: 0 20px;
@@ -225,6 +247,11 @@
     display: flex;
     align-items: center;
     height: 100%;
+  }
+
+  &__playlist-btns {
+    display: flex;
+    align-items: center;
   }
 
   &__volume-icon {

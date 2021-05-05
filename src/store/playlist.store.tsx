@@ -7,12 +7,8 @@ export const playlistStore = proxy<AllPlaylists>({
     albumList: proxy<Playlist>([]),
 });
 
-// export const onePlaylistStore = proxy<OnePlaylist>({
-//     playlist: proxy<Playlist>([]),
-// });
-
 export const onePlaylistStore = proxy<OnePlaylist>({
-    album: proxy<Playlist>({
+    playlist: proxy<Playlist>({
         'playlist_id': 1,
         tittle: '',
         description: '',

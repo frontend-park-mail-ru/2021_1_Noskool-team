@@ -42,6 +42,7 @@ const onSubmitForm = (values: MouseEvent) => {
                 } else if (res.status === 200) {
                     localStorage.setItem('auth', 'ok');
                     requestsStore.profile = true;
+                    requestsStore.allPlaylists = true;
                     redirectTo(LINKS.main);
                 } else {
                     res.json().then((res) => {

@@ -27,6 +27,7 @@ import { Playlist } from 'pages/Playlists/Playlist';
 import './app.scss';
 import { isMobile } from 'utils/isMobile';
 import { rightMenuStore } from 'store/right-menu.store';
+import { getAllPlaylists } from 'actions/playlist/playlist';
 
 const isPageExistsAuth = (): boolean => {
     const path = window.location.pathname;
@@ -57,6 +58,11 @@ export const App = () => {
     if (requestsStore.profile) {
         requestsStore.profile = false;
         getUser();
+    }
+
+    if (requestsStore.allPlaylists) {
+        requestsStore.allPlaylists = false;
+        getAllPlaylists();
     }
 
     return (
