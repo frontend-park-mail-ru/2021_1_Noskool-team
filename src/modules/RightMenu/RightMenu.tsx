@@ -45,7 +45,7 @@ const chooseItem = (index: number, isMobile: boolean) => () => {
                 link = LINKS.mediatekaTracks;
                 break;
             case 7:
-                link = LINKS.playlist;
+                link = LINKS.myPlaylists;
                 break;
             case 8:
                 link = LINKS.profile;
@@ -106,7 +106,7 @@ export const RightMenu = () => {
         {
             text: 'Плейлисты',
             icon: DiagramIcon,
-            isActive: window.location.pathname.startsWith(LINKS.playlist),
+            isActive: window.location.pathname.startsWith(LINKS.myPlaylists),
             className: 'not-fill',
         },
         {

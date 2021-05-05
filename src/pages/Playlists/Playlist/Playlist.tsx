@@ -3,7 +3,6 @@ import { getOnePlaylist } from 'actions/playlist/playlist';
 import { TRACK_HOST } from 'constants/api';
 import { cn } from 'utils/cn';
 import { onePlaylistStore } from 'store/playlist.store';
-import { requestsStore } from 'store/requests.store';
 import { playerStore } from 'store/player.store';
 import { onClickPlay } from 'modules/AudioLine/AudioLine';
 
@@ -41,11 +40,13 @@ const onClickTrack = (index: number) => () => {
     }
 };
 
+let previosId: number;
+
 export const Playlist = () => {
     const id = window.location.pathname.split('/');
 
-    if (requestsStore.onePlaylist) {
-        requestsStore.onePlaylist = false;
+    if (Number(id[id.length - 1]) !== previosId) {
+        previosId = Number(id[id.length - 1]);
         getOnePlaylist(id[id.length - 1]);
     }
 
@@ -54,14 +55,13 @@ export const Playlist = () => {
             <div class={playlistPage('content')}>
                 <img src={TRACK_HOST + onePlaylistStore.playlist.picture} alt='' />
                 <div class={playlistPage('title')}>{onePlaylistStore.playlist.tittle}</div>
-                <div class={playlistPage('singer')}>Xavier Haas / A Road Through Synthwave</div>
                 <div class={playlistPage('songs-background')} />
                 <div class={playlistPage('songs-block')}>
                     <div class={playlistPage('songs')}>
-                        {onePlaylistStore.playlist.tracks.map((item, index) => (
+                        {onePlaylistStore.playlist.tracks?.map((item, index) => (
                             <div class={playlistPage('song')} onclick={onClickTrack(index)}>
                                 <div class={playlistPage('number-song')}>{item.track_id}</div>
-                                <div class='song-name-song'>{item?.tittle}</div>
+                                <div class='song-name-song'>{item.tittle}</div>
                                 <div class={playlistPage('time-song')}>{item.duration}</div>
                                 <div class={playlistPage('icons')}>
                                     <div class={playlistPage('like')} />

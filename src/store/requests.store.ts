@@ -13,4 +13,5 @@ export const requestsStore = proxy<RequestsStore>({
     mediatekaAlbums: true,
     allPlaylists: true,
     onePlaylist: true,
+    getAlbumId: true,
 });

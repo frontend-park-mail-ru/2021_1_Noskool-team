@@ -11,6 +11,7 @@ export const LINKS = {
     favoritePodcasts: '/favorite/podcasts',
 <<<<<<< HEAD
     weeklyTop: '/weekly',
+<<<<<<< HEAD
     artistsTop: '/artists',
 <<<<<<< HEAD
     billboard: '/billboard',
@@ -26,6 +27,8 @@ export const LINKS = {
     topAlbums: '/albums',
 >>>>>>> MEGA UPDATE
 =======
+=======
+>>>>>>> fix
     topArtists: '/top/artists',
     topAlbums: '/top/albums',
 >>>>>>> MEGA FIX
@@ -36,11 +39,15 @@ export const LINKS = {
     mediatekaPodcasts: '/mediateka/podcasts',
     topTracks: '/tracks',
     billboard: '/billboard',
-    playlist: '/playlist',
+    myPlaylists: '/myplaylists',
     createPlaylist: '/create',
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 >>>>>>> artist page
 =======
 >>>>>>> MEGA UPDATE
+=======
+    playlist: '/playlist',
+>>>>>>> fix
 };

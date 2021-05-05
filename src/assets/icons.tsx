@@ -235,19 +235,10 @@ export const CrossIcon = () => (
 );
 
 export const PlaylistsIcon = () => (
-    <svg
-        xmlns='http://www.w3.org/2000/svg'
-        enable-background='new 0 0 24 24'
-        height='24px'
-        viewBox='0 0 24 24'
-        width='24px'
-        fill='#000000'
-    >
-        <g>
-            <rect fill='none' height='24' width='24' />
-        </g>
-        <g>
-            <path d='M14,10H3v2h11V10z M14,6H3v2h11V6z M18,14v-4h-2v4h-4v2h4v4h2v-4h4v-2H18z M3,16h7v-2H3V16z' />
-        </g>
+    <svg width='15' height='15' viewBox='0 0 15 15' fill='none' xmlns='http://www.w3.org/2000/svg'>
+        <path
+            d='M7 3.5H15M7 11.5H15M1.5 1.5H3.5C4.05228 1.5 4.5 1.94772 4.5 2.5V4.5C4.5 5.05228 4.05228 5.5 3.5 5.5H1.5C0.947715 5.5 0.5 5.05228 0.5 4.5V2.5C0.5 1.94772 0.947715 1.5 1.5 1.5ZM1.5 9.5H3.5C4.05228 9.5 4.5 9.94772 4.5 10.5V12.5C4.5 13.0523 4.05228 13.5 3.5 13.5H1.5C0.947715 13.5 0.5 13.0523 0.5 12.5V10.5C0.5 9.94772 0.947715 9.5 1.5 9.5Z'
+            stroke='black'
+        />
     </svg>
 );

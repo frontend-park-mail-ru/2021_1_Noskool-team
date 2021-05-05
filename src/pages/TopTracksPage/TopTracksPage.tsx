@@ -4,6 +4,7 @@ import { onClickPlay } from 'modules/AudioLine/AudioLine';
 import { tracksStore } from 'store/main-page.store';
 import { playerStore } from 'store/player.store';
 import { requestsStore } from 'store/requests.store';
+import { TRACK_HOST } from 'constants/api';
 import { cn } from 'utils/cn';
 
 import './style.scss';
@@ -48,6 +49,7 @@ export const Tracks = () => {
 
     return (
         <div class={topTracks('')}>
+            {tracksStore.trackList.length !== 0 && <div class={topTracks('title')}>{'Популярные треки:'}</div>}
             <div class={topTracks('content')}>
                 <div class={topTracks('table')}>
                     {tracksStore.trackList.length !== 0 && (
@@ -61,12 +63,15 @@ export const Tracks = () => {
                     )}
                     {tracksStore.trackList.map((el, i) => (
                         <div class={topTracks('row', 'track')} onclick={onClickTrack(i)}>
-                            <div class={topTracks('cell')}>{`#${i + 1}`}</div>
-                            <div class={topTracks('cell')}>{el?.tittle || '???'}</div>
+                            <div class={topTracks('cell')}>{String(i + 1).padStart(2, '0')}</div>
+                            <div class={topTracks('cell')}>
+                                <img src={TRACK_HOST + el.picture} class={topTracks('photo')} />
+                                <div class={topTracks('name')}>{el?.tittle || '???'}</div>
+                            </div>
                             <div class={topTracks('cell')}>
                                 {el?.musicians?.map((el) => el?.name).join(', ') || '???'}
                             </div>
-                            <div class={topTracks('cell')}>{'3:32'}</div>
+                            <div class={topTracks('cell')}>{el.duration}</div>
                             <div class={topTracks('cell')}>
                                 <div />
                             </div>

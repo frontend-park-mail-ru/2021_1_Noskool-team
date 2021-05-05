@@ -18,7 +18,7 @@ const onSubmitForm = (e: MouseEvent) => {
         description: playlistForm.description.value,
         date: String(new Date()),
     }).then(() => {
-        redirectTo(LINKS.playlist);
+        redirectTo(LINKS.myPlaylists);
     });
 };
 

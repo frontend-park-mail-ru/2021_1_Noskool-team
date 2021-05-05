@@ -10,4 +10,5 @@ export interface RequestsStore {
     mediatekaAlbums: boolean;
     allPlaylists: boolean;
     onePlaylist: boolean;
+    getAlbumId: boolean;
 }

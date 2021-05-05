@@ -14,7 +14,9 @@ export const getAllPlaylists = async () => {
 
 export const getOnePlaylist = async (id: string) => {
     const response = await get<Playlist>(PLAYLIST + id);
-    onePlaylistStore.playlist = response;
+    if ('playlist_id' in response) {
+        onePlaylistStore.playlist = response;
+    }
 };
 
 interface createPlaylist {

@@ -15,7 +15,7 @@ import {
     VolumeTwoIcon,
     PlusIcon,
     LikeIcon,
-    // PlaylistsIcon,
+    PlaylistsIcon,
 } from 'assets/icons';
 import { requestsStore } from 'store/requests.store';
 import {
@@ -253,8 +253,8 @@ const toggle = () => {
     console.log(playlistStore.albumList.map((item) => item.tittle));
 };
 
-const onClickAddToPlaylist = (id_playlist: number, id_track: number) => () => {
-    addTrackToPlaylist(id_playlist, id_track);
+const onClickAddToPlaylist = (id_playlist: number) => () => {
+    addTrackToPlaylist(id_playlist, playerStore.currentTrack.trackId);
 };
 
 export const AudioLine = () => {
@@ -323,20 +323,15 @@ export const AudioLine = () => {
                 </div>
             </div>
             <div class={player('like')} onclick={toggle}>
-                <LikeIcon />
+                <PlaylistsIcon />
                 <div class={player('menu', expandStore.isExpand ? 'expand' : '')}>
                     <ul class={player('items-user')}>
                         {playlistStore.albumList.map((item) => (
-                            <li onclick={onClickAddToPlaylist(item.playlist_id, playerStore.currentTrack.trackId)}>
-                                {item.tittle}
-                            </li>
+                            <li onclick={onClickAddToPlaylist(item.playlist_id)}>{item.tittle}</li>
                         ))}
                     </ul>
                 </div>
             </div>
-            {/* <div class={player('play-btn', playerStore.isPlay ? 'pause' : '')} onclick={onClickPlay}>
-                {playerStore.isPlay ? <PauseIcon /> : <PlayIcon />}
-            </div> */}
             {localStorage.getItem('auth') ? (
                 <div class={player('like-btns')}>
                     <div
