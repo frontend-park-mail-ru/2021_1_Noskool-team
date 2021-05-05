@@ -242,3 +242,15 @@ export const PlaylistsIcon = () => (
         />
     </svg>
 );
+
+export const PlayListMenuIcon = () => (
+    <svg width='15' height='15' viewBox='0 0 15 15' fill='none' xmlns='http://www.w3.org/2000/svg'>
+        <path d='M4 7.5H15M0 7.5H2M4 3.5H15M0 3.5H2M4 11.5H15M0 11.5H2' stroke='black' />
+    </svg>
+);
+
+export const PlayMainTrackIcon = () => (
+    <svg width='15' height='15' viewBox='0 0 15 15' fill='none' xmlns='http://www.w3.org/2000/svg'>
+        <path d='M4.5 12.5V2.5L11.5 7.5L4.5 12.5Z' stroke='black' stroke-linejoin='round' />
+    </svg>
+);

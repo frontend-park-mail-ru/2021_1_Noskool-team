@@ -13,6 +13,7 @@ import {
     SettingsIcon,
     YetMobIcon,
     CrossIcon,
+    PlayListMenuIcon,
 } from 'assets/icons';
 import { cn } from 'utils/cn';
 
@@ -105,7 +106,7 @@ export const RightMenu = () => {
         },
         {
             text: 'Плейлисты',
-            icon: DiagramIcon,
+            icon: PlayListMenuIcon,
             isActive: window.location.pathname.startsWith(LINKS.myPlaylists),
             className: 'not-fill',
         },

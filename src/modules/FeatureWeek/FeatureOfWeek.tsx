@@ -8,6 +8,7 @@ import { cn } from 'utils/cn';
 import { PlayerFrom } from 'types/store/player-store';
 
 import './style.scss';
+import { PlayMainTrackIcon } from 'assets/icons';
 
 const onClickTrack = (index: number) => () => {
     playerStore.currentTrack = {
@@ -63,7 +64,9 @@ export const FeatureOfWeek = () => {
                     <div class={feature('song-name')}>{item?.tittle}</div>
                     <div class={feature('singers')}>{item?.musicians.map((artist) => artist?.name).join(', ')}</div>
                     <div class={feature('position-button')}>
-                        <div class={feature('play')} onclick={onClickTrack(index)}></div>
+                        <div class={feature('play')} onclick={onClickTrack(index)}>
+                            <PlayMainTrackIcon />
+                        </div>
                     </div>
                 </div>
             ))}

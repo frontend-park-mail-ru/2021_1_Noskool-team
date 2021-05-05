@@ -80,13 +80,26 @@
   &__play {
     @extend %button;
 
+    svg {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      height: 40px;
+      width: 40px;
+    }
+
     position: absolute;
     height: 68px;
     width: 68px;
     top: 303px;
     background-color: $white;
-    // background-image: url(../../icons/arrow_right_black_24dp.svg);
     background-size: 70px;
     background-repeat: no-repeat;
+    transition: all 0.5s;
+
+    &:hover {
+      transform: scale(1.05, 1.05);
+    }
   }
 }

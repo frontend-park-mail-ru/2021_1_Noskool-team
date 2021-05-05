@@ -49,8 +49,7 @@ const onSubmitForm = (values: MouseEvent) => {
         })
             .then((res) => {
                 if (res.status === 200) {
-                    localStorage.setItem('auth', 'true');
-                    redirectTo(LINKS.main);
+                    redirectTo(LINKS.auth);
                 } else {
                     res.json().then((res) => onSetError(res.error));
                 }

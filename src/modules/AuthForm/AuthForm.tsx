@@ -75,11 +75,11 @@ export const AuthForm = () => {
                 <button type='submit' class={formCn('sign-in')}>
                     {'Войти'}
                 </button>
-                <div class={formCn('alternative')}>{'Войти через'}</div>
+                {/* <div class={formCn('alternative')}>{'Войти через'}</div>
                 <div class={formCn('buttons')}>
                     <button class={formCn('button', 'vk')}></button>
                     <button class={formCn('button', 'google')}></button>
-                </div>
+                </div> */}
                 <div class={formCn('alternative')}>{'Нет аккаунта?'}</div>
                 <div class={formCn('reg')} onclick={onClickReg}>
                     {'Регистрация'}
