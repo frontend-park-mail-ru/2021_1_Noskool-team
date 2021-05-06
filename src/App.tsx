@@ -23,11 +23,12 @@ import { NeedAccessPage } from 'pages/NeedAccessPage/NeedAccessPage';
 import { Tracks } from 'pages/TopTracksPage';
 import { BillboardChart } from 'pages/BillboardChart';
 import { Playlist } from 'pages/Playlists/Playlist';
-
-import './app.scss';
 import { isMobile } from 'utils/isMobile';
 import { rightMenuStore } from 'store/right-menu.store';
 import { getAllPlaylists } from 'actions/playlist/playlist';
+import { ArtistPage } from 'pages/ArtistPage';
+
+import './app.scss';
 
 const isPageExistsAuth = (): boolean => {
     const path = window.location.pathname;
@@ -45,7 +46,8 @@ const isPageExistsAuth = (): boolean => {
         path !== LINKS.topAlbums &&
         path !== LINKS.topTracks &&
         path !== LINKS.billboard &&
-        !path.startsWith(LINKS.playlist)
+        !path.startsWith(LINKS.playlist) &&
+        !path.startsWith(LINKS.artist)
     );
 };
 
@@ -91,6 +93,7 @@ export const App = () => {
                         {path === LINKS.topTracks && <Tracks />}
                         {path === LINKS.billboard && <BillboardChart />}
                         {path.startsWith(LINKS.playlist) && <Playlist />}
+                        {path.startsWith(LINKS.artist) && <ArtistPage />}
                     </div>
                 ) : (
                     <div />
