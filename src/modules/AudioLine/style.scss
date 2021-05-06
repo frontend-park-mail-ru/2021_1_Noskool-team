@@ -67,6 +67,20 @@
     height: 100%;
   }
 
+  &__none {
+    pointer-events: none;
+    cursor: none;
+  }
+
+  &__playlists {
+    cursor: pointer;
+    margin-bottom: 5px;
+
+    &:hover {
+      color: $pink;
+    }
+  }
+
   &__name {
     width: 150px;
     white-space: pre;

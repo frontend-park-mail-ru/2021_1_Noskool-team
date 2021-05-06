@@ -33,12 +33,13 @@
     left: 50%;
     top: 50%;
     transform: translate(-50%, -70%);
-    z-index: 10;
+    // z-index: 10;
     height: calc(70% - 100px);
     opacity: 0.7;
     width: 500px;
     padding: 20px;
     box-sizing: border-box;
+    z-index: 0;
   }
 
   &__songs-block {
@@ -47,11 +48,12 @@
     left: 50%;
     top: 50%;
     transform: translate(-50%, -70%);
-    z-index: 11;
+    // z-index: 11;
     height: calc(70% - 100px);
     width: 500px;
     padding: 20px;
     box-sizing: border-box;
+    z-index: 0;
   }
 
   &__singer {

@@ -31,10 +31,7 @@ import { albumPageStore } from 'store/album-page.store';
 
 export const getAlbumById = async (id: number) => {
     const response = await get<Album>(ALBUM + `${id}`);
-    console.log('lera');
     if ('album_id' in response) {
         albumPageStore.album = response;
-        console.log('dfgh');
-        console.log(albumPageStore);
     }
 };

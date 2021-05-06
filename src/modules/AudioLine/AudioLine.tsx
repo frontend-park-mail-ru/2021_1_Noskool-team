@@ -330,9 +330,18 @@ export const AudioLine = () => {
                         </div>
                         <div class={player('menu', expandStore.isExpand ? 'expand' : '')}>
                             <ul class={player('items-user')}>
-                                {playlistStore.albumList.map((item) => (
-                                    <li onclick={onClickAddToPlaylist(item.playlist_id)}>{item.tittle}</li>
-                                ))}
+                                {playlistStore.albumList.length === 0 ? (
+                                    <div class={player('none')}>Нет плейлистов :(</div>
+                                ) : (
+                                    playlistStore.albumList.map((item) => (
+                                        <li
+                                            class={player('playlists')}
+                                            onclick={onClickAddToPlaylist(item.playlist_id)}
+                                        >
+                                            {item.tittle}
+                                        </li>
+                                    ))
+                                )}
                             </ul>
                         </div>
                     </div>
