@@ -22,4 +22,5 @@ export const LINKS = {
     myPlaylists: '/myplaylists',
     createPlaylist: '/create',
     playlist: '/playlist',
+    artist: '/artist',
 };

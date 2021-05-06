@@ -91,7 +91,11 @@ export const Header = () => {
                                     {headerStore.searchResultArtists.slice(0, 4).map((el) => (
                                         <div class={header('search-together')}>
                                             <img src={TRACK_HOST + el.picture} class={header('search-photo')} />
-                                            {/* <Link text={el.name} to={} /> */}
+                                            <Link
+                                                text={el.name}
+                                                to={LINKS.artist + `/${el.musician_id}`}
+                                                onClick={onBlureSearch}
+                                            />
                                         </div>
                                     ))}
                                 </div>
@@ -161,7 +165,11 @@ export const Header = () => {
                                     {headerStore.searchResultArtists.slice(0, 4).map((el) => (
                                         <div class={header('search-together')}>
                                             <img src={TRACK_HOST + el.picture} class={header('search-photo')} />
-                                            {/* <Link text={el.name} to={} /> */}
+                                            <Link
+                                                text={el.name}
+                                                to={LINKS.artist + `/${el.musician_id}`}
+                                                onClick={onBlureSearch}
+                                            />
                                         </div>
                                     ))}
                                 </div>
