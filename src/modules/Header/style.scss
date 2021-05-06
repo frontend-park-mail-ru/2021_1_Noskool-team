@@ -28,6 +28,14 @@
     box-shadow: 0 2px 8px rgb(0 0 0 / 15%);
     border-radius: 5px;
     color: $gray;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s;
+
+    &--expand {
+      opacity: 1;
+      pointer-events: all;
+    }
   }
 
   &__search-together {

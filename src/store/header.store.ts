@@ -7,4 +7,5 @@ export const headerStore = proxy<HeaderStore>({
     searchResultArtists: [],
     searchResultAlbums: [],
     serachResultTracks: [],
+    isExpandSearch: false,
 });

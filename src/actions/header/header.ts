@@ -8,8 +8,8 @@ export const getSearch = async (search: string) => {
         `${SEARCH}/?search=${search}`
     );
     if ('tracks' in response) {
-        headerStore.searchResultAlbums = [...response.albums];
-        headerStore.searchResultArtists = [...response.musicians];
-        headerStore.serachResultTracks = [...response.tracks];
+        headerStore.searchResultAlbums = response.albums;
+        headerStore.searchResultArtists = response.musicians;
+        headerStore.serachResultTracks = response.tracks;
     }
 };

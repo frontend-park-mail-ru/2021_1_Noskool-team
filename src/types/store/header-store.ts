@@ -25,6 +25,7 @@ export interface Track {
 
 export interface HeaderStore {
     isExpand: boolean;
+    isExpandSearch: boolean;
     search: string;
     searchResultArtists: Musician[];
     searchResultAlbums: Album[];
