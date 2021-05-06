@@ -61,6 +61,7 @@ export const Playlist = () => {
             <div class={playlistPage('content')}>
                 <img src={TRACK_HOST + onePlaylistStore.playlist?.picture} alt='' />
                 <div class={playlistPage('title')}>{onePlaylistStore.playlist?.tittle}</div>
+                <div class={playlistPage('description')}>{onePlaylistStore.playlist?.description}</div>
                 <div class={playlistPage('songs-background')} />
                 <div class={playlistPage('songs-block')}>
                     <div class={playlistPage('songs')}>
