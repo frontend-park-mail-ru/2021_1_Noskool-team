@@ -48,6 +48,7 @@ export const AlbumPageInner = () => {
     const id = window.location.pathname.split('/');
 
     if (Number(id[id.length - 1]) !== previosId) {
+        albumPageStore.album.tracks = [];
         previosId = Number(id[id.length - 1]);
         getAlbumById(Number(id[id.length - 1]));
     }

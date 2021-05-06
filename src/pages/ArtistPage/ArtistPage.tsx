@@ -47,6 +47,7 @@ export const ArtistPage = () => {
 
     if (Number(id[id.length - 1]) !== previosId) {
         previosId = Number(id[id.length - 1]);
+        artistPageStore.tracks = [];
         getArtistTracksById(Number(id[id.length - 1]));
         getArtistById(Number(id[id.length - 1]));
     }
