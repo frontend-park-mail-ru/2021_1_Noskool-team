@@ -48,6 +48,7 @@ const windowName = String(new Date().getTime());
 
 export const onClickPlay = () => {
     localStorage.setItem('name', windowName);
+    localStorage.setItem('lastTrack', JSON.stringify(playerStore.currentTrack));
     const player = getPlayer();
     if (playerStore.isPlay) {
         player.pause();
@@ -55,29 +56,6 @@ export const onClickPlay = () => {
     } else {
         playerStore.isPlay = true;
         player.play();
-    }
-};
-
-window.name = windowName;
-window.onload = () => {
-    localStorage.setItem('name', windowName);
-    const volume = localStorage.getItem('volume');
-
-    if (!volume) {
-        localStorage.setItem('volume', '1');
-        changeVolume(1);
-    } else {
-        changeVolume(Number(volume));
-    }
-};
-
-window.onstorage = () => {
-    if (localStorage.getItem('name') !== windowName) {
-        if (playerStore.isPlay) {
-            const player = getPlayer();
-            player.pause();
-            playerStore.isPlay = false;
-        }
     }
 };
 
@@ -93,10 +71,6 @@ const onClickNext = () => {
         player.pause();
         playerStore.isPlay = false;
     }
-    setTimeout(() => {
-        const trackLine = getTrackLine();
-        trackLine.value = String(0);
-    }, 100);
 };
 
 const onClickPrev = () => {
@@ -117,10 +91,6 @@ const onClickPrev = () => {
         player.pause();
         playerStore.isPlay = false;
     }
-    setTimeout(() => {
-        const trackLine = getTrackLine();
-        trackLine.value = String(0);
-    }, 100);
 };
 
 const changeVolume = (volume: number) => {
@@ -168,7 +138,7 @@ const onChangeTrackLine = () => {
 const onTimeUpdate = () => {
     const trackLine = getTrackLine();
     const player = getPlayer();
-    trackLine.value = String(player.currentTime / player.duration);
+    trackLine.value = String(player.currentTime / player.duration || 0);
 };
 
 const getVolumeIcon = () => {
@@ -244,17 +214,38 @@ const onClickAddToPlaylist = (id_playlist: number) => () => {
     requestsStore.onePlaylist = true;
 };
 
+window.name = windowName;
+window.onload = () => {
+    if (!localStorage.getItem('name')) {
+        localStorage.setItem('name', window.name);
+    }
+    const volume = localStorage.getItem('volume');
+    if (!volume) {
+        localStorage.setItem('volume', '1');
+        changeVolume(1);
+    } else {
+        changeVolume(Number(volume));
+    }
+    getPlayer().addEventListener('timeupdate', onTimeUpdate);
+};
+
+window.onstorage = () => {
+    if (localStorage.getItem('name') !== window.name) {
+        if (playerStore.isPlay) {
+            const player = getPlayer();
+            player.pause();
+            playerStore.isPlay = false;
+        }
+    }
+};
+
 const player = cn('player');
 
 export const AudioLine = () => {
     if (isMobile()) {
         return (
             <div class={player('', isMobile() ? 'mob' : '')} onswipe={isMobile() ? onSwipeTrack : undefined}>
-                <audio
-                    id={PLAYER_ID}
-                    ontimeupdate={onTimeUpdate}
-                    src={TRACK_HOST + playerStore.playList[playerStore.currentTrack.index]?.link}
-                >
+                <audio id={PLAYER_ID} src={TRACK_HOST + playerStore.playList[playerStore.currentTrack.index]?.link}>
                     <source
                         src={TRACK_HOST + playerStore.playList[playerStore.currentTrack.index]?.link}
                         type='audio/mpeg'
@@ -308,11 +299,7 @@ export const AudioLine = () => {
 
     return (
         <div class={player('', isMobile() ? 'mob' : '')} onswipe={isMobile() ? onSwipeTrack : undefined}>
-            <audio
-                id={PLAYER_ID}
-                ontimeupdate={onTimeUpdate}
-                src={TRACK_HOST + playerStore.playList[playerStore.currentTrack.index]?.link}
-            >
+            <audio id={PLAYER_ID} src={TRACK_HOST + playerStore.playList[playerStore.currentTrack.index]?.link}>
                 <source
                     src={TRACK_HOST + playerStore.playList[playerStore.currentTrack.index]?.link}
                     type='audio/mpeg'
@@ -403,7 +390,7 @@ export const AudioLine = () => {
                     min='0'
                     max='1'
                     step='0.01'
-                    value={0}
+                    value='0'
                 />
             </div>
             <div class={player('volume')}>

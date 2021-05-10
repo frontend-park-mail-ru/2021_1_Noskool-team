@@ -78,7 +78,7 @@ export const App = () => {
                 </div>
                 <div class={pageWrapper('page')}>
                     {!isMobile() ? (
-                        <div>
+                        <div class={pageWrapper('wrapper')}>
                             {path === LINKS.main && <MainPage />}
                             {path === LINKS.profile && (isAuth ? <ProfilePage /> : <NeedAccessPage />)}
                             {path.startsWith(LINKS.album) && <AlbumPage />}

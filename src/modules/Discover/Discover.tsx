@@ -30,10 +30,10 @@ export const DiscoverGenres = () => {
         <div class={genres()}>
             <div class={genres('titles')}>
                 <div class={genres('monthly-artists')} onclick={onClickBillboard}>
-                    Discover Genres
+                    {'Популярные альбомы'}
                 </div>
                 <div class={genres('see-all')} onclick={onClickBillboard}>
-                    See All
+                    {'Все >>'}
                 </div>
             </div>
             <div class={genres('section')}>

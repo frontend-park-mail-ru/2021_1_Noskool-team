@@ -118,8 +118,8 @@ const patchProps = (node: HTMLElement, props: Props, nextProps: Props) => {
     Object.keys(mergedProps).forEach((key: string) => {
         if (props !== null && nextProps !== null) {
             if (key.startsWith('on')) {
-                let eventType: 'onclick' | 'onblur' | 'ontimeupdate' | 'oninput' | 'onfocus' = 'onclick';
-                switch (key.substr(2)) {
+                let eventType: 'onclick' | 'onblur' | 'ontimeupdate' | 'oninput' | 'onfocus' | 'onsubmit';
+                switch (key) {
                     case 'onclick':
                         eventType = 'onclick';
                         break;
@@ -138,9 +138,7 @@ const patchProps = (node: HTMLElement, props: Props, nextProps: Props) => {
                 }
                 if (!nextProps[key]) {
                     node[eventType] = undefined;
-                } else if (!props[key]) {
-                    node[eventType] = nextProps[key];
-                } else if (props[key] !== nextProps[key]) {
+                } else if (!props[key] || props[key] !== nextProps[key]) {
                     node[eventType] = nextProps[key];
                 }
                 return;

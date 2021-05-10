@@ -7,7 +7,7 @@ interface Artists {
     picture: string;
 }
 
-interface ArtistTrack {
+export interface ArtistTrack {
     track_id: number;
     tittle: string;
     text: string;

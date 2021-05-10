@@ -22,7 +22,9 @@ const onBlureSearch = () => {
 
 const handleClickOutside = (event: any) => {
     if (document.getElementById('search-input') && !document.getElementById('search-input').contains(event.target)) {
-        onBlureSearch();
+        if (headerStore.isExpandSearch) {
+            onBlureSearch();
+        }
     }
 };
 

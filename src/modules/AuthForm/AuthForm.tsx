@@ -59,7 +59,7 @@ const onSubmitForm = (values: MouseEvent) => {
 export const AuthForm = () => {
     return (
         <div class={formCn('wrapper', isMobile() ? 'mob' : '')}>
-            <form onsubmit={onSubmitForm} class={formCn()}>
+            <form class={formCn()}>
                 <div class={formCn('title')}>{'Вход'}</div>
                 <Input
                     validators={[requaredValidator]}
@@ -73,7 +73,7 @@ export const AuthForm = () => {
                     input={authFormStore.form.fields.password}
                 />
                 <div class={formCn('error')}>{authFormStore.form.errorMsg}</div>
-                <button type='submit' class={formCn('sign-in')}>
+                <button onclick={onSubmitForm} class={formCn('sign-in')}>
                     {'Войти'}
                 </button>
                 {/* <div class={formCn('alternative')}>{'Войти через'}</div>

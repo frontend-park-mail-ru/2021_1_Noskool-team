@@ -7,6 +7,7 @@ import { redirectTo } from 'utils/render';
 import { cn } from 'utils/cn';
 
 import './style.scss';
+import { Link } from 'components/Link/Link';
 
 const topArtists = cn('top-artists');
 
@@ -25,22 +26,25 @@ export const TopArtists = () => {
     return (
         <div class={topArtists()}>
             <div class={topArtists('titles')}>
-                <div class={topArtists('monthly-artists')} onclick={onClickArtists}>
-                    Monthly Top Artists
-                </div>
+                <div class={topArtists('monthly-artists')}>{'Артисты месяца'}</div>
                 <div class={topArtists('see-all')} onclick={onClickArtists}>
-                    See All
+                    {'Все >>'}
                 </div>
             </div>
             <div class={topArtists('artists')}>
                 {artistsStore.artists.map((item) => (
-                    <div class={topArtists('find-artist')}>
-                        <img
-                            src={TRACK_HOST + item?.picture}
-                            class={topArtists('artists-photo')}
-                            title={item?.name}
-                        ></img>
-                    </div>
+                    <Link
+                        child={() => (
+                            <div class={topArtists('find-artist')}>
+                                <img
+                                    src={TRACK_HOST + item?.picture}
+                                    class={topArtists('artists-photo')}
+                                    title={item?.name}
+                                ></img>
+                            </div>
+                        )}
+                        to={LINKS.artist + `/${item.musician_id}`}
+                    />
                 ))}
             </div>
         </div>

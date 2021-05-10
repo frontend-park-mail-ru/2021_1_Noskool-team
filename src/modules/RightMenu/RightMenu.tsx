@@ -47,7 +47,7 @@ const chooseItem = (index: number, isMobile: boolean) => () => {
             case 3:
                 link = LINKS.myPlaylists;
                 break;
-            case 8:
+            case 7:
                 link = LINKS.profile;
                 break;
         }

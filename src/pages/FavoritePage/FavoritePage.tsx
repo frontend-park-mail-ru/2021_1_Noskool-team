@@ -21,10 +21,6 @@ const onClickArtists = () => {
     redirectTo(LINKS.favoriteArtists);
 };
 
-const onClickPodcasts = () => {
-    redirectTo(LINKS.favoritePodcasts);
-};
-
 export const FavoritePage = () => {
     return (
         <div class={favoritePage()}>
@@ -46,12 +42,6 @@ export const FavoritePage = () => {
                     class={favoritePage('tab', window.location.pathname === LINKS.favoriteArtists ? 'active' : '')}
                 >
                     {'Артисты'}
-                </div>
-                <div
-                    onclick={onClickPodcasts}
-                    class={favoritePage('tab', window.location.pathname === LINKS.favoritePodcasts ? 'active' : '')}
-                >
-                    {'Подкасты'}
                 </div>
             </div>
             <div class={favoritePage('content-wrapper')}>
