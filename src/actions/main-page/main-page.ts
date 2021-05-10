@@ -12,35 +12,35 @@ import { topTrack } from 'store/top-track.store';
 export const topOne = async () => {
     const response = await getMainPage<TrackBack[] | {}>(TOP_ONE);
     if (Array.isArray(response)) {
-        topTrack.trackList = [...topTrack.trackList, ...response];
+        topTrack.trackList = [...response];
     }
 };
 
 export const getWeeklyTop = async () => {
     const response = await getMainPage<TrackBack[] | {}>(WEEKLY_TOP);
     if (Array.isArray(response)) {
-        tracksStore.trackList = [...tracksStore.trackList, ...response];
+        tracksStore.trackList = [...response];
     }
 };
 
 export const getBillboardChart = async () => {
     const response = await getMainPage<TrackBack[] | {}>(BILLBOARD_CHART);
     if (Array.isArray(response)) {
-        billboardChartStore.trackList = [...billboardChartStore.trackList, ...response];
+        billboardChartStore.trackList = [...response];
     }
 };
 
 export const getTopArtists = async () => {
     const response = await getMainPage<Artists[] | {}>(TOP_ARTIST);
     if (Array.isArray(response)) {
-        artistsStore.artists = [...artistsStore.artists, ...response];
+        artistsStore.artists = [...response];
     }
 };
 
 export const getDiscovers = async () => {
     const response = await getMainPage<Album[] | {}>(DISCOVERS);
     if (Array.isArray(response)) {
-        albumsStore.albums = [...albumsStore.albums, ...response];
+        albumsStore.albums = [...response];
     }
 };
 

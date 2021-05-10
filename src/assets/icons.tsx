@@ -15,6 +15,15 @@ export const LikeIcon = () => (
     </svg>
 );
 
+export const LikeFillIcon = () => (
+    <svg width='15' height='13' viewBox='0 0 15 13' fill='none' xmlns='http://www.w3.org/2000/svg'>
+        <path
+            d='M4.03553 0C1.80677 0 0 1.80677 0 4.03553C0 5.10582 0.42517 6.13228 1.18198 6.88909L7.14645 12.8536C7.34171 13.0488 7.65829 13.0488 7.85355 12.8536L13.818 6.88909C14.5748 6.13228 15 5.10582 15 4.03553C15 1.80677 13.1932 0 10.9645 0C9.89418 0 8.86772 0.425171 8.11091 1.18198L7.5 1.79289L6.88909 1.18198C6.13228 0.425171 5.10582 0 4.03553 0Z'
+            fill='black'
+        />
+    </svg>
+);
+
 export const HomeIcon = () => (
     <svg width='15' height='15' viewBox='0 0 15 15' fill='none'>
         <path
@@ -37,15 +46,6 @@ export const HeadPhonesIcon = () => (
     <svg width='15' height='15' viewBox='0 0 15 15' fill='none'>
         <path
             d='M1.5 9.5H2.5C3.05228 9.5 3.5 9.94772 3.5 10.5V13.5C3.5 14.0523 3.05228 14.5 2.5 14.5H1.5C0.947715 14.5 0.5 14.0523 0.5 13.5V10.5C0.5 9.94772 0.947715 9.5 1.5 9.5ZM1.5 9.5V6.5C1.5 3.18629 4.18629 0.5 7.5 0.5C10.8137 0.5 13.5 3.18629 13.5 6.5V9.5M13.5 9.5H12.5C11.9477 9.5 11.5 9.94772 11.5 10.5V13.5C11.5 14.0523 11.9477 14.5 12.5 14.5H13.5C14.0523 14.5 14.5 14.0523 14.5 13.5V10.5C14.5 9.94772 14.0523 9.5 13.5 9.5Z'
-            stroke='black'
-        />
-    </svg>
-);
-
-export const MicroPhone = () => (
-    <svg width='15' height='15' viewBox='0 0 15 15' fill='none'>
-        <path
-            d='M2.5 4V6.5C2.5 9.26142 4.73858 11.5 7.5 11.5M12.5 4V6.5C12.5 9.26142 10.2614 11.5 7.5 11.5M7.5 11.5V15M5 14.5H10M9.5 2.5V6.5C9.5 7.60457 8.60457 8.5 7.5 8.5C6.39543 8.5 5.5 7.60457 5.5 6.5V2.5C5.5 1.39543 6.39543 0.5 7.5 0.5C8.60457 0.5 9.5 1.39543 9.5 2.5Z'
             stroke='black'
         />
     </svg>
@@ -192,6 +192,17 @@ export const PauseIcon = () => (
 export const OkIcon = () => (
     <svg width='25' height='25' viewBox='0 0 25 25' fill='none' xmlns='http://www.w3.org/2000/svg'>
         <path d='M1.66669 11.6667L9.16669 19.1667L23.3334 5' stroke='#61B15A' stroke-linecap='square' />
+    </svg>
+);
+
+export const OkFillIcon = () => (
+    <svg width='15' height='15' viewBox='0 0 15 15' fill='none' xmlns='http://www.w3.org/2000/svg'>
+        <path
+            fill-rule='evenodd'
+            clip-rule='evenodd'
+            d='M14.7071 3.00001L5.5 12.2071L0.292892 7.00001L0.999999 6.29291L5.5 10.7929L14 2.29291L14.7071 3.00001Z'
+            fill='black'
+        />
     </svg>
 );
 

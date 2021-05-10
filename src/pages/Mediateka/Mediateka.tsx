@@ -21,10 +21,6 @@ const onClickArtists = () => {
     redirectTo(LINKS.mediatekaArtists);
 };
 
-const onClickPodcasts = () => {
-    redirectTo(LINKS.mediatekaPodcasts);
-};
-
 export const MediatekaPage = () => {
     return (
         <div class={mediatekaPage()}>
@@ -46,12 +42,6 @@ export const MediatekaPage = () => {
                     class={mediatekaPage('tab', window.location.pathname === LINKS.mediatekaArtists ? 'active' : '')}
                 >
                     {'Артисты'}
-                </div>
-                <div
-                    onclick={onClickPodcasts}
-                    class={mediatekaPage('tab', window.location.pathname === LINKS.mediatekaPodcasts ? 'active' : '')}
-                >
-                    {'Подкасты'}
                 </div>
             </div>
             <div class={mediatekaPage('content-wrapper')}>

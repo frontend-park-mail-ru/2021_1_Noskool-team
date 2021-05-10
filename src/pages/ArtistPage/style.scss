@@ -19,66 +19,8 @@
     font-size: 36px;
   }
 
-  &__row {
-    width: 100%;
-    display: flex;
-    align-items: center;
-
-    &--header {
-      border-bottom: 1px solid $borders;
-    }
-
-    &--track {
-      cursor: pointer;
-      transition: all 0.3s;
-
-      &:hover {
-        background-color: $cyan-light;
-        color: $white;
-      }
-    }
-  }
-
   &__desc {
     margin: 20px 0;
     color: $gray;
-  }
-
-  &__cell {
-    padding: 10px;
-    height: 50px;
-    box-sizing: border-box;
-    white-space: pre;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-
-    &:nth-child(1) {
-      border-right: 1px solid $borders;
-      width: 50px;
-    }
-
-    &:nth-child(2) {
-      width: 270px;
-      border-right: 1px solid $borders;
-    }
-
-    &:nth-child(3) {
-      width: 220px;
-      border-right: 1px solid $borders;
-    }
-
-    &:nth-child(4) {
-      width: 70px;
-      border-right: 1px solid $borders;
-    }
-  }
-
-  &__photo {
-    width: 30px;
-    height: 30px;
-    margin-right: 20px;
-    border-radius: 5px;
   }
 }

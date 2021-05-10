@@ -16,6 +16,8 @@ import {
     PlusIcon,
     LikeIcon,
     PlaylistsIcon,
+    LikeFillIcon,
+    OkFillIcon,
 } from 'assets/icons';
 import { requestsStore } from 'store/requests.store';
 import {
@@ -26,12 +28,11 @@ import {
     getBillboardChart,
 } from 'actions/main-page/main-page';
 import { LINKS } from 'constants/links';
-import { PlayerFrom } from 'types/store/player-store';
-import { billboardChartStore, tracksStore } from 'store/main-page.store';
-import { topTrack } from 'store/top-track.store';
 import { isMobile } from 'utils/isMobile';
+import { redirectTo } from 'utils/render';
 
 import './style.scss';
+import { Link } from 'components/Link/Link';
 
 const PLAYER_ID = 'PLAYER_ID';
 const VOLUME_ID = 'VOLUME_ID';
@@ -47,6 +48,7 @@ const windowName = String(new Date().getTime());
 
 export const onClickPlay = () => {
     localStorage.setItem('name', windowName);
+    localStorage.setItem('lastTrack', JSON.stringify(playerStore.currentTrack));
     const player = getPlayer();
     if (playerStore.isPlay) {
         player.pause();
@@ -54,20 +56,6 @@ export const onClickPlay = () => {
     } else {
         playerStore.isPlay = true;
         player.play();
-    }
-};
-
-window.name = windowName;
-window.onload = () => {
-    localStorage.setItem('name', windowName);
-};
-window.onstorage = () => {
-    if (localStorage.getItem('name') !== windowName) {
-        if (playerStore.isPlay) {
-            const player = getPlayer();
-            player.pause();
-            playerStore.isPlay = false;
-        }
     }
 };
 
@@ -83,10 +71,6 @@ const onClickNext = () => {
         player.pause();
         playerStore.isPlay = false;
     }
-    setTimeout(() => {
-        const trackLine = getTrackLine();
-        trackLine.value = String(0);
-    }, 100);
 };
 
 const onClickPrev = () => {
@@ -107,21 +91,19 @@ const onClickPrev = () => {
         player.pause();
         playerStore.isPlay = false;
     }
-    setTimeout(() => {
-        const trackLine = getTrackLine();
-        trackLine.value = String(0);
-    }, 100);
 };
 
 const changeVolume = (volume: number) => {
+    localStorage.setItem('volume', String(volume));
+    playerStore.volume = volume;
     if (volume === 0) {
-        playerStore.volume = 0;
+        playerStore.volumeIcon = 0;
     } else if (volume > 0 && volume < 0.3) {
-        playerStore.volume = 1;
+        playerStore.volumeIcon = 1;
     } else if (volume >= 0.3 && volume < 0.6) {
-        playerStore.volume = 2;
+        playerStore.volumeIcon = 2;
     } else {
-        playerStore.volume = 3;
+        playerStore.volumeIcon = 3;
     }
 };
 
@@ -156,11 +138,11 @@ const onChangeTrackLine = () => {
 const onTimeUpdate = () => {
     const trackLine = getTrackLine();
     const player = getPlayer();
-    trackLine.value = String(player.currentTime / player.duration);
+    trackLine.value = String(player.currentTime / player.duration || 0);
 };
 
 const getVolumeIcon = () => {
-    switch (playerStore.volume) {
+    switch (playerStore.volumeIcon) {
         case 0:
             return SoundOffIcon;
         case 1:
@@ -169,27 +151,6 @@ const getVolumeIcon = () => {
             return VolumeTwoIcon;
         case 3:
             return VolumeThreeIcon;
-    }
-};
-
-const player = cn('player');
-
-const fixState = (favorite: boolean, mediateca: boolean, index: number): void => {
-    switch (playerStore.from) {
-        case PlayerFrom.BilboardCharts:
-            billboardChartStore.trackList[index].in_mediateka = mediateca;
-            billboardChartStore.trackList[index].in_favorite = favorite;
-            break;
-        case PlayerFrom.FeatureOfWeek:
-            topTrack.trackList[index].in_mediateka = mediateca;
-            topTrack.trackList[index].in_favorite = favorite;
-            break;
-        case PlayerFrom.Single:
-            tracksStore.trackList[index].in_mediateka = mediateca;
-            tracksStore.trackList[index].in_favorite = favorite;
-            break;
-        default:
-            break;
     }
 };
 
@@ -204,7 +165,6 @@ const onClickFavorite = () => {
             playerStore.currentTrack.isFavorite = true;
             playerStore.currentTrack.isMediateca = true;
             playerStore.playList = buffer;
-            fixState(true, true, index);
         });
     } else {
         deleteFromFavourites(playerStore.currentTrack.trackId).then(() => {
@@ -213,7 +173,6 @@ const onClickFavorite = () => {
             buffer[index].isFavorite = false;
             playerStore.currentTrack.isFavorite = false;
             playerStore.playList = buffer;
-            fixState(false, true, index);
         });
     }
 };
@@ -226,7 +185,6 @@ const onClickMedia = () => {
             buffer[index].isMediateca = true;
             playerStore.currentTrack.isMediateca = true;
             playerStore.playList = buffer;
-            fixState(false, true, index);
         });
     } else {
         deleteFromMediateca(playerStore.currentTrack.trackId).then(() => {
@@ -236,7 +194,6 @@ const onClickMedia = () => {
             playerStore.currentTrack.isFavorite = false;
             playerStore.currentTrack.isMediateca = false;
             playerStore.playList = buffer;
-            fixState(false, false, index);
         });
     }
     if (location.pathname === LINKS.main) {
@@ -257,15 +214,38 @@ const onClickAddToPlaylist = (id_playlist: number) => () => {
     requestsStore.onePlaylist = true;
 };
 
+window.name = windowName;
+window.onload = () => {
+    if (!localStorage.getItem('name')) {
+        localStorage.setItem('name', window.name);
+    }
+    const volume = localStorage.getItem('volume');
+    if (!volume) {
+        localStorage.setItem('volume', '1');
+        changeVolume(1);
+    } else {
+        changeVolume(Number(volume));
+    }
+    getPlayer().addEventListener('timeupdate', onTimeUpdate);
+};
+
+window.onstorage = () => {
+    if (localStorage.getItem('name') !== window.name) {
+        if (playerStore.isPlay) {
+            const player = getPlayer();
+            player.pause();
+            playerStore.isPlay = false;
+        }
+    }
+};
+
+const player = cn('player');
+
 export const AudioLine = () => {
     if (isMobile()) {
         return (
             <div class={player('', isMobile() ? 'mob' : '')} onswipe={isMobile() ? onSwipeTrack : undefined}>
-                <audio
-                    id={PLAYER_ID}
-                    ontimeupdate={onTimeUpdate}
-                    src={TRACK_HOST + playerStore.playList[playerStore.currentTrack.index]?.link}
-                >
+                <audio id={PLAYER_ID} src={TRACK_HOST + playerStore.playList[playerStore.currentTrack.index]?.link}>
                     <source
                         src={TRACK_HOST + playerStore.playList[playerStore.currentTrack.index]?.link}
                         type='audio/mpeg'
@@ -275,7 +255,17 @@ export const AudioLine = () => {
                     <img src={TRACK_HOST + playerStore.playList[playerStore.currentTrack.index]?.img} alt='' />
                     <div class={player('name')}>
                         {playerStore.playList[playerStore.currentTrack.index]?.name}
-                        <div>{playerStore.playList[playerStore.currentTrack.index]?.artist}</div>
+                        <div>
+                            {playerStore.playList[playerStore.currentTrack.index]?.artists.map((artist, index) => (
+                                <div onclick={onClickArtist(artist.musician_id)}>
+                                    {`${artist.name}${
+                                        index === playerStore.playList[playerStore.currentTrack.index]?.artists.length
+                                            ? ''
+                                            : ', '
+                                    }`}
+                                </div>
+                            ))}
+                        </div>
                     </div>
                 </div>
                 <div class={player('play-btn', playerStore.isPlay ? 'pause' : '')} onclick={onClickPlay}>
@@ -303,13 +293,13 @@ export const AudioLine = () => {
         );
     }
 
+    const onClickArtist = (id: number) => () => {
+        redirectTo(`${LINKS.artist}/${id}`);
+    };
+
     return (
         <div class={player('', isMobile() ? 'mob' : '')} onswipe={isMobile() ? onSwipeTrack : undefined}>
-            <audio
-                id={PLAYER_ID}
-                ontimeupdate={onTimeUpdate}
-                src={TRACK_HOST + playerStore.playList[playerStore.currentTrack.index]?.link}
-            >
+            <audio id={PLAYER_ID} src={TRACK_HOST + playerStore.playList[playerStore.currentTrack.index]?.link}>
                 <source
                     src={TRACK_HOST + playerStore.playList[playerStore.currentTrack.index]?.link}
                     type='audio/mpeg'
@@ -319,7 +309,21 @@ export const AudioLine = () => {
                 <img src={TRACK_HOST + playerStore.playList[playerStore.currentTrack.index]?.img} alt='' />
                 <div class={player('name')}>
                     {playerStore.playList[playerStore.currentTrack.index]?.name}
-                    <div>{playerStore.playList[playerStore.currentTrack.index]?.artist}</div>
+                    <div>
+                        {playerStore.playList[playerStore.currentTrack.index]?.artists.map((artist, index) => (
+                            <Link
+                                child={() =>
+                                    `${artist.name}${
+                                        index + 1 ===
+                                        playerStore.playList[playerStore.currentTrack.index]?.artists.length
+                                            ? ''
+                                            : ', '
+                                    }`
+                                }
+                                to={LINKS.artist + `/${artist.musician_id}`}
+                            />
+                        ))}
+                    </div>
                 </div>
             </div>
             {localStorage.getItem('auth') === 'ok' && (
@@ -351,12 +355,18 @@ export const AudioLine = () => {
                             onclick={onClickFavorite}
                         >
                             <LikeIcon />
+                            <div>
+                                <LikeFillIcon />
+                            </div>
                         </div>
                         <div
                             class={player('add', playerStore.currentTrack.isMediateca ? 'checked' : '')}
                             onclick={onClickMedia}
                         >
                             <PlusIcon />
+                            <div>
+                                <OkFillIcon />
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -387,7 +397,15 @@ export const AudioLine = () => {
                 <div class={player('volume-icon')} onclick={onClickVolume}>
                     {getVolumeIcon()()}
                 </div>
-                <input id={VOLUME_ID} oninput={onChangeVolume} type='range' min='0' max='1' step='0.01' value='1' />
+                <input
+                    id={VOLUME_ID}
+                    oninput={onChangeVolume}
+                    type='range'
+                    min='0'
+                    max='1'
+                    step='0.01'
+                    value={localStorage.getItem('volume')}
+                />
             </div>
         </div>
     );

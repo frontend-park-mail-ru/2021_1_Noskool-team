@@ -1,8 +1,8 @@
-/* eslint-disable no-unused-vars */
-export enum PlayerFrom {
-    BilboardCharts,
-    FeatureOfWeek,
-    Single,
+interface Musician {
+    'musician_id': number;
+    name: string;
+    description: string;
+    picture: string;
 }
 
 export interface CurrentTrack {
@@ -10,7 +10,7 @@ export interface CurrentTrack {
     link: string;
     img: string;
     name: string;
-    artist: string;
+    artists: Musician[];
     trackId: number;
     isFavorite: boolean;
     isMediateca: boolean;
@@ -19,11 +19,11 @@ export interface CurrentTrack {
 export interface PlayerStore {
     currentTrack: CurrentTrack;
     isPlay: boolean;
+    volumeIcon: number;
     volume: number;
     playList: CurrentTrack[];
     currentTime: number;
     durationTime: number;
-    from: PlayerFrom;
 }
 
 export interface Expand {

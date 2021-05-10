@@ -23,7 +23,6 @@ export const Artists = () => {
                     <div class={topArtists('artist')}>
                         <img class={topArtists('photo')} src={TRACK_HOST + item?.picture} />
                         <div class={topArtists('name')}>{item?.name}</div>
-                        {/* <div class={topArtists('genre')}>{item?.genres.map((genre) => genre?.title).join(', ')}</div> */}
                     </div>
                 ))}
             </div>

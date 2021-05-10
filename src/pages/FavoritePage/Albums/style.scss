@@ -18,7 +18,6 @@
   &__content-wrapper {
     max-height: calc(100vh - 320px);
     overflow: auto;
-    margin-bottom: 75px;
     box-sizing: border-box;
 
     &::-webkit-scrollbar {

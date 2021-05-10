@@ -94,6 +94,12 @@
       font-size: 12px;
       margin-top: 2px;
       color: $gray;
+      cursor: pointer;
+      transition: all 0.3s;
+
+      &:hover {
+        opacity: 0.6;
+      }
     }
   }
 
@@ -119,10 +125,12 @@
     width: 25px;
     height: 25px;
     margin: 0 10px;
+    position: relative;
 
     svg {
       width: 25px;
       height: 25px;
+      position: absolute;
 
       path {
         transition: all 0.3s;
@@ -130,11 +138,20 @@
       }
     }
 
+    div {
+      opacity: 0;
+      transition: all 0.3s;
+    }
+
     &--checked {
       svg {
         path {
           fill: $pink;
         }
+      }
+
+      div {
+        opacity: 1;
       }
     }
 
@@ -194,10 +211,18 @@
     width: 25px;
     height: 25px;
     margin: 0 10px;
+    position: relative;
+
+    div {
+      opacity: 0;
+      transition: all 0.3s;
+    }
 
     svg {
       width: 25px;
       height: 25px;
+      position: absolute;
+      transition: all 0.3s;
 
       path {
         transition: all 0.3s;
@@ -207,8 +232,19 @@
 
     &--checked {
       svg {
+        opacity: 0;
+
         path {
-          stroke: $pink;
+          fill: $pink;
+          stroke: none;
+        }
+      }
+
+      div {
+        opacity: 1;
+
+        svg {
+          opacity: 1;
         }
       }
     }
@@ -217,6 +253,14 @@
       svg {
         path {
           stroke: $pink;
+        }
+      }
+
+      div {
+        svg {
+          path {
+            stroke: none;
+          }
         }
       }
     }

@@ -6,7 +6,6 @@ import {
     HomeIcon,
     SoundOnIcon,
     HeadPhonesIcon,
-    MicroPhone,
     LikeInRoundIcon,
     TargetIcon,
     DiagramIcon,
@@ -45,10 +44,10 @@ const chooseItem = (index: number, isMobile: boolean) => () => {
             case 4:
                 link = LINKS.mediatekaTracks;
                 break;
-            case 7:
+            case 3:
                 link = LINKS.myPlaylists;
                 break;
-            case 8:
+            case 7:
                 link = LINKS.profile;
                 break;
         }
@@ -82,9 +81,9 @@ export const RightMenu = () => {
             className: 'not-fill',
         },
         {
-            text: 'Подкасты',
-            icon: MicroPhone,
-            isActive: false,
+            text: 'Плейлисты',
+            icon: PlayListMenuIcon,
+            isActive: window.location.pathname.startsWith(LINKS.myPlaylists),
             className: 'not-fill',
         },
         {
@@ -105,12 +104,6 @@ export const RightMenu = () => {
             isActive: false,
         },
         {
-            text: 'Плейлисты',
-            icon: PlayListMenuIcon,
-            isActive: window.location.pathname.startsWith(LINKS.myPlaylists),
-            className: 'not-fill',
-        },
-        {
             text: 'Настройки',
             icon: SettingsIcon,
             isActive: window.location.pathname === LINKS.profile,
@@ -125,9 +118,9 @@ export const RightMenu = () => {
             isActive: window.location.pathname === '/',
         },
         {
-            text: 'Подкасты',
-            icon: MicroPhone,
-            isActive: false,
+            text: 'Плейлисты',
+            icon: PlayListMenuIcon,
+            isActive: window.location.pathname.startsWith(LINKS.myPlaylists),
             className: 'not-fill',
         },
         {
