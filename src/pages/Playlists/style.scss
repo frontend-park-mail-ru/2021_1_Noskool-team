@@ -3,10 +3,11 @@
 .mediateka-albums {
   background-color: $white;
   border-radius: 50px 0 0 50px;
-  width: 100%;
+  width: calc(100% - 15px);
   box-sizing: border-box;
   padding: 30px;
   max-height: calc(100% - 50px);
+  margin: 15px 0 15px 15px;
 
   &__header {
     display: flex;

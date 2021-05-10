@@ -5,7 +5,6 @@ import { onClickPlay } from 'modules/AudioLine/AudioLine';
 import { getBillboardChart } from 'actions/main-page/main-page';
 import { TRACK_HOST } from 'constants/api';
 import { cn } from 'utils/cn';
-import { PlayerFrom } from 'types/store/player-store';
 
 import './style.scss';
 
@@ -15,7 +14,7 @@ const onClickTrack = (index: number) => () => {
         index: i,
         link: el?.audio,
         name: el?.tittle,
-        artist: el?.musicians?.map((el) => el?.name).join(', '),
+        artists: el?.musicians,
         isFavorite: el?.in_favorite,
         isMediateca: el?.in_mediateka,
         trackId: el?.track_id,
@@ -25,13 +24,12 @@ const onClickTrack = (index: number) => () => {
         index: index,
         link: billboardChartStore.trackList[index]?.audio,
         name: billboardChartStore.trackList[index]?.tittle,
-        artist: billboardChartStore.trackList[index]?.musicians?.map((el) => el?.name).join(', '),
+        artists: billboardChartStore.trackList[index]?.musicians,
         isFavorite: billboardChartStore.trackList[index].in_favorite,
         isMediateca: billboardChartStore.trackList[index].in_mediateka,
         trackId: billboardChartStore.trackList[index].track_id,
     };
     playerStore.currentTime = 0;
-    playerStore.from = PlayerFrom.BilboardCharts;
     if (!playerStore.isPlay) {
         onClickPlay();
     } else {

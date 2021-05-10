@@ -67,7 +67,7 @@ export const createDOM = (element: VNode | string): Element | Text => {
     if (element.props) {
         Object.entries(element.props).forEach(([key, value]) => {
             if (key.startsWith('on')) {
-                node.addEventListener(key.substr(2), value);
+                node.onclick = value;
             } else {
                 node.setAttribute(key, value);
             }
@@ -81,7 +81,7 @@ export const createDOM = (element: VNode | string): Element | Text => {
     return node;
 };
 
-export const patchDom = (node: Element, vNode: VNode | string, vNewNode: VNode | string): void => {
+export const patchDom = (node: HTMLElement, vNode: VNode | string, vNewNode: VNode | string): void => {
     if (vNewNode === undefined) {
         node.remove();
         return;
@@ -112,30 +112,52 @@ export const patchDom = (node: Element, vNode: VNode | string, vNewNode: VNode |
     return;
 };
 
-const patchProps = (node: Element, props: Props, nextProps: Props) => {
+const patchProps = (node: HTMLElement, props: Props, nextProps: Props) => {
     const mergedProps = { ...props, ...nextProps };
 
     Object.keys(mergedProps).forEach((key: string) => {
         if (props !== null && nextProps !== null) {
+            if (key.startsWith('on')) {
+                let eventType: 'onclick' | 'onblur' | 'ontimeupdate' | 'oninput' | 'onfocus' = 'onclick';
+                switch (key.substr(2)) {
+                    case 'onclick':
+                        eventType = 'onclick';
+                        break;
+                    case 'onblur':
+                        eventType = 'onblur';
+                        break;
+                    case 'ontimeupdate':
+                        eventType = 'ontimeupdate';
+                        break;
+                    case 'oninput':
+                        eventType = 'oninput';
+                        break;
+                    case 'onfocus':
+                        eventType = 'onfocus';
+                        break;
+                }
+                if (!nextProps[key]) {
+                    node[eventType] = undefined;
+                } else if (!props[key]) {
+                    node[eventType] = nextProps[key];
+                } else if (props[key] !== nextProps[key]) {
+                    node[eventType] = nextProps[key];
+                }
+                return;
+            }
             if (props[key] !== nextProps[key]) {
                 if (!nextProps[key]) {
-                    if (key.startsWith('on')) {
-                        node.removeEventListener(String(key.startsWith('on')), props[key]);
-                    } else {
-                        node.removeAttribute(key);
-                    }
+                    node.removeAttribute(key);
                     return;
                 }
-                if (!key.startsWith('on')) {
-                    node.setAttribute(key, nextProps[key]);
-                }
+                node.setAttribute(key, nextProps[key]);
             }
         }
     });
 };
 
-const patchChildren = (parent: Element, vChildren: Array<VNode | string>, nextVChildren: Array<VNode | string>) => {
-    parent.childNodes.forEach((childNode: Element, i: number) => {
+const patchChildren = (parent: HTMLElement, vChildren: Array<VNode | string>, nextVChildren: Array<VNode | string>) => {
+    parent.childNodes.forEach((childNode: HTMLElement, i: number) => {
         patchDom(childNode, vChildren[i], nextVChildren[i]);
     });
 

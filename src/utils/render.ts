@@ -14,7 +14,7 @@ export const render = () => {
         root.appendChild(Dom);
     } else {
         let vNewDom = App();
-        patchDom(root.children[0], vDom, vNewDom);
+        patchDom(root.children[0] as HTMLElement, vDom, vNewDom);
         Object.assign(vDom, vNewDom);
     }
 };
@@ -24,8 +24,7 @@ export const redirectTo = (url: string) => {
     render();
 };
 
-export const onClickA = (to: string) => (e: MouseEvent) => {
-    e.preventDefault();
+export const onClickA = (to: string) => {
     window.history.pushState('', '', to);
     render();
 };

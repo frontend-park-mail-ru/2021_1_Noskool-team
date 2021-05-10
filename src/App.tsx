@@ -76,28 +76,30 @@ export const App = () => {
                 <div class={pageWrapper('nav-bar')}>
                     <RightMenu />
                 </div>
-                {!isMobile() ? (
-                    <div class={pageWrapper('page')}>
-                        {path === LINKS.main && <MainPage />}
-                        {path === LINKS.profile && (isAuth ? <ProfilePage /> : <NeedAccessPage />)}
-                        {path.startsWith(LINKS.album) && <AlbumPage />}
-                        {path.startsWith(LINKS.favorite) && (isAuth ? <FavoritePage /> : <NeedAccessPage />)}
-                        {isPageExistsAuth() && <ErrorPage />}
-                        {path === LINKS.auth && <AuthPage />}
-                        {path === LINKS.reg && <RegistrationPage />}
-                        {path === LINKS.topArtists && <Artists />}
-                        {path.startsWith(LINKS.mediateka) && (isAuth ? <MediatekaPage /> : <NeedAccessPage />)}
-                        {path === LINKS.myPlaylists && (isAuth ? <Playlists /> : <NeedAccessPage />)}
-                        {path === LINKS.createPlaylist && <CreatePlaylist />}
-                        {path === LINKS.topAlbums && <Albums />}
-                        {path === LINKS.topTracks && <Tracks />}
-                        {path === LINKS.billboard && <BillboardChart />}
-                        {path.startsWith(LINKS.playlist) && <Playlist />}
-                        {path.startsWith(LINKS.artist) && <ArtistPage />}
-                    </div>
-                ) : (
-                    <div />
-                )}
+                <div class={pageWrapper('page')}>
+                    {!isMobile() ? (
+                        <div>
+                            {path === LINKS.main && <MainPage />}
+                            {path === LINKS.profile && (isAuth ? <ProfilePage /> : <NeedAccessPage />)}
+                            {path.startsWith(LINKS.album) && <AlbumPage />}
+                            {path.startsWith(LINKS.favorite) && (isAuth ? <FavoritePage /> : <NeedAccessPage />)}
+                            {isPageExistsAuth() && <ErrorPage />}
+                            {path === LINKS.auth && <AuthPage />}
+                            {path === LINKS.reg && <RegistrationPage />}
+                            {path === LINKS.topArtists && <Artists />}
+                            {path.startsWith(LINKS.mediateka) && (isAuth ? <MediatekaPage /> : <NeedAccessPage />)}
+                            {path === LINKS.myPlaylists && (isAuth ? <Playlists /> : <NeedAccessPage />)}
+                            {path === LINKS.createPlaylist && <CreatePlaylist />}
+                            {path === LINKS.topAlbums && <Albums />}
+                            {path === LINKS.topTracks && <Tracks />}
+                            {path === LINKS.billboard && <BillboardChart />}
+                            {path.startsWith(LINKS.playlist) && <Playlist />}
+                            {path.startsWith(LINKS.artist) && <ArtistPage />}
+                        </div>
+                    ) : (
+                        <div></div>
+                    )}
+                </div>
                 <div class={pageWrapper('player')}>
                     <AudioLine />
                 </div>
