@@ -265,3 +265,9 @@ export const PlayMainTrackIcon = () => (
         <path d='M4.5 12.5V2.5L11.5 7.5L4.5 12.5Z' stroke='black' stroke-linejoin='round' />
     </svg>
 );
+
+export const OkeyIcon = () => (
+    <svg width='15' height='15' viewBox='0 0 15 15' fill='none' xmlns='http://www.w3.org/2000/svg'>
+        <path d='M1 7L5.5 11.5L14 3' stroke='black' stroke-linecap='square' />
+    </svg>
+);

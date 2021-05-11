@@ -55,7 +55,12 @@ const pageWrapper = cn('page-wrapper');
 
 export const App = () => {
     const path = window.location.pathname;
-    const isAuth = localStorage.getItem('auth') === 'ok';
+    let isAuth;
+    try {
+        isAuth = localStorage.getItem('auth') === 'ok';
+    } catch (e) {
+        alert(`да лол, обнови браузер, ошибочка: ${e}`);
+    }
 
     if (requestsStore.profile) {
         requestsStore.profile = false;

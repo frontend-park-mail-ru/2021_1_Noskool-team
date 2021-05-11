@@ -13,6 +13,10 @@ export const authUser = (body: AuthUser) => {
 
 export const logoutUser = () => {
     get<Response>(LOGOUT_USER);
-    localStorage.clear();
+    try {
+        localStorage.clear();
+    } catch (e) {
+        alert(`да лол, обнови браузер, ошибочка: ${e}`);
+    }
     render();
 };

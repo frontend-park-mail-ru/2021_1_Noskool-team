@@ -9,6 +9,7 @@ export const profileStore = {
         photo: '',
         name: '',
         lastName: '',
+        isOkey: false,
     }),
 };
 
@@ -25,26 +26,6 @@ export const profileForm = {
             ['onCheckValid']
         ),
         email: proxy<FieldState>(
-            {
-                value: '',
-                isValid: null,
-                onCheckValid: undefined,
-                isFocuse: false,
-                errorMsg: '',
-            },
-            ['onCheckValid']
-        ),
-        name: proxy<FieldState>(
-            {
-                value: '',
-                isValid: null,
-                onCheckValid: undefined,
-                isFocuse: false,
-                errorMsg: '',
-            },
-            ['onCheckValid']
-        ),
-        lastName: proxy<FieldState>(
             {
                 value: '',
                 isValid: null,

@@ -23,7 +23,11 @@ export const getUser = async () => {
 export const changeUser = async (body: UserChangeData) => {
     let response = await postAuth(CHANGE_PROFILE, body);
     if (response.status === 401) {
-        localStorage.clear();
+        try {
+            localStorage.clear();
+        } catch (e) {
+            alert(`да лол, обнови браузер, ошибочка: ${e}`);
+        }
         redirectTo(LINKS.auth);
         return new Promise(() => {});
     } else if (response.status === 403) {
@@ -47,7 +51,11 @@ export const changeUserPhoto = async (img: any): Promise<Response | undefined> =
     formData.append('my_file', img.files[0]);
     let response = await postImg(CHANGE_USER_PHOTE, formData);
     if (response.status === 401) {
-        localStorage.clear();
+        try {
+            localStorage.clear();
+        } catch (e) {
+            alert(`да лол, обнови браузер, ошибочка: ${e}`);
+        }
         redirectTo(LINKS.auth);
         return new Promise(() => {});
     } else if (response.status === 403) {

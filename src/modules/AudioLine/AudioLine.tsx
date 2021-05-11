@@ -47,8 +47,12 @@ const getTrackLine = (): HTMLInputElement => document.getElementById(TRACK_LINE_
 const windowName = String(new Date().getTime());
 
 export const onClickPlay = () => {
-    localStorage.setItem('name', windowName);
-    localStorage.setItem('lastTrack', JSON.stringify(playerStore.currentTrack));
+    try {
+        localStorage.setItem('name', windowName);
+        localStorage.setItem('lastTrack', JSON.stringify(playerStore.currentTrack));
+    } catch (e) {
+        alert(`да лол, обнови браузер, ошибочка: ${e}`);
+    }
     const player = getPlayer();
     if (playerStore.isPlay) {
         player.pause();
@@ -94,7 +98,11 @@ const onClickPrev = () => {
 };
 
 const changeVolume = (volume: number) => {
-    localStorage.setItem('volume', String(volume));
+    try {
+        localStorage.setItem('volume', String(volume));
+    } catch (e) {
+        alert(`да лол, обнови браузер, ошибочка: ${e}`);
+    }
     playerStore.volume = volume;
     if (volume === 0) {
         playerStore.volumeIcon = 0;
@@ -216,26 +224,34 @@ const onClickAddToPlaylist = (id_playlist: number) => () => {
 
 window.name = windowName;
 window.onload = () => {
-    if (!localStorage.getItem('name')) {
-        localStorage.setItem('name', window.name);
-    }
-    const volume = localStorage.getItem('volume');
-    if (!volume) {
-        localStorage.setItem('volume', '1');
-        changeVolume(1);
-    } else {
-        changeVolume(Number(volume));
+    try {
+        if (!localStorage.getItem('name')) {
+            localStorage.setItem('name', window.name);
+        }
+        const volume = localStorage.getItem('volume');
+        if (!volume) {
+            localStorage.setItem('volume', '1');
+            changeVolume(1);
+        } else {
+            changeVolume(Number(volume));
+        }
+    } catch (e) {
+        alert(`да лол, обнови браузер, ошибочка: ${e}`);
     }
     getPlayer().addEventListener('timeupdate', onTimeUpdate);
 };
 
 window.onstorage = () => {
-    if (localStorage.getItem('name') !== window.name) {
-        if (playerStore.isPlay) {
-            const player = getPlayer();
-            player.pause();
-            playerStore.isPlay = false;
+    try {
+        if (localStorage.getItem('name') !== window.name) {
+            if (playerStore.isPlay) {
+                const player = getPlayer();
+                player.pause();
+                playerStore.isPlay = false;
+            }
         }
+    } catch (e) {
+        alert(`да лол, обнови браузер, ошибочка: ${e}`);
     }
 };
 

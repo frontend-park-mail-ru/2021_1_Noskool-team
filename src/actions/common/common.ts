@@ -64,32 +64,36 @@ export const getcsrf = (): Promise<Response> => {
 export const getMainPage = async <P>(url: string): Promise<P | undefined> => {
     let response: Promise<P | undefined>;
     let resBuff;
-    if (localStorage.getItem('auth') === 'ok') {
-        resBuff = await getAuth(url);
-        if (resBuff.status === 401) {
-            localStorage.removeItem('auth');
-            resBuff = await getNoneAuth(url + '/notauth');
-            response = resBuff.ok ? resBuff.json() : new Promise(() => {});
-        } else if (resBuff.status === 403) {
-            const csrf = await getcsrf();
-            if (csrf.status === 200) {
-                resBuff = await getAuth(url);
-                response = resBuff.ok ? resBuff.json() : new Promise(() => {});
-            } else {
+    try {
+        if (localStorage.getItem('auth') === 'ok') {
+            resBuff = await getAuth(url);
+            if (resBuff.status === 401) {
                 localStorage.removeItem('auth');
                 resBuff = await getNoneAuth(url + '/notauth');
                 response = resBuff.ok ? resBuff.json() : new Promise(() => {});
+            } else if (resBuff.status === 403) {
+                const csrf = await getcsrf();
+                if (csrf.status === 200) {
+                    resBuff = await getAuth(url);
+                    response = resBuff.ok ? resBuff.json() : new Promise(() => {});
+                } else {
+                    localStorage.removeItem('auth');
+                    resBuff = await getNoneAuth(url + '/notauth');
+                    response = resBuff.ok ? resBuff.json() : new Promise(() => {});
+                }
+            } else if (resBuff.ok) {
+                response = resBuff.json();
+            } else {
+                response = new Promise(() => {});
             }
-        } else if (resBuff.ok) {
-            response = resBuff.json();
         } else {
-            response = new Promise(() => {});
+            resBuff = await getNoneAuth(url + '/notauth');
+            response = resBuff.ok ? resBuff.json() : new Promise(() => {});
         }
-    } else {
-        resBuff = await getNoneAuth(url + '/notauth');
-        response = resBuff.ok ? resBuff.json() : new Promise(() => {});
+        return response;
+    } catch (e) {
+        alert(`да лол, обнови браузер, ошибочка: ${e}`);
     }
-    return response;
 };
 
 export const get = async <P>(url: string): Promise<P | undefined> => {
