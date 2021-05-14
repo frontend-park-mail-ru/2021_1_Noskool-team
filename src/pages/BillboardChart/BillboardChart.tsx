@@ -21,6 +21,7 @@ const onClickTrack = (index: number) => () => {
         isFavorite: el?.in_favorite,
         isMediateca: el?.in_mediateka,
         trackId: el?.track_id,
+        duration: el?.duration,
     }));
     playerStore.currentTrack = {
         img: billboardChartStore.trackList[index]?.picture,
@@ -31,6 +32,7 @@ const onClickTrack = (index: number) => () => {
         isFavorite: billboardChartStore.trackList[index]?.in_favorite,
         isMediateca: billboardChartStore.trackList[index]?.in_mediateka,
         trackId: billboardChartStore.trackList[index]?.track_id,
+        duration: billboardChartStore.trackList[index]?.duration,
     };
     playerStore.currentTime = 0;
     if (!playerStore.isPlay) {

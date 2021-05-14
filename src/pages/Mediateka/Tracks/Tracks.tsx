@@ -10,6 +10,34 @@ import './style.scss';
 
 const mediatekaTracks = cn('mediateka-tracks');
 
+const isClickAddFavourites = (id: number) => {
+    requestsStore.mediatekaTracks = true;
+    const buffer = [...mediatekaTracksStore.tracksList];
+    buffer[id].in_mediateka = true;
+    buffer[id].in_favorite = true;
+    mediatekaTracksStore.tracksList = buffer;
+};
+
+const isClickDeleteFavourites = (id: number) => {
+    requestsStore.mediatekaTracks = true;
+    const buffer = [...mediatekaTracksStore.tracksList];
+    buffer[id].in_favorite = false;
+    mediatekaTracksStore.tracksList = buffer;
+};
+
+const isClickAddMediateca = (id: number) => {
+    const buffer = [...mediatekaTracksStore.tracksList];
+    buffer[id].in_mediateka = true;
+    mediatekaTracksStore.tracksList = buffer;
+};
+
+const isClickDeleteMediateca = (id: number) => {
+    requestsStore.mediatekaTracks = true;
+    const buffer = [...mediatekaTracksStore.tracksList];
+    buffer[id].in_favorite = false;
+    mediatekaTracksStore.tracksList = buffer;
+};
+
 export const Tracks = () => {
     if (requestsStore.mediatekaTracks) {
         requestsStore.mediatekaTracks = false;
@@ -21,7 +49,15 @@ export const Tracks = () => {
             {mediatekaTracksStore.tracksList.length !== 0 && (
                 <div class={mediatekaTracks('title')}>{'Ваши избранные треки:'}</div>
             )}
-            <TrackTable isNeedHeader trackList={toCurrentTrack(mediatekaTracksStore.tracksList)} />
+            <TrackTable
+                isNeedHeader
+                isForMediateca={true}
+                trackList={toCurrentTrack(mediatekaTracksStore.tracksList)}
+                updateAddFavourites={isClickAddFavourites}
+                updateAddMediateca={isClickAddMediateca}
+                updateDeleteFavourites={isClickDeleteFavourites}
+                updateDeleteMediateca={isClickDeleteMediateca}
+            />
         </div>
     );
 };

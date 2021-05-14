@@ -9,12 +9,13 @@
   width: 100%;
 
   &__row {
-    width: 100%;
+    // width: 100%;
     display: flex;
     align-items: center;
 
     &--header {
       border-bottom: 1px solid $borders;
+      margin-left: 5px;
     }
 
     &--track {
@@ -32,6 +33,20 @@
     text-align: center;
     padding: 50px;
     font-size: 20px;
+  }
+
+  &__celll {
+    padding: 10px;
+    height: 50px;
+    box-sizing: border-box;
+    white-space: pre;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    border-right: 1px solid $borders;
+    width: 75px;
+    justify-content: center;
   }
 
   &__cell {
@@ -62,6 +77,32 @@
     &:nth-child(4) {
       width: 70px;
       border-right: 1px solid $borders;
+      justify-content: center;
+    }
+  }
+
+  &__icon-icon-delete {
+    cursor: pointer;
+
+    svg:hover > path {
+      stroke: #f00;
+    }
+  }
+
+  &__icon-icon-like {
+    cursor: pointer;
+    margin-right: 10px;
+
+    svg:hover > path {
+      fill: #ef548e;
+    }
+  }
+
+  &__icon-plus {
+    cursor: pointer;
+
+    svg:hover > path {
+      stroke: #ef548e;
     }
   }
 
@@ -70,5 +111,32 @@
     height: 30px;
     margin-right: 20px;
     border-radius: 5px;
+  }
+
+  &__icons {
+    display: flex;
+
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  &__together {
+    display: flex;
+    margin-left: 5px;
+  }
+
+  &__icon-icon-flike {
+    cursor: pointer;
+    margin-right: 10px;
+  }
+
+  &__icon-icon {
+    cursor: pointer;
+  }
+
+  &__icon {
+    cursor: pointer;
   }
 }

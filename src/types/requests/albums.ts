@@ -6,5 +6,5 @@ export interface Album {
     'release_date': string;
     tittle: string;
     tracks: TrackBack[];
-    musicians: Musician[];
+    musician: Musician[];
 }
