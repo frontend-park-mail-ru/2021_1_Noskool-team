@@ -6,11 +6,10 @@ export interface Profile {
     photo: string;
     name: string;
     lastName: string;
+    isOkey: boolean;
 }
 
 export interface ProfileForm {
     email: FieldState;
     nickname: FieldState;
-    name: FieldState;
-    lastName: FieldState;
 }

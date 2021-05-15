@@ -10,6 +10,34 @@ import './style.scss';
 
 const topTracks = cn('top-tracks');
 
+const isClickAddFavourites = (id: number) => {
+    requestsStore.getTopTracks = true;
+    const buffer = [...tracksStore.trackList];
+    buffer[id].in_mediateka = true;
+    buffer[id].in_favorite = true;
+    tracksStore.trackList = buffer;
+};
+
+const isClickDeleteFavourites = (id: number) => {
+    requestsStore.getTopTracks = true;
+    const buffer = [...tracksStore.trackList];
+    buffer[id].in_favorite = false;
+    tracksStore.trackList = buffer;
+};
+
+const isClickAddMediateca = (id: number) => {
+    const buffer = [...tracksStore.trackList];
+    buffer[id].in_mediateka = true;
+    tracksStore.trackList = buffer;
+};
+
+const isClickDeleteMediateca = (id: number) => {
+    requestsStore.getTopTracks = true;
+    const buffer = [...tracksStore.trackList];
+    buffer[id].in_favorite = false;
+    tracksStore.trackList = buffer;
+};
+
 export const Tracks = () => {
     if (requestsStore.getTopTracks) {
         requestsStore.getTopTracks = false;
@@ -19,7 +47,14 @@ export const Tracks = () => {
     return (
         <div class={topTracks('')}>
             {tracksStore.trackList.length !== 0 && <div class={topTracks('title')}>{'Популярные треки:'}</div>}
-            <TrackTable trackList={toCurrentTrack(tracksStore.trackList)} isNeedHeader />
+            <TrackTable
+                trackList={toCurrentTrack(tracksStore.trackList)}
+                isNeedHeader
+                updateAddFavourites={isClickAddFavourites}
+                updateAddMediateca={isClickAddMediateca}
+                updateDeleteFavourites={isClickDeleteFavourites}
+                updateDeleteMediateca={isClickDeleteMediateca}
+            />
         </div>
     );
 };

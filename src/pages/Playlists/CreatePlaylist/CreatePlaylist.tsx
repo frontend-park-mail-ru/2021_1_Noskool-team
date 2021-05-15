@@ -28,11 +28,13 @@ const onSubmitForm = (e: MouseEvent) => {
 export const CreatePlaylist = () => {
     return (
         <div class={createCn('wrapper', isMobile() ? 'mob' : '')}>
-            <form onsubmit={onSubmitForm} class={createCn()}>
+            <form class={createCn()}>
                 <div class={createCn('title')}>{'Создание плейлиста'}</div>
                 <Input validators={[]} placeholder={'Название'} input={playlistForm.name} />
                 <Input validators={[]} placeholder={'Описание'} input={playlistForm.description} />
-                <button type='submit'>{'Создать'}</button>
+                <button type='submit' onclick={onSubmitForm}>
+                    {'Создать'}
+                </button>
             </form>
         </div>
     );

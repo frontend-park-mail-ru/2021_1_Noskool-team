@@ -14,6 +14,8 @@ export interface CurrentTrack {
     trackId: number;
     isFavorite: boolean;
     isMediateca: boolean;
+    duration: string;
+    albumId: number;
 }
 
 export interface PlayerStore {

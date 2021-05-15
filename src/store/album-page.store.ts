@@ -8,6 +8,6 @@ export const albumPageStore = proxy<AlbumPageStore>({
         'release_date': '',
         tittle: '',
         tracks: [],
-        musicians: [],
+        musician: [],
     }),
 });

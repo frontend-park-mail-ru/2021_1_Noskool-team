@@ -52,7 +52,11 @@ interface createPlaylist {
 export const postPlaylist = async (body: createPlaylist) => {
     let response = await postAuth(PLAYLIST, body);
     if (response.status === 401) {
-        localStorage.clear();
+        try {
+            localStorage.clear();
+        } catch (e) {
+            alert(`да лол, обнови браузер, ошибочка: ${e}`);
+        }
         redirectTo(LINKS.auth);
         return new Promise(() => {});
     } else if (response.status === 403) {
@@ -74,7 +78,11 @@ export const postPlaylist = async (body: createPlaylist) => {
 export const addTrackToPlaylist = async (id_playlist: number, id_track: number) => {
     let response = await postAuth(PLAYLIST + `${id_playlist}/track/${id_track}`, '');
     if (response.status === 401) {
-        localStorage.clear();
+        try {
+            localStorage.clear();
+        } catch (e) {
+            alert(`да лол, обнови браузер, ошибочка: ${e}`);
+        }
         redirectTo(LINKS.auth);
         return new Promise(() => {});
     } else if (response.status === 403) {
