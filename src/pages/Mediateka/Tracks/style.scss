@@ -1,11 +1,8 @@
 @import '../../../styles/colors.scss';
 
 .mediateka-tracks {
-  background-color: $white;
-  border-radius: 50px 0 0 50px;
   width: 100%;
-  box-sizing: border-box;
-  padding: 30px;
+  height: 100%;
 
   &__title {
     font-family: 'Comfortaa', cursive;
@@ -18,5 +15,26 @@
     text-align: center;
     padding: 50px;
     font-size: 20px;
+  }
+
+  &__table {
+    height: calc(100% - 43px);
+  }
+}
+
+.mediateka-tracks--mob {
+  .mediateka-tracks {
+    &__title {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+
+    &__not-found {
+      font-size: 16px;
+    }
+
+    &__table {
+      height: calc(100% - 43px);
+    }
   }
 }

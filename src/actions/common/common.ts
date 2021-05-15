@@ -92,7 +92,7 @@ export const getMainPage = async <P>(url: string): Promise<P | undefined> => {
         }
         return response;
     } catch (e) {
-        alert(`да лол, обнови браузер, ошибочка: ${e}`);
+        console.log(`да лол, обнови браузер, ошибочка: ${e}`);
     }
 };
 

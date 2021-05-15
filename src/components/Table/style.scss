@@ -7,24 +7,53 @@
   line-height: 16px;
   font-weight: lighter;
   width: 100%;
+  height: 100%;
+
+  img {
+    cursor: pointer;
+  }
+
+  &__name {
+    cursor: pointer;
+  }
+
+  &__artist {
+    cursor: pointer;
+  }
+
+  &__together-wrapper {
+    height: 100%;
+    overflow: auto;
+
+    &--header {
+      height: calc(100% - 50px);
+    }
+  }
 
   &__row {
-    // width: 100%;
     display: flex;
     align-items: center;
 
     &--header {
       border-bottom: 1px solid $borders;
-      margin-left: 5px;
+      margin-left: 7px;
     }
 
     &--track {
-      cursor: pointer;
       transition: all 0.3s;
+      border: 2px solid $white;
 
       &:hover {
-        background-color: $cyan-light;
-        color: $white;
+        border: 2px solid $cyan-light;
+      }
+    }
+
+    &--track--not-white {
+      transition: all 0.3s;
+      border: 2px solid $page-background;
+
+      &:hover {
+        border: 2px solid $cyan-light;
       }
     }
   }
@@ -33,20 +62,6 @@
     text-align: center;
     padding: 50px;
     font-size: 20px;
-  }
-
-  &__celll {
-    padding: 10px;
-    height: 50px;
-    box-sizing: border-box;
-    white-space: pre;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    border-right: 1px solid $borders;
-    width: 75px;
-    justify-content: center;
   }
 
   &__cell {
@@ -65,19 +80,25 @@
     }
 
     &:nth-child(2) {
-      width: 270px;
       border-right: 1px solid $borders;
+      width: 300px;
     }
 
     &:nth-child(3) {
-      width: 220px;
       border-right: 1px solid $borders;
+      width: 300px;
     }
 
     &:nth-child(4) {
-      width: 70px;
       border-right: 1px solid $borders;
       justify-content: center;
+      width: 100px;
+    }
+
+    &:nth-child(5) {
+      border-right: 1px solid $borders;
+      justify-content: center;
+      width: 100px;
     }
   }
 
@@ -109,7 +130,7 @@
   &__photo {
     width: 30px;
     height: 30px;
-    margin-right: 20px;
+    margin-right: 10px;
     border-radius: 5px;
   }
 
@@ -138,5 +159,50 @@
 
   &__icon {
     cursor: pointer;
+  }
+}
+
+.tracks-table--mob {
+  font-size: 12px;
+  height: 100%;
+
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  .tracks-table {
+    &__together-mob-wrapper {
+      overflow: auto;
+      height: 100%;
+    }
+
+    &__track {
+      padding: 5px;
+      display: flex;
+      align-items: center;
+    }
+
+    &__photo {
+      width: 45px;
+      height: 45px;
+    }
+
+    &__track-artists {
+      color: $gray;
+    }
+
+    &__track-name {
+      color: $black;
+      font-size: 16px;
+      margin-bottom: 5px;
+    }
+
+    &__track-info {
+      flex-grow: 1;
+    }
+
+    &__actions {
+      margin-right: 5px;
+    }
   }
 }

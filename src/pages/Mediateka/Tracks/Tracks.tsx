@@ -5,6 +5,7 @@ import { mediatekaTracksStore } from 'store/mediateka.store';
 import { requestsStore } from 'store/requests.store';
 import { toCurrentTrack } from 'utils/cast';
 import { cn } from 'utils/cn';
+import { isMobile } from 'utils/isMobile';
 
 import './style.scss';
 
@@ -45,19 +46,21 @@ export const Tracks = () => {
     }
 
     return (
-        <div class={mediatekaTracks('')}>
+        <div class={mediatekaTracks('', isMobile() ? 'mob' : '')}>
             {mediatekaTracksStore.tracksList.length !== 0 && (
                 <div class={mediatekaTracks('title')}>{'Ваши избранные треки:'}</div>
             )}
-            <TrackTable
-                isNeedHeader
-                isForMediateca={true}
-                trackList={toCurrentTrack(mediatekaTracksStore.tracksList)}
-                updateAddFavourites={isClickAddFavourites}
-                updateAddMediateca={isClickAddMediateca}
-                updateDeleteFavourites={isClickDeleteFavourites}
-                updateDeleteMediateca={isClickDeleteMediateca}
-            />
+            <div class={mediatekaTracks('table')}>
+                <TrackTable
+                    isNeedHeader
+                    isForMediateca={true}
+                    trackList={toCurrentTrack(mediatekaTracksStore.tracksList)}
+                    updateAddFavourites={isClickAddFavourites}
+                    updateAddMediateca={isClickAddMediateca}
+                    updateDeleteFavourites={isClickDeleteFavourites}
+                    updateDeleteMediateca={isClickDeleteMediateca}
+                />
+            </div>
         </div>
     );
 };

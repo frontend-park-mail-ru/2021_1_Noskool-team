@@ -61,6 +61,7 @@
       top: 60px;
       left: 0;
       width: 100%;
+      height: calc(100vh - 170px);
     }
 
     &__player {
@@ -87,6 +88,11 @@
       top: 0;
       transition: 0.1s all;
       z-index: 0;
+    }
+
+    &__wrapper {
+      padding-bottom: 0;
+      height: 100%;
     }
   }
 }

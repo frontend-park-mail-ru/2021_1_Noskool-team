@@ -8,6 +8,7 @@ import { toCurrentTrack } from 'utils/cast';
 
 import './style.scss';
 import { requestsStore } from 'store/requests.store';
+import { render } from 'utils/render';
 
 const albumPage = cn('album-page');
 
@@ -16,35 +17,33 @@ export let isNeedFetch = true;
 let previosId: number;
 
 const isClickAddFavourites = (id: number) => {
-    requestsStore.getAlbumId = true;
     const buffer = [...albumPageStore.album.tracks];
     buffer[id].in_mediateka = true;
     buffer[id].in_favorite = true;
-    albumPageStore.album.tracks = buffer;
+    albumPageStore.album.tracks = [...buffer];
+    render();
 };
 
 const isClickDeleteFavourites = (id: number) => {
-    requestsStore.getAlbumId = true;
     const buffer = [...albumPageStore.album.tracks];
     buffer[id].in_favorite = false;
     albumPageStore.album.tracks = buffer;
-    getAlbumById(id);
+    render();
 };
 
 const isClickAddMediateca = (id: number) => {
-    requestsStore.getAlbumId = true;
     const buffer = [...albumPageStore.album.tracks];
     buffer[id].in_mediateka = true;
     albumPageStore.album.tracks = buffer;
-    getAlbumById(id);
+    render();
 };
 
 const isClickDeleteMediateca = (id: number) => {
-    requestsStore.getAlbumId = true;
     const buffer = [...albumPageStore.album.tracks];
     buffer[id].in_favorite = false;
+    buffer[id].in_mediateka = false;
     albumPageStore.album.tracks = buffer;
-    getAlbumById(id);
+    render();
 };
 
 export const AlbumPageInner = () => {
@@ -84,7 +83,7 @@ export const AlbumPageInner = () => {
                     trackList={toCurrentTrack(albumPageStore.album.tracks)}
                     isNeedHeader={false}
                     isNeedPhoto={false}
-                    isNeedSingers={false}
+                    isNotWhite
                     updateAddFavourites={isClickAddFavourites}
                     updateAddMediateca={isClickAddMediateca}
                     updateDeleteFavourites={isClickDeleteFavourites}

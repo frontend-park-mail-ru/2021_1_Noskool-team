@@ -67,7 +67,7 @@ const onClickAuth = () => {
 export const RegistrationForm = () => {
     return (
         <div class={formCn('wrapper', isMobile() ? 'mob' : '')}>
-            <form onsubmit={onSubmitForm} class={formCn()}>
+            <form class={formCn()}>
                 <div class={formCn('title')}>{'Регистрация'}</div>
                 <Input
                     validators={[requaredValidator, emailValidator]}
@@ -97,7 +97,7 @@ export const RegistrationForm = () => {
                     input={regFormStore.passwordRepeat}
                 />
                 <div class={formCn('error-msg')}>{regFormStore.errorMsg}</div>
-                <button type='submit'>{'Зарегистрироваться'}</button>
+                <button onclick={onSubmitForm}>{'Зарегистрироваться'}</button>
                 <button onclick={onClickAuth}>{'Или войти'}</button>
             </form>
         </div>

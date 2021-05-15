@@ -11,6 +11,9 @@ import {
     addToMediateca,
     deleteFromMediateca,
 } from 'actions/main-page/main-page';
+import { redirectTo } from 'utils/render';
+import { LINKS } from 'constants/links';
+import { isMobile } from 'utils/isMobile';
 
 import './style.scss';
 
@@ -26,15 +29,23 @@ const onClickTrack = (index: number, trackList: CurrentTrack[]) => () => {
     }
 };
 
+const onClickTrackName = (index: Number) => () => {
+    redirectTo(`${LINKS.album}/${index}`);
+};
+
+const onClickArtist = (index: Number) => () => {
+    redirectTo(`${LINKS.artist}/${index}`);
+};
+
 const tracksTable = cn('tracks-table');
 
 interface TrackTableProps {
     trackList: CurrentTrack[];
     isNeedHeader?: boolean;
     isNeedPhoto?: boolean;
-    isNeedSingers?: boolean;
     isForMediateca?: boolean;
     isForFavourites?: boolean;
+    isNotWhite?: boolean;
     /*eslint-disable */
     updateAddMediateca: (id: number) => void;
     /*eslint-disable */
@@ -49,41 +60,75 @@ export const TrackTable = ({
     trackList,
     isNeedHeader = false,
     isNeedPhoto = true,
-    isNeedSingers = true,
     isForMediateca = false,
     isForFavourites = false,
+    isNotWhite = false,
     updateAddMediateca,
     updateAddFavourites,
     updateDeleteMediateca,
     updateDeleteFavourites,
 }: TrackTableProps) => {
-    const onClickAddFavourites = (id: number) => () => {
+    const onClickAddFavourites = (id: number, index: number) => () => {
         addToFavourites(id).then(() => {
-            updateAddFavourites(id);
+            updateAddFavourites(index);
         });
     };
 
-    const onClickAddMediateca = (id: number) => () => {
+    const onClickAddMediateca = (id: number, index: number) => () => {
         addToMediateca(id).then(() => {
-            updateAddMediateca(id);
+            updateAddMediateca(index);
         });
     };
 
-    const onClickDeleteFavourites = (id: number) => () => {
+    const onClickDeleteFavourites = (id: number, index: number) => () => {
         deleteFromFavourites(id).then(() => {
-            updateDeleteFavourites(id);
+            updateDeleteFavourites(index);
         });
     };
 
-    const onClickDeleteMediateca = (id: number) => () => {
+    const onClickDeleteMediateca = (id: number, index: number) => () => {
         deleteFromMediateca(id).then(() => {
-            updateDeleteMediateca(id);
+            updateDeleteMediateca(index);
         });
     };
+
+    const icons = (trackId: number, i: number, isFavorite: boolean, isMediateca: boolean) => (
+        <div class={tracksTable('icons')}>
+            {isForFavourites ? (
+                <div class={tracksTable('icon-icon-delete')} onclick={onClickDeleteFavourites(trackId, i)}>
+                    <DeleteIcon />
+                </div>
+            ) : isFavorite ? (
+                <div class={tracksTable('icon-icon-flike')} onclick={onClickDeleteFavourites(trackId, i)}>
+                    <LikeFillIcon />
+                </div>
+            ) : (
+                <div class={tracksTable('icon-icon-like')} onclick={onClickAddFavourites(trackId, i)}>
+                    <LikeIcon />
+                </div>
+            )}
+
+            {isForFavourites ? (
+                ''
+            ) : isForMediateca ? (
+                <div onclick={onClickDeleteMediateca(trackId, i)} class={tracksTable('icon-icon-delete')}>
+                    <DeleteIcon />
+                </div>
+            ) : isMediateca ? (
+                <div onclick={onClickDeleteMediateca(trackId, i)} class={tracksTable('icon')}>
+                    <OkeyIcon />
+                </div>
+            ) : (
+                <div onclick={onClickAddMediateca(trackId, i)} class={tracksTable('icon-plus')}>
+                    <PlusIcon />
+                </div>
+            )}
+        </div>
+    );
 
     return (
-        <div class={tracksTable()}>
-            {isNeedHeader && trackList.length !== 0 && (
+        <div class={tracksTable('', isMobile() ? 'mob' : '')}>
+            {!isMobile() && isNeedHeader && trackList.length !== 0 && (
                 <div class={tracksTable('row', 'header')}>
                     <div class={tracksTable('cell')}>{'#'}</div>
                     <div class={tracksTable('cell')}>{'Название'}</div>
@@ -92,65 +137,81 @@ export const TrackTable = ({
                     <div class={tracksTable('cell')}>{''}</div>
                 </div>
             )}
-            {trackList.map((el, i) => (
-                <div class={tracksTable('together')}>
-                    <div class={tracksTable('row', 'track')} onclick={onClickTrack(i, trackList)}>
-                        <div class={tracksTable('cell')}>{String(i + 1)}</div>
-                        <div class={tracksTable('cell')}>
-                            {isNeedPhoto && <img src={TRACK_HOST + el.img} class={tracksTable('photo')} />}
-                            <div class={tracksTable('name')}>{el?.name || '???'}</div>
-                        </div>
-                        {isNeedSingers && (
-                            <div class={tracksTable('cell')}>
-                                {el?.artists?.map((el) => el?.name).join(', ') || '???'}
+            {isMobile() ? (
+                <div class={tracksTable('together-mob-wrapper')}>
+                    <div class={tracksTable('together-mob')}>
+                        {trackList.map((el, i) => (
+                            <div class={tracksTable('track')}>
+                                {isNeedPhoto && (
+                                    <img
+                                        src={TRACK_HOST + el.img}
+                                        class={tracksTable('photo')}
+                                        onclick={onClickTrack(i, trackList)}
+                                    />
+                                )}
+                                <div class={tracksTable('track-info')}>
+                                    <div class={tracksTable('track-name')} onclick={onClickTrackName(el?.albumId)}>
+                                        {el?.name || '???'}
+                                    </div>
+                                    <div class={tracksTable('track-artists')}>
+                                        {el?.artists?.map((artist, index) => (
+                                            <div
+                                                class={tracksTable('artist')}
+                                                onclick={onClickArtist(artist?.musician_id)}
+                                            >
+                                                {`${artist?.name}${index !== el?.artists.length - 1 ? ', ' : ''}`}
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                                <div class={tracksTable('actions')}>
+                                    {icons(el?.trackId, i, el?.isFavorite, el?.isMediateca)}
+                                </div>
                             </div>
-                        )}
-                        <div class={tracksTable('cell')}>{el.duration}</div>
-                    </div>
-                    <div class={tracksTable('celll')}>
-                        <div class={tracksTable('icons')}>
-                            {isForFavourites ? (
-                                <div
-                                    class={tracksTable('icon-icon-delete')}
-                                    onclick={onClickDeleteFavourites(el?.trackId)}
-                                >
-                                    <DeleteIcon />
-                                </div>
-                            ) : el?.isFavorite ? (
-                                <div
-                                    class={tracksTable('icon-icon-flike')}
-                                    onclick={onClickDeleteFavourites(el?.trackId)}
-                                >
-                                    <LikeFillIcon />
-                                </div>
-                            ) : (
-                                <div class={tracksTable('icon-icon-like')} onclick={onClickAddFavourites(el?.trackId)}>
-                                    <LikeIcon />
-                                </div>
-                            )}
-
-                            {isForFavourites ? (
-                                ''
-                            ) : isForMediateca ? (
-                                <div
-                                    onclick={onClickDeleteMediateca(el?.trackId)}
-                                    class={tracksTable('icon-icon-delete')}
-                                >
-                                    <DeleteIcon />
-                                </div>
-                            ) : el?.isMediateca ? (
-                                <div onclick={onClickDeleteMediateca(el?.trackId)} class={tracksTable('icon')}>
-                                    <OkeyIcon />
-                                </div>
-                            ) : (
-                                <div onclick={onClickAddMediateca(el?.trackId)} class={tracksTable('icon-plus')}>
-                                    <PlusIcon />
-                                </div>
-                            )}
-                        </div>
+                        ))}
                     </div>
                 </div>
-            ))}
+            ) : (
+                <div class={tracksTable('together-wrapper', isNeedHeader ? 'header' : '')}>
+                    <div>
+                        {trackList.map((el, i) => (
+                            <div class={tracksTable('together')}>
+                                <div class={tracksTable('row', 'track' + (isNotWhite ? '--not-white' : ''))}>
+                                    <div class={tracksTable('cell')} onclick={onClickTrack(i, trackList)}>
+                                        {String(i + 1)}
+                                    </div>
+                                    <div class={tracksTable('cell')}>
+                                        {isNeedPhoto && (
+                                            <img
+                                                src={TRACK_HOST + el.img}
+                                                class={tracksTable('photo')}
+                                                onclick={onClickTrackName(el?.albumId)}
+                                            />
+                                        )}
+                                        <div class={tracksTable('name')} onclick={onClickTrackName(el?.albumId)}>
+                                            {el?.name || '???'}
+                                        </div>
+                                    </div>
+                                    <div class={tracksTable('cell')}>
+                                        {el?.artists?.map((artist, index) => (
+                                            <div
+                                                class={tracksTable('artist')}
+                                                onclick={onClickArtist(artist?.musician_id)}
+                                            >
+                                                {`${artist?.name}${index !== el?.artists.length - 1 ? ', ' : ''}`}
+                                            </div>
+                                        ))}
+                                    </div>
+                                    <div class={tracksTable('cell')}>{el.duration}</div>
+                                    <div class={tracksTable('cell')}>
+                                        {icons(el?.trackId, i, el?.isFavorite, el?.isMediateca)}
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

@@ -67,7 +67,40 @@ export const createDOM = (element: VNode | string): Element | Text => {
     if (element.props) {
         Object.entries(element.props).forEach(([key, value]) => {
             if (key.startsWith('on')) {
-                node.onclick = value;
+                let eventType:
+                    | 'onclick'
+                    | 'onblur'
+                    | 'ontimeupdate'
+                    | 'oninput'
+                    | 'onfocus'
+                    | 'onsubmit'
+                    | 'ontouchstart'
+                    | 'ontouchmove';
+                switch (key) {
+                    case 'onclick':
+                        eventType = 'onclick';
+                        break;
+                    case 'onblur':
+                        eventType = 'onblur';
+                        break;
+                    case 'ontimeupdate':
+                        eventType = 'ontimeupdate';
+                        break;
+                    case 'oninput':
+                        eventType = 'oninput';
+                        break;
+                    case 'onfocus':
+                        eventType = 'onfocus';
+                        break;
+                    case 'ontouchstart':
+                        eventType = 'ontouchstart';
+                        break;
+                    case 'ontouchmove':
+                        eventType = 'ontouchmove';
+                        break;
+                }
+                node[eventType] = value;
+                return;
             } else {
                 node.setAttribute(key, value);
             }
@@ -118,7 +151,15 @@ const patchProps = (node: HTMLElement, props: Props, nextProps: Props) => {
     Object.keys(mergedProps).forEach((key: string) => {
         if (props !== null && nextProps !== null) {
             if (key.startsWith('on')) {
-                let eventType: 'onclick' | 'onblur' | 'ontimeupdate' | 'oninput' | 'onfocus' | 'onsubmit';
+                let eventType:
+                    | 'onclick'
+                    | 'onblur'
+                    | 'ontimeupdate'
+                    | 'oninput'
+                    | 'onfocus'
+                    | 'onsubmit'
+                    | 'ontouchstart'
+                    | 'ontouchmove';
                 switch (key) {
                     case 'onclick':
                         eventType = 'onclick';
@@ -134,6 +175,12 @@ const patchProps = (node: HTMLElement, props: Props, nextProps: Props) => {
                         break;
                     case 'onfocus':
                         eventType = 'onfocus';
+                        break;
+                    case 'ontouchstart':
+                        eventType = 'ontouchstart';
+                        break;
+                    case 'ontouchmove':
+                        eventType = 'ontouchmove';
                         break;
                 }
                 if (!nextProps[key]) {

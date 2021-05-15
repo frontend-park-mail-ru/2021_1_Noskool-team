@@ -59,7 +59,7 @@ export const App = () => {
     try {
         isAuth = localStorage.getItem('auth') === 'ok';
     } catch (e) {
-        alert(`да лол, обнови браузер, ошибочка: ${e}`);
+        // alert(`да лол, обнови браузер, ошибочка: ${e}`);
     }
 
     if (requestsStore.profile) {
@@ -82,28 +82,25 @@ export const App = () => {
                     <RightMenu />
                 </div>
                 <div class={pageWrapper('page')}>
-                    {!isMobile() ? (
-                        <div class={pageWrapper('wrapper')}>
-                            {path === LINKS.main && <MainPage />}
-                            {path === LINKS.profile && (isAuth ? <ProfilePage /> : <NeedAccessPage />)}
-                            {path.startsWith(LINKS.album) && <AlbumPage />}
-                            {path.startsWith(LINKS.favorite) && (isAuth ? <FavoritePage /> : <NeedAccessPage />)}
-                            {isPageExistsAuth() && <ErrorPage />}
-                            {path === LINKS.auth && <AuthPage />}
-                            {path === LINKS.reg && <RegistrationPage />}
-                            {path === LINKS.topArtists && <Artists />}
-                            {path.startsWith(LINKS.mediateka) && (isAuth ? <MediatekaPage /> : <NeedAccessPage />)}
-                            {path === LINKS.myPlaylists && (isAuth ? <Playlists /> : <NeedAccessPage />)}
-                            {path === LINKS.createPlaylist && <CreatePlaylist />}
-                            {path === LINKS.topAlbums && <Albums />}
-                            {path === LINKS.topTracks && <Tracks />}
-                            {path === LINKS.billboard && <BillboardChart />}
-                            {path.startsWith(LINKS.playlist) && <Playlist />}
-                            {path.startsWith(LINKS.artist) && <ArtistPage />}
-                        </div>
-                    ) : (
-                        <div></div>
-                    )}
+                    <div class={pageWrapper('wrapper')}>
+                        {path === LINKS.main && <MainPage />}
+                        {path === LINKS.profile && (isAuth ? <ProfilePage /> : <NeedAccessPage />)}
+                        {path.startsWith(LINKS.album) && <AlbumPage />}
+                        {path.startsWith(LINKS.favorite) && (isAuth ? <FavoritePage /> : <NeedAccessPage />)}
+                        {isPageExistsAuth() && <ErrorPage />}
+                        {path === LINKS.auth && <AuthPage />}
+                        {path === LINKS.reg && <RegistrationPage />}
+                        {path === LINKS.topArtists && <Artists />}
+                        {path === LINKS.myPlaylists && (isAuth ? <Playlists /> : <NeedAccessPage />)}
+                        {path === LINKS.createPlaylist && <CreatePlaylist />}
+                        {path === LINKS.topAlbums && <Albums />}
+                        {path === LINKS.topTracks && <Tracks />}
+                        {path === LINKS.billboard && <BillboardChart />}
+                        {path.startsWith(LINKS.playlist) && <Playlist />}
+                        {path.startsWith(LINKS.artist) && <ArtistPage />}
+
+                        {path.startsWith(LINKS.mediateka) && (isAuth ? <MediatekaPage /> : <NeedAccessPage />)}
+                    </div>
                 </div>
                 <div class={pageWrapper('player')}>
                     <AudioLine />

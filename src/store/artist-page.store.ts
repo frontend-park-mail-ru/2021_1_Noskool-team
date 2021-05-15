@@ -7,6 +7,13 @@ interface Artists {
     picture: string;
 }
 
+interface Album {
+    'album_id': number;
+    tittle: string;
+    picture: string;
+    'release_date': string;
+}
+
 export interface ArtistTrack {
     track_id: number;
     tittle: string;
@@ -17,6 +24,7 @@ export interface ArtistTrack {
     in_mediateka: boolean;
     musicians: Artists[];
     duration: string;
+    album: Album[];
 }
 
 interface ArtistsStore {

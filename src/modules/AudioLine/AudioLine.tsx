@@ -258,6 +258,10 @@ window.onstorage = () => {
 const player = cn('player');
 
 export const AudioLine = () => {
+    const onClickArtist = (id: number) => () => {
+        redirectTo(`${LINKS.artist}/${id}`);
+    };
+
     if (isMobile()) {
         return (
             <div class={player('', isMobile() ? 'mob' : '')} onswipe={isMobile() ? onSwipeTrack : undefined}>
@@ -308,10 +312,6 @@ export const AudioLine = () => {
             </div>
         );
     }
-
-    const onClickArtist = (id: number) => () => {
-        redirectTo(`${LINKS.artist}/${id}`);
-    };
 
     return (
         <div class={player('', isMobile() ? 'mob' : '')} onswipe={isMobile() ? onSwipeTrack : undefined}>

@@ -58,6 +58,7 @@ export const ArtistPage = () => {
                 updateAddMediateca={isClickAddMediateca}
                 updateDeleteFavourites={isClickDeleteFavourites}
                 updateDeleteMediateca={isClickDeleteMediateca}
+                isNotWhite
             />
         </div>
     );

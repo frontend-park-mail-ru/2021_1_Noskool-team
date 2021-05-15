@@ -9,6 +9,13 @@ interface Artists {
     picture: string;
 }
 
+interface Album {
+    'album_id': number;
+    tittle: string;
+    picture: string;
+    'release_date': string;
+}
+
 interface ArtistTrack {
     track_id: number;
     tittle: string;
@@ -19,6 +26,7 @@ interface ArtistTrack {
     in_mediateka: boolean;
     musicians: Artists[];
     duration: string;
+    album: Album[];
 }
 
 export const getArtistById = async (id: number) => {
