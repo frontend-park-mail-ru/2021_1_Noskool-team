@@ -24,3 +24,29 @@
     color: $gray;
   }
 }
+
+.artist-page--mob {
+  padding: 15px;
+  box-sizing: border-box;
+  height: 100%;
+
+  .artist-page {
+    &__img {
+      max-height: 200px;
+      max-width: 100%;
+    }
+
+    &__table {
+      width: 100%;
+      overflow: auto;
+    }
+
+    &__desc {
+      text-align: center;
+    }
+
+    &__title {
+      font-size: 20px;
+    }
+  }
+}

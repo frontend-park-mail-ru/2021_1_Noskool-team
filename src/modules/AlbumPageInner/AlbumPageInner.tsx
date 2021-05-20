@@ -9,6 +9,9 @@ import { toCurrentTrack } from 'utils/cast';
 import './style.scss';
 import { requestsStore } from 'store/requests.store';
 import { render } from 'utils/render';
+import { isMobile } from 'utils/isMobile';
+import { Link } from 'components/Link/Link';
+import { LINKS } from 'constants/links';
 
 const albumPage = cn('album-page');
 
@@ -60,14 +63,16 @@ export const AlbumPageInner = () => {
     }
 
     return (
-        <div class={albumPage()}>
+        <div class={albumPage('', isMobile() ? 'mob' : '')}>
             <div class={albumPage('header')}>
                 <img src={TRACK_HOST + albumPageStore.album.picture} alt='' class={albumPage('photo')} />
                 <div class={albumPage('information')}>
                     <div class={albumPage('title')}>{albumPageStore.album.tittle}</div>
                     <div class={albumPage('singer')}>
                         {`Исполнитель: `}
-                        {albumPageStore.album.musician?.map((musician) => musician?.name).join(', ')}
+                        {albumPageStore.album.musician?.map((musician) => (
+                            <Link text={musician?.name} to={`${LINKS.artist}/${musician?.musician_id}`} />
+                        ))}
                     </div>
                     <div class={albumPage('date')}>
                         {String(new Date(albumPageStore.album.release_date).getFullYear())}

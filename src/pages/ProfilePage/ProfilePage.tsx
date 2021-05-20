@@ -6,9 +6,10 @@ import { profileStore, profileForm } from 'store/profile.store';
 import { HOST } from 'constants/api';
 import { cn } from 'utils/cn';
 import { OkeyIcon } from 'assets/icons';
+import { requestsStore } from 'store/requests.store';
 
 import './style.scss';
-import { requestsStore } from 'store/requests.store';
+import { isMobile } from 'utils/isMobile';
 
 const page = cn('profile-page');
 const change = cn('change-data');
@@ -61,9 +62,22 @@ export const ProfilePage = () => {
     };
 
     return (
-        <div class={page()}>
+        <div class={page('', isMobile() ? 'mob' : '')}>
             <div class={change()}>
-                <form class={change('input')} onsubmit={onSubmitChanges}>
+                <form class={change('input')}>
+                    {isMobile() && (
+                        <div class={page('photo')}>
+                            <input
+                                type='file'
+                                id={ID_IMAGE_INPUT}
+                                accept={'image/jpeg,image/png,image/webp,image/gif'}
+                                onchange={onChacngePhoto}
+                            />
+                            <label htmlFor={ID_IMAGE_INPUT} onclick={onClickLabel} class={page('change-photo')}>
+                                <img src={HOST + profileStore.profile.photo} alt='' class={page('image')} />
+                            </label>
+                        </div>
+                    )}
                     <ProfileInput
                         input={profileForm.form.email}
                         placeholder={'Измените email'}
@@ -78,29 +92,39 @@ export const ProfilePage = () => {
                         initialName={profileStore.profile.login}
                         inputName={'Логин'}
                     />
-                    <div class={page('div-photo')}>
-                        <div class={page('name')}>Фото</div>
-                        <div class={page('photo')}>
-                            <input
-                                type='file'
-                                id={ID_IMAGE_INPUT}
-                                accept={'image/jpeg,image/png,image/webp,image/gif'}
-                                onchange={onChacngePhoto}
-                            />
-                            <label htmlFor={ID_IMAGE_INPUT} onclick={onClickLabel} class={page('change-photo')}>
-                                <img src={HOST + profileStore.profile.photo} alt='' class={page('image')} />
-                            </label>
-                        </div>
-                    </div>
-                    <button type='submit' class={page('change')}>
-                        {'Изменить'}
-                    </button>
-                    {profileStore.profile.isOkey && (
-                        <div class={page('changeStatus')} id='status'>
-                            <OkeyIcon />
-                            <div class={page('isOkey')}>{'Данные успешно изменены'}</div>
+                    {!isMobile() && (
+                        <div class={page('div-photo')}>
+                            <div class={page('name')}>Фото</div>
+                            <div class={page('photo')}>
+                                <input
+                                    type='file'
+                                    id={ID_IMAGE_INPUT}
+                                    accept={'image/jpeg,image/png,image/webp,image/gif'}
+                                    onchange={onChacngePhoto}
+                                />
+                                <label htmlFor={ID_IMAGE_INPUT} onclick={onClickLabel} class={page('change-photo')}>
+                                    <img src={HOST + profileStore.profile.photo} alt='' class={page('image')} />
+                                </label>
+                            </div>
                         </div>
                     )}
+                    <button onclick={onSubmitChanges} class={page('change')}>
+                        {'Изменить'}
+                    </button>
+                    {profileStore.profile.isOkey &&
+                        (isMobile() ? (
+                            <div class={page('changeStatus-wrapper')}>
+                                <div class={page('changeStatus')} id='status'>
+                                    <OkeyIcon />
+                                    <div class={page('isOkey')}>{'Данные успешно изменены'}</div>
+                                </div>
+                            </div>
+                        ) : (
+                            <div class={page('changeStatus')} id='status'>
+                                <OkeyIcon />
+                                <div class={page('isOkey')}>{'Данные успешно изменены'}</div>
+                            </div>
+                        ))}
                 </form>
             </div>
         </div>

@@ -1,4 +1,4 @@
-import { GET_FAVORITE_TRACKS, GET_FAVORITE_ALBUMS } from './favorite.constants';
+import { GET_FAVORITE_TRACKS, GET_FAVORITE_ALBUMS, GET_FAVORITE_ARTISTS } from './favorite.constants';
 import { get } from '../common/common';
 import { FavoriteAlbum, FavoriteTarck } from 'types/requests/favorite';
 import { favoriteTracksStore } from 'store/favorite-track.store';
@@ -13,6 +13,13 @@ export const getFavoriteTracks = async (limit = 100) => {
 
 export const getFavoriteAlbums = async (limit = 100) => {
     const response = await get<FavoriteAlbum[] | {}>(GET_FAVORITE_ALBUMS + `?limit=${limit}`);
+    if (Array.isArray(response)) {
+        favoriteAlbumsStore.albumList = response;
+    }
+};
+
+export const getFavoriteArtists = async (limit = 100) => {
+    const response = await get<any[] | {}>(GET_FAVORITE_ARTISTS + `?limit=${limit}`);
     if (Array.isArray(response)) {
         favoriteAlbumsStore.albumList = response;
     }

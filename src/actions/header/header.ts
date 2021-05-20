@@ -1,5 +1,5 @@
 import { get } from '../common/common';
-import { Album, Track, Musician } from 'types/store/header-store';
+import { Album, Track, Musician } from 'store/header.store';
 import { SEARCH } from 'actions/header/header.constants';
 import { headerStore } from 'store/header.store';
 

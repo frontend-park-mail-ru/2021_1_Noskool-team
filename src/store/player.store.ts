@@ -1,5 +1,39 @@
 import { proxy } from 'jsx/store';
-import { PlayerStore, CurrentTrack, Expand } from 'types/store/player-store';
+
+interface Musician {
+    'musician_id': number;
+    name: string;
+    description: string;
+    picture: string;
+}
+
+export interface CurrentTrack {
+    index: number;
+    link: string;
+    img: string;
+    name: string;
+    artists: Musician[];
+    trackId: number;
+    isFavorite: boolean;
+    isMediateca: boolean;
+    duration: string;
+    albumId: number;
+}
+
+export interface PlayerStore {
+    currentTrack: CurrentTrack;
+    isPlay: boolean;
+    volumeIcon: number;
+    volume: number;
+    playList: CurrentTrack[];
+    currentTime: number;
+    durationTime: number;
+}
+
+export interface Expand {
+    isExpand: boolean;
+    isExpandPlaylist: boolean;
+}
 
 const lastTrack: CurrentTrack = JSON.parse(localStorage.getItem('lastTrack')) || {
     link: '/api/v1/data/audio/Do_I_Wanna_Know.ogg',

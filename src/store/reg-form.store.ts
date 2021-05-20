@@ -1,6 +1,16 @@
 import { proxy } from 'jsx/store';
 import { FieldState } from 'types/common';
-import { Form } from 'types/store/reg-form';
+
+export interface Form {
+    nickname: FieldState;
+    password: FieldState;
+    passwordRepeat: FieldState;
+    email: FieldState;
+    name: FieldState;
+    lastName: FieldState;
+    isValid: boolean;
+    errorMsg: string;
+}
 
 export const regFormStore = proxy<Form>({
     nickname: proxy<FieldState>(

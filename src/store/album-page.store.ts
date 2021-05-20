@@ -1,5 +1,18 @@
 import { proxy } from 'jsx/store';
-import { Album, AlbumPageStore } from 'types/store/albums-page';
+import { TrackBack, Musician } from 'types/requests/tracks';
+
+export interface Album {
+    'album_id': number;
+    picture: string;
+    'release_date': string;
+    tittle: string;
+    tracks: TrackBack[];
+    musician: Musician[];
+}
+
+export interface AlbumPageStore {
+    album: Album;
+}
 
 export const albumPageStore = proxy<AlbumPageStore>({
     album: proxy<Album>({

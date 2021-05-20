@@ -48,7 +48,7 @@ export const Tracks = () => {
     return (
         <div class={mediatekaTracks('', isMobile() ? 'mob' : '')}>
             {mediatekaTracksStore.tracksList.length !== 0 && (
-                <div class={mediatekaTracks('title')}>{'Ваши избранные треки:'}</div>
+                <div class={mediatekaTracks('title')}>{'Ваши добавленные треки:'}</div>
             )}
             <div class={mediatekaTracks('table')}>
                 <TrackTable

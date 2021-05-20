@@ -91,33 +91,78 @@
     }
   }
 
+  &__change {
+    background-color: $pink;
+    border-radius: 5px;
+    width: 200px;
+    height: 50px;
+    color: $white;
+    font-size: 22px;
+    line-height: 25px;
+    font-weight: 500;
+    cursor: pointer;
+    transform: scale(0.975, 0.975);
+    transition: all 0.5s;
+    margin-left: 150px;
+    margin-top: 30px;
+
+    &:hover {
+      transform: scale(1, 1);
+    }
+  }
+
   .change-data {
     border-radius: 30px;
     background-color: $white;
     padding: 15px;
     grid-area: span 1 / span 2;
     height: 560px;
+  }
+}
 
-    &__input {
-      button {
-        background-color: $pink;
-        border-radius: 5px;
-        width: 200px;
-        height: 50px;
-        color: $white;
-        font-size: 22px;
-        line-height: 25px;
-        font-weight: 500;
-        cursor: pointer;
-        transform: scale(0.975, 0.975);
-        transition: all 0.5s;
-        margin-left: 150px;
-        margin-top: 30px;
+.profile-page--mob {
+  padding: 15px;
 
-        &:hover {
-          transform: scale(1, 1);
-        }
+  .profile-page {
+    &__photo {
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      box-sizing: border-box;
+
+      img {
+        height: 150px;
+        width: 150px;
       }
     }
+
+    &__change {
+      margin: 0;
+      width: 100%;
+
+      &:hover {
+        transform: scale(0.975, 0.975);
+      }
+    }
+
+    &__changeStatus {
+      margin: 0;
+    }
+
+    &__changeStatus-wrapper {
+      width: 100%;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 10px;
+    }
+  }
+
+  .change-data {
+    height: 100%;
+    box-sizing: border-box;
   }
 }

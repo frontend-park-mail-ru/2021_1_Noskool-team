@@ -29,6 +29,9 @@ const chooseItem = (index: number, isMobile: boolean) => () => {
             case 0:
                 link = LINKS.main;
                 break;
+            case 1:
+                link = LINKS.myPlaylists;
+                break;
             case 3:
                 link = LINKS.favoriteTracks;
                 break;
@@ -38,14 +41,14 @@ const chooseItem = (index: number, isMobile: boolean) => () => {
             case 0:
                 link = LINKS.main;
                 break;
-            case 5:
-                link = LINKS.favoriteTracks;
+            case 3:
+                link = LINKS.myPlaylists;
                 break;
             case 4:
                 link = LINKS.mediatekaTracks;
                 break;
-            case 3:
-                link = LINKS.myPlaylists;
+            case 5:
+                link = LINKS.favoriteTracks;
                 break;
             case 7:
                 link = LINKS.profile;

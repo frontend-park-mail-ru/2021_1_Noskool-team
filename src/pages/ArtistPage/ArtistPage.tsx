@@ -5,6 +5,7 @@ import { JSX } from 'jsx/jsx';
 import { artistPageStore } from 'store/artist-page.store';
 import { toCurrentTrack } from 'utils/cast';
 import { cn } from 'utils/cn';
+import { isMobile } from 'utils/isMobile';
 
 import './style.scss';
 
@@ -48,18 +49,20 @@ export const ArtistPage = () => {
     }
 
     return (
-        <div class={page()}>
+        <div class={page('', isMobile() ? 'mob' : '')}>
             <img class={page('img')} src={HOST_IMG + artistPageStore.artist?.picture} alt='' />
             <div class={page('title')}>{artistPageStore.artist?.name}</div>
             <div class={page('desc')}>{artistPageStore.artist?.description}</div>
-            <TrackTable
-                trackList={toCurrentTrack(artistPageStore.tracks)}
-                updateAddFavourites={isClickAddFavourites}
-                updateAddMediateca={isClickAddMediateca}
-                updateDeleteFavourites={isClickDeleteFavourites}
-                updateDeleteMediateca={isClickDeleteMediateca}
-                isNotWhite
-            />
+            <div class={page('table')}>
+                <TrackTable
+                    trackList={toCurrentTrack(artistPageStore.tracks)}
+                    updateAddFavourites={isClickAddFavourites}
+                    updateAddMediateca={isClickAddMediateca}
+                    updateDeleteFavourites={isClickDeleteFavourites}
+                    updateDeleteMediateca={isClickDeleteMediateca}
+                    isNotWhite
+                />
+            </div>
         </div>
     );
 };

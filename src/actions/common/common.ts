@@ -7,6 +7,7 @@ const getAuth = (url: string): Promise<Response> => {
         headers: {
             'X-Csrf-Token': document.cookie
                 ?.split(';')
+                ?.map((el) => el.trim())
                 ?.find((item) => item?.startsWith('csrf'))
                 ?.split('=')[1],
         },

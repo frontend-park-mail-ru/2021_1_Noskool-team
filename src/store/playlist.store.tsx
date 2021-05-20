@@ -1,7 +1,18 @@
 import { proxy } from 'jsx/store';
-import { Playlist } from 'types/requests/playlist';
-import { AllPlaylists, OnePlaylist, CreatePlaylist } from 'types/store/playlist';
 import { FieldState } from 'types/common';
+import { Playlist } from 'types/requests/playlist';
+
+export interface AllPlaylists {
+    albumList: Playlist[];
+}
+
+export interface OnePlaylist {
+    playlist: Playlist;
+}
+
+export interface CreatePlaylist {
+    playlist: CreatePlaylist;
+}
 
 export const playlistStore = proxy<AllPlaylists>({
     albumList: proxy<Playlist>([]),

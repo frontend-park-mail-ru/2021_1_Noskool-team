@@ -4,9 +4,9 @@ import { Albums } from './Albums';
 import { JSX } from 'jsx/jsx';
 import { cn } from 'utils/cn';
 import { redirectTo } from 'utils/render';
+import { isMobile } from 'utils/isMobile';
 
 import './style.scss';
-import { isMobile } from 'utils/isMobile';
 
 const mediatekaPage = cn('mediateka-page');
 

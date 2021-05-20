@@ -1,6 +1,7 @@
 import { JSX } from 'jsx/jsx';
 import { FieldState } from 'types/common';
 import { cn } from 'utils/cn';
+import { isMobile } from 'utils/isMobile';
 
 import './style.scss';
 
@@ -45,7 +46,7 @@ export const ProfileInput = ({ validators, isPassword = false, input, initialNam
     };
 
     return (
-        <div class={CnInput()}>
+        <div class={CnInput('', isMobile() ? 'mob' : '')}>
             <div class={CnInput('name')}>{inputName}</div>
             <div
                 class={
@@ -53,8 +54,6 @@ export const ProfileInput = ({ validators, isPassword = false, input, initialNam
                 }
             >
                 <input type={isPassword ? 'password' : 'text'} value={initialName} oninput={onInput} onblur={onBlur} />
-                <div class={'input-text__error-msg'}>{input.errorMsg}</div>
-                <div class={input.isValid !== null ? (input.isValid ? 'ok' : 'not-valid') : ''} />
             </div>
         </div>
     );

@@ -58,7 +58,7 @@ export const Header = () => {
     if (isMobile()) {
         return (
             <div class={header('', 'mob')}>
-                <form class={header('search-form')}>
+                <form class={header('search-form')} id={'search-input'}>
                     <input
                         type='search'
                         value={headerStore.search}
@@ -74,7 +74,7 @@ export const Header = () => {
                             <div>
                                 <div class={header('serach-title')}>{'Треки:'}</div>
                                 <div class={header('search-item')}>
-                                    {headerStore.serachResultTracks.slice(0, 4).map((el) => (
+                                    {headerStore.serachResultTracks.slice(0, 3).map((el) => (
                                         <div class={header('search-together')}>
                                             <img src={TRACK_HOST + el.picture} class={header('search-photo')} />
                                             <Link
@@ -91,7 +91,7 @@ export const Header = () => {
                             <div>
                                 <div class={header('serach-title')}>{'Артисты:'}</div>
                                 <div class={header('search-item')}>
-                                    {headerStore.searchResultArtists.slice(0, 4).map((el) => (
+                                    {headerStore.searchResultArtists.slice(0, 3).map((el) => (
                                         <div class={header('search-together')}>
                                             <img src={TRACK_HOST + el.picture} class={header('search-photo')} />
                                             <Link
@@ -108,7 +108,7 @@ export const Header = () => {
                             <div>
                                 <div class={header('serach-title')}>{'Альбомы:'}</div>
                                 <div class={header('search-item')}>
-                                    {headerStore.searchResultAlbums.slice(0, 4).map((el) => {
+                                    {headerStore.searchResultAlbums.slice(0, 3).map((el) => (
                                         <div class={header('search-together')}>
                                             <img src={TRACK_HOST + el.picture} class={header('search-photo')} />
                                             <Link
@@ -116,8 +116,8 @@ export const Header = () => {
                                                 to={`${LINKS.album}/${el.album_id}`}
                                                 onClick={onBlureSearch}
                                             />
-                                        </div>;
-                                    })}
+                                        </div>
+                                    ))}
                                 </div>
                             </div>
                         )}

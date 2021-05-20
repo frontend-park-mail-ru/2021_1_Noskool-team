@@ -1,7 +1,7 @@
 import { JSX } from 'jsx/jsx';
 import { cn } from 'utils/cn';
 import { TRACK_HOST } from 'constants/api';
-import { CurrentTrack } from 'types/store/player-store';
+import { CurrentTrack } from 'store/player.store';
 import { playerStore } from 'store/player.store';
 import { onClickPlay } from 'modules/AudioLine/AudioLine';
 import { LikeFillIcon, PlusIcon, LikeIcon, DeleteIcon, OkeyIcon } from 'assets/icons';
