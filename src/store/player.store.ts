@@ -51,4 +51,5 @@ export const playerStore = proxy<PlayerStore>({
 
 export const expandStore = proxy<Expand>({
     isExpand: false,
+    isExpandPlaylist: false,
 });

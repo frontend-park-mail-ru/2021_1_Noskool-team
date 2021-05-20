@@ -16,6 +16,7 @@ export const onePlaylistStore = proxy<OnePlaylist>({
         'release_date': '',
         'user_id': '',
         tracks: [],
+        isOkey: false,
     }),
 });
 

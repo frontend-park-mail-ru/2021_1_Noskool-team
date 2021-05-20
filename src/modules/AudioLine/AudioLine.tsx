@@ -1,9 +1,10 @@
 import { JSX } from 'jsx/jsx';
 import { cn } from 'utils/cn';
 import { playerStore, expandStore } from 'store/player.store';
-import { playlistStore } from 'store/playlist.store';
+import { onePlaylistStore, playlistStore } from 'store/playlist.store';
 import { TRACK_HOST } from 'constants/api';
 import { addTrackToPlaylist } from 'actions/playlist/playlist';
+import { TrackTable } from 'components/Table';
 import {
     NextBtnIcon,
     PauseIcon,
@@ -18,6 +19,11 @@ import {
     PlaylistsIcon,
     LikeFillIcon,
     OkFillIcon,
+    CloseIson,
+    ShuffleIcon,
+    PlayMainTrackIcon,
+    CurrentPlaylistIcon,
+    OkeyIcon,
 } from 'assets/icons';
 import { requestsStore } from 'store/requests.store';
 import {
@@ -217,9 +223,14 @@ const toggle = () => {
     expandStore.isExpand = !expandStore.isExpand;
 };
 
+const togglePlaylist = () => {
+    expandStore.isExpandPlaylist = !expandStore.isExpandPlaylist;
+};
+
 const onClickAddToPlaylist = (id_playlist: number) => () => {
+    onePlaylistStore.playlist.isOkey = false;
     addTrackToPlaylist(id_playlist, playerStore.currentTrack.trackId);
-    requestsStore.onePlaylist = true;
+    console.log('dkjgfs');
 };
 
 window.name = windowName;
@@ -253,6 +264,19 @@ window.onstorage = () => {
     } catch (e) {
         alert(`да лол, обнови браузер, ошибочка: ${e}`);
     }
+};
+
+const onClickShufflePlayer = () => {
+    for (let i = playerStore.playList.length - 1; i > 0; i--) {
+        let j = Math.floor(Math.random() * (i + 1));
+        [playerStore.playList[i], playerStore.playList[j]] = [playerStore.playList[j], playerStore.playList[i]];
+    }
+
+    onClickPlay();
+};
+
+const onClickClosePlaylist = () => {
+    document.getElementById('menu-tracklist').classList.remove('expand');
 };
 
 const player = cn('player');
@@ -342,13 +366,44 @@ export const AudioLine = () => {
                     </div>
                 </div>
             </div>
+            <div class={player('together')}>
+                <div class={player('controls')}>
+                    <div class={player('prev-btn')} onclick={onClickPrev}>
+                        <PrevBtnIcon />
+                    </div>
+                    <div class={player('play-btn', playerStore.isPlay ? 'pause' : '')} onclick={onClickPlay}>
+                        {playerStore.isPlay ? <PauseIcon /> : <PlayMainTrackIcon />}
+                    </div>
+                    <div class={player('next-btn')} onclick={onClickNext}>
+                        <NextBtnIcon />
+                    </div>
+                </div>
+                <div class={player('track-line')}>
+                    <input
+                        id={TRACK_LINE_ID}
+                        oninput={onChangeTrackLine}
+                        type='range'
+                        min='0'
+                        max='1'
+                        step='0.01'
+                        value='0'
+                    />
+                </div>
+            </div>
+            {onePlaylistStore.playlist.isOkey && (
+                <div class={player('changeStatus')} id='status'>
+                    <OkeyIcon />
+                    <div class={player('isOkey')}>{'Песня добавлена в плейлист'}</div>
+                </div>
+            )}
+
             {localStorage.getItem('auth') === 'ok' && (
                 <div class={player('playlist-btns')}>
                     <div class={player('playlist')} onclick={toggle}>
                         <div class={player('playlist-btn')}>
                             <PlaylistsIcon />
                         </div>
-                        <div class={player('menu', expandStore.isExpand ? 'expand' : '')}>
+                        <div class={player('menu', expandStore.isExpand ? 'expand' : '')} id='menu-tracklist'>
                             <ul class={player('items-user')}>
                                 {playlistStore.albumList.length === 0 ? (
                                     <div class={player('none')}>Нет плейлистов :(</div>
@@ -385,30 +440,38 @@ export const AudioLine = () => {
                             </div>
                         </div>
                     </div>
+                    <div class={player('random')}>
+                        <div class={player('playRandom')} onclick={onClickShufflePlayer}>
+                            <ShuffleIcon />
+                        </div>
+                    </div>
+                    <div class={player('current-playlist')} onclick={togglePlaylist}>
+                        <div class={player('tracklist-btn', expandStore.isExpandPlaylist ? 'click' : '')}>
+                            <CurrentPlaylistIcon />
+                        </div>
+                        <div class={player('playlist-menu', expandStore.isExpandPlaylist ? 'expand' : '')}>
+                            <div class={player('tracklist-title')}>
+                                <div class={player('playlist-title')}>Очередь прослушивания</div>
+                                <div class={player('close')} onclick={onClickClosePlaylist}>
+                                    <CloseIson />
+                                </div>
+                            </div>
+                            <div class={player('play-currentTrack')}>
+                                {`Сейчас играет: `}
+                                <span class={player('currentTrack')}>{playerStore.currentTrack.name}</span>
+                            </div>
+                            <TrackTable
+                                trackList={playerStore.playList}
+                                isNeedHeader={true}
+                                updateAddFavourites={onClickFavorite}
+                                updateAddMediateca={onClickFavorite}
+                                updateDeleteFavourites={onClickFavorite}
+                                updateDeleteMediateca={onClickMedia}
+                            />
+                        </div>
+                    </div>
                 </div>
             )}
-            <div class={player('controls')}>
-                <div class={player('prev-btn')} onclick={onClickPrev}>
-                    <PrevBtnIcon />
-                </div>
-                <div class={player('play-btn', playerStore.isPlay ? 'pause' : '')} onclick={onClickPlay}>
-                    {playerStore.isPlay ? <PauseIcon /> : <PlayIcon />}
-                </div>
-                <div class={player('next-btn')} onclick={onClickNext}>
-                    <NextBtnIcon />
-                </div>
-            </div>
-            <div class={player('track-line')}>
-                <input
-                    id={TRACK_LINE_ID}
-                    oninput={onChangeTrackLine}
-                    type='range'
-                    min='0'
-                    max='1'
-                    step='0.01'
-                    value='0'
-                />
-            </div>
             <div class={player('volume')}>
                 <div class={player('volume-icon')} onclick={onClickVolume}>
                     {getVolumeIcon()()}

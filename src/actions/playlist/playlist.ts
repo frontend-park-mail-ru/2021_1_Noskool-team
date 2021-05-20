@@ -77,6 +77,7 @@ export const postPlaylist = async (body: createPlaylist) => {
 
 export const addTrackToPlaylist = async (id_playlist: number, id_track: number) => {
     let response = await postAuth(PLAYLIST + `${id_playlist}/track/${id_track}`, '');
+    console.log('skgjkdf');
     if (response.status === 401) {
         try {
             localStorage.clear();
@@ -98,5 +99,7 @@ export const addTrackToPlaylist = async (id_playlist: number, id_track: number) 
             return new Promise(() => {});
         }
     }
+    console.log('leralera');
+    console.log(response.json());
     return response.json();
 };
