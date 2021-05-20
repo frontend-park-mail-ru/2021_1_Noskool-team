@@ -8,6 +8,7 @@ export interface Playlist {
     'release_date': string;
     'user_id': string;
     tracks: TrackBack[];
+    isOkey: boolean;
 }
 
 export interface CreatePlaylistProps {

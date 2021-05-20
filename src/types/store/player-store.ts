@@ -30,4 +30,5 @@ export interface PlayerStore {
 
 export interface Expand {
     isExpand: boolean;
+    isExpandPlaylist: boolean;
 }

@@ -65,6 +65,7 @@
     display: flex;
     align-items: center;
     height: 100%;
+    justify-content: center;
   }
 
   &__none {
@@ -75,6 +76,12 @@
   &__playlists {
     cursor: pointer;
     margin-bottom: 5px;
+
+    &--disable {
+      pointer-events: none;
+      cursor: none;
+      color: #c8c8c8;
+    }
 
     &:hover {
       color: $pink;
@@ -164,14 +171,19 @@
     }
   }
 
+  &__together {
+    flex-grow: 0.5;
+  }
+
   &__menu {
     position: absolute;
     opacity: 0;
     pointer-events: none;
     background-color: $white;
     width: 300px;
+    height: 200px;
     bottom: 75px;
-    left: -15px;
+    left: 465px;
     border-radius: 10px;
     z-index: 100;
     transition: all 0.3s;
@@ -195,6 +207,26 @@
       opacity: 1;
       pointer-events: all;
     }
+  }
+
+  &__changeStatus {
+    position: absolute;
+    bottom: 85px;
+    right: 100px;
+    display: flex;
+    background-color: #ceffbc;
+    padding: 5px;
+    width: max-content;
+    border-radius: 3px;
+
+    svg > path {
+      stroke: #247719;
+    }
+  }
+
+  &__isOkey {
+    color: #247719;
+    margin-left: 10px;
   }
 
   &__items-user {
@@ -266,8 +298,78 @@
     }
   }
 
+  &__playRandom {
+    cursor: pointer;
+    width: 25px;
+    height: 25px;
+    margin: 0 10px;
+    position: relative;
+
+    svg {
+      width: 25px;
+      height: 25px;
+      position: absolute;
+      fill: $gray;
+
+      path {
+        transition: all 0.3s;
+      }
+    }
+
+    div {
+      opacity: 0;
+      transition: all 0.3s;
+    }
+
+    &:hover {
+      svg {
+        fill: $pink;
+      }
+    }
+  }
+
+  &__tracklist-btn {
+    cursor: pointer;
+    width: 25px;
+    height: 25px;
+    margin: 0 10px;
+    position: relative;
+
+    svg {
+      width: 25px;
+      height: 25px;
+      position: absolute;
+      fill: $gray;
+
+      path {
+        transition: all 0.3s;
+      }
+    }
+
+    div {
+      opacity: 0;
+      transition: all 0.3s;
+    }
+
+    &--click {
+      svg {
+        fill: $pink;
+      }
+    }
+
+    &:hover {
+      svg {
+        fill: $pink;
+      }
+    }
+  }
+
   &__playlist-btn {
     cursor: pointer;
+    width: 25px;
+    height: 25px;
+    margin: 0 10px;
+    position: relative;
 
     svg {
       width: 25px;
@@ -318,10 +420,37 @@
 
   &__prev-btn {
     @include btn;
+
+    width: 18px;
+    height: 18px;
+    margin: 0;
+
+    svg {
+      width: 18px;
+      height: 18px;
+    }
   }
 
   &__play-btn {
     @include btn;
+
+    width: 35px;
+    height: 35px;
+
+    svg {
+      width: 35px;
+      height: 35px;
+
+      path {
+        stroke: $gray;
+      }
+
+      &:hover {
+        path {
+          stroke: $pink;
+        }
+      }
+    }
 
     &--pause {
       &:hover {
@@ -334,8 +463,8 @@
       }
 
       svg {
-        width: 30px;
-        height: 30px;
+        width: 35px;
+        height: 35px;
 
         path {
           stroke: $gray;
@@ -345,8 +474,79 @@
     }
   }
 
+  &__playlist-menu {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+    background-color: $white;
+    width: 1200px;
+    height: calc(100vh - 75px);
+    bottom: 75px;
+    left: 0;
+    z-index: -1;
+    transition: all 0.3s;
+    padding: 15px;
+    box-sizing: border-box;
+    padding-left: 200px;
+    overflow-y: scroll;
+
+    &--expand {
+      opacity: 1;
+      pointer-events: all;
+    }
+  }
+
+  &__tracklist-title {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__playlist-title {
+    font-size: 24px;
+    font-weight: 600;
+  }
+
+  &__close {
+    @include btn;
+
+    margin-right: 40px;
+
+    svg {
+      path {
+        fill: $gray;
+      }
+    }
+  }
+
+  &__currentTrack {
+    color: $gray;
+    font-size: 18px;
+    cursor: pointer;
+    margin-left: 10px;
+
+    &:hover {
+      color: $pink;
+    }
+  }
+
+  &__play-currentTrack {
+    margin-top: 15px;
+    font-size: 18px;
+    margin-bottom: 30px;
+  }
+
   &__next-btn {
     @include btn;
+
+    width: 18px;
+    height: 18px;
+    margin: 0;
+
+    svg {
+      width: 18px;
+      height: 18px;
+    }
   }
 }
 
