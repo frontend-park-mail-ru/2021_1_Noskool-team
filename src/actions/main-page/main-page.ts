@@ -45,7 +45,7 @@ export const getDiscovers = async () => {
 };
 
 export const addToMediateca = async (id: number): Promise<Response | undefined> => {
-    const ADD_TO_MEDIATECA = TRACK_HOST + `/api/v1/track/${id}/mediateka?type=add`;
+    const ADD_TO_MEDIATECA = TRACK_HOST + `/api/v1/music/track/${id}/mediateka?type=add`;
     let response = await postAuth(ADD_TO_MEDIATECA, {});
     if (response.status === 401) {
         redirectTo(LINKS.auth);
@@ -67,7 +67,7 @@ export const addToMediateca = async (id: number): Promise<Response | undefined> 
 };
 
 export const deleteFromMediateca = async (id: number): Promise<Response | undefined> => {
-    const ADD_TO_MEDIATECA = TRACK_HOST + `/api/v1/track/${id}/mediateka?type=delete`;
+    const ADD_TO_MEDIATECA = TRACK_HOST + `/api/v1/music/track/${id}/mediateka?type=delete`;
     let response = await postAuth(ADD_TO_MEDIATECA, {});
     if (response.status === 401) {
         redirectTo(LINKS.auth);
@@ -89,7 +89,7 @@ export const deleteFromMediateca = async (id: number): Promise<Response | undefi
 };
 
 export const addToFavourites = async (id: number): Promise<Response | undefined> => {
-    const ADD_TO_FAVOURITES = TRACK_HOST + `/api/v1/track/${id}/favorite?type=add`;
+    const ADD_TO_FAVOURITES = TRACK_HOST + `/api/v1/music/track/${id}/favorite?type=add`;
     let response = await postAuth(ADD_TO_FAVOURITES, {});
     if (response.status === 401) {
         redirectTo(LINKS.auth);
@@ -111,7 +111,7 @@ export const addToFavourites = async (id: number): Promise<Response | undefined>
 };
 
 export const deleteFromFavourites = async (id: number): Promise<Response | undefined> => {
-    const ADD_TO_FAVOURITES = TRACK_HOST + `/api/v1/track/${id}/favorite?type=delete`;
+    const ADD_TO_FAVOURITES = TRACK_HOST + `/api/v1/music/track/${id}/favorite?type=delete`;
     let response = await postAuth(ADD_TO_FAVOURITES, {});
     if (response.status === 401) {
         redirectTo(LINKS.auth);
