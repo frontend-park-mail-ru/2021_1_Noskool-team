@@ -9,6 +9,8 @@ export interface Playlist {
     'user_id': string;
     tracks: TrackBack[];
     isOkey: boolean;
+    onClickEditTitle: boolean;
+    onClickEditDesc: boolean;
 }
 
 export interface CreatePlaylistProps {
