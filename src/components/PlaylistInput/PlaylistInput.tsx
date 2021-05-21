@@ -12,11 +12,20 @@ interface PlaylistInputProps {
     placeholder: string;
     isPassword?: boolean;
     initialName: string;
+    onblur: (id: number) => void;
+    className?: string;
 }
 
 const CnInput = cn('playlistInput-name');
 
-export const PlaylistInput = ({ validators, isPassword = false, input, initialName }: PlaylistInputProps) => {
+export const PlaylistInput = ({
+    validators,
+    isPassword = false,
+    input,
+    initialName,
+    onblur,
+    className = '',
+}: PlaylistInputProps) => {
     const validateInput = (value: string) => {
         let errorMsg = validators.reduce((error, validator) => error || validator(value), '');
         if (errorMsg) {
@@ -37,21 +46,10 @@ export const PlaylistInput = ({ validators, isPassword = false, input, initialNa
         input.value = (e.target as HTMLInputElement).value;
     };
 
-    const onBlur = (e: InputEvent) => {
-        if ((e.target as HTMLInputElement).value === '') {
-            input.isFocuse = false;
-            validateInput((e.target as HTMLInputElement).value);
-        }
-    };
-
     return (
         <div class={CnInput('', isMobile() ? 'mob' : '')}>
-            <div
-                class={
-                    'input-text' + ` ${input.isValid !== null ? (input.isValid ? '' : 'input-text--not-valid') : ''}`
-                }
-            >
-                <input type={isPassword ? 'password' : 'text'} value={initialName} oninput={onInput} onblur={onBlur} />
+            <div class={'pl-input-text' + className}>
+                <input type={isPassword ? 'password' : 'text'} value={initialName} oninput={onInput} onblur={onblur} />
             </div>
         </div>
     );

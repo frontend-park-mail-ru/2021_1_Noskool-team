@@ -41,6 +41,8 @@
     font-weight: bold;
     font-size: 35px;
     color: $gray;
+    margin-top: 6px;
+    margin-left: 1px;
   }
 
   &__icon {
@@ -70,16 +72,15 @@
   &__name {
     font-size: 15px;
     color: $gray;
-    cursor: pointer;
-
-    &:hover {
-      color: $pink;
-    }
+    margin-left: 1px;
   }
 
   &__block {
-    display: flex;
-    align-items: center;
+    width: 600px;
+
+    &:hover {
+      border: 1px solid $pink;
+    }
   }
 
   &__description {
@@ -92,6 +93,11 @@
     margin-top: 15px;
     font-size: 18px;
     color: $gray;
+    cursor: pointer;
+
+    &:hover {
+      color: $pink;
+    }
   }
 
   &__singer {

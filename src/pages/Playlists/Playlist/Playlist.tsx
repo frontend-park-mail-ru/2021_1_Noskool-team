@@ -1,16 +1,16 @@
 import { JSX } from 'jsx/jsx';
-import { getOnePlaylist, changePlaylistPhoto } from 'actions/playlist/playlist';
+import { getOnePlaylist, changePlaylistPhoto, changeName, changeDescription } from 'actions/playlist/playlist';
 import { TRACK_HOST } from 'constants/api';
 import { cn } from 'utils/cn';
 import { PlaylistInput } from 'components/PlaylistInput';
-import { onePlaylistStore, playlistEditForm } from 'store/playlist.store';
+import { onePlaylistStore, playlistEditForm, playlistForm } from 'store/playlist.store';
 import { profileStore } from 'store/profile.store';
 import { TrackTable } from 'components/Table';
 import { isMobile } from 'utils/isMobile';
 
 import { toCurrentTrack } from 'utils/cast';
 import { render } from 'utils/render';
-import { EditIcon } from 'assets/icons';
+// import { TrashIcon } from 'assets/icons';
 
 import './style.scss';
 import { requestsStore } from 'store/requests.store';
@@ -75,16 +75,32 @@ export const Playlist = () => {
         (document.getElementById(ID_IMAGE_INPUT) as HTMLInputElement).click();
     };
 
-    const onClickEditTitle = () => {
-        console.log('dkgh');
-        console.log(onePlaylistStore.playlist.onClickEditTitle);
-        onePlaylistStore.playlist.onClickEditTitle = true;
-        render();
+    const saveName = () => {
+        if (playlistForm.name.value !== playlistEditForm.form.name.value) {
+            const body = {
+                tittle: playlistEditForm.form.name.value,
+            };
+            if (!playlistEditForm.form.name.value) {
+                delete body.tittle;
+            }
+            changeName(onePlaylistStore.playlist.playlist_id, body).then(() => {
+                playlistForm.name.value = playlistEditForm.form.name.value;
+            });
+        }
     };
 
-    const onClickEditDesc = () => {
-        onePlaylistStore.playlist.onClickEditDesc = true;
-        render();
+    const saveDescription = () => {
+        if (playlistForm.description.value !== playlistEditForm.form.description.value) {
+            const body = {
+                description: playlistEditForm.form.description.value,
+            };
+            if (!playlistEditForm.form.name.value) {
+                delete body.description;
+            }
+            changeDescription(onePlaylistStore.playlist.playlist_id, body).then(() => {
+                playlistForm.name.value = playlistEditForm.form.name.value;
+            });
+        }
     };
 
     return (
@@ -107,42 +123,21 @@ export const Playlist = () => {
                 </div>
                 <div class={playlistPage('information')}>
                     <div class={playlistPage('name')}>ПЛЕЙЛИСТ</div>
-                    {onePlaylistStore.playlist.onClickEditTitle ? (
-                        <div class={playlistPage('block')}>
-                            <PlaylistInput
-                                input={playlistEditForm.form.name}
-                                placeholder={'Измените название'}
-                                validators={[]}
-                                initialName={onePlaylistStore.playlist.tittle}
-                            />
-                            <div class={playlistPage('save')}>Сохранить</div>
-                        </div>
-                    ) : (
-                        <div class={playlistPage('block')}>
-                            <div class={playlistPage('title')}>{onePlaylistStore.playlist.tittle}</div>
-                            <div class={playlistPage('icon')} onclick={onClickEditTitle}>
-                                <EditIcon />
-                            </div>
-                        </div>
-                    )}
-                    {onePlaylistStore.playlist.onClickEditDesc ? (
-                        <div class={playlistPage('block')}>
-                            <PlaylistInput
-                                input={playlistEditForm.form.description}
-                                placeholder={'Измените описание'}
-                                validators={[]}
-                                initialName={onePlaylistStore.playlist.description}
-                            />
-                            <div class={playlistPage('save')}>Сохранить</div>
-                        </div>
-                    ) : (
-                        <div class={playlistPage('block')}>
-                            <div class={playlistPage('description')}>{onePlaylistStore.playlist.description}</div>
-                            <div class={playlistPage('icon-desc')} onclick={onClickEditDesc}>
-                                <EditIcon />
-                            </div>
-                        </div>
-                    )}
+                    <PlaylistInput
+                        input={playlistEditForm.form.name}
+                        placeholder={'Измените название'}
+                        validators={[]}
+                        initialName={onePlaylistStore.playlist.tittle}
+                        onblur={saveName}
+                    />
+                    <PlaylistInput
+                        input={playlistEditForm.form.description}
+                        placeholder={'Измените описание'}
+                        validators={[]}
+                        initialName={onePlaylistStore.playlist.description}
+                        onblur={saveDescription}
+                        className={'-description'}
+                    />
                     <div class={playlistPage('author')}>{profileStore.profile.login}</div>
                     <div class={playlistPage('icons')}>
                         <div class={playlistPage('like-album')}></div>
