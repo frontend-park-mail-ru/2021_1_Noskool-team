@@ -96,7 +96,7 @@ export const getMainPage = async <P>(url: string): Promise<P | undefined> => {
         }
         return response;
     } catch (e) {
-        console.log(`да лол, обнови браузер, ошибочка: ${e}`);
+        alert(`да лол, обнови браузер, ошибочка: ${e}`);
     }
 };
 
