@@ -1,0 +1,35 @@
+
+name: CI
+on:
+  push:
+    branches: [ main, dev ]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v1
+      - name: install node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+      - name: colllect-and-build-static
+        run: |
+          git clone https://github.com/frontend-park-mail-ru/2021_1_Noskool-team.git
+          cd ./2021_1_Noskool-team
+          git checkout dev
+          mv -f ./src/constants/api.product.ts ./src/constants/api.ts
+          npm i
+          npm run build
+          cp ./out/index.html ./build/
+          cd ..
+      - name: Deploy to server via rsync
+        uses: trendyminds/github-actions-rsync@master
+        with:
+          RSYNC_OPTIONS: -avzr --delete --exclude node_modules --exclude '.git*'
+          RSYNC_TARGET: /home/cuzkov/frontend
+          RSYNC_SOURCE: /2021_1_Noskool-team/build
+        env:
+          SSH_PRIVATE_KEY: ${{secrets.SSH_PRIVATE_KEY}}
+          SSH_USERNAME: ${{secrets.SSH_USERNAME}}
+          SSH_HOSTNAME: ${{secrets.SSH_HOSTNAME}} 
