@@ -1,19 +1,22 @@
 import { JSX } from 'jsx/jsx';
 import { FieldState } from 'types/common';
-import { OkIcon, NotValidIcon } from 'assets/icons';
+import { cn } from 'utils/cn';
+import { isMobile } from 'utils/isMobile';
 
 import './style.scss';
 
-interface InputProps {
+interface PlaylistInputProps {
     /*eslint-disable no-unused-vars*/
     input: FieldState;
     validators: ((value: string) => string | undefined)[];
     placeholder: string;
     isPassword?: boolean;
-    needIcon?: boolean;
+    initialName: string;
 }
 
-export const Input = ({ validators, placeholder, isPassword = false, input, needIcon = true }: InputProps) => {
+const CnInput = cn('playlistInput-name');
+
+export const PlaylistInput = ({ validators, isPassword = false, input, initialName }: PlaylistInputProps) => {
     const validateInput = (value: string) => {
         let errorMsg = validators.reduce((error, validator) => error || validator(value), '');
         if (errorMsg) {
@@ -34,10 +37,6 @@ export const Input = ({ validators, placeholder, isPassword = false, input, need
         input.value = (e.target as HTMLInputElement).value;
     };
 
-    const onFocus = () => {
-        input.isFocuse = true;
-    };
-
     const onBlur = (e: InputEvent) => {
         if ((e.target as HTMLInputElement).value === '') {
             input.isFocuse = false;
@@ -46,27 +45,14 @@ export const Input = ({ validators, placeholder, isPassword = false, input, need
     };
 
     return (
-        <div
-            class={
-                'input-text' +
-                ` ${input.isFocuse ? 'input-text--focus' : ''}` +
-                ` ${input.isValid !== null ? (input.isValid ? '' : 'input-text--not-valid') : ''}`
-            }
-        >
-            <input
-                type={isPassword ? 'password' : 'text'}
-                value={input.value}
-                oninput={onInput}
-                onblur={onBlur}
-                onfocus={onFocus}
-            />
-            <div class={'input-text__error-msg'}>{input.errorMsg}</div>
-            <div class={'input-text__placeholder'}>{`${placeholder}`}</div>
-            {needIcon && (
-                <div class={'icon'}>
-                    {input.isValid !== null ? input.isValid ? <OkIcon /> : <NotValidIcon /> : <div />}
-                </div>
-            )}
+        <div class={CnInput('', isMobile() ? 'mob' : '')}>
+            <div
+                class={
+                    'input-text' + ` ${input.isValid !== null ? (input.isValid ? '' : 'input-text--not-valid') : ''}`
+                }
+            >
+                <input type={isPassword ? 'password' : 'text'} value={initialName} oninput={onInput} onblur={onBlur} />
+            </div>
         </div>
     );
 };

@@ -12,7 +12,8 @@ export const toCurrentTrack = (tracklist: Array<TrackBack | ArtistTrack>): Curre
         link: el?.audio,
         name: el?.tittle,
         trackId: el?.track_id,
-        albumId: el?.album[0].album_id,
+        // albumId: el?.album[0].album_id,
+        albumId: 1,
         duration: el?.duration,
     }));
 };

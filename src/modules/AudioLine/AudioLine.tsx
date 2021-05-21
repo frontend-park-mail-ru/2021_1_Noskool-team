@@ -229,7 +229,12 @@ const togglePlaylist = () => {
 
 const onClickAddToPlaylist = (id_playlist: number) => () => {
     onePlaylistStore.playlist.isOkey = false;
-    addTrackToPlaylist(id_playlist, playerStore.currentTrack.trackId);
+    addTrackToPlaylist(id_playlist, playerStore.currentTrack.trackId).then(() => {
+        onePlaylistStore.playlist.isOkey = true;
+        setTimeout(function () {
+            document.getElementById('status').style.display = 'none';
+        }, 5000);
+    });
     console.log('dkjgfs');
 };
 
@@ -272,7 +277,15 @@ const onClickShufflePlayer = () => {
         [playerStore.playList[i], playerStore.playList[j]] = [playerStore.playList[j], playerStore.playList[i]];
     }
 
-    onClickPlay();
+    try {
+        localStorage.setItem('name', windowName);
+        localStorage.setItem('lastTrack', JSON.stringify(playerStore.currentTrack));
+    } catch (e) {
+        alert(`да лол, обнови браузер, ошибочка: ${e}`);
+    }
+    const player = getPlayer();
+    playerStore.isPlay = true;
+    player.play();
 };
 
 const onClickClosePlaylist = () => {
@@ -458,7 +471,9 @@ export const AudioLine = () => {
                             </div>
                             <div class={player('play-currentTrack')}>
                                 {`Сейчас играет: `}
-                                <span class={player('currentTrack')}>{playerStore.currentTrack.name}</span>
+                                <span class={player('currentTrack')}>
+                                    {playerStore.playList[playerStore.currentTrack.index]?.name}
+                                </span>
                             </div>
                             <TrackTable
                                 trackList={playerStore.playList}

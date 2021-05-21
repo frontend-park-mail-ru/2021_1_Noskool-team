@@ -28,6 +28,8 @@ export const onePlaylistStore = proxy<OnePlaylist>({
         'user_id': '',
         tracks: [],
         isOkey: false,
+        onClickEditTitle: false,
+        onClickEditDesc: false,
     }),
 });
 
@@ -54,6 +56,31 @@ export const playlistProfileStore = {
         name: '',
         description: '',
         photo: '',
+    }),
+};
+
+export const playlistEditForm = {
+    form: proxy<PlaylistForm>({
+        name: proxy<FieldState>(
+            {
+                value: '',
+                isValid: null,
+                onCheckValid: undefined,
+                isFocuse: false,
+                errorMsg: '',
+            },
+            ['onCheckValid']
+        ),
+        description: proxy<FieldState>(
+            {
+                value: '',
+                isValid: null,
+                onCheckValid: undefined,
+                isFocuse: false,
+                errorMsg: '',
+            },
+            ['onCheckValid']
+        ),
     }),
 };
 
