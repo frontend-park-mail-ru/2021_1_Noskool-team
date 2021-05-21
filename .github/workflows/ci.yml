@@ -20,6 +20,7 @@ jobs:
           node-version: 12.x
       - name: colllect-and-build-static
         run: |
+          ls
           git clone https://github.com/frontend-park-mail-ru/2021_1_Noskool-team.git
           cd ./2021_1_Noskool-team
           git checkout dev
