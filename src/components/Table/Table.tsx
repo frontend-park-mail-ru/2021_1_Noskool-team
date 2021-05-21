@@ -46,6 +46,7 @@ interface TrackTableProps {
     isForMediateca?: boolean;
     isForFavourites?: boolean;
     isNotWhite?: boolean;
+    isForPlaylist?: boolean;
     /*eslint-disable */
     updateAddMediateca: (id: number) => void;
     /*eslint-disable */
@@ -63,6 +64,7 @@ export const TrackTable = ({
     isForMediateca = false,
     isForFavourites = false,
     isNotWhite = false,
+    isForPlaylist = false,
     updateAddMediateca,
     updateAddFavourites,
     updateDeleteMediateca,
@@ -90,6 +92,10 @@ export const TrackTable = ({
         deleteFromMediateca(id).then(() => {
             updateDeleteMediateca(index);
         });
+    };
+
+    const onClickDeletePlaylist = (id: number, index: number) => () => {
+        // !!!!!
     };
 
     const icons = (trackId: number, i: number, isFavorite: boolean, isMediateca: boolean) => (
@@ -121,6 +127,12 @@ export const TrackTable = ({
             ) : (
                 <div onclick={onClickAddMediateca(trackId, i)} class={tracksTable('icon-plus')}>
                     <PlusIcon />
+                </div>
+            )}
+
+            {isForPlaylist && (
+                <div onclick={onClickDeletePlaylist(trackId, i)} class={tracksTable('icon-icon-delete')}>
+                    <DeleteIcon />
                 </div>
             )}
         </div>

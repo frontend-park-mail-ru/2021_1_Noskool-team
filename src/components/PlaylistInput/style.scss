@@ -1,7 +1,8 @@
 @import '../../styles/colors.scss';
 
 .playlistInput-name {
-  width: 800px;
+  width: 100%;
+  cursor: pointer;
 }
 
 @mixin input-icon {
@@ -13,23 +14,33 @@
   width: 25px;
 }
 
-.input-text {
-  margin-bottom: 20px;
+.pl-input-text-description {
+  margin-bottom: 0;
   width: 100%;
   position: relative;
+  margin-top: 5px;
 
   input {
     width: 100%;
-    box-shadow: 0 3px 6px rgba(75, 81, 91, 0.15), 0 1px 3px rgba(0, 0, 0, 0.15);
-    border-radius: 10px;
-    height: 50px;
-    border: none;
-    padding: 0 0 0 20px;
+    height: 40px;
+    padding: 0;
     text-overflow: ellipsis;
     font-size: 20px;
+    font-weight: 400;
     line-height: 26px;
-    color: $black;
     box-sizing: border-box;
+    background-color: $page-background;
+    color: $gray;
+    cursor: pointer;
+    border: 1px solid $page-background;
+
+    &:hover {
+      border: 1px solid $pink;
+    }
+
+    &:focus {
+      border: 1px solid $pink;
+    }
   }
 
   &__placeholder {
@@ -44,23 +55,60 @@
     pointer-events: none;
   }
 
-  &__error-msg {
-    position: absolute;
-    top: calc(100% + 5px);
-    left: 50%;
-    transform: translateX(-50%);
-    color: $error;
-    font-size: 10px;
-    line-height: 10px;
+  &--focus {
+    input {
+      padding: 12px 55px 0 20px;
+    }
+
+    .input-text {
+      &__placeholder {
+        top: 10px;
+        font-size: 12px;
+        line-height: 10px;
+      }
+    }
+  }
+}
+
+.pl-input-text {
+  margin-bottom: 0;
+  width: 100%;
+  position: relative;
+  margin-top: 5px;
+
+  input {
     width: 100%;
-    text-align: center;
+    height: 40px;
+    padding: 0;
+    text-overflow: ellipsis;
+    font-size: 35px;
+    font-weight: 600;
+    line-height: 26px;
+    box-sizing: border-box;
+    background-color: $page-background;
+    color: $gray;
+    cursor: pointer;
+    border: 1px solid $page-background;
+
+    &:hover {
+      border: 1px solid $pink;
+    }
+
+    &:focus {
+      border: 1px solid $pink;
+    }
   }
 
-  &__icon {
-    svg {
-      height: 25px;
-      width: 25px;
-    }
+  &__placeholder {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+    line-height: 18px;
+    color: $gray;
+    transition: all 0.3s;
+    pointer-events: none;
   }
 
   &--focus {
