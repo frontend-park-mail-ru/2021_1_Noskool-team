@@ -1,23 +1,23 @@
 import { PLAYLIST } from './playlist.constants';
-import { postAuth, getcsrf } from '../common/common';
-// import { Playlist } from 'types/requests/playlist';
+import { get, postAuth, getcsrf } from '../common/common';
+import { Playlist } from 'types/requests/playlist';
 import { LINKS } from 'constants/links';
 import { redirectTo } from 'utils/render';
-// import { playlistStore, onePlaylistStore } from 'store/playlist.store';
+import { playlistStore, onePlaylistStore } from 'store/playlist.store';
 
 export const getAllPlaylists = async () => {
-    // const response = await get<Playlist[] | {}>(PLAYLIST);
-    // if (Array.isArray(response)) {
-    //     playlistStore.albumList = response;
-    // }
+    const response = await get<Playlist[] | {}>(PLAYLIST);
+    if (Array.isArray(response)) {
+        playlistStore.albumList = response;
+    }
 };
 
 export const getOnePlaylist = async (id: string) => {
     id;
-    // const response = await get<Playlist>(PLAYLIST + id);
-    // if ('playlist_id' in response) {
-    //     onePlaylistStore.playlist = response;
-    // }
+    const response = await get<Playlist>(PLAYLIST + id);
+    if ('playlist_id' in response) {
+        onePlaylistStore.playlist = response;
+    }
 };
 
 interface createPlaylist {

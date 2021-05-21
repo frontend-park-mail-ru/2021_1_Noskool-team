@@ -1,3 +1,3 @@
 import { TRACK_HOST } from 'constants/api';
 
-export const ALBUM = TRACK_HOST + '/api/v1/album/';
+export const ALBUM = TRACK_HOST + '/api/v1/music/album/';
