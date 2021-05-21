@@ -16,9 +16,7 @@ const getAuth = (url: string): Promise<Response> => {
 
 const getNoneAuth = (url: string): Promise<Response> => {
     alert(url);
-    return fetch('http://yandex.ru', {
-        method: 'get',
-    });
+    return fetch(url);
 };
 
 export const postAuth = <R>(url: string, body: R) => {
