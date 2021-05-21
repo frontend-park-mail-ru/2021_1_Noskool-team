@@ -65,6 +65,7 @@ export const getcsrf = (): Promise<Response> => {
 export const getMainPage = async <P>(url: string): Promise<P | undefined> => {
     let response: Promise<P | undefined>;
     let resBuff;
+    alert(`url ${url}`);
     try {
         if (localStorage.getItem('auth') === 'ok') {
             alert(`url ${url}`);
