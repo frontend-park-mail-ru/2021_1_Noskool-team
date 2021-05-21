@@ -15,7 +15,6 @@ const getAuth = (url: string): Promise<Response> => {
 };
 
 const getNoneAuth = (url: string): Promise<Response> => {
-    alert(url);
     return fetch(url, {
         method: 'get',
     });
