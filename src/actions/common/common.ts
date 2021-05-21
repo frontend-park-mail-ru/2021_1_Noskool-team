@@ -15,6 +15,7 @@ const getAuth = (url: string): Promise<Response> => {
 };
 
 const getNoneAuth = (url: string): Promise<Response> => {
+    alert(url);
     return fetch(url, {
         method: 'get',
     });
@@ -65,10 +66,8 @@ export const getcsrf = (): Promise<Response> => {
 export const getMainPage = async <P>(url: string): Promise<P | undefined> => {
     let response: Promise<P | undefined>;
     let resBuff;
-    alert(`url ${url}`);
     try {
         if (localStorage.getItem('auth') === 'ok') {
-            alert(`url ${url}`);
             resBuff = await getAuth(url);
             if (resBuff.status === 401) {
                 localStorage.removeItem('auth');
@@ -91,11 +90,13 @@ export const getMainPage = async <P>(url: string): Promise<P | undefined> => {
             }
         } else {
             resBuff = await getNoneAuth(url + '/notauth');
+            alert(resBuff.statusText);
+            alert(resBuff.status);
             response = resBuff.ok ? resBuff.json() : new Promise(() => {});
         }
         return response;
     } catch (e) {
-        alert(`да лол, обнови браузер, ошибочка: ${e}`);
+        console.log(`да лол, обнови браузер, ошибочка: ${e}`);
     }
 };
 
