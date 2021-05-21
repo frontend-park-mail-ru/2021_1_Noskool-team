@@ -36,8 +36,8 @@ export interface Expand {
 }
 
 const lastTrack: CurrentTrack = JSON.parse(localStorage.getItem('lastTrack')) || {
-    link: '/api/v1/data/audio/Do_I_Wanna_Know.ogg',
-    img: '/api/v1/data/img/tracks/AM.webp',
+    link: '/api/v1/music/data/audio/Do_I_Wanna_Know.ogg',
+    img: '/api/v1/music/data/img/tracks/AM.webp',
     name: 'Do I Wanna Now?',
     artists: [
         {

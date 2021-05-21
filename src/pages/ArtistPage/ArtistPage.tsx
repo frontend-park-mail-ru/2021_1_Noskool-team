@@ -1,6 +1,6 @@
 import { getArtistById, getArtistTracksById } from 'actions/artists/artists';
 import { TrackTable } from 'components/Table';
-import { HOST_IMG } from 'constants/api';
+// import { HOST_IMG } from 'constants/api';
 import { JSX } from 'jsx/jsx';
 import { artistPageStore } from 'store/artist-page.store';
 import { toCurrentTrack } from 'utils/cast';
@@ -50,7 +50,7 @@ export const ArtistPage = () => {
 
     return (
         <div class={page('', isMobile() ? 'mob' : '')}>
-            <img class={page('img')} src={HOST_IMG + artistPageStore.artist?.picture} alt='' />
+            {/* <img class={page('img')} src={HOST_IMG + artistPageStore.artist?.picture} alt='' /> */}
             <div class={page('title')}>{artistPageStore.artist?.name}</div>
             <div class={page('desc')}>{artistPageStore.artist?.description}</div>
             <div class={page('table')}>

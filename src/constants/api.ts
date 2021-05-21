@@ -1,5 +1,4 @@
 export const HOST = 'http://localhost:8082';
-export const HOST_IMG = 'http://localhost:8082';
 export const TRACK_HOST = 'http://localhost:8888';
 
 export const REGISTER_USER = HOST + '/api/v1/user/registrate';
