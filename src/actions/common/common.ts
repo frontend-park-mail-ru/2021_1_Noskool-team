@@ -67,6 +67,7 @@ export const getMainPage = async <P>(url: string): Promise<P | undefined> => {
     let resBuff;
     try {
         if (localStorage.getItem('auth') === 'ok') {
+            alert(`url ${url}`);
             resBuff = await getAuth(url);
             if (resBuff.status === 401) {
                 localStorage.removeItem('auth');
