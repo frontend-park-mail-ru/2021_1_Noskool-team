@@ -1,19 +1,29 @@
 import { JSX } from 'jsx/jsx';
-import { getOnePlaylist, changePlaylistPhoto, changeName, changeDescription } from 'actions/playlist/playlist';
+import {
+    getOnePlaylist,
+    changePlaylistPhoto,
+    changeName,
+    changeDescription,
+    deletePlaylist,
+    deleteTrackPlaylist,
+} from 'actions/playlist/playlist';
 import { TRACK_HOST } from 'constants/api';
 import { cn } from 'utils/cn';
 import { PlaylistInput } from 'components/PlaylistInput';
-import { onePlaylistStore, playlistEditForm, playlistForm } from 'store/playlist.store';
+import { onePlaylistStore, playlistEditForm, playlistForm, playlistStore } from 'store/playlist.store';
 import { profileStore } from 'store/profile.store';
 import { TrackTable } from 'components/Table';
 import { isMobile } from 'utils/isMobile';
+import { playerStore } from 'store/player.store';
+import { onClickPlay } from 'modules/AudioLine/AudioLine';
 
+import { PlayMainTrackIcon, TrashIcon } from 'assets/icons';
 import { toCurrentTrack } from 'utils/cast';
-import { render } from 'utils/render';
-// import { TrashIcon } from 'assets/icons';
+import { redirectTo, render } from 'utils/render';
 
 import './style.scss';
 import { requestsStore } from 'store/requests.store';
+import { LINKS } from 'constants/links';
 
 const playlistPage = cn('playlist-page');
 
@@ -47,6 +57,38 @@ const isClickDeleteMediateca = (id: number) => {
     buffer[id].in_mediateka = false;
     onePlaylistStore.playlist.tracks = buffer;
     render();
+};
+
+const isClickDeleteTrackPlaylist = (id: number) => {
+    deleteTrackPlaylist(onePlaylistStore.playlist.playlist_id, id).then(() => {
+        const buffer = onePlaylistStore.playlist.tracks.filter(({ track_id }) => track_id !== id);
+        onePlaylistStore.playlist.tracks = buffer;
+        render();
+    });
+};
+
+const isClickDeletePlaylist = () => {
+    deletePlaylist(onePlaylistStore.playlist.playlist_id).then(() => {
+        const buffer = playlistStore.albumList.filter(
+            ({ playlist_id }) => playlist_id !== onePlaylistStore.playlist.playlist_id
+        );
+        playlistStore.albumList = buffer;
+        render();
+        redirectTo(LINKS.myPlaylists);
+    });
+};
+
+const onClickTrack = () => () => {
+    const trackList = toCurrentTrack(onePlaylistStore.playlist.tracks);
+    playerStore.playList = trackList;
+    playerStore.currentTrack = trackList[0];
+    playerStore.currentTime = 0;
+    if (!playerStore.isPlay) {
+        onClickPlay();
+    } else {
+        onClickPlay();
+        onClickPlay();
+    }
 };
 
 export const Playlist = () => {
@@ -94,11 +136,12 @@ export const Playlist = () => {
             const body = {
                 description: playlistEditForm.form.description.value,
             };
-            if (!playlistEditForm.form.name.value) {
+            if (!playlistEditForm.form.description.value) {
                 delete body.description;
             }
+            console.log(body);
             changeDescription(onePlaylistStore.playlist.playlist_id, body).then(() => {
-                playlistForm.name.value = playlistEditForm.form.name.value;
+                playlistForm.description.value = playlistEditForm.form.description.value;
             });
         }
     };
@@ -139,9 +182,19 @@ export const Playlist = () => {
                         className={'-description'}
                     />
                     <div class={playlistPage('author')}>{profileStore.profile.login}</div>
-                    <div class={playlistPage('icons')}>
-                        <div class={playlistPage('like-album')}></div>
-                        <div class={playlistPage('add-album')}></div>
+                    <div class={playlistPage('icons-playlist')}>
+                        <div class={playlistPage('play-playlist')}>
+                            <div class={playlistPage('listen')} onclick={onClickTrack}>
+                                Слушать
+                            </div>
+                            <PlayMainTrackIcon />
+                        </div>
+                        {/* <div class={playlistPage('like-palylist')}>
+                            Добавить к себе
+                        </div> */}
+                        <div class={playlistPage('delete-playlust')} onclick={isClickDeletePlaylist}>
+                            <TrashIcon />
+                        </div>
                     </div>
                 </div>
             </div>
@@ -155,12 +208,14 @@ export const Playlist = () => {
                     <TrackTable
                         trackList={toCurrentTrack(onePlaylistStore.playlist.tracks)}
                         isNeedHeader={false}
-                        isNeedPhoto={false}
+                        isNeedPhoto={true}
+                        isForPlaylist={true}
                         isNotWhite
                         updateAddFavourites={isClickAddFavourites}
                         updateAddMediateca={isClickAddMediateca}
                         updateDeleteFavourites={isClickDeleteFavourites}
                         updateDeleteMediateca={isClickDeleteMediateca}
+                        updateDeleteTrackPlaylist={isClickDeleteTrackPlaylist}
                     />
                 )}
             </div>

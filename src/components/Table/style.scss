@@ -110,6 +110,15 @@
     }
   }
 
+  &__icon-delete-playlist {
+    margin-left: 5px;
+    cursor: pointer;
+
+    svg:hover > path {
+      stroke: #f00;
+    }
+  }
+
   &__icon-icon-like {
     cursor: pointer;
     margin-right: 10px;

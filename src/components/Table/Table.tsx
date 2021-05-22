@@ -55,6 +55,8 @@ interface TrackTableProps {
     updateDeleteMediateca: (id: number) => void;
     /*eslint-disable */
     updateDeleteFavourites: (id: number) => void;
+    /*eslint-disable */
+    updateDeleteTrackPlaylist?: (id: number) => void;
 }
 
 export const TrackTable = ({
@@ -69,6 +71,7 @@ export const TrackTable = ({
     updateAddFavourites,
     updateDeleteMediateca,
     updateDeleteFavourites,
+    updateDeleteTrackPlaylist = (id: 5) => undefined,
 }: TrackTableProps) => {
     const onClickAddFavourites = (id: number, index: number) => () => {
         addToFavourites(id).then(() => {
@@ -94,8 +97,8 @@ export const TrackTable = ({
         });
     };
 
-    const onClickDeletePlaylist = (id: number, index: number) => () => {
-        // !!!!!
+    const onClickDeleteTrackPlaylist = (id: number) => () => {
+        updateDeleteTrackPlaylist(id);
     };
 
     const icons = (trackId: number, i: number, isFavorite: boolean, isMediateca: boolean) => (
@@ -131,7 +134,7 @@ export const TrackTable = ({
             )}
 
             {isForPlaylist && (
-                <div onclick={onClickDeletePlaylist(trackId, i)} class={tracksTable('icon-icon-delete')}>
+                <div onclick={onClickDeleteTrackPlaylist(trackId)} class={tracksTable('icon-delete-playlist')}>
                     <DeleteIcon />
                 </div>
             )}

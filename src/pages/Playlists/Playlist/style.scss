@@ -34,7 +34,7 @@
 
   &__information {
     margin-left: 30px;
-    width: 550px;
+    width: 800px;
   }
 
   &__title {
@@ -67,6 +67,64 @@
     svg:hover {
       fill: $pink;
     }
+  }
+
+  &__icons-playlist {
+    margin-top: 10px;
+    display: flex;
+  }
+
+  &__play-playlist {
+    display: flex;
+    padding: 7px;
+    background-color: $pink;
+    border: 1px solid $pink;
+    border-radius: 7px;
+    color: #fff;
+    align-items: center;
+    cursor: pointer;
+
+    svg {
+      width: 20px;
+      height: 20px;
+      fill: #fff;
+
+      path {
+        stroke: #fff;
+      }
+    }
+  }
+
+  &__like-palylist {
+    margin-left: 15px;
+    display: flex;
+    padding: 7px;
+    align-items: center;
+    color: $gray;
+    cursor: pointer;
+
+    &:hover {
+      color: $pink;
+    }
+  }
+
+  &__delete-playlust {
+    padding: 7px;
+    cursor: pointer;
+    float: right;
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+
+    svg {
+      width: 30px;
+      height: 30px;
+      fill: #f00;
+    }
+  }
+
+  &__listen {
+    margin-right: 5px;
   }
 
   &__name {

@@ -35,6 +35,21 @@ export const postAuth = <R>(url: string, body: R) => {
     });
 };
 
+export const deleteAuth = <R>(url: string, body: R) => {
+    return fetch(url, {
+        method: 'delete',
+        credentials: 'include',
+        body: JSON.stringify(body),
+        headers: {
+            'X-Csrf-Token': document.cookie
+                ?.split(';')
+                ?.map((el) => el.trim())
+                ?.find((item) => item?.startsWith('csrf'))
+                ?.split('=')[1],
+        },
+    });
+};
+
 export const post = <R>(url: string, body: R) => {
     return fetch(url, {
         method: 'post',

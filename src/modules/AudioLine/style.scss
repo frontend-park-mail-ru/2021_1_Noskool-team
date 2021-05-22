@@ -76,6 +76,8 @@
   &__playlists {
     cursor: pointer;
     margin-bottom: 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 
     &--disable {
       pointer-events: none;
