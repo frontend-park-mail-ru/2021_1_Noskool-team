@@ -17,6 +17,8 @@ export const getOnePlaylist = async (id: string) => {
     const response = await get<Playlist>(PLAYLIST + id);
     if ('playlist_id' in response) {
         onePlaylistStore.playlist = response;
+        onePlaylistStore.playlist.onClickEditDesc = false;
+        onePlaylistStore.playlist.onClickEditTitle = false;
     }
 };
 

@@ -96,15 +96,35 @@
   }
 
   &__like-palylist {
-    margin-left: 15px;
     display: flex;
     padding: 7px;
     align-items: center;
     color: $gray;
     cursor: pointer;
+    margin-left: 10px;
+    margin-top: 10px;
+
+    svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    svg:hover {
+      fill: $pink;
+    }
+  }
+
+  &__name {
+    font-size: 15px;
+    color: $gray;
+    margin-left: 1px;
+  }
+
+  &__block {
+    width: 600px;
 
     &:hover {
-      color: $pink;
+      border: 1px solid $pink;
     }
   }
 
@@ -125,20 +145,6 @@
 
   &__listen {
     margin-right: 5px;
-  }
-
-  &__name {
-    font-size: 15px;
-    color: $gray;
-    margin-left: 1px;
-  }
-
-  &__block {
-    width: 600px;
-
-    &:hover {
-      border: 1px solid $pink;
-    }
   }
 
   &__description {
