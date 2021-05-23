@@ -2,6 +2,7 @@ import { proxy } from 'jsx/store';
 import { FieldState } from 'types/common';
 
 export interface Profile {
+    id: number;
     login: string;
     email: string;
     photo: string;
@@ -17,6 +18,7 @@ export interface ProfileForm {
 
 export const profileStore = {
     profile: proxy<Profile>({
+        id: 0,
         login: '',
         email: '',
         photo: '',

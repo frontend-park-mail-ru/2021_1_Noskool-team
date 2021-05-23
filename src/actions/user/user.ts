@@ -10,6 +10,7 @@ export const getUser = async () => {
     if (instanceOfUserProfile(response)) {
         profileStore.profile = {
             ...profileStore.profile,
+            id: response?.user_id,
             email: response?.email,
             login: response?.login,
             photo: response?.avatar,
