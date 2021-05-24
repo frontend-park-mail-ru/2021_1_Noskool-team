@@ -40,6 +40,12 @@
     overflow: hidden;
   }
 
+  &__create {
+    color: $pink;
+    margin-left: 10px;
+    cursor: pointer;
+  }
+
   &__album {
     width: 200px;
     padding: 10px;

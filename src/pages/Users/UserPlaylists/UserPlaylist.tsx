@@ -16,7 +16,7 @@ const onClickPlaylist = (id: number) => () => {
     redirectTo(LINKS.playlist + `/${id}`);
 };
 
-const onClickCreatePlaylist = () => () => {
+const onClickCreatePlaylist = () => {
     redirectTo(LINKS.createPlaylist);
 };
 

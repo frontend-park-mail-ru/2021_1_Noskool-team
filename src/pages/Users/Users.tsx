@@ -3,7 +3,7 @@ import { HOST } from 'constants/api';
 import { userProfileStore } from 'store/users.store';
 import { profileStore } from 'store/profile.store';
 import { requestsStore } from 'store/requests.store';
-import { getUserProfile, getAllPlaylists } from 'actions/users/users';
+import { getUserProfile, getAllPlaylists, subscribeUser, unSubscribeUser } from 'actions/users/users';
 import { render } from 'utils/render';
 import { cn } from 'utils/cn';
 import { UserPlaylist } from './UserPlaylists/UserPlaylist';
@@ -37,6 +37,31 @@ const onClickSubscriptions = () => {
     render();
 };
 
+const onClickSubscribe = () => {
+    if (userProfileStore.profile.I_subscribed) {
+        unSubscribeUser(userProfileStore.profile.user_id).then(() => {
+            const unsubscriber = [...userProfileStore.profile.subscribers];
+            unsubscriber.filter(({ user_id }) => user_id !== profileStore.profile.id);
+            userProfileStore.profile.subscribers = unsubscriber;
+            userProfileStore.profile.I_subscribed = false;
+            render();
+        });
+    } else {
+        subscribeUser(userProfileStore.profile.user_id).then(() => {
+            const unsubscriber = [...userProfileStore.profile.subscribers];
+            unsubscriber.push({
+                user_id: profileStore.profile.id,
+                nickname: profileStore.profile.login,
+                photo: profileStore.profile.photo,
+                I_subscribed: false,
+            });
+            userProfileStore.profile.subscribers = unsubscriber;
+            userProfileStore.profile.I_subscribed = true;
+            render();
+        });
+    }
+};
+
 export const Users = () => {
     const id = window.location.pathname.split('/');
 
@@ -67,7 +92,9 @@ export const Users = () => {
                     </div>
                 </div>
                 {profileStore.profile?.id !== userProfileStore.profile?.user_id && (
-                    <div class={users('subscribe')}>Подписаться</div>
+                    <div class={users('subscribe')} onclick={onClickSubscribe}>
+                        {userProfileStore.profile.I_subscribed ? 'Отписаться' : 'Подписаться'}
+                    </div>
                 )}
             </div>
             {isMobile() ? (
