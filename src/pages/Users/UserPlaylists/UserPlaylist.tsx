@@ -9,6 +9,7 @@ import { redirectTo } from 'utils/render';
 import { isMobile } from 'utils/isMobile';
 
 import './style.scss';
+import { profileStore } from 'store/profile.store';
 
 const userPalylist = cn('user-playlist');
 
@@ -40,14 +41,15 @@ export const UserPlaylist = () => {
                         </div>
                     ))}
                 </div>
-                {profilePlaylistStore.playlist.length === 0 && (
-                    <div class={userPalylist('not-found')}>
-                        {'У вас нет плейлистов.'}
-                        <span class={userPalylist('create')} onclick={onClickCreatePlaylist}>
-                            Создать
-                        </span>
-                    </div>
-                )}
+                {profilePlaylistStore.playlist.length === 0 &&
+                    profileStore.profile.id === userProfileStore.profile.user_id && (
+                        <div class={userPalylist('not-found')}>
+                            {'У вас нет плейлистов.'}
+                            <span class={userPalylist('create')} onclick={onClickCreatePlaylist}>
+                                Создать
+                            </span>
+                        </div>
+                    )}
             </div>
         </div>
     );
