@@ -23,7 +23,7 @@ export interface RequestsStore {
     searchPlaylists: boolean;
     searchArtists: boolean;
     searchUsers: boolean;
-    sharePlaylist: boolean;
+    sharePlaylist: boolean; 
 }
 
 export const requestsStore = proxy<RequestsStore>({
