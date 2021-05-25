@@ -1,5 +1,5 @@
 import { PLAYLIST } from './playlist.constants';
-import { get, postAuth, getcsrf, postImg, deleteAuth } from '../common/common';
+import { get, postAuth, getcsrf, postImg } from '../common/common';
 import { Playlist } from 'types/requests/playlist';
 import { LINKS } from 'constants/links';
 import { redirectTo } from 'utils/render';
