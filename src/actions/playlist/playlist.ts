@@ -84,7 +84,7 @@ export const postPlaylist = async (body: createPlaylist) => {
 };
 
 export const addTrackToPlaylist = async (id_playlist: number, id_track: number) => {
-    let response = await postAuth(PLAYLIST + `${id_playlist}/track/${id_track}`, {});
+    let response = await postAuth(PLAYLIST + `${id_playlist}/track/${id_track}`, '');
     if (response.status === 401) {
         try {
             localStorage.clear();
@@ -106,118 +106,5 @@ export const addTrackToPlaylist = async (id_playlist: number, id_track: number) 
             return new Promise(() => {});
         }
     }
-    return response;
-};
-
-interface editName {
-    tittle: string;
-}
-
-export const changeName = async (id_playlist: number, body: editName) => {
-    let response = await postAuth(PLAYLIST + `${id_playlist}/title`, body);
-    console.log(response);
-    if (response.status === 401) {
-        try {
-            localStorage.clear();
-        } catch (e) {
-            alert(`да лол, обнови браузер, ошибочка: ${e}`);
-        }
-        redirectTo(LINKS.auth);
-        return new Promise(() => {});
-    } else if (response.status === 403) {
-        const csrf = await getcsrf();
-        if (csrf.status === 200) {
-            response = await postAuth(PLAYLIST + `${id_playlist}/title`, body);
-            if (response.status !== 200) {
-                redirectTo(LINKS.auth);
-                return new Promise(() => {});
-            }
-        } else {
-            redirectTo(LINKS.auth);
-            return new Promise(() => {});
-        }
-    }
-    return response;
-};
-
-interface editDescription {
-    description: string;
-}
-
-export const changeDescription = async (id_playlist: number, body: editDescription) => {
-    let response = await postAuth(PLAYLIST + `${id_playlist}/description`, body);
-    if (response.status === 401) {
-        try {
-            localStorage.clear();
-        } catch (e) {
-            alert(`да лол, обнови браузер, ошибочка: ${e}`);
-        }
-        redirectTo(LINKS.auth);
-        return new Promise(() => {});
-    } else if (response.status === 403) {
-        const csrf = await getcsrf();
-        if (csrf.status === 200) {
-            response = await postAuth(PLAYLIST + `${id_playlist}/description`, body);
-            if (response.status !== 200) {
-                redirectTo(LINKS.auth);
-                return new Promise(() => {});
-            }
-        } else {
-            redirectTo(LINKS.auth);
-            return new Promise(() => {});
-        }
-    }
-    return response;
-};
-
-export const deletePlaylist = async (id_playlist: number) => {
-    let response = await deleteAuth(PLAYLIST + `${id_playlist}`, {});
-    if (response.status === 401) {
-        try {
-            localStorage.clear();
-        } catch (e) {
-            alert(`да лол, обнови браузер, ошибочка: ${e}`);
-        }
-        redirectTo(LINKS.auth);
-        return new Promise(() => {});
-    } else if (response.status === 403) {
-        const csrf = await getcsrf();
-        if (csrf.status === 200) {
-            response = await deleteAuth(PLAYLIST + `${id_playlist}`, {});
-            if (response.status !== 200) {
-                redirectTo(LINKS.auth);
-                return new Promise(() => {});
-            }
-        } else {
-            redirectTo(LINKS.auth);
-            return new Promise(() => {});
-        }
-    }
-    return response;
-};
-
-export const deleteTrackPlaylist = async (id_playlist: number, idTrack: number) => {
-    let response = await deleteAuth(PLAYLIST + `${id_playlist}/track/${idTrack}`, {});
-    if (response.status === 401) {
-        try {
-            localStorage.clear();
-        } catch (e) {
-            alert(`да лол, обнови браузер, ошибочка: ${e}`);
-        }
-        redirectTo(LINKS.auth);
-        return new Promise(() => {});
-    } else if (response.status === 403) {
-        const csrf = await getcsrf();
-        if (csrf.status === 200) {
-            response = await deleteAuth(PLAYLIST + `${id_playlist}/track/${idTrack}`, {});
-            if (response.status !== 200) {
-                redirectTo(LINKS.auth);
-                return new Promise(() => {});
-            }
-        } else {
-            redirectTo(LINKS.auth);
-            return new Promise(() => {});
-        }
-    }
-    return response;
+    return response.json();
 };
