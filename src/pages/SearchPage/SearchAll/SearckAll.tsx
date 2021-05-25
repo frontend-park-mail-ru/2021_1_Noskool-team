@@ -76,6 +76,10 @@ const onClickArtist = (id: number) => () => {
     redirectTo(LINKS.artist + `/${id}`);
 };
 
+const onClickUser = (id: number) => () => {
+    redirectTo(LINKS.user + `/${id}`);
+};
+
 export const SearchAll = () => {
     if (requestsStore.searchAll) {
         requestsStore.searchAll = false;
@@ -91,7 +95,7 @@ export const SearchAll = () => {
                 </div>
                 <div class={searchAll('artists')}>
                     {artistsStore.artists.map((item) => (
-                        <div class={searchAll('artist')} onclick={onClickArtist}>
+                        <div class={searchAll('artist')} onclick={onClickArtist(item?.musician_id)}>
                             <img class={searchAll('photo-artist')} src={TRACK_HOST + item?.picture} />
                             <div class={searchAll('name-artist')}>{item?.name}</div>
                         </div>
@@ -149,7 +153,7 @@ export const SearchAll = () => {
                 </div>
                 <div class={searchAll('users')}>
                     {playlistStore.albumList.map((item) => (
-                        <div class={searchAll('user')} onclick={onClickPlaylists(item?.playlist_id)}>
+                        <div class={searchAll('user')} onclick={onClickUser(item?.playlist_id)}>
                             <img class={searchAll('photo-artist')} src={TRACK_HOST + item?.picture} />
                             <div class={searchAll('name-artist')}>{item?.tittle}</div>
                         </div>

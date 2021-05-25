@@ -34,7 +34,7 @@
 
   &__information {
     margin-left: 30px;
-    width: 800px;
+    width: 700px;
   }
 
   &__title {
@@ -104,14 +104,48 @@
     margin-left: 10px;
     margin-top: 10px;
 
-    svg {
-      width: 18px;
-      height: 18px;
+    &:hover {
+      color: $pink;
     }
+  }
 
-    svg:hover {
-      fill: $pink;
+  &__changeStatus {
+    position: absolute;
+    bottom: 85px;
+    right: 100px;
+    display: flex;
+    background-color: #ceffbc;
+    padding: 5px;
+    width: max-content;
+    border-radius: 3px;
+
+    svg > path {
+      stroke: #247719;
     }
+  }
+
+  #link {
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    z-index: -1;
+  }
+
+  &__share {
+    margin-left: 20px;
+    display: flex;
+    padding: 7px;
+    background-color: $pink;
+    border: 1px solid $pink;
+    border-radius: 7px;
+    color: #fff;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  &__isOkey {
+    color: #247719;
+    margin-left: 10px;
   }
 
   &__name {
@@ -133,7 +167,7 @@
     cursor: pointer;
     float: right;
     display: flex;
-    width: 100%;
+    width: 450px;
     justify-content: flex-end;
 
     svg {
