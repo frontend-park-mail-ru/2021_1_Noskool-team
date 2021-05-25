@@ -55,6 +55,10 @@ export const Header = () => {
 
     const isAuth = Boolean(localStorage.getItem('auth'));
 
+    const redirectToProfile = () => {
+        redirectTo(`${LINKS.user}/${profileStore.profile.id}`);
+    };
+
     if (isMobile()) {
         return (
             <div class={header('', 'mob')}>
@@ -205,7 +209,9 @@ export const Header = () => {
                         <div class={profile('data')}>
                             <img src={HOST + profileStore.profile.photo} class={profile('photo')} />
                             <div class={profile('text')}>
-                                <div class={profile('nickname')}>{profileStore.profile.login}</div>
+                                <div class={profile('nickname')} onclick={redirectToProfile}>
+                                    {profileStore.profile.login}
+                                </div>
                                 <div class={profile('email')}>{profileStore.profile.email}</div>
                             </div>
                         </div>

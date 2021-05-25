@@ -25,6 +25,13 @@ export interface Track {
     'Album': number;
 }
 
+export interface User {
+    I_subscribed: boolean;
+    nickname: string;
+    photo: string;
+    user_id: number;
+}
+
 export interface HeaderStore {
     isExpand: boolean;
     isExpandSearch: boolean;
@@ -32,13 +39,19 @@ export interface HeaderStore {
     searchResultArtists: Musician[];
     searchResultAlbums: Album[];
     serachResultTracks: Track[];
+    isExpandUsers: boolean;
+    searchUsers: string;
+    searchResultUser: User[];
 }
 
 export const headerStore = proxy<HeaderStore>({
     isExpand: false,
+    isExpandUsers: false,
+    searchUsers: '',
     search: '',
     searchResultArtists: [],
     searchResultAlbums: [],
     serachResultTracks: [],
+    searchResultUser: [],
     isExpandSearch: false,
 });

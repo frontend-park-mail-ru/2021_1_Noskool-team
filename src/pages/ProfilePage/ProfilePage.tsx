@@ -1,5 +1,5 @@
 import { JSX } from 'jsx/jsx';
-import { changeUserPhoto, getUser, changeUser } from 'actions/user/user';
+import { changeUserPhoto, getUser, changeUser, changePassword } from 'actions/user/user';
 import { ProfileInput } from 'components/ProfileInput/ProfileInput';
 import { emailValidator } from 'utils/form-validators';
 import { profileStore, profileForm } from 'store/profile.store';
@@ -40,8 +40,23 @@ export const ProfilePage = () => {
             profileForm.form.email.value = '';
             profileStore.profile.isOkey = true;
             requestsStore.profile = true;
-            setTimeout(function () {
+            setTimeout(() => {
                 document.getElementById('status').style.display = 'none';
+            }, 5000);
+        });
+    };
+
+    const onChangePassword = (e: MouseEvent) => {
+        e.preventDefault();
+        profileStore.profile.isOkeyPassword = false;
+        changePassword({
+            new: profileForm.form.newPassword.value,
+            old: profileForm.form.oldPassword.value,
+        }).then(() => {
+            requestsStore.profile = true;
+            profileStore.profile.isOkeyPassword = true;
+            setTimeout(() => {
+                document.getElementById('status-pass').style.display = 'none';
             }, 5000);
         });
     };
@@ -111,20 +126,56 @@ export const ProfilePage = () => {
                     <button onclick={onSubmitChanges} class={page('change')}>
                         {'Изменить'}
                     </button>
-                    {profileStore.profile.isOkey &&
-                        (isMobile() ? (
-                            <div class={page('changeStatus-wrapper')}>
+                    <div class={page('status')}>
+                        {profileStore.profile.isOkey &&
+                            (isMobile() ? (
+                                <div class={page('changeStatus-wrapper')}>
+                                    <div class={page('changeStatus')} id='status'>
+                                        <OkeyIcon />
+                                        <div class={page('isOkey')}>{'Данные успешно изменены'}</div>
+                                    </div>
+                                </div>
+                            ) : (
                                 <div class={page('changeStatus')} id='status'>
                                     <OkeyIcon />
                                     <div class={page('isOkey')}>{'Данные успешно изменены'}</div>
                                 </div>
-                            </div>
-                        ) : (
-                            <div class={page('changeStatus')} id='status'>
-                                <OkeyIcon />
-                                <div class={page('isOkey')}>{'Данные успешно изменены'}</div>
-                            </div>
-                        ))}
+                            ))}
+                    </div>
+                    <div class={page('change-password')}>
+                        <ProfileInput
+                            input={profileForm.form.oldPassword}
+                            placeholder={'Введите старый пароль'}
+                            validators={[emailValidator]}
+                            initialName={''}
+                            inputName={'Изменить пароль'}
+                        />
+                        <ProfileInput
+                            input={profileForm.form.newPassword}
+                            placeholder={'Введите новый пароль'}
+                            validators={[]}
+                            initialName={''}
+                        />
+                        <button onclick={onChangePassword} class={page('change')}>
+                            {'Изменить'}
+                        </button>
+                        <div class={page('status')}>
+                            {profileStore.profile.isOkeyPassword &&
+                                (isMobile() ? (
+                                    <div class={page('changeStatus-wrapper')}>
+                                        <div class={page('changeStatus')} id='status-pass'>
+                                            <OkeyIcon />
+                                            <div class={page('isOkey')}>{'Пароль успешно изменен'}</div>
+                                        </div>
+                                    </div>
+                                ) : (
+                                    <div class={page('changeStatus')} id='status-pass'>
+                                        <OkeyIcon />
+                                        <div class={page('isOkey')}>{'Пароль успешно изменен'}</div>
+                                    </div>
+                                ))}
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>
