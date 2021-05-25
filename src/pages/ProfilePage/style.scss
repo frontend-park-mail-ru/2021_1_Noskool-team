@@ -104,11 +104,15 @@
     transform: scale(0.975, 0.975);
     transition: all 0.5s;
     margin-left: 150px;
-    margin-top: 30px;
 
     &:hover {
       transform: scale(1, 1);
     }
+  }
+
+  &__status {
+    height: 100px;
+    padding-top: 30px;
   }
 
   .change-data {
@@ -116,7 +120,6 @@
     background-color: $white;
     padding: 15px;
     grid-area: span 1 / span 2;
-    height: 560px;
   }
 }
 

@@ -9,11 +9,14 @@ export interface Profile {
     name: string;
     lastName: string;
     isOkey: boolean;
+    isOkeyPassword: boolean;
 }
 
 export interface ProfileForm {
     email: FieldState;
     nickname: FieldState;
+    oldPassword: FieldState;
+    newPassword: FieldState;
 }
 
 export const profileStore = {
@@ -25,6 +28,7 @@ export const profileStore = {
         name: '',
         lastName: '',
         isOkey: false,
+        isOkeyPassword: false,
     }),
 };
 
@@ -41,6 +45,26 @@ export const profileForm = {
             ['onCheckValid']
         ),
         email: proxy<FieldState>(
+            {
+                value: '',
+                isValid: null,
+                onCheckValid: undefined,
+                isFocuse: false,
+                errorMsg: '',
+            },
+            ['onCheckValid']
+        ),
+        oldPassword: proxy<FieldState>(
+            {
+                value: '',
+                isValid: null,
+                onCheckValid: undefined,
+                isFocuse: false,
+                errorMsg: '',
+            },
+            ['onCheckValid']
+        ),
+        newPassword: proxy<FieldState>(
             {
                 value: '',
                 isValid: null,
