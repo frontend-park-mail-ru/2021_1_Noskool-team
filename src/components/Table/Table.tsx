@@ -46,6 +46,7 @@ interface TrackTableProps {
     isForMediateca?: boolean;
     isForFavourites?: boolean;
     isNotWhite?: boolean;
+    isForPlaylist?: boolean;
     /*eslint-disable */
     updateAddMediateca: (id: number) => void;
     /*eslint-disable */
@@ -54,6 +55,8 @@ interface TrackTableProps {
     updateDeleteMediateca: (id: number) => void;
     /*eslint-disable */
     updateDeleteFavourites: (id: number) => void;
+    /*eslint-disable */
+    updateDeleteTrackPlaylist?: (id: number) => void;
 }
 
 export const TrackTable = ({
@@ -63,10 +66,12 @@ export const TrackTable = ({
     isForMediateca = false,
     isForFavourites = false,
     isNotWhite = false,
+    isForPlaylist = false,
     updateAddMediateca,
     updateAddFavourites,
     updateDeleteMediateca,
     updateDeleteFavourites,
+    updateDeleteTrackPlaylist = (id: 5) => undefined,
 }: TrackTableProps) => {
     const onClickAddFavourites = (id: number, index: number) => () => {
         addToFavourites(id).then(() => {
@@ -90,6 +95,10 @@ export const TrackTable = ({
         deleteFromMediateca(id).then(() => {
             updateDeleteMediateca(index);
         });
+    };
+
+    const onClickDeleteTrackPlaylist = (id: number) => () => {
+        updateDeleteTrackPlaylist(id);
     };
 
     const icons = (trackId: number, i: number, isFavorite: boolean, isMediateca: boolean) => (
@@ -121,6 +130,12 @@ export const TrackTable = ({
             ) : (
                 <div onclick={onClickAddMediateca(trackId, i)} class={tracksTable('icon-plus')}>
                     <PlusIcon />
+                </div>
+            )}
+
+            {isForPlaylist && (
+                <div onclick={onClickDeleteTrackPlaylist(trackId)} class={tracksTable('icon-delete-playlist')}>
+                    <DeleteIcon />
                 </div>
             )}
         </div>

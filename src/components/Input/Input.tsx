@@ -10,9 +10,10 @@ interface InputProps {
     validators: ((value: string) => string | undefined)[];
     placeholder: string;
     isPassword?: boolean;
+    needIcon?: boolean;
 }
 
-export const Input = ({ validators, placeholder, isPassword = false, input }: InputProps) => {
+export const Input = ({ validators, placeholder, isPassword = false, input, needIcon = true }: InputProps) => {
     const validateInput = (value: string) => {
         let errorMsg = validators.reduce((error, validator) => error || validator(value), '');
         if (errorMsg) {
@@ -61,7 +62,11 @@ export const Input = ({ validators, placeholder, isPassword = false, input }: In
             />
             <div class={'input-text__error-msg'}>{input.errorMsg}</div>
             <div class={'input-text__placeholder'}>{`${placeholder}`}</div>
-            <div class={'icon'}>{input.isValid !== null ? input.isValid ? <OkIcon /> : <NotValidIcon /> : <div />}</div>
+            {needIcon && (
+                <div class={'icon'}>
+                    {input.isValid !== null ? input.isValid ? <OkIcon /> : <NotValidIcon /> : <div />}
+                </div>
+            )}
         </div>
     );
 };

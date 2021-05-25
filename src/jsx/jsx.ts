@@ -75,6 +75,7 @@ export const createDOM = (element: VNode | string): Element | Text => {
                     | 'onfocus'
                     | 'onsubmit'
                     | 'ontouchstart'
+                    | 'onchange'
                     | 'ontouchmove';
                 switch (key) {
                     case 'onclick':
@@ -94,6 +95,9 @@ export const createDOM = (element: VNode | string): Element | Text => {
                         break;
                     case 'ontouchstart':
                         eventType = 'ontouchstart';
+                        break;
+                    case 'onchange':
+                        eventType = 'onchange';
                         break;
                     case 'ontouchmove':
                         eventType = 'ontouchmove';
@@ -159,6 +163,7 @@ const patchProps = (node: HTMLElement, props: Props, nextProps: Props) => {
                     | 'onfocus'
                     | 'onsubmit'
                     | 'ontouchstart'
+                    | 'onchange'
                     | 'ontouchmove';
                 switch (key) {
                     case 'onclick':
@@ -178,6 +183,9 @@ const patchProps = (node: HTMLElement, props: Props, nextProps: Props) => {
                         break;
                     case 'ontouchstart':
                         eventType = 'ontouchstart';
+                        break;
+                    case 'onchange':
+                        eventType = 'onchange';
                         break;
                     case 'ontouchmove':
                         eventType = 'ontouchmove';

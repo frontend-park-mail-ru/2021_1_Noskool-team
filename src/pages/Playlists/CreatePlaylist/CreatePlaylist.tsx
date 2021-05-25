@@ -29,9 +29,9 @@ export const CreatePlaylist = () => {
     return (
         <div class={createCn('wrapper', isMobile() ? 'mob' : '')}>
             <form class={createCn()}>
-                <div class={createCn('title')}>{'Создание плейлиста'}</div>
-                <Input validators={[]} placeholder={'Название'} input={playlistForm.name} />
-                <Input validators={[]} placeholder={'Описание'} input={playlistForm.description} />
+                <div class={createCn('title', isMobile() ? 'mob-title' : '')}>{'Создание плейлиста'}</div>
+                <Input validators={[]} placeholder={'Название'} input={playlistForm.name} needIcon={false} />
+                <Input validators={[]} placeholder={'Описание'} input={playlistForm.description} needIcon={false} />
                 <button type='submit' onclick={onSubmitForm}>
                     {'Создать'}
                 </button>

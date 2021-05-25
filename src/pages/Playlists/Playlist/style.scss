@@ -4,94 +4,159 @@
   width: 100%;
   height: 100%;
 
-  &__content {
-    margin: 50px;
-    position: relative;
-    height: 100%;
-    box-sizing: border-box;
+  &__header {
     display: flex;
-    align-items: center;
-    flex-direction: column;
+    margin: 40px;
+  }
 
-    &:hover {
-      img {
-        filter: blur(5px);
-      }
+  &__photo {
+    width: 180px;
+    margin-bottom: 15px;
+
+    input {
+      width: 0.1px;
+      height: 0.1px;
+      opacity: 0;
+      overflow: hidden;
+      position: absolute;
+      z-index: -1;
     }
-
-    img {
-      height: calc(100% - 200px);
-      border-radius: 50px;
-      transition: all 0.5s;
-    }
   }
 
-  &__description {
-    font-size: 20px;
-    margin-top: 10px;
-    margin-bottom: 20px;
+  &__change-photo {
+    cursor: pointer;
   }
 
-  &__songs-background {
-    background-color: #f0f3fa;
-    border-radius: 20px;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -70%);
-    z-index: 10;
-    height: calc(70% - 100px);
-    opacity: 0.7;
-    width: 500px;
-    padding: 20px;
-    box-sizing: border-box;
+  &__image {
+    width: 180px;
+    height: 180px;
   }
 
-  &__songs-block {
-    border-radius: 20px;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -70%);
-    z-index: 11;
-    height: calc(70% - 100px);
-    width: 500px;
-    padding: 20px;
-    box-sizing: border-box;
-  }
-
-  &__singer {
-    font-size: 28px;
-    font-family: 'Comfortaa', cursive;
-    color: $black;
-    letter-spacing: 1px;
-    box-sizing: border-box;
-    text-align: center;
-    padding-top: 5px;
+  &__information {
+    margin-left: 30px;
+    width: 800px;
   }
 
   &__title {
-    font-size: 28px;
-    font-family: 'Comfortaa', cursive;
-    color: $black;
-    letter-spacing: 1px;
-    box-sizing: border-box;
-    text-align: center;
-    padding-top: 30px;
+    font-weight: bold;
+    font-size: 35px;
+    color: $gray;
+    margin-top: 6px;
+    margin-left: 1px;
   }
 
-  &__songs {
-    height: 100%;
-    width: 100%;
-    overflow-y: auto;
+  &__icon {
+    cursor: pointer;
+    margin-left: 10px;
+
+    svg:hover {
+      fill: $pink;
+    }
   }
 
-  &__song {
-    height: 48px;
+  &__icon-desc {
+    cursor: pointer;
+    margin-left: 10px;
+    margin-top: 10px;
+
+    svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    svg:hover {
+      fill: $pink;
+    }
+  }
+
+  &__icons-playlist {
+    margin-top: 10px;
     display: flex;
+  }
+
+  &__play-playlist {
+    display: flex;
+    padding: 7px;
+    background-color: $pink;
+    border: 1px solid $pink;
+    border-radius: 7px;
+    color: #fff;
     align-items: center;
-    justify-content: space-between;
-    padding: 0 10px;
+    cursor: pointer;
+
+    svg {
+      width: 20px;
+      height: 20px;
+      fill: #fff;
+
+      path {
+        stroke: #fff;
+      }
+    }
+  }
+
+  &__like-palylist {
+    display: flex;
+    padding: 7px;
+    align-items: center;
+    color: $gray;
+    cursor: pointer;
+    margin-left: 10px;
+    margin-top: 10px;
+
+    svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    svg:hover {
+      fill: $pink;
+    }
+  }
+
+  &__name {
+    font-size: 15px;
+    color: $gray;
+    margin-left: 1px;
+  }
+
+  &__block {
+    width: 600px;
+
+    &:hover {
+      border: 1px solid $pink;
+    }
+  }
+
+  &__delete-playlust {
+    padding: 7px;
+    cursor: pointer;
+    float: right;
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+
+    svg {
+      width: 30px;
+      height: 30px;
+      fill: #f00;
+    }
+  }
+
+  &__listen {
+    margin-right: 5px;
+  }
+
+  &__description {
+    color: $gray;
+    margin-top: 10px;
+    font-size: 18px;
+  }
+
+  &__author {
+    margin-top: 15px;
+    font-size: 18px;
+    color: $gray;
     cursor: pointer;
 
     &:hover {
@@ -99,55 +164,67 @@
     }
   }
 
-  &__number-song {
-    position: relative;
+  &__singer {
+    margin-top: 10px;
+    font-size: 15px;
     color: $gray;
-    font-size: 16px;
-    margin-top: 13px;
-    margin-bottom: 16px;
-    font-family: 'Heebo', sans-serif;
-    cursor: pointer;
-    outline: none;
-    border: none;
-    width: 40px;
   }
 
-  &__icons {
-    display: flex;
-    align-items: center;
-  }
-
-  &__time-song {
-    font-family: 'Heebo', sans-serif;
-    font-size: 19px;
+  &__date {
+    margin-top: 10px;
+    font-size: 15px;
     color: $gray;
-    padding-top: 13px;
-    padding-bottom: 16px;
   }
 
-  %button-music {
-    background-size: 23px;
+  &__empty-playlist {
+    padding-top: 45px;
+    width: 350px;
+    margin: auto;
+  }
+
+  &__empty {
+    width: 350px;
+    height: 280px;
+    background-image: url(./img/emptyPlaylist.png);
     background-position: center;
     background-repeat: no-repeat;
-    background-color: none;
-    cursor: pointer;
-    height: 23px;
-    width: 23px;
+    background-size: 100%;
   }
 
-  &__like {
-    @extend %button-music;
-
-    margin-left: 20px;
-    margin-right: 5px;
-    // background-image: url(../../icons/favorite_black_24dp.svg);
+  &__text {
+    margin-top: 7px;
+    text-align: center;
   }
 
-  &__add-song {
-    @extend %button-music;
+  &__content {
+    margin-left: 40px;
+  }
+}
 
-    // background-image: url(../../icons/add_black_24dp.svg);
-    background-size: 27px;
-    margin-right: 0;
+.playlist-page--mob {
+  .playlist-page {
+    &__header {
+      flex-direction: column;
+      margin: 15px;
+      align-items: center;
+    }
+
+    &__information {
+      margin-left: 0;
+      width: 100%;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 15px;
+    }
+
+    &__title {
+      font-size: 25px;
+    }
+
+    &__content {
+      margin: 0 15px;
+    }
   }
 }

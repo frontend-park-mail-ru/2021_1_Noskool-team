@@ -76,6 +76,8 @@
   &__playlists {
     cursor: pointer;
     margin-bottom: 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 
     &--disable {
       pointer-events: none;
@@ -488,7 +490,6 @@
     padding: 15px;
     box-sizing: border-box;
     padding-left: 200px;
-    overflow-y: scroll;
 
     &--expand {
       opacity: 1;
