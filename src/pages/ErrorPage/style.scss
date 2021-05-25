@@ -2,7 +2,7 @@
   width: 100%;
   height: calc(100vh - 75px);
 
-  .photo {
+  &__photo {
     margin: auto;
     width: 400px;
     height: 400px;
@@ -11,5 +11,16 @@
     background-position: center;
     background-size: 100%;
     background-repeat: no-repeat;
+  }
+}
+
+.not-found-page--mob {
+  height: 100%;
+
+  .not-found-page {
+    &__photo {
+      padding-top: 25%;
+      width: 100%;
+    }
   }
 }

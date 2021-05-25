@@ -1,6 +1,8 @@
 import { JSX } from 'jsx/jsx';
 import { LINKS } from 'constants/links';
 import { redirectTo } from 'utils/render';
+import { isMobile } from 'utils/isMobile';
+import { cn } from 'utils/cn';
 
 import './style.scss';
 
@@ -12,20 +14,20 @@ const onClickReg = () => {
     redirectTo(LINKS.reg);
 };
 
-export const NeedAccessPage = () => {
-    return (
-        <div class='not-access-page'>
-            <div class='photo' />
-            <div class='text'>
-                <span class='login' onclick={onClickLogin}>
-                    {'Войдите'}{' '}
-                </span>
-                {` или `}
-                <span class='login' onclick={onClickReg}>
-                    {'зарегистрируйтесь'}
-                </span>
-                {', чтобы увидеть '}
-            </div>
+const needAccessPage = cn('not-access-page');
+
+export const NeedAccessPage = () => (
+    <div class={needAccessPage('', isMobile() ? 'mob' : '')}>
+        <div class={needAccessPage('photo')} />
+        <div class={needAccessPage('text')}>
+            <span class={needAccessPage('login')} onclick={onClickLogin}>
+                {'Войдите'}
+            </span>
+            {` или `}
+            <span class={needAccessPage('login')} onclick={onClickReg}>
+                {'зарегистрируйтесь'}
+            </span>
+            {', чтобы увидеть '}
         </div>
-    );
-};
+    </div>
+);

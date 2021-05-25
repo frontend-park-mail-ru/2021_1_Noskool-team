@@ -5,7 +5,6 @@ import { JSX } from 'jsx/jsx';
 import { RightMenu } from 'modules/RightMenu/RightMenu';
 import { Header } from 'modules/Header';
 import { LINKS } from 'constants/links';
-
 import { FavoritePage } from 'pages/FavoritePage/FavoritePage';
 import { ErrorPage } from 'pages/ErrorPage';
 import { RegistrationPage } from 'pages/RegistrationPage/RegistrationPage';
