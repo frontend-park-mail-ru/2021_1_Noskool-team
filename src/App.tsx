@@ -27,6 +27,7 @@ import { rightMenuStore } from 'store/right-menu.store';
 import { getAllPlaylists } from 'actions/playlist/playlist';
 import { ArtistPage } from 'pages/ArtistPage';
 import { Users } from 'pages/Users';
+import { SearchPage } from 'pages/SearchPage';
 
 import './app.scss';
 
@@ -48,7 +49,8 @@ const isPageExistsAuth = (): boolean => {
         path !== LINKS.billboard &&
         !path.startsWith(LINKS.playlist) &&
         !path.startsWith(LINKS.artist) &&
-        !path.startsWith(LINKS.user)
+        !path.startsWith(LINKS.user) &&
+        !path.startsWith(LINKS.search)
     );
 };
 
@@ -100,6 +102,8 @@ export const App = () => {
                         {path.startsWith(LINKS.playlist) && <Playlist />}
                         {path.startsWith(LINKS.artist) && <ArtistPage />}
                         {path.startsWith(LINKS.user) && <Users />}
+                        {path.startsWith(LINKS.search) && <SearchPage />}
+
                         {path.startsWith(LINKS.mediateka) && (isAuth ? <MediatekaPage /> : <NeedAccessPage />)}
                     </div>
                 </div>

@@ -17,6 +17,12 @@ export interface RequestsStore {
     userPlaylists: boolean;
     userSubscribers: boolean;
     userSubscriptions: boolean;
+    searchAll: boolean;
+    searchTracks: boolean;
+    searchAlbums: boolean;
+    searchPlaylists: boolean;
+    searchArtists: boolean;
+    searchUsers: boolean;
 }
 
 export const requestsStore = proxy<RequestsStore>({
@@ -39,4 +45,10 @@ export const requestsStore = proxy<RequestsStore>({
     userPlaylists: true,
     userSubscribers: true,
     userSubscriptions: true,
+    searchAll: true,
+    searchTracks: true,
+    searchAlbums: true,
+    searchPlaylists: true,
+    searchArtists: true,
+    searchUsers: true,
 });
