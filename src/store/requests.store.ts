@@ -52,6 +52,5 @@ export const requestsStore = proxy<RequestsStore>({
     searchPlaylists: true,
     searchArtists: true,
     searchUsers: true,
-
     sharePlaylist: true,
 });
