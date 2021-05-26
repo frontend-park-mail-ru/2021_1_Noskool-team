@@ -23,7 +23,7 @@ import {
     ShuffleIcon,
     PlayMainTrackIcon,
     CurrentPlaylistIcon,
-    // OkeyIcon,
+    OkeyIcon,
 } from 'assets/icons';
 import { requestsStore } from 'store/requests.store';
 import {
@@ -35,7 +35,7 @@ import {
 } from 'actions/main-page/main-page';
 import { LINKS } from 'constants/links';
 import { isMobile } from 'utils/isMobile';
-import { redirectTo } from 'utils/render';
+import { redirectTo, render } from 'utils/render';
 
 import './style.scss';
 import { Link } from 'components/Link/Link';
@@ -231,6 +231,8 @@ const onClickAddToPlaylist = (id_playlist: number) => () => {
     addTrackToPlaylist(id_playlist, playerStore.currentTrack.trackId).then(() => {
         onePlaylistStore.playlist.isOkey = true;
         requestsStore.onePlaylist = true;
+        document.getElementById('addtoPl').style.display = 'flex';
+        render();
         setTimeout(function () {
             document.getElementById('addtoPl').style.display = 'none';
         }, 5000);
@@ -403,12 +405,10 @@ export const AudioLine = () => {
                 </div>
             </div>
 
-            {/* {onePlaylistStore.playlist.isOkey && (
-                <div class={player('changeStatus')} id='addtoPl'>
-                    <OkeyIcon />
-                    <div class={player('isOkey')}>{'Песня добавлена в плейлист'}</div>
-                </div>
-            )} */}
+            <div class={player('changeStatus')} id='addtoPl'>
+                <OkeyIcon />
+                <div class={player('isOkey')}>{'Песня добавлена в плейлист'}</div>
+            </div>
 
             {localStorage.getItem('auth') === 'ok' ? (
                 <div class={player('playlist-btns')}>
