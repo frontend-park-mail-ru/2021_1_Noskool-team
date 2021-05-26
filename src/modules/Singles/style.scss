@@ -5,6 +5,10 @@
   box-sizing: border-box;
   font-family: 'Comfortaa', cursive;
 
+  &--mob {
+    margin: 31px 30px 20px 31px;
+  }
+
   &__legend {
     display: flex;
     justify-content: space-between;
@@ -20,6 +24,11 @@
     margin-bottom: auto;
     cursor: pointer;
     transition: all 0.3s;
+
+    &--mob {
+      font-size: 18px;
+      padding-left: 0;
+    }
 
     &:hover {
       color: $pink;
@@ -39,6 +48,15 @@
     box-shadow: 2px 2px 8px rgb(0 0 0 / 35%);
     position: relative;
     transition: all 0.3s;
+
+    &--mob {
+      height: 28px;
+      width: 28px;
+
+      &:nth-child(1) {
+        margin-right: 8px;
+      }
+    }
 
     &:nth-child(1) {
       margin-right: 20px;
@@ -84,6 +102,11 @@
       margin-top: 25px;
       object-fit: cover;
       cursor: pointer;
+
+      &--mob {
+        height: 90px;
+        width: 90px;
+      }
     }
 
     &__name-song {
@@ -97,6 +120,12 @@
       display: block;
       cursor: pointer;
       text-decoration: none;
+
+      &--mob {
+        width: 138px;
+        font-size: 12px;
+        padding-top: 10px;
+      }
     }
 
     &__name-song:hover {
@@ -113,6 +142,11 @@
       display: block;
       cursor: pointer;
       text-decoration: none;
+
+      &--mob {
+        width: 138px;
+        font-size: 10px;
+      }
     }
 
     &__singer:hover {

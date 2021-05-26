@@ -8,6 +8,7 @@ import { DiscoverGenres } from 'modules/Discover/Discover';
 import './style.scss';
 import { redirectTo } from 'utils/render';
 import { LINKS } from 'constants/links';
+import { isMobile } from 'utils/isMobile';
 
 const onClickBillboard = () => {
     redirectTo(LINKS.billboard);
@@ -19,18 +20,33 @@ export const MainPage = () => {
             <div class='main'>
                 <FeatureOfWeek />
                 <Single />
-                <div class='top'>
-                    <div class='billboard-charts'>
-                        <div class='title' onclick={onClickBillboard}>
-                            Billboard Top Charts
+                {isMobile() ? (
+                    <div class='top-mob'>
+                        <div class='billboard-charts-mob'>
+                            <div class='title-mob' onclick={onClickBillboard}>
+                                Billboard Top Charts
+                            </div>
+                            <BillboardChart />
                         </div>
-                        <BillboardChart />
+                        <div class='discover-mob'>
+                            <TopArtists />
+                            <DiscoverGenres />
+                        </div>
                     </div>
-                    <div class='discover'>
-                        <TopArtists />
-                        <DiscoverGenres />
+                ) : (
+                    <div class='top'>
+                        <div class='billboard-charts'>
+                            <div class='title' onclick={onClickBillboard}>
+                                Billboard Top Charts
+                            </div>
+                            <BillboardChart />
+                        </div>
+                        <div class='discover'>
+                            <TopArtists />
+                            <DiscoverGenres />
+                        </div>
                     </div>
-                </div>
+                )}
             </div>
         </div>
     );
