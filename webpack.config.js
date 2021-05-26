@@ -1,4 +1,5 @@
 const path = require('path');
+const WorkboxWebpackPlugin = require("workbox-webpack-plugin");
 
 function srcPath(subdir) {
     return path.join(__dirname, "src", subdir);
@@ -15,6 +16,12 @@ module.exports = {
     module: {
         rules: [
             {
+                test: /\.worker\.js$/,
+                use: [
+                    { loader: 'worker-loader' },
+                ],
+            },
+            {
                 test: /\.s[ac]ss$/i,
                 use: [
                   "style-loader",
@@ -30,7 +37,7 @@ module.exports = {
             {
                 test: /.(jpg|jpeg|png|svg)$/,
                 use: ['file-loader'],
-            }
+            },
         ],
     },
     resolve: {
@@ -52,5 +59,11 @@ module.exports = {
         filename: 'main.js',
         path: path.resolve(__dirname, 'build'),
     },
-    mode: "development"
+    mode: "development",
+    plugins: [
+        new WorkboxWebpackPlugin.InjectManifest({
+            swSrc: "./src/sw.js",
+            swDest: "sw.js"
+        })
+    ]   
 };

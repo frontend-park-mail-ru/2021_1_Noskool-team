@@ -1,6 +1,14 @@
 import { proxy } from 'jsx/store';
 import { FieldState } from 'types/common';
-import { Form } from 'types/store/auth-form';
+
+export interface Form {
+    fields: {
+        nickname: FieldState;
+        password: FieldState;
+    };
+    isValid: boolean;
+    errorMsg: string;
+}
 
 export const authFormStore = {
     form: proxy<Form>({

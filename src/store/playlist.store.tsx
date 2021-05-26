@@ -1,18 +1,25 @@
 import { proxy } from 'jsx/store';
-import { Playlist } from 'types/requests/playlist';
-import { AllPlaylists, OnePlaylist, CreatePlaylist } from 'types/store/playlist';
 import { FieldState } from 'types/common';
+import { Playlist } from 'types/requests/playlist';
+
+export interface AllPlaylists {
+    albumList: Playlist[];
+}
+
+export interface OnePlaylist {
+    playlist: Playlist;
+}
+
+export interface CreatePlaylist {
+    playlist: CreatePlaylist;
+}
 
 export const playlistStore = proxy<AllPlaylists>({
     albumList: proxy<Playlist>([]),
 });
 
-// export const onePlaylistStore = proxy<OnePlaylist>({
-//     playlist: proxy<Playlist>([]),
-// });
-
 export const onePlaylistStore = proxy<OnePlaylist>({
-    album: proxy<Playlist>({
+    playlist: proxy<Playlist>({
         'playlist_id': 1,
         tittle: '',
         description: '',
@@ -20,6 +27,9 @@ export const onePlaylistStore = proxy<OnePlaylist>({
         'release_date': '',
         'user_id': '',
         tracks: [],
+        isOkey: false,
+        onClickEditTitle: false,
+        onClickEditDesc: false,
     }),
 });
 
@@ -46,6 +56,31 @@ export const playlistProfileStore = {
         name: '',
         description: '',
         photo: '',
+    }),
+};
+
+export const playlistEditForm = {
+    form: proxy<PlaylistForm>({
+        name: proxy<FieldState>(
+            {
+                value: '',
+                isValid: null,
+                onCheckValid: undefined,
+                isFocuse: false,
+                errorMsg: '',
+            },
+            ['onCheckValid']
+        ),
+        description: proxy<FieldState>(
+            {
+                value: '',
+                isValid: null,
+                onCheckValid: undefined,
+                isFocuse: false,
+                errorMsg: '',
+            },
+            ['onCheckValid']
+        ),
     }),
 };
 

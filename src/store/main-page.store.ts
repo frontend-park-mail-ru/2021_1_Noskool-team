@@ -1,9 +1,12 @@
 import { proxy } from 'jsx/store';
 import { TrackBack } from 'types/requests/tracks';
-import { TracksStore, ArtistsStore } from 'types/store/tracks';
+import { TracksStore, ArtistsStore } from 'store/top-track.store';
 import { Artists } from 'types/requests/artists';
-import { AlbumsStore } from 'types/store/albums-store';
 import { Album } from 'types/requests/albums';
+
+export interface AlbumsStore {
+    albums: Album[];
+}
 
 export const tracksStore = proxy<TracksStore>({
     trackList: proxy<TrackBack>([]),

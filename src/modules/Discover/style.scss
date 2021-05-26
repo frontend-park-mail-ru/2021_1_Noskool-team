@@ -4,6 +4,10 @@
   width: 100%;
   margin: 50px 30px 25px 10px;
 
+  &--mob {
+    width: 95%;
+  }
+
   &__titles {
     width: 100%;
     display: flex;
@@ -18,10 +22,9 @@
     color: #373944;
     margin-bottom: 25px;
     margin-left: 12px;
-    cursor: pointer;
 
-    &:hover {
-      color: $pink;
+    &--mob {
+      font-size: 18px;
     }
   }
 
@@ -33,6 +36,11 @@
     padding-right: 25px;
     text-decoration: none;
     cursor: pointer;
+    transition: all 0.3s;
+
+    &--mob {
+      font-size: 13px;
+    }
 
     &:hover {
       color: $pink;
@@ -45,6 +53,10 @@
     justify-content: space-between;
     padding: 0 20px;
     overflow: hidden;
+
+    &--mob {
+      padding: 0 18px;
+    }
   }
 
   &__find-album {
@@ -58,5 +70,11 @@
     border-radius: 20px;
     cursor: pointer;
     object-fit: cover;
+
+    &--mob {
+      width: 90px;
+      height: 88px;
+      border-radius: 10px;
+    }
   }
 }

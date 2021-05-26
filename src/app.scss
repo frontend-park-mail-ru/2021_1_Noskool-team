@@ -25,6 +25,7 @@
     bottom: 0;
     height: 75px;
     width: 1200px;
+    z-index: 2;
   }
 
   &__nav-bar {
@@ -42,6 +43,10 @@
     top: 0;
     z-index: 1;
   }
+
+  &__wrapper {
+    padding-bottom: 75px;
+  }
 }
 
 .page-wrapper--mob {
@@ -57,6 +62,7 @@
       top: 60px;
       left: 0;
       width: 100%;
+      height: calc(100vh - 170px);
     }
 
     &__player {
@@ -82,7 +88,11 @@
       height: 60px;
       top: 0;
       transition: 0.1s all;
-      z-index: 0;
+    }
+
+    &__wrapper {
+      padding-bottom: 0;
+      height: 100%;
     }
   }
 }

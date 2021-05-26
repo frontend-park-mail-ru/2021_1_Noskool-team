@@ -3,11 +3,7 @@
 .profile-page {
   width: 100%;
   height: 100%;
-  // display: grid;
-  // grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-  // grid-template-rows: 1fr 1fr 1fr 1fr;
   padding: 40px;
-  // gap: 40px;
   box-sizing: border-box;
 
   &__wrapper {
@@ -29,11 +25,7 @@
 
   &__photo {
     width: 250px;
-
-    img {
-      width: 100%;
-      border-radius: 40px;
-    }
+    margin-bottom: 15px;
 
     input {
       width: 0.1px;
@@ -58,6 +50,33 @@
     grid-area: span 1 / span 4;
   }
 
+  &__changeStatus {
+    display: flex;
+    margin-left: 150px;
+    margin-top: 20px;
+    background-color: #ceffbc;
+    padding: 5px;
+    width: max-content;
+    border-radius: 3px;
+
+    svg > path {
+      stroke: #247719;
+    }
+  }
+
+  &__isOkey {
+    color: #247719;
+    margin-left: 10px;
+  }
+
+  &__image {
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 1px solid $gray;
+  }
+
   &__text-info-container {
     margin: 0 0 0 15px;
   }
@@ -72,35 +91,81 @@
     }
   }
 
+  &__change {
+    background-color: $pink;
+    border-radius: 5px;
+    width: 200px;
+    height: 50px;
+    color: $white;
+    font-size: 22px;
+    line-height: 25px;
+    font-weight: 500;
+    cursor: pointer;
+    transform: scale(0.975, 0.975);
+    transition: all 0.5s;
+    margin-left: 150px;
+
+    &:hover {
+      transform: scale(1, 1);
+    }
+  }
+
+  &__status {
+    height: 100px;
+    padding-top: 30px;
+  }
+
   .change-data {
     border-radius: 30px;
     background-color: $white;
     padding: 15px;
     grid-area: span 1 / span 2;
+  }
+}
 
-    &__input {
-      button {
-        background-color: $pink;
-        border-radius: 5px;
-        width: 200px;
-        height: 50px;
-        color: $white;
-        font-size: 22px;
-        line-height: 25px;
-        font-weight: 500;
-        cursor: pointer;
-        transform: scale(0.975, 0.975);
-        transition: all 0.5s;
-        margin-left: 100px;
+.profile-page--mob {
+  padding: 15px;
 
-        &:nth-last-child(1) {
-          margin-top: 15px;
-        }
+  .profile-page {
+    &__photo {
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      box-sizing: border-box;
 
-        &:hover {
-          transform: scale(1, 1);
-        }
+      img {
+        height: 150px;
+        width: 150px;
       }
     }
+
+    &__change {
+      margin: 0;
+      width: 100%;
+
+      &:hover {
+        transform: scale(0.975, 0.975);
+      }
+    }
+
+    &__changeStatus {
+      margin: 0;
+    }
+
+    &__changeStatus-wrapper {
+      width: 100%;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 10px;
+    }
+  }
+
+  .change-data {
+    height: 100%;
+    box-sizing: border-box;
   }
 }

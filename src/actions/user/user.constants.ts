@@ -1,6 +1,7 @@
-import { HOST } from '../../constants/api';
+import { HOST } from 'constants/api';
 
-export const PROFILE = HOST + '/api/v1/profile';
-export const CHANGE_PROFILE = HOST + '/api/v1/profile/update';
-export const CHANGE_USER_PHOTE = HOST + '/api/v1/profile/avatar/upload';
-export const GET_CSRF = HOST + '/api/v1/profile/csrf';
+export const PROFILE = HOST + '/api/v1/user/profile';
+export const CHANGE_PROFILE = HOST + '/api/v1/user/profile/update';
+export const CHANGE_USER_PHOTE = HOST + '/api/v1/user/profile/avatar/upload';
+export const GET_CSRF = HOST + '/api/v1/user/profile/csrf';
+export const CHANGE_PASSWORD = HOST + '/api/v1/user/profile/update/password';

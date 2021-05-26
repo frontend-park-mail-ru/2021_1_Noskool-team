@@ -1,14 +1,34 @@
 import { proxy } from 'jsx/store';
-import { Profile, ProfileForm } from 'types/store/profile-store';
 import { FieldState } from 'types/common';
+
+export interface Profile {
+    id: number;
+    login: string;
+    email: string;
+    photo: string;
+    name: string;
+    lastName: string;
+    isOkey: boolean;
+    isOkeyPassword: boolean;
+}
+
+export interface ProfileForm {
+    email: FieldState;
+    nickname: FieldState;
+    oldPassword: FieldState;
+    newPassword: FieldState;
+}
 
 export const profileStore = {
     profile: proxy<Profile>({
+        id: 0,
         login: '',
         email: '',
         photo: '',
         name: '',
         lastName: '',
+        isOkey: false,
+        isOkeyPassword: false,
     }),
 };
 
@@ -34,7 +54,7 @@ export const profileForm = {
             },
             ['onCheckValid']
         ),
-        name: proxy<FieldState>(
+        oldPassword: proxy<FieldState>(
             {
                 value: '',
                 isValid: null,
@@ -44,7 +64,7 @@ export const profileForm = {
             },
             ['onCheckValid']
         ),
-        lastName: proxy<FieldState>(
+        newPassword: proxy<FieldState>(
             {
                 value: '',
                 isValid: null,

@@ -1,11 +1,13 @@
 import { JSX } from 'jsx/jsx';
+import { cn } from 'utils/cn';
+import { isMobile } from 'utils/isMobile';
 
 import './style.scss';
 
-export const ErrorPage = () => {
-    return (
-        <div class='not-found-page'>
-            <div class='photo' />
-        </div>
-    );
-};
+const errorPage = cn('not-found-page');
+
+export const ErrorPage = () => (
+    <div class={errorPage('', isMobile() ? 'mob' : '')}>
+        <div class={errorPage('photo')} />
+    </div>
+);

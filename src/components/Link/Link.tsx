@@ -13,7 +13,8 @@ export const Link = ({ to = '', text = '', child = () => <div></div>, onClick = 
         <a
             href={''}
             onclick={(e: any) => {
-                onClickA(to)(e);
+                e.preventDefault();
+                onClickA(to);
                 onClick();
             }}
         >

@@ -5,6 +5,7 @@ import { TRACK_HOST } from 'constants/api';
 import { redirectTo } from 'utils/render';
 import { LINKS } from 'constants/links';
 import { cn } from 'utils/cn';
+import { isMobile } from 'utils/isMobile';
 
 import './style.scss';
 
@@ -27,19 +28,25 @@ export const DiscoverGenres = () => {
     }
 
     return (
-        <div class={genres()}>
+        <div class={genres('', isMobile() ? 'mob' : '')}>
             <div class={genres('titles')}>
-                <div class={genres('monthly-artists')} onclick={onClickBillboard}>
-                    Discover Genres
+                <div class={genres('monthly-artists', isMobile() ? 'mob' : '')} onclick={onClickBillboard}>
+                    {'Популярные альбомы'}
                 </div>
-                <div class={genres('see-all')} onclick={onClickBillboard}>
-                    See All
-                </div>
+                {!isMobile() && (
+                    <div class={genres('see-all')} onclick={onClickBillboard}>
+                        {'Все >>'}
+                    </div>
+                )}
             </div>
-            <div class={genres('section')}>
+            <div class={genres('section', isMobile() ? 'mob' : '')}>
                 {albumsStore.albums.map((item) => (
                     <div class={genres('find-album')} onclick={onClickAlbum(item?.album_id)}>
-                        <img src={TRACK_HOST + item?.picture} class={genres('album-photo')} title={item?.tittle}></img>
+                        <img
+                            src={TRACK_HOST + item?.picture}
+                            class={genres('album-photo', isMobile() ? 'mob' : '')}
+                            title={item?.tittle}
+                        ></img>
                     </div>
                 ))}
             </div>

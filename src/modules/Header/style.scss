@@ -14,7 +14,7 @@
   &__logo {
     width: 60px;
     height: 50px;
-    background-image: url(icons/Logo_solo_mockup.svg);
+    background-image: url(img/logo.png);
     background-position: center;
     background-size: 100%;
     background-repeat: no-repeat;
@@ -28,6 +28,14 @@
     box-shadow: 0 2px 8px rgb(0 0 0 / 15%);
     border-radius: 5px;
     color: $gray;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s;
+
+    &--expand {
+      opacity: 1;
+      pointer-events: all;
+    }
   }
 
   &__search-together {
@@ -280,6 +288,7 @@
       margin-bottom: 5px;
       font-size: 20px;
       font-weight: 600;
+      cursor: pointer;
     }
   }
 }

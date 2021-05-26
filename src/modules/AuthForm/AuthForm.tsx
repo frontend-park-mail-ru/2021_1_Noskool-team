@@ -42,6 +42,7 @@ const onSubmitForm = (values: MouseEvent) => {
                 } else if (res.status === 200) {
                     localStorage.setItem('auth', 'ok');
                     requestsStore.profile = true;
+                    requestsStore.allPlaylists = true;
                     redirectTo(LINKS.main);
                 } else {
                     res.json().then((res) => {
@@ -58,7 +59,7 @@ const onSubmitForm = (values: MouseEvent) => {
 export const AuthForm = () => {
     return (
         <div class={formCn('wrapper', isMobile() ? 'mob' : '')}>
-            <form onsubmit={onSubmitForm} class={formCn()}>
+            <form class={formCn()}>
                 <div class={formCn('title')}>{'Вход'}</div>
                 <Input
                     validators={[requaredValidator]}
@@ -72,14 +73,9 @@ export const AuthForm = () => {
                     input={authFormStore.form.fields.password}
                 />
                 <div class={formCn('error')}>{authFormStore.form.errorMsg}</div>
-                <button type='submit' class={formCn('sign-in')}>
+                <button onclick={onSubmitForm} class={formCn('sign-in')}>
                     {'Войти'}
                 </button>
-                <div class={formCn('alternative')}>{'Войти через'}</div>
-                <div class={formCn('buttons')}>
-                    <button class={formCn('button', 'vk')}></button>
-                    <button class={formCn('button', 'google')}></button>
-                </div>
                 <div class={formCn('alternative')}>{'Нет аккаунта?'}</div>
                 <div class={formCn('reg')} onclick={onClickReg}>
                     {'Регистрация'}

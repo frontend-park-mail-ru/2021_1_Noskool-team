@@ -9,13 +9,14 @@ import {
     nicknameValidator,
     passwordEqualValidator,
 } from 'utils/form-validators';
-import { registerUser } from 'actions/registration/registration';
+import { authUser, registerUser } from 'actions/registration/registration';
 import { redirectTo } from 'utils/render';
 import { LINKS } from 'constants/links';
 import { ErrorFetch } from 'types/common';
 import { isMobile } from 'utils/isMobile';
 import { regFormStore } from 'store/reg-form.store';
 import { cn } from 'utils/cn';
+import { requestsStore } from 'store/requests.store';
 
 import './style.scss';
 
@@ -49,8 +50,15 @@ const onSubmitForm = (values: MouseEvent) => {
         })
             .then((res) => {
                 if (res.status === 200) {
-                    localStorage.setItem('auth', 'true');
-                    redirectTo(LINKS.main);
+                    authUser({
+                        nickname: regFormStore.nickname.value,
+                        password: regFormStore.password.value,
+                    }).then(() => {
+                        localStorage.setItem('auth', 'ok');
+                        requestsStore.profile = true;
+                        requestsStore.allPlaylists = true;
+                        redirectTo(LINKS.main);
+                    });
                 } else {
                     res.json().then((res) => onSetError(res.error));
                 }
@@ -68,7 +76,7 @@ const onClickAuth = () => {
 export const RegistrationForm = () => {
     return (
         <div class={formCn('wrapper', isMobile() ? 'mob' : '')}>
-            <form onsubmit={onSubmitForm} class={formCn()}>
+            <form class={formCn()}>
                 <div class={formCn('title')}>{'Регистрация'}</div>
                 <Input
                     validators={[requaredValidator, emailValidator]}
@@ -98,7 +106,7 @@ export const RegistrationForm = () => {
                     input={regFormStore.passwordRepeat}
                 />
                 <div class={formCn('error-msg')}>{regFormStore.errorMsg}</div>
-                <button type='submit'>{'Зарегистрироваться'}</button>
+                <button onclick={onSubmitForm}>{'Зарегистрироваться'}</button>
                 <button onclick={onClickAuth}>{'Или войти'}</button>
             </form>
         </div>

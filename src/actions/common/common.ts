@@ -7,6 +7,7 @@ const getAuth = (url: string): Promise<Response> => {
         headers: {
             'X-Csrf-Token': document.cookie
                 ?.split(';')
+                ?.map((el) => el.trim())
                 ?.find((item) => item?.startsWith('csrf'))
                 ?.split('=')[1],
         },
@@ -27,6 +28,22 @@ export const postAuth = <R>(url: string, body: R) => {
         headers: {
             'X-Csrf-Token': document.cookie
                 ?.split(';')
+                ?.map((el) => el.trim())
+                ?.find((item) => item?.startsWith('csrf'))
+                ?.split('=')[1],
+        },
+    });
+};
+
+export const deleteAuth = <R>(url: string, body: R) => {
+    return fetch(url, {
+        method: 'delete',
+        credentials: 'include',
+        body: JSON.stringify(body),
+        headers: {
+            'X-Csrf-Token': document.cookie
+                ?.split(';')
+                ?.map((el) => el.trim())
                 ?.find((item) => item?.startsWith('csrf'))
                 ?.split('=')[1],
         },
@@ -48,6 +65,7 @@ export const postImg = (url: string, body: FormData) => {
         headers: {
             'X-Csrf-Token': document.cookie
                 ?.split(';')
+                ?.map((el) => el.trim())
                 ?.find((item) => item?.startsWith('csrf'))
                 ?.split('=')[1],
         },
@@ -64,32 +82,36 @@ export const getcsrf = (): Promise<Response> => {
 export const getMainPage = async <P>(url: string): Promise<P | undefined> => {
     let response: Promise<P | undefined>;
     let resBuff;
-    if (localStorage.getItem('auth') === 'ok') {
-        resBuff = await getAuth(url);
-        if (resBuff.status === 401) {
-            localStorage.removeItem('auth');
-            resBuff = await getNoneAuth(url + '/notauth');
-            response = resBuff.ok ? resBuff.json() : new Promise(() => {});
-        } else if (resBuff.status === 403) {
-            const csrf = await getcsrf();
-            if (csrf.status === 200) {
-                resBuff = await getAuth(url);
-                response = resBuff.ok ? resBuff.json() : new Promise(() => {});
-            } else {
+    try {
+        if (localStorage.getItem('auth') === 'ok') {
+            resBuff = await getAuth(url);
+            if (resBuff.status === 401) {
                 localStorage.removeItem('auth');
                 resBuff = await getNoneAuth(url + '/notauth');
                 response = resBuff.ok ? resBuff.json() : new Promise(() => {});
+            } else if (resBuff.status === 403) {
+                const csrf = await getcsrf();
+                if (csrf.status === 200) {
+                    resBuff = await getAuth(url);
+                    response = resBuff.ok ? resBuff.json() : new Promise(() => {});
+                } else {
+                    localStorage.removeItem('auth');
+                    resBuff = await getNoneAuth(url + '/notauth');
+                    response = resBuff.ok ? resBuff.json() : new Promise(() => {});
+                }
+            } else if (resBuff.ok) {
+                response = resBuff.json();
+            } else {
+                response = new Promise(() => {});
             }
-        } else if (resBuff.ok) {
-            response = resBuff.json();
         } else {
-            response = new Promise(() => {});
+            resBuff = await getNoneAuth(url + '/notauth');
+            response = resBuff.ok ? resBuff.json() : new Promise(() => {});
         }
-    } else {
-        resBuff = await getNoneAuth(url + '/notauth');
-        response = resBuff.ok ? resBuff.json() : new Promise(() => {});
+        return response;
+    } catch (e) {
+        console.log(`Да лол, обнови браузер, ошибочка: ${e}`);
     }
-    return response;
 };
 
 export const get = async <P>(url: string): Promise<P | undefined> => {

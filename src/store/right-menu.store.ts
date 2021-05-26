@@ -1,5 +1,8 @@
 import { proxy } from 'jsx/store';
-import { RightMenuStore } from 'types/store/right-menu-store';
+
+export interface RightMenuStore {
+    isExpand: boolean;
+}
 
 export const rightMenuStore = proxy<RightMenuStore>({
     isExpand: false,

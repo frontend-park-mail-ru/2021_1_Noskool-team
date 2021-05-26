@@ -4,6 +4,7 @@ import { Albums } from './Albums';
 import { JSX } from 'jsx/jsx';
 import { cn } from 'utils/cn';
 import { redirectTo } from 'utils/render';
+import { isMobile } from 'utils/isMobile';
 
 import './style.scss';
 
@@ -21,12 +22,83 @@ const onClickArtists = () => {
     redirectTo(LINKS.mediatekaArtists);
 };
 
-const onClickPodcasts = () => {
-    redirectTo(LINKS.mediatekaPodcasts);
+const redirectSwitch = (offset: number) => {
+    switch (offset) {
+        case 0:
+            onClickTracks();
+            break;
+        case -100:
+            onClickAlbums();
+            break;
+        case -200:
+            onClickArtists();
+            break;
+        default:
+            return;
+    }
+};
+
+let x1: number = null,
+    currentOffset = 0;
+
+const onTouch = (e: TouchEvent) => {
+    x1 = e.touches[0].clientX;
+};
+
+const onTouchMove = (e: TouchEvent) => {
+    if (!x1) {
+        return;
+    }
+    let x2 = e.touches[0].clientX;
+    let xDiff = x2 - x1;
+    if (Math.abs(xDiff) > 50) {
+        if (xDiff > 0) {
+            if (currentOffset !== 0) {
+                currentOffset += 100;
+            }
+            document.getElementById('SLIDER_TAPE_MEDIATECA').style.left = `${currentOffset}vw`;
+            x1 = null;
+            redirectSwitch(currentOffset);
+        } else {
+            if (currentOffset !== -200) {
+                currentOffset -= 100;
+            }
+            document.getElementById('SLIDER_TAPE_MEDIATECA').style.left = `${currentOffset}vw`;
+            x1 = null;
+            redirectSwitch(currentOffset);
+        }
+    }
 };
 
 export const MediatekaPage = () => {
-    return (
+    return isMobile() ? (
+        <div class={mediatekaPage('', 'mob')}>
+            <div class={mediatekaPage('slider')}>
+                <div
+                    class={mediatekaPage('slider-tape')}
+                    id={'SLIDER_TAPE_MEDIATECA'}
+                    ontouchstart={onTouch}
+                    ontouchmove={onTouchMove}
+                >
+                    <div class={mediatekaPage('slide-block')}>
+                        <div class={mediatekaPage('slider-text')}>{'Треки'}</div>
+                    </div>
+                    <div class={mediatekaPage('slide-block')}>
+                        <div class={mediatekaPage('slider-text')}>{'Альбомы'}</div>
+                    </div>
+                    <div class={mediatekaPage('slide-block')}>
+                        <div class={mediatekaPage('slider-text')}>{'Артисты'}</div>
+                    </div>
+                </div>
+            </div>
+            <div class={mediatekaPage('content-wrappers')}>
+                <div class={mediatekaPage('content')}>
+                    {window.location.pathname.startsWith(LINKS.mediatekaTracks) && <Tracks />}
+                    {/* {window.location.pathname.startsWith(LINKS.mediatekaAlbums) && <Albums />} */}
+                </div>
+            </div>
+        </div>
+    ) : (
         <div class={mediatekaPage()}>
             <div class={mediatekaPage('tabs')}>
                 <div
@@ -47,16 +119,12 @@ export const MediatekaPage = () => {
                 >
                     {'Артисты'}
                 </div>
-                <div
-                    onclick={onClickPodcasts}
-                    class={mediatekaPage('tab', window.location.pathname === LINKS.mediatekaPodcasts ? 'active' : '')}
-                >
-                    {'Подкасты'}
-                </div>
             </div>
             <div class={mediatekaPage('content-wrapper')}>
-                {window.location.pathname.startsWith(LINKS.mediatekaTracks) && <Tracks />}
-                {window.location.pathname.startsWith(LINKS.mediatekaAlbums) && <Albums />}
+                <div class={mediatekaPage('content')}>
+                    {window.location.pathname.startsWith(LINKS.mediatekaTracks) && <Tracks />}
+                    {window.location.pathname.startsWith(LINKS.mediatekaAlbums) && <Albums />}
+                </div>
             </div>
         </div>
     );

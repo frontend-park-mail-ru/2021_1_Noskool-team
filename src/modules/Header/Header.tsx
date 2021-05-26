@@ -17,15 +17,14 @@ const header = cn('header');
 const profile = cn('profile');
 
 const onBlureSearch = () => {
-    headerStore.serachResultTracks = [];
-    headerStore.searchResultAlbums = [];
-    headerStore.searchResultArtists = [];
-    headerStore.search = '';
+    headerStore.isExpandSearch = false;
 };
 
 const handleClickOutside = (event: any) => {
     if (document.getElementById('search-input') && !document.getElementById('search-input').contains(event.target)) {
-        onBlureSearch();
+        if (headerStore.isExpandSearch) {
+            onBlureSearch();
+        }
     }
 };
 
@@ -47,15 +46,23 @@ export const Header = () => {
     const onInputSearch = (e: InputEvent) => {
         const value = (e.target as HTMLInputElement).value;
         headerStore.search = value;
+        headerStore.searchResultArtists = [];
+        headerStore.searchResultAlbums = [];
+        headerStore.serachResultTracks = [];
         getSearch(value);
+        headerStore.isExpandSearch = true;
     };
 
     const isAuth = Boolean(localStorage.getItem('auth'));
 
+    const redirectToProfile = () => {
+        redirectTo(`${LINKS.user}/${profileStore.profile.id}`);
+    };
+
     if (isMobile()) {
         return (
             <div class={header('', 'mob')}>
-                <form class={header('search-form')}>
+                <form class={header('search-form')} id={'search-input'}>
                     <input
                         type='search'
                         value={headerStore.search}
@@ -66,12 +73,12 @@ export const Header = () => {
                     <div class={header('search-button')}>
                         <div class={header('search-icon')} />
                     </div>
-                    <div class={header('search-result')}>
+                    <div class={header('search-result', headerStore.isExpandSearch ? 'expand' : '')}>
                         {headerStore.serachResultTracks.length && (
                             <div>
                                 <div class={header('serach-title')}>{'Треки:'}</div>
                                 <div class={header('search-item')}>
-                                    {headerStore.serachResultTracks.slice(0, 4).map((el) => (
+                                    {headerStore.serachResultTracks.slice(0, 3).map((el) => (
                                         <div class={header('search-together')}>
                                             <img src={TRACK_HOST + el.picture} class={header('search-photo')} />
                                             <Link
@@ -88,10 +95,14 @@ export const Header = () => {
                             <div>
                                 <div class={header('serach-title')}>{'Артисты:'}</div>
                                 <div class={header('search-item')}>
-                                    {headerStore.searchResultArtists.slice(0, 4).map((el) => (
+                                    {headerStore.searchResultArtists.slice(0, 3).map((el) => (
                                         <div class={header('search-together')}>
                                             <img src={TRACK_HOST + el.picture} class={header('search-photo')} />
-                                            {/* <Link text={el.name} to={} /> */}
+                                            <Link
+                                                text={el.name}
+                                                to={LINKS.artist + `/${el.musician_id}`}
+                                                onClick={onBlureSearch}
+                                            />
                                         </div>
                                     ))}
                                 </div>
@@ -101,7 +112,7 @@ export const Header = () => {
                             <div>
                                 <div class={header('serach-title')}>{'Альбомы:'}</div>
                                 <div class={header('search-item')}>
-                                    {headerStore.searchResultAlbums.slice(0, 4).map((el) => (
+                                    {headerStore.searchResultAlbums.slice(0, 3).map((el) => (
                                         <div class={header('search-together')}>
                                             <img src={TRACK_HOST + el.picture} class={header('search-photo')} />
                                             <Link
@@ -123,7 +134,9 @@ export const Header = () => {
     return (
         <div class={header()}>
             <div class={header('left')}>
-                <div class={header('logo')} />
+                <div class={header('logo')}>
+                    <img src={''} alt='' />
+                </div>
                 <Link child={() => <div class={header('logo-text')}>{'NoSkool-Music'}</div>} to={LINKS.main} />
                 <form class={header('search-form')} id={'search-input'}>
                     <input
@@ -136,7 +149,7 @@ export const Header = () => {
                     <button type='submit' class={header('search-button')}>
                         <div class={header('search-icon')} />
                     </button>
-                    <div class={header('search-result')}>
+                    <div class={header('search-result', headerStore.isExpandSearch ? 'expand' : '')}>
                         {headerStore.serachResultTracks.length && (
                             <div>
                                 <div class={header('serach-title')}>{'Треки:'}</div>
@@ -161,7 +174,11 @@ export const Header = () => {
                                     {headerStore.searchResultArtists.slice(0, 4).map((el) => (
                                         <div class={header('search-together')}>
                                             <img src={TRACK_HOST + el.picture} class={header('search-photo')} />
-                                            {/* <Link text={el.name} to={} /> */}
+                                            <Link
+                                                text={el.name}
+                                                to={LINKS.artist + `/${el.musician_id}`}
+                                                onClick={onBlureSearch}
+                                            />
                                         </div>
                                     ))}
                                 </div>
@@ -194,7 +211,9 @@ export const Header = () => {
                         <div class={profile('data')}>
                             <img src={HOST + profileStore.profile.photo} class={profile('photo')} />
                             <div class={profile('text')}>
-                                <div class={profile('nickname')}>{profileStore.profile.login}</div>
+                                <div class={profile('nickname')} onclick={redirectToProfile}>
+                                    {profileStore.profile.login}
+                                </div>
                                 <div class={profile('email')}>{profileStore.profile.email}</div>
                             </div>
                         </div>

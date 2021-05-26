@@ -7,11 +7,11 @@ import { getWeeklyTop } from 'actions/main-page/main-page';
 import { TRACK_HOST } from 'constants/api';
 import { cn } from 'utils/cn';
 import { LeftChevronIcon, RightChevronIcon } from 'assets/icons';
-import { PlayerFrom } from 'types/store/player-store';
-
-import './style.scss';
 import { redirectTo } from 'utils/render';
 import { LINKS } from 'constants/links';
+import { isMobile } from 'utils/isMobile';
+
+import './style.scss';
 
 const onClickTrack = (index: number) => () => {
     playerStore.playList = tracksStore.trackList.map((el, i) => ({
@@ -19,23 +19,26 @@ const onClickTrack = (index: number) => () => {
         index: i,
         link: el?.audio,
         name: el?.tittle,
-        artist: el?.musicians?.map((el) => el?.name).join(', '),
+        artists: el?.musicians,
         isFavorite: el?.in_favorite,
         isMediateca: el?.in_mediateka,
         trackId: el?.track_id,
+        duration: el?.duration,
+        albumId: el?.album[0]?.album_id,
     }));
     playerStore.currentTrack = {
         img: tracksStore.trackList[index]?.picture,
         index: index,
         link: tracksStore.trackList[index]?.audio,
         name: tracksStore.trackList[index]?.tittle,
-        artist: tracksStore.trackList[index]?.musicians?.map((el) => el?.name).join(', '),
+        artists: [],
         isFavorite: tracksStore.trackList[index]?.in_favorite,
         isMediateca: tracksStore.trackList[index]?.in_mediateka,
         trackId: tracksStore.trackList[index]?.track_id,
+        duration: tracksStore.trackList[index]?.duration,
+        albumId: tracksStore.trackList[index]?.album[0]?.album_id,
     };
     playerStore.currentTime = 0;
-    playerStore.from = PlayerFrom.Single;
     if (!playerStore.isPlay) {
         onClickPlay();
     } else {
@@ -93,16 +96,16 @@ export const Single = () => {
     };
 
     return (
-        <div class={weekly()}>
+        <div class={weekly('', isMobile() ? 'mob' : '')}>
             <div class={weekly('legend')}>
-                <div class={weekly('title')} onclick={onClickWeekly}>
+                <div class={weekly('title', isMobile() ? 'mob' : '')} onclick={onClickWeekly}>
                     {'Weekly Top Track'}
                 </div>
                 <div class={weekly('buttons')}>
-                    <div onclick={prevItem} class={weekly('btn')}>
+                    <div onclick={prevItem} class={weekly('btn', isMobile() ? 'mob' : '')}>
                         <LeftChevronIcon />
                     </div>
-                    <div onclick={nextItem} class={weekly('btn')}>
+                    <div onclick={nextItem} class={weekly('btn', isMobile() ? 'mob' : '')}>
                         <RightChevronIcon />
                     </div>
                 </div>
@@ -111,9 +114,12 @@ export const Single = () => {
                 <ul id={SLIDER} class={slider('single-items')}>
                     {tracksStore.trackList?.map((item, index) => (
                         <li class={slider('item')} onclick={onClickTrack(index)}>
-                            <img src={TRACK_HOST + item?.picture} class={slider('single-img')} />
-                            <div class={slider('name-song')}>{item?.tittle}</div>
-                            <div class={slider('singer')}>
+                            <img
+                                src={TRACK_HOST + item?.picture}
+                                class={slider('single-img', isMobile() ? 'mob' : '')}
+                            />
+                            <div class={slider('name-song', isMobile() ? 'mob' : '')}>{item?.tittle}</div>
+                            <div class={slider('singer', isMobile() ? 'mob' : '')}>
                                 {item?.musicians?.map((artist) => artist?.name).join(', ')}
                             </div>
                         </li>

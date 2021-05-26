@@ -6,13 +6,13 @@ import {
     HomeIcon,
     SoundOnIcon,
     HeadPhonesIcon,
-    MicroPhone,
     LikeInRoundIcon,
     TargetIcon,
     DiagramIcon,
     SettingsIcon,
     YetMobIcon,
     CrossIcon,
+    PlayListMenuIcon,
 } from 'assets/icons';
 import { cn } from 'utils/cn';
 
@@ -29,6 +29,9 @@ const chooseItem = (index: number, isMobile: boolean) => () => {
             case 0:
                 link = LINKS.main;
                 break;
+            case 1:
+                link = LINKS.myPlaylists;
+                break;
             case 3:
                 link = LINKS.favoriteTracks;
                 break;
@@ -38,16 +41,16 @@ const chooseItem = (index: number, isMobile: boolean) => () => {
             case 0:
                 link = LINKS.main;
                 break;
-            case 5:
-                link = LINKS.favoriteTracks;
+            case 3:
+                link = LINKS.myPlaylists;
                 break;
             case 4:
                 link = LINKS.mediatekaTracks;
                 break;
-            case 7:
-                link = LINKS.myPlaylists;
+            case 5:
+                link = LINKS.favoriteTracks;
                 break;
-            case 8:
+            case 7:
                 link = LINKS.profile;
                 break;
         }
@@ -81,9 +84,9 @@ export const RightMenu = () => {
             className: 'not-fill',
         },
         {
-            text: 'Подкасты',
-            icon: MicroPhone,
-            isActive: false,
+            text: 'Плейлисты',
+            icon: PlayListMenuIcon,
+            isActive: window.location.pathname.startsWith(LINKS.myPlaylists),
             className: 'not-fill',
         },
         {
@@ -104,12 +107,6 @@ export const RightMenu = () => {
             isActive: false,
         },
         {
-            text: 'Плейлисты',
-            icon: DiagramIcon,
-            isActive: window.location.pathname.startsWith(LINKS.myPlaylists),
-            className: 'not-fill',
-        },
-        {
             text: 'Настройки',
             icon: SettingsIcon,
             isActive: window.location.pathname === LINKS.profile,
@@ -124,9 +121,9 @@ export const RightMenu = () => {
             isActive: window.location.pathname === '/',
         },
         {
-            text: 'Подкасты',
-            icon: MicroPhone,
-            isActive: false,
+            text: 'Плейлисты',
+            icon: PlayListMenuIcon,
+            isActive: window.location.pathname.startsWith(LINKS.myPlaylists),
             className: 'not-fill',
         },
         {

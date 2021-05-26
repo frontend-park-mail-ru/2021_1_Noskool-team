@@ -1,6 +1,7 @@
 import { JSX } from 'jsx/jsx';
 import { FieldState } from 'types/common';
 import { cn } from 'utils/cn';
+import { isMobile } from 'utils/isMobile';
 
 import './style.scss';
 
@@ -11,12 +12,19 @@ interface ProfileInputProps {
     placeholder: string;
     isPassword?: boolean;
     initialName: string;
-    inputName: string;
+    inputName?: string;
 }
 
 const CnInput = cn('input-name');
 
-export const ProfileInput = ({ validators, isPassword = false, input, initialName, inputName }: ProfileInputProps) => {
+export const ProfileInput = ({
+    validators,
+    isPassword = false,
+    input,
+    initialName,
+    inputName,
+    placeholder,
+}: ProfileInputProps) => {
     const validateInput = (value: string) => {
         let errorMsg = validators.reduce((error, validator) => error || validator(value), '');
         if (errorMsg) {
@@ -45,16 +53,20 @@ export const ProfileInput = ({ validators, isPassword = false, input, initialNam
     };
 
     return (
-        <div class={CnInput()}>
-            <div class={CnInput('name')}>{inputName}</div>
+        <div class={CnInput('', isMobile() ? 'mob' : '')}>
+            {inputName ? <div class={CnInput('name')}>{inputName}</div> : <div />}
             <div
                 class={
                     'input-text' + ` ${input.isValid !== null ? (input.isValid ? '' : 'input-text--not-valid') : ''}`
                 }
             >
-                <input type={isPassword ? 'password' : 'text'} value={initialName} oninput={onInput} onblur={onBlur} />
-                <div class={'input-text__error-msg'}>{input.errorMsg}</div>
-                <div class={input.isValid !== null ? (input.isValid ? 'ok' : 'not-valid') : ''} />
+                <input
+                    type={isPassword ? 'password' : 'text'}
+                    value={initialName}
+                    placeholder={placeholder}
+                    oninput={onInput}
+                    onblur={onBlur}
+                />
             </div>
         </div>
     );

@@ -6,6 +6,7 @@ import { LINKS } from 'constants/links';
 import { isMobile } from 'utils/isMobile';
 import { playlistForm } from 'store/playlist.store';
 import { cn } from 'utils/cn';
+import { requestsStore } from 'store/requests.store';
 
 import './style.scss';
 
@@ -18,20 +19,22 @@ const onSubmitForm = (e: MouseEvent) => {
         description: playlistForm.description.value,
         date: String(new Date()),
     }).then(() => {
+        requestsStore.onePlaylist = true;
+        requestsStore.allPlaylists = true;
         redirectTo(LINKS.myPlaylists);
     });
 };
 
 export const CreatePlaylist = () => {
-    // const ID_IMAGE_INPUT = 'ID_IMAGE_INPUT';
-
     return (
         <div class={createCn('wrapper', isMobile() ? 'mob' : '')}>
-            <form onsubmit={onSubmitForm} class={createCn()}>
-                <div class={createCn('title')}>{'Создание плейлиста'}</div>
-                <Input validators={[]} placeholder={'Название'} input={playlistForm.name} />
-                <Input validators={[]} placeholder={'Описание'} input={playlistForm.description} />
-                <button type='submit'>{'Создать'}</button>
+            <form class={createCn()}>
+                <div class={createCn('title', isMobile() ? 'mob-title' : '')}>{'Создание плейлиста'}</div>
+                <Input validators={[]} placeholder={'Название'} input={playlistForm.name} needIcon={false} />
+                <Input validators={[]} placeholder={'Описание'} input={playlistForm.description} needIcon={false} />
+                <button type='submit' onclick={onSubmitForm}>
+                    {'Создать'}
+                </button>
             </form>
         </div>
     );
