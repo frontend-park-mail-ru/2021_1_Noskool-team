@@ -1,8 +1,3 @@
-import { precacheAndRoute } from 'workbox-precaching';
-
-const precacheManifest = [].concat(self.__WB_MANIFEST || []);
-precacheAndRoute(precacheManifest);
-
 self.addEventListener('fetch', function (event) {
     event.respondWith(fetch(event.request).catch(() => useFallback()));
 });
