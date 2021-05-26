@@ -23,7 +23,7 @@ import {
     ShuffleIcon,
     PlayMainTrackIcon,
     CurrentPlaylistIcon,
-    OkeyIcon,
+    // OkeyIcon,
 } from 'assets/icons';
 import { requestsStore } from 'store/requests.store';
 import {
@@ -403,12 +403,12 @@ export const AudioLine = () => {
                 </div>
             </div>
 
-            {onePlaylistStore.playlist.isOkey && (
+            {/* {onePlaylistStore.playlist.isOkey && (
                 <div class={player('changeStatus')} id='addtoPl'>
                     <OkeyIcon />
                     <div class={player('isOkey')}>{'Песня добавлена в плейлист'}</div>
                 </div>
-            )}
+            )} */}
 
             {localStorage.getItem('auth') === 'ok' ? (
                 <div class={player('playlist-btns')}>
@@ -434,7 +434,6 @@ export const AudioLine = () => {
                         </div>
                     </div>
                     <div class={player('like-btns')}>
-                        <div class={player('dawd')}>{String(playerStore.currentTrack.likes)}</div>
                         <div
                             class={player('like', playerStore.currentTrack.isFavorite ? 'checked' : '')}
                             onclick={onClickFavorite}
