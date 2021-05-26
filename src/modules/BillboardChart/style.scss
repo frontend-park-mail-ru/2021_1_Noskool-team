@@ -23,6 +23,12 @@
 }
 
 .tracks {
+  &__mob {
+    height: 380px;
+    overflow: hidden;
+    margin-bottom: 20px;
+  }
+
   &__audio {
     height: 48px;
     display: flex;
@@ -50,6 +56,11 @@
     margin-right: 5px;
     cursor: pointer;
     object-fit: cover;
+
+    &--mob {
+      width: 40px;
+      height: 38px;
+    }
   }
 
   &__song {
@@ -71,6 +82,10 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+
+    &--mob {
+      width: 200px;
+    }
   }
 
   &__song-name:hover {
