@@ -134,7 +134,9 @@ export const Header = () => {
     return (
         <div class={header()}>
             <div class={header('left')}>
-                <div class={header('logo')} />
+                <div class={header('logo')}>
+                    <img src={''} alt='' />
+                </div>
                 <Link child={() => <div class={header('logo-text')}>{'NoSkool-Music'}</div>} to={LINKS.main} />
                 <form class={header('search-form')} id={'search-input'}>
                     <input
