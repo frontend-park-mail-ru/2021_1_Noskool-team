@@ -55,6 +55,18 @@
     pointer-events: none;
   }
 
+  .disabled {
+    cursor: default;
+
+    &:hover {
+      border: none;
+    }
+
+    &:focus {
+      border: none;
+    }
+  }
+
   &--focus {
     input {
       padding: 12px 55px 0 20px;
@@ -96,6 +108,18 @@
 
     &:focus {
       border: 1px solid $pink;
+    }
+  }
+
+  .disabled {
+    cursor: default;
+
+    &:hover {
+      border: none;
+    }
+
+    &:focus {
+      border: none;
     }
   }
 

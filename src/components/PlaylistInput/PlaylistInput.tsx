@@ -14,6 +14,7 @@ interface PlaylistInputProps {
     initialName: string;
     onblur: (id: number) => void;
     className?: string;
+    disabled?: boolean;
 }
 
 const CnInput = cn('playlistInput-name');
@@ -25,6 +26,7 @@ export const PlaylistInput = ({
     initialName,
     onblur,
     className = '',
+    disabled = false,
 }: PlaylistInputProps) => {
     const validateInput = (value: string) => {
         let errorMsg = validators.reduce((error, validator) => error || validator(value), '');
@@ -49,7 +51,14 @@ export const PlaylistInput = ({
     return (
         <div class={CnInput('', isMobile() ? 'mob' : '')}>
             <div class={'pl-input-text' + className}>
-                <input type={isPassword ? 'password' : 'text'} value={initialName} oninput={onInput} onblur={onblur} />
+                <input
+                    class={disabled ? 'disabled' : ''}
+                    type={isPassword ? 'password' : 'text'}
+                    disabled={disabled}
+                    value={initialName}
+                    oninput={onInput}
+                    onblur={onblur}
+                />
             </div>
         </div>
     );

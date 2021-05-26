@@ -16,14 +16,13 @@ import { TrackTable } from 'components/Table';
 import { isMobile } from 'utils/isMobile';
 import { playerStore } from 'store/player.store';
 import { onClickPlay } from 'modules/AudioLine/AudioLine';
-
 import { PlayMainTrackIcon, TrashIcon } from 'assets/icons';
 import { toCurrentTrack } from 'utils/cast';
 import { redirectTo, render } from 'utils/render';
+import { LINKS } from 'constants/links';
+import { requestsStore } from 'store/requests.store';
 
 import './style.scss';
-import { requestsStore } from 'store/requests.store';
-import { LINKS } from 'constants/links';
 
 const playlistPage = cn('playlist-page');
 
@@ -106,14 +105,12 @@ export const Playlist = () => {
     }
 
     const onChacngePhoto = (id: string) => (e: MouseEvent) => {
-        console.log(e.target, id);
         changePlaylistPhoto(e.target, id).then(() => {
             render();
         });
     };
 
     const onClickLabel = () => {
-        console.log('sdjghfjg');
         (document.getElementById(ID_IMAGE_INPUT) as HTMLInputElement).click();
     };
 
@@ -139,7 +136,6 @@ export const Playlist = () => {
             if (!playlistEditForm.form.description.value) {
                 delete body.description;
             }
-            console.log(body);
             changeDescription(onePlaylistStore.playlist.playlist_id, body).then(() => {
                 playlistForm.description.value = playlistEditForm.form.description.value;
             });
@@ -171,12 +167,14 @@ export const Playlist = () => {
                         placeholder={'Измените название'}
                         validators={[]}
                         initialName={onePlaylistStore.playlist.tittle}
+                        disabled={Boolean(onePlaylistStore.playlist.user_id !== String(profileStore.profile.id))}
                         onblur={saveName}
                     />
                     <PlaylistInput
                         input={playlistEditForm.form.description}
                         placeholder={'Измените описание'}
                         validators={[]}
+                        disabled={Boolean(onePlaylistStore.playlist.user_id !== String(profileStore.profile.id))}
                         initialName={onePlaylistStore.playlist.description}
                         onblur={saveDescription}
                         className={'-description'}
