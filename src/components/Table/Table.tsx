@@ -198,7 +198,7 @@ export const TrackTable = ({
                         {trackList.map((el, i) => (
                             <div class={tracksTable('together')}>
                                 <div class={tracksTable('row', 'track' + (isNotWhite ? '--not-white' : ''))}>
-                                    <div class={tracksTable('cell')} onclick={onClickTrack(i, trackList)}>
+                                    <div class={tracksTable('cell', 'number')} onclick={onClickTrack(i, trackList)}>
                                         {String(i + 1)}
                                     </div>
                                     <div class={tracksTable('cell')}>

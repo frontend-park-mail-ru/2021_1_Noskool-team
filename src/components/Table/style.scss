@@ -74,6 +74,15 @@
     display: flex;
     align-items: center;
 
+    &--number {
+      cursor: pointer;
+      transition: all 0.3s;
+
+      &:hover {
+        color: $pink;
+      }
+    }
+
     &:nth-child(1) {
       border-right: 1px solid $borders;
       width: 50px;
