@@ -1,0 +1,30 @@
+
+name: CI
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v1
+      - name: install node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+      - name: colllect-and-build-static
+        run: |
+          npm i
+          mv -f ./src/constants/api.product.ts ./src/constants/api.ts
+          npm run build
+          cp ./out/index.html ./build/
+      - name: Deploy to server via rsync
+        uses: trendyminds/github-actions-rsync@master
+        with:
+          RSYNC_OPTIONS: -avzr --delete --exclude node_modules --exclude '.git*'
+          RSYNC_TARGET: /home/cuzkov/frontend
+          RSYNC_SOURCE: /build
+        env:
+          SSH_PRIVATE_KEY: ${{secrets.SSH_PRIVATE_KEY}}
+          SSH_USERNAME: ${{secrets.SSH_USERNAME}}
+          SSH_HOSTNAME: ${{secrets.SSH_HOSTNAME}} 
