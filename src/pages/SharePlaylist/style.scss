@@ -23,6 +23,21 @@
     }
   }
 
+  &__title {
+    font-size: 35px;
+    font-weight: 600;
+    line-height: 26px;
+    color: #8a8c99;
+    margin: 10px;
+  }
+
+  &__description {
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 26px;
+    color: #8a8c99;
+  }
+
   &__change-photo {
     cursor: pointer;
   }
@@ -35,14 +50,6 @@
   &__information {
     margin-left: 30px;
     width: 700px;
-  }
-
-  &__title {
-    font-weight: bold;
-    font-size: 35px;
-    color: $gray;
-    margin-top: 6px;
-    margin-left: 1px;
   }
 
   &__icon {
@@ -179,12 +186,6 @@
 
   &__listen {
     margin-right: 5px;
-  }
-
-  &__description {
-    color: $gray;
-    margin-top: 10px;
-    font-size: 18px;
   }
 
   &__author {

@@ -59,11 +59,11 @@
     cursor: default;
 
     &:hover {
-      border: none;
+      border: 1px solid $page-background;
     }
 
     &:focus {
-      border: none;
+      border: 1px solid $page-background;
     }
   }
 
@@ -115,11 +115,11 @@
     cursor: default;
 
     &:hover {
-      border: none;
+      border: 1px solid $page-background;
     }
 
     &:focus {
-      border: none;
+      border: 1px solid $page-background;
     }
   }
 

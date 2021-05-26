@@ -103,11 +103,12 @@ const isClickAddPlaylist = () => {
     });
 };
 
-const onClickTrack = () => () => {
+const onClickTrack = () => {
     const trackList = toCurrentTrack(onePlaylistStore.playlist.tracks);
     playerStore.playList = trackList;
     playerStore.currentTrack = trackList[0];
     playerStore.currentTime = 0;
+
     if (!playerStore.isPlay) {
         onClickPlay();
     } else {

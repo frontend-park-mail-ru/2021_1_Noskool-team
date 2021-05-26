@@ -50,8 +50,8 @@ export const SharePlaylist = () => {
                 </div>
                 <div class={sharePlaylistPage('information')}>
                     <div class={sharePlaylistPage('name')}>ПЛЕЙЛИСТ</div>
-                    <div class={'name'}>{sharePlaylistStore.playlist.tittle}</div>
-                    <div class={'description'}>{sharePlaylistStore.playlist.description}</div>
+                    <div class={sharePlaylistPage('title')}>{sharePlaylistStore.playlist.tittle}</div>
+                    <div class={sharePlaylistPage('description')}>{sharePlaylistStore.playlist.description}</div>
                     <div class={sharePlaylistPage('author')}>{profileStore.profile.login}</div>
                     <div class={sharePlaylistPage('icons-playlist')}>
                         <div class={sharePlaylistPage('play-playlist')}>

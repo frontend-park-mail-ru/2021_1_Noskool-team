@@ -234,11 +234,11 @@ const onClickAddToPlaylist = (id_playlist: number) => () => {
     onePlaylistStore.playlist.isOkey = false;
     addTrackToPlaylist(id_playlist, playerStore.currentTrack.trackId).then(() => {
         onePlaylistStore.playlist.isOkey = true;
+        requestsStore.onePlaylist = true;
         setTimeout(function () {
             document.getElementById('addtoPl').style.display = 'none';
         }, 5000);
     });
-    console.log('dkjgfs');
 };
 
 window.name = windowName;
