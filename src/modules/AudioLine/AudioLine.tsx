@@ -410,7 +410,7 @@ export const AudioLine = () => {
                 </div>
             )}
 
-            {localStorage.getItem('auth') === 'ok' && (
+            {localStorage.getItem('auth') === 'ok' ? (
                 <div class={player('playlist-btns')}>
                     <div class={player('playlist')} onclick={toggle}>
                         <div class={player('playlist-btn')}>
@@ -486,6 +486,8 @@ export const AudioLine = () => {
                         </div>
                     </div>
                 </div>
+            ) : (
+                <div />
             )}
             <div class={player('volume')}>
                 <div class={player('volume-icon')} onclick={onClickVolume}>

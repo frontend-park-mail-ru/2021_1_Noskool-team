@@ -187,9 +187,6 @@ export const Playlist = () => {
                             </div>
                             <PlayMainTrackIcon />
                         </div>
-                        {/* <div class={playlistPage('like-palylist')}>
-                            Добавить к себе
-                        </div> */}
                         <div class={playlistPage('delete-playlust')} onclick={isClickDeletePlaylist}>
                             <TrashIcon />
                         </div>
