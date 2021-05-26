@@ -90,12 +90,11 @@ const isClickAddPlaylist = () => {
             user_id: String(profileStore.profile.id),
             tracks: onePlaylistStore.playlist.tracks,
             isOkey: onePlaylistStore.playlist.isOkey,
-            isAddPlaylist: onePlaylistStore.playlist.isAddPlaylist,
             uid: onePlaylistStore.playlist.uid,
             isCopyLink: onePlaylistStore.playlist.isCopyLink,
         };
         playlistStore.albumList.push(newPlaylist);
-        onePlaylistStore.playlist.isAddPlaylist = true;
+        document.getElementById('addPlaylist').style.display = 'flex';
         setTimeout(function () {
             document.getElementById('addPlaylist').style.display = 'none';
         }, 5000);
@@ -273,14 +272,10 @@ export const Playlist = () => {
                         updateDeleteTrackPlaylist={isClickDeleteTrackPlaylist}
                     />
                 )}
-                {onePlaylistStore.playlist.isAddPlaylist ? (
-                    <div class={playlistPage('changeStatus')} id='addPlaylist'>
-                        <OkeyIcon />
-                        <div class={playlistPage('isOkey')}>{'Плейлист добавлен'}</div>
-                    </div>
-                ) : (
-                    <div />
-                )}
+                <div class={playlistPage('changeStatus')} id='addPlaylist'>
+                    <OkeyIcon />
+                    <div class={playlistPage('isOkey')}>{'Плейлист добавлен'}</div>
+                </div>
                 {onePlaylistStore.playlist.isCopyLink ? (
                     <div class={playlistPage('changeStatus')} id='statusShare'>
                         <OkeyIcon />

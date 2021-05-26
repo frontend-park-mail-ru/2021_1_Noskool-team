@@ -17,7 +17,6 @@ export const getOnePlaylist = async (id: string) => {
     if ('playlist_id' in response) {
         onePlaylistStore.playlist = response;
         onePlaylistStore.playlist.isOkey = false;
-        onePlaylistStore.playlist.isAddPlaylist = false;
     }
 };
 

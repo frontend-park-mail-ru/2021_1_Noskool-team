@@ -9,7 +9,6 @@ export interface Playlist {
     'user_id': string;
     tracks: TrackBack[];
     isOkey: boolean;
-    isAddPlaylist: boolean;
     uid: string;
     isCopyLink: boolean;
 }
