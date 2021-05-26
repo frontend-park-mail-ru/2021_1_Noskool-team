@@ -97,7 +97,7 @@ const isClickAddPlaylist = () => {
         playlistStore.albumList.push(newPlaylist);
         onePlaylistStore.playlist.isAddPlaylist = true;
         setTimeout(function () {
-            document.getElementById('status').style.display = 'none';
+            document.getElementById('addPlaylist').style.display = 'none';
         }, 5000);
         render();
     });
@@ -236,7 +236,7 @@ export const Playlist = () => {
                             type='text'
                             id='link'
                             readonly
-                            value={TRACK_HOST + '/api/v1/music/playlist/getByUID/' + onePlaylistStore.playlist.uid}
+                            value={'noskool-music.ru' + LINKS.playlistShare + '/' + onePlaylistStore.playlist.uid}
                         ></input>
                         {profileStore.profile.id !== Number(onePlaylistStore.playlist.user_id) && (
                             <div class={playlistPage('like-palylist')} onclick={isClickAddPlaylist}>
@@ -273,7 +273,7 @@ export const Playlist = () => {
                     />
                 )}
                 {onePlaylistStore.playlist.isAddPlaylist && (
-                    <div class={playlistPage('changeStatus')} id='status'>
+                    <div class={playlistPage('changeStatus')} id='addPlaylist'>
                         <OkeyIcon />
                         <div class={playlistPage('isOkey')}>{'Плейлист добавлен'}</div>
                     </div>

@@ -2,12 +2,16 @@ import { getArtistById, getArtistTracksById } from 'actions/artists/artists';
 import { TrackTable } from 'components/Table';
 // import { HOST_IMG } from 'constants/api';
 import { JSX } from 'jsx/jsx';
+import { TRACK_HOST } from 'constants/api';
 import { artistPageStore } from 'store/artist-page.store';
 import { toCurrentTrack } from 'utils/cast';
 import { cn } from 'utils/cn';
 import { isMobile } from 'utils/isMobile';
+// import { LikeFillIcon, PlusIcon, LikeIcon, OkeyIcon } from 'assets/icons';
+// import { addToFavourites, addToMediateca, deleteFromMediateca, deleteToFavourites } from 'actions/artists/artists';
 
 import './style.scss';
+// import { artistsStore } from 'store/main-page.store';
 
 const page = cn('artist-page');
 
@@ -38,6 +42,12 @@ const isClickDeleteMediateca = (id: number) => {
     artistPageStore.tracks = buffer;
 };
 
+// const actionsMediateka = (id: number, index: number) => {
+//     if (artistsStore.artists[index].in_favourite) {
+
+//     }
+// }
+
 export const ArtistPage = () => {
     const id = window.location.pathname.split('/');
 
@@ -50,9 +60,16 @@ export const ArtistPage = () => {
 
     return (
         <div class={page('', isMobile() ? 'mob' : '')}>
-            {/* <img class={page('img')} src={HOST_IMG + artistPageStore.artist?.picture} alt='' /> */}
+            <img class={page('img')} src={TRACK_HOST + artistPageStore.artist?.picture} alt='' />
             <div class={page('title')}>{artistPageStore.artist?.name}</div>
             <div class={page('desc')}>{artistPageStore.artist?.description}</div>
+            {/* <div class={page('icon-icon-flike')} onclick={onClickDeleteFavourites(trackId, i)}>
+                    <LikeFillIcon />
+                </div>
+                <div class={page('icon-icon-like')} onclick={onClickAddFavourites(trackId, i)}>
+                    <LikeIcon />
+                </div>
+            )} */}
             <div class={page('table')}>
                 <TrackTable
                     trackList={toCurrentTrack(artistPageStore.tracks)}

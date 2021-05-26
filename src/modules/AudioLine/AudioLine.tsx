@@ -232,7 +232,7 @@ const onClickAddToPlaylist = (id_playlist: number) => () => {
     addTrackToPlaylist(id_playlist, playerStore.currentTrack.trackId).then(() => {
         onePlaylistStore.playlist.isOkey = true;
         setTimeout(function () {
-            document.getElementById('status').style.display = 'none';
+            document.getElementById('addtoPl').style.display = 'none';
         }, 5000);
     });
     console.log('dkjgfs');
@@ -404,7 +404,7 @@ export const AudioLine = () => {
                 </div>
             </div>
             {onePlaylistStore.playlist.isOkey && (
-                <div class={player('changeStatus')} id='status'>
+                <div class={player('changeStatus')} id='addtoPl'>
                     <OkeyIcon />
                     <div class={player('isOkey')}>{'Песня добавлена в плейлист'}</div>
                 </div>

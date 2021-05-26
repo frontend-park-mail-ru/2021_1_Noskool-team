@@ -76,6 +76,7 @@ export const SharePlaylist = () => {
                         isNeedPhoto={true}
                         isForPlaylist={true}
                         isNotWhite
+                        isNeedIcons={false}
                         updateAddFavourites={() => undefined}
                         updateAddMediateca={() => undefined}
                         updateDeleteFavourites={() => undefined}

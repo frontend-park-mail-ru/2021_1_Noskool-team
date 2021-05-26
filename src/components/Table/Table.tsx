@@ -48,6 +48,7 @@ interface TrackTableProps {
     isNotWhite?: boolean;
     isForPlaylist?: boolean;
     canDeleteTrack?: boolean;
+    isNeedIcons?: boolean;
     /*eslint-disable */
     updateAddMediateca: (id: number) => void;
     /*eslint-disable */
@@ -69,6 +70,7 @@ export const TrackTable = ({
     isNotWhite = false,
     isForPlaylist = false,
     canDeleteTrack = false,
+    isNeedIcons = true,
     updateAddMediateca,
     updateAddFavourites,
     updateDeleteMediateca,
@@ -181,9 +183,11 @@ export const TrackTable = ({
                                         ))}
                                     </div>
                                 </div>
-                                <div class={tracksTable('actions')}>
-                                    {icons(el?.trackId, i, el?.isFavorite, el?.isMediateca)}
-                                </div>
+                                {isNeedIcons && (
+                                    <div class={tracksTable('actions')}>
+                                        {icons(el?.trackId, i, el?.isFavorite, el?.isMediateca)}
+                                    </div>
+                                )}
                             </div>
                         ))}
                     </div>
@@ -220,9 +224,11 @@ export const TrackTable = ({
                                         ))}
                                     </div>
                                     <div class={tracksTable('cell')}>{el.duration}</div>
-                                    <div class={tracksTable('cell')}>
-                                        {icons(el?.trackId, i, el?.isFavorite, el?.isMediateca)}
-                                    </div>
+                                    {isNeedIcons && (
+                                        <div class={tracksTable('cell')}>
+                                            {icons(el?.trackId, i, el?.isFavorite, el?.isMediateca)}
+                                        </div>
+                                    )}
                                 </div>
                             </div>
                         ))}
