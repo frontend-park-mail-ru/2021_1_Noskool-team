@@ -23,7 +23,7 @@ import {
     ShuffleIcon,
     PlayMainTrackIcon,
     CurrentPlaylistIcon,
-    // OkeyIcon,
+    OkeyIcon,
 } from 'assets/icons';
 import { requestsStore } from 'store/requests.store';
 import {
@@ -218,10 +218,6 @@ const onClickMedia = () => {
     }
 };
 
-const onSwipeTrack = () => {
-    // console.log(123);
-};
-
 const toggle = () => {
     expandStore.isExpand = !expandStore.isExpand;
 };
@@ -304,7 +300,7 @@ export const AudioLine = () => {
 
     if (isMobile()) {
         return (
-            <div class={player('', isMobile() ? 'mob' : '')} onswipe={isMobile() ? onSwipeTrack : undefined}>
+            <div class={player('', isMobile() ? 'mob' : '')}>
                 <audio id={PLAYER_ID} src={TRACK_HOST + playerStore.playList[playerStore.currentTrack.index]?.link}>
                     <source
                         src={TRACK_HOST + playerStore.playList[playerStore.currentTrack.index]?.link}
@@ -354,7 +350,7 @@ export const AudioLine = () => {
     }
 
     return (
-        <div class={player('', isMobile() ? 'mob' : '')} onswipe={isMobile() ? onSwipeTrack : undefined}>
+        <div class={player('', isMobile() ? 'mob' : '')}>
             <audio id={PLAYER_ID} src={TRACK_HOST + playerStore.playList[playerStore.currentTrack.index]?.link}>
                 <source
                     src={TRACK_HOST + playerStore.playList[playerStore.currentTrack.index]?.link}
@@ -407,12 +403,12 @@ export const AudioLine = () => {
                 </div>
             </div>
 
-            {/* {onePlaylistStore.playlist.isOkey ? (
+            {onePlaylistStore.playlist.isOkey && (
                 <div class={player('changeStatus')} id='addtoPl'>
                     <OkeyIcon />
                     <div class={player('isOkey')}>{'Песня добавлена в плейлист'}</div>
                 </div>
-            ) : <div />} */}
+            )}
 
             {localStorage.getItem('auth') === 'ok' ? (
                 <div class={player('playlist-btns')}>
