@@ -50,15 +50,19 @@ const onSubmitForm = (values: MouseEvent) => {
         })
             .then((res) => {
                 if (res.status === 200) {
-                    authUser({
-                        nickname: regFormStore.nickname.value,
-                        password: regFormStore.password.value,
-                    }).then(() => {
-                        localStorage.setItem('auth', 'ok');
-                        requestsStore.profile = true;
-                        requestsStore.allPlaylists = true;
-                        redirectTo(LINKS.main);
-                    });
+                    regFormStore.errorMsg = 'Подождите, идёт регистрация';
+                    setTimeout(() => {
+                        authUser({
+                            nickname: regFormStore.nickname.value,
+                            password: regFormStore.password.value,
+                        }).then(() => {
+                            localStorage.setItem('auth', 'ok');
+                            requestsStore.profile = true;
+                            requestsStore.allPlaylists = true;
+                            regFormStore.errorMsg = '';
+                            redirectTo(LINKS.main);
+                        });
+                    }, 3000);
                 } else {
                     res.json().then((res) => onSetError(res.error));
                 }
