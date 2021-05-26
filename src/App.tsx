@@ -28,6 +28,7 @@ import { getAllPlaylists } from 'actions/playlist/playlist';
 import { ArtistPage } from 'pages/ArtistPage';
 import { Users } from 'pages/Users';
 import { SearchPage } from 'pages/SearchPage';
+import { SharePlaylist } from 'pages/SharePlaylist';
 
 import './app.scss';
 
@@ -50,7 +51,8 @@ const isPageExistsAuth = (): boolean => {
         !path.startsWith(LINKS.playlist) &&
         !path.startsWith(LINKS.artist) &&
         !path.startsWith(LINKS.user) &&
-        !path.startsWith(LINKS.search)
+        !path.startsWith(LINKS.search) &&
+        !path.startsWith(LINKS.playlistShare)
     );
 };
 
@@ -105,6 +107,7 @@ export const App = () => {
                         {path.startsWith(LINKS.search) && <SearchPage />}
 
                         {path.startsWith(LINKS.mediateka) && (isAuth ? <MediatekaPage /> : <NeedAccessPage />)}
+                        {path.startsWith(LINKS.playlistShare) && <SharePlaylist />}
                     </div>
                 </div>
                 <div class={pageWrapper('player')}>

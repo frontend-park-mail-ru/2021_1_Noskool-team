@@ -1,0 +1,264 @@
+@import '../../../styles/colors.scss';
+
+.share-playlist-page {
+  width: 100%;
+  height: 100%;
+
+  &__header {
+    display: flex;
+    margin: 40px;
+  }
+
+  &__photo {
+    width: 180px;
+    margin-bottom: 15px;
+
+    input {
+      width: 0.1px;
+      height: 0.1px;
+      opacity: 0;
+      overflow: hidden;
+      position: absolute;
+      z-index: -1;
+    }
+  }
+
+  &__change-photo {
+    cursor: pointer;
+  }
+
+  &__image {
+    width: 180px;
+    height: 180px;
+  }
+
+  &__information {
+    margin-left: 30px;
+    width: 700px;
+  }
+
+  &__title {
+    font-weight: bold;
+    font-size: 35px;
+    color: $gray;
+    margin-top: 6px;
+    margin-left: 1px;
+  }
+
+  &__icon {
+    cursor: pointer;
+    margin-left: 10px;
+
+    svg:hover {
+      fill: $pink;
+    }
+  }
+
+  &__icon-desc {
+    cursor: pointer;
+    margin-left: 10px;
+    margin-top: 10px;
+
+    svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    svg:hover {
+      fill: $pink;
+    }
+  }
+
+  &__icons-playlist {
+    margin-top: 10px;
+    display: flex;
+  }
+
+  &__play-playlist {
+    display: flex;
+    padding: 7px;
+    background-color: $pink;
+    border: 1px solid $pink;
+    border-radius: 7px;
+    color: #fff;
+    align-items: center;
+    cursor: pointer;
+
+    svg {
+      width: 20px;
+      height: 20px;
+      fill: #fff;
+
+      path {
+        stroke: #fff;
+      }
+    }
+  }
+
+  &__like-palylist {
+    display: flex;
+    padding: 7px;
+    align-items: center;
+    color: $gray;
+    cursor: pointer;
+    margin-left: 10px;
+    margin-top: 10px;
+
+    &:hover {
+      color: $pink;
+    }
+  }
+
+  &__changeStatus {
+    position: absolute;
+    bottom: 85px;
+    right: 100px;
+    display: flex;
+    background-color: #ceffbc;
+    padding: 5px;
+    width: max-content;
+    border-radius: 3px;
+
+    svg > path {
+      stroke: #247719;
+    }
+  }
+
+  #link {
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    z-index: -1;
+  }
+
+  &__share {
+    margin-left: 20px;
+    display: flex;
+    padding: 7px;
+    background-color: $pink;
+    border: 1px solid $pink;
+    border-radius: 7px;
+    color: #fff;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  &__isOkey {
+    color: #247719;
+    margin-left: 10px;
+  }
+
+  &__name {
+    font-size: 15px;
+    color: $gray;
+    margin-left: 1px;
+  }
+
+  &__block {
+    width: 600px;
+
+    &:hover {
+      border: 1px solid $pink;
+    }
+  }
+
+  &__delete-playlust {
+    padding: 7px;
+    cursor: pointer;
+    float: right;
+    display: flex;
+    width: 450px;
+    justify-content: flex-end;
+
+    svg {
+      width: 30px;
+      height: 30px;
+      fill: #f00;
+    }
+  }
+
+  &__listen {
+    margin-right: 5px;
+  }
+
+  &__description {
+    color: $gray;
+    margin-top: 10px;
+    font-size: 18px;
+  }
+
+  &__author {
+    margin-top: 15px;
+    font-size: 18px;
+    color: $gray;
+    cursor: pointer;
+
+    &:hover {
+      color: $pink;
+    }
+  }
+
+  &__singer {
+    margin-top: 10px;
+    font-size: 15px;
+    color: $gray;
+  }
+
+  &__date {
+    margin-top: 10px;
+    font-size: 15px;
+    color: $gray;
+  }
+
+  &__empty-playlist {
+    padding-top: 45px;
+    width: 350px;
+    margin: auto;
+  }
+
+  &__empty {
+    width: 350px;
+    height: 280px;
+    background-image: url(./img/emptyPlaylist.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100%;
+  }
+
+  &__text {
+    margin-top: 7px;
+    text-align: center;
+  }
+
+  &__content {
+    margin-left: 40px;
+  }
+}
+
+.playlist-page--mob {
+  .playlist-page {
+    &__header {
+      flex-direction: column;
+      margin: 15px;
+      align-items: center;
+    }
+
+    &__information {
+      margin-left: 0;
+      width: 100%;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 15px;
+    }
+
+    &__title {
+      font-size: 25px;
+    }
+
+    &__content {
+      margin: 0 15px;
+    }
+  }
+}
