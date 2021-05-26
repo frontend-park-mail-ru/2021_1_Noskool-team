@@ -28,8 +28,9 @@ export const onePlaylistStore = proxy<OnePlaylist>({
         'user_id': '',
         tracks: [],
         isOkey: false,
-        onClickEditTitle: false,
-        onClickEditDesc: false,
+        isAddPlaylist: false,
+        isCopyLink: false,
+        uid: '',
     }),
 });
 

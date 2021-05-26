@@ -6,6 +6,7 @@ import {
     changeDescription,
     deletePlaylist,
     deleteTrackPlaylist,
+    addPlaylistToMy,
 } from 'actions/playlist/playlist';
 import { TRACK_HOST } from 'constants/api';
 import { cn } from 'utils/cn';
@@ -23,6 +24,7 @@ import { LINKS } from 'constants/links';
 import { requestsStore } from 'store/requests.store';
 
 import './style.scss';
+import { OkeyIcon } from 'assets/icons';
 
 const playlistPage = cn('playlist-page');
 
@@ -77,6 +79,30 @@ const isClickDeletePlaylist = () => {
     });
 };
 
+const isClickAddPlaylist = () => {
+    addPlaylistToMy(onePlaylistStore.playlist.playlist_id).then(() => {
+        const newPlaylist = {
+            playlist_id: onePlaylistStore.playlist.playlist_id,
+            tittle: onePlaylistStore.playlist.tittle,
+            description: onePlaylistStore.playlist.description,
+            picture: onePlaylistStore.playlist.picture,
+            release_date: onePlaylistStore.playlist.release_date,
+            user_id: String(profileStore.profile.id),
+            tracks: onePlaylistStore.playlist.tracks,
+            isOkey: onePlaylistStore.playlist.isOkey,
+            isAddPlaylist: onePlaylistStore.playlist.isAddPlaylist,
+            uid: onePlaylistStore.playlist.uid,
+            isCopyLink: onePlaylistStore.playlist.isCopyLink,
+        };
+        playlistStore.albumList.push(newPlaylist);
+        onePlaylistStore.playlist.isAddPlaylist = true;
+        setTimeout(function () {
+            document.getElementById('addPlaylist').style.display = 'none';
+        }, 5000);
+        render();
+    });
+};
+
 const onClickTrack = () => () => {
     const trackList = toCurrentTrack(onePlaylistStore.playlist.tracks);
     playerStore.playList = trackList;
@@ -88,6 +114,10 @@ const onClickTrack = () => () => {
         onClickPlay();
         onClickPlay();
     }
+};
+
+const onClickUser = (id: number) => () => {
+    redirectTo(LINKS.user + `/${id}`);
 };
 
 export const Playlist = () => {
@@ -142,6 +172,16 @@ export const Playlist = () => {
         }
     };
 
+    const onClickShare = () => {
+        const link = document.getElementById('link') as HTMLInputElement;
+        link.select();
+        document.execCommand('copy');
+        onePlaylistStore.playlist.isCopyLink = true;
+        setTimeout(function () {
+            document.getElementById('statusShare').style.display = 'none';
+        }, 5000);
+    };
+
     return (
         <div class={playlistPage('', isMobile() ? 'mob' : '')}>
             <div class={playlistPage('header')}>
@@ -179,7 +219,9 @@ export const Playlist = () => {
                         onblur={saveDescription}
                         className={'-description'}
                     />
-                    <div class={playlistPage('author')}>{profileStore.profile.login}</div>
+                    <div class={playlistPage('author')} onclick={onClickUser(profileStore.profile.id)}>
+                        {profileStore.profile.login}
+                    </div>
                     <div class={playlistPage('icons-playlist')}>
                         <div class={playlistPage('play-playlist')}>
                             <div class={playlistPage('listen')} onclick={onClickTrack}>
@@ -187,9 +229,25 @@ export const Playlist = () => {
                             </div>
                             <PlayMainTrackIcon />
                         </div>
-                        <div class={playlistPage('delete-playlust')} onclick={isClickDeletePlaylist}>
-                            <TrashIcon />
+                        <div class={playlistPage('share')} onclick={onClickShare}>
+                            Поделиться
                         </div>
+                        <input
+                            type='text'
+                            id='link'
+                            readonly
+                            value={'noskool-music.ru' + LINKS.playlistShare + '/' + onePlaylistStore.playlist.uid}
+                        ></input>
+                        {profileStore.profile.id !== Number(onePlaylistStore.playlist.user_id) && (
+                            <div class={playlistPage('like-palylist')} onclick={isClickAddPlaylist}>
+                                Добавить к себе
+                            </div>
+                        )}
+                        {profileStore.profile.id === Number(onePlaylistStore.playlist.user_id) && (
+                            <div class={playlistPage('delete-playlust')} onclick={isClickDeletePlaylist}>
+                                <TrashIcon />
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>
@@ -206,12 +264,25 @@ export const Playlist = () => {
                         isNeedPhoto={true}
                         isForPlaylist={true}
                         isNotWhite
+                        canDeleteTrack={profileStore.profile.id === Number(onePlaylistStore.playlist.user_id)}
                         updateAddFavourites={isClickAddFavourites}
                         updateAddMediateca={isClickAddMediateca}
                         updateDeleteFavourites={isClickDeleteFavourites}
                         updateDeleteMediateca={isClickDeleteMediateca}
                         updateDeleteTrackPlaylist={isClickDeleteTrackPlaylist}
                     />
+                )}
+                {onePlaylistStore.playlist.isAddPlaylist && (
+                    <div class={playlistPage('changeStatus')} id='addPlaylist'>
+                        <OkeyIcon />
+                        <div class={playlistPage('isOkey')}>{'Плейлист добавлен'}</div>
+                    </div>
+                )}
+                {onePlaylistStore.playlist.isCopyLink && (
+                    <div class={playlistPage('changeStatus')} id='statusShare'>
+                        <OkeyIcon />
+                        <div class={playlistPage('isOkey')}>{'Cсылка скопирована'}</div>
+                    </div>
                 )}
             </div>
         </div>

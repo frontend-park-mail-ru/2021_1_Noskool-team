@@ -1,6 +1,6 @@
 @import '../../../styles/colors.scss';
 
-.favourite-artists {
+.search-artists {
   width: calc(100% - 60px);
   padding: 40px;
 
@@ -42,18 +42,6 @@
   }
 
   &__name:hover {
-    color: $pink;
-  }
-
-  &__genre {
-    font-size: 14px;
-    color: gray;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  &__genre:hover {
     color: $pink;
   }
 }

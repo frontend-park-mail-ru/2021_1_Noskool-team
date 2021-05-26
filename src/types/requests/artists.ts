@@ -3,4 +3,6 @@ export interface Artists {
     name: string;
     description: string;
     picture: string;
+    in_favourite: boolean;
+    in_mediateka: boolean;
 }
