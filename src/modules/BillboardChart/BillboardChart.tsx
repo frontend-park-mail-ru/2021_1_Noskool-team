@@ -5,6 +5,7 @@ import { onClickPlay } from 'modules/AudioLine/AudioLine';
 import { getBillboardChart } from 'actions/main-page/main-page';
 import { TRACK_HOST } from 'constants/api';
 import { cn } from 'utils/cn';
+import { isMobile } from 'utils/isMobile';
 
 import './style.scss';
 
@@ -53,18 +54,18 @@ export const BillboardChart = () => {
     }
 
     return (
-        <div class={tracks()}>
+        <div class={tracks(isMobile() ? 'mob' : '')}>
             {billboardChartStore.trackList.map((item, index) => (
                 <div class={tracks('audio')}>
                     <div class={tracks('number')}>{String(index + 1).padStart(2, '0')}</div>
                     <img
                         src={TRACK_HOST + item?.picture}
-                        class={tracks('audio-photo')}
+                        class={tracks('audio-photo', isMobile() ? 'mob' : '')}
                         onclick={onClickTrack(index)}
                     ></img>
                     <div class={tracks('song')}>
-                        <div class={tracks('song-name')}>{item?.tittle}</div>
-                        <div class={tracks('song-author')}>
+                        <div class={tracks('song-name', isMobile() ? 'mob' : '')}>{item?.tittle}</div>
+                        <div class={tracks('song-author', isMobile() ? 'mob' : '')}>
                             {item?.musicians.map((artist) => artist?.name).join(', ')}
                         </div>
                     </div>

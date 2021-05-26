@@ -6,6 +6,7 @@
     display: flex;
     justify-content: space-between;
     font-family: 'Comfortaa', cursive;
+    align-items: center;
   }
 
   &__monthly-artists {
@@ -15,6 +16,11 @@
     color: #373944;
     margin-bottom: 25px;
     margin-left: 12px;
+
+    &--mob {
+      font-size: 18px;
+      margin-left: 25px;
+    }
   }
 
   &__see-all {
@@ -43,6 +49,10 @@
   &__find-artist {
     text-decoration: none;
     margin-right: 17px;
+
+    &--mob {
+      margin-right: 20px;
+    }
   }
 
   &__artists-photo {
@@ -51,5 +61,11 @@
     border-radius: 40px;
     cursor: pointer;
     object-fit: cover;
+
+    &--mob {
+      width: 90px;
+      height: 90px;
+      border-radius: 30px;
+    }
   }
 }

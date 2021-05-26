@@ -6,6 +6,7 @@ import { topOne } from 'actions/main-page/main-page';
 import { TRACK_HOST } from 'constants/api';
 import { cn } from 'utils/cn';
 import { PlayMainTrackIcon } from 'assets/icons';
+import { isMobile } from 'utils/isMobile';
 
 import './style.scss';
 
@@ -54,19 +55,24 @@ export const FeatureOfWeek = () => {
     }
 
     return (
-        <div id='feature' class={feature()}>
-            <img src={TRACK_HOST + topTrack.trackList[0]?.picture} class={feature('image')}></img>
-            <div class={feature('position-feature')}>
-                <div class={feature('title')}>
-                    <div class={feature('title-text')}>FEATURED OF THE WEEK</div>
+        <div id='feature' class={feature('', isMobile() ? 'mob' : '')}>
+            <img
+                src={TRACK_HOST + topTrack.trackList[0]?.picture}
+                class={feature('image', isMobile() ? 'mob' : '')}
+            ></img>
+            <div class={feature('position-feature', isMobile() ? 'mob' : '')}>
+                <div class={feature('title', isMobile() ? 'mob' : '')}>
+                    <div class={feature('title-text', isMobile() ? 'mob' : '')}>FEATURED OF THE WEEK</div>
                 </div>
             </div>
             {topTrack.trackList.map((item, index) => (
                 <div class={feature('class')}>
-                    <div class={feature('song-name')}>{item?.tittle}</div>
-                    <div class={feature('singers')}>{item?.musicians.map((artist) => artist?.name).join(', ')}</div>
+                    <div class={feature('song-name', isMobile() ? 'mob' : '')}>{item?.tittle}</div>
+                    <div class={feature('singers', isMobile() ? 'mob' : '')}>
+                        {item?.musicians.map((artist) => artist?.name).join(', ')}
+                    </div>
                     <div class={feature('position-button')}>
-                        <div class={feature('play')} onclick={onClickTrack(index)}>
+                        <div class={feature('play', isMobile() ? 'mob' : '')} onclick={onClickTrack(index)}>
                             <PlayMainTrackIcon />
                         </div>
                     </div>

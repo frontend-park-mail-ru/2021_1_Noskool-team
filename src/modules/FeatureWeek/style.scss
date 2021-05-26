@@ -19,23 +19,29 @@
   font-weight: 800;
   font-size: 16px;
 
+  &--mob {
+    position: relative;
+    height: 308px;
+  }
+
   &__image {
     height: 408px;
     width: 100%;
     object-fit: cover;
+
+    &--mob {
+      height: 308px;
+    }
   }
 
   &__position-feature {
     position: absolute;
     top: 122px;
     left: 41.8%;
-  }
 
-  &__title {
-    height: 39px;
-    width: 252px;
-    background-color: $white;
-    border-radius: 20px;
+    &--mob {
+      top: 90px;
+    }
   }
 
   &__title-text {
@@ -44,7 +50,15 @@
     text-align: center;
     font-size: 15px;
     line-height: 12px;
-    padding-top: 15px;
+    padding: 10px 20px;
+    border-radius: 20px;
+    background-color: #fff;
+
+    &--mob {
+      font-size: 10px;
+      padding: 5px 10px;
+      font-weight: 800;
+    }
   }
 
   &__song-name {
@@ -58,6 +72,11 @@
     display: block;
     cursor: pointer;
     text-decoration: none;
+
+    &--mob {
+      font-size: 25px;
+      top: 140px;
+    }
   }
 
   &__singers {
@@ -70,6 +89,11 @@
     display: block;
     cursor: pointer;
     text-decoration: none;
+
+    &--mob {
+      font-size: 15px;
+      top: 190px;
+    }
   }
 
   &__position-button {
@@ -102,6 +126,17 @@
     background-size: 70px;
     background-repeat: no-repeat;
     transition: all 0.5s;
+
+    &--mob {
+      height: 48px;
+      width: 48px;
+      top: 233px;
+
+      svg {
+        height: 25px;
+        width: 25px;
+      }
+    }
 
     &:hover {
       transform: scale(1.05, 1.05);
