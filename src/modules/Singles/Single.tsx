@@ -25,6 +25,7 @@ const onClickTrack = (index: number) => () => {
         trackId: el?.track_id,
         duration: el?.duration,
         albumId: el?.album[0]?.album_id,
+        likes: el?.likes,
     }));
     playerStore.currentTrack = {
         img: tracksStore.trackList[index]?.picture,
@@ -37,6 +38,7 @@ const onClickTrack = (index: number) => () => {
         trackId: tracksStore.trackList[index]?.track_id,
         duration: tracksStore.trackList[index]?.duration,
         albumId: tracksStore.trackList[index]?.album[0]?.album_id,
+        likes: tracksStore.trackList[index]?.likes,
     };
     playerStore.currentTime = 0;
     if (!playerStore.isPlay) {

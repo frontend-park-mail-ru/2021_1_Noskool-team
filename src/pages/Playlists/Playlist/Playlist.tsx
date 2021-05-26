@@ -272,17 +272,21 @@ export const Playlist = () => {
                         updateDeleteTrackPlaylist={isClickDeleteTrackPlaylist}
                     />
                 )}
-                {onePlaylistStore.playlist.isAddPlaylist && (
+                {onePlaylistStore.playlist.isAddPlaylist ? (
                     <div class={playlistPage('changeStatus')} id='addPlaylist'>
                         <OkeyIcon />
                         <div class={playlistPage('isOkey')}>{'Плейлист добавлен'}</div>
                     </div>
+                ) : (
+                    <div />
                 )}
-                {onePlaylistStore.playlist.isCopyLink && (
+                {onePlaylistStore.playlist.isCopyLink ? (
                     <div class={playlistPage('changeStatus')} id='statusShare'>
                         <OkeyIcon />
                         <div class={playlistPage('isOkey')}>{'Cсылка скопирована'}</div>
                     </div>
+                ) : (
+                    <div />
                 )}
             </div>
         </div>

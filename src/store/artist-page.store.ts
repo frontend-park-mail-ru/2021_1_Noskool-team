@@ -25,6 +25,7 @@ export interface ArtistTrack {
     musicians: Artists[];
     duration: string;
     album: Album[];
+    likes: number;
 }
 
 interface ArtistsStore {

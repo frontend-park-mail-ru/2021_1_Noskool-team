@@ -1,7 +1,6 @@
 import { ARTIST, ARTIST_TRACK } from './artists.constants';
 import { get, postAuth, getcsrf } from '../common/common';
 import { artistPageStore } from 'store/artist-page.store';
-// import { favoriteArtistsStore } from 'store/favorite-artists.store';
 import { TRACK_HOST } from 'constants/api';
 import { redirectTo } from 'utils/render';
 import { LINKS } from 'constants/links';
@@ -31,6 +30,7 @@ interface ArtistTrack {
     musicians: Artists[];
     duration: string;
     album: Album[];
+    likes: number;
 }
 
 export const getArtistById = async (id: number) => {

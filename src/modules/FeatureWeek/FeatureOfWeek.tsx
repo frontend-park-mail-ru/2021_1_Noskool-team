@@ -22,6 +22,7 @@ const onClickTrack = (index: number) => () => {
         trackId: topTrack.trackList[index]?.track_id,
         duration: topTrack.trackList[index]?.duration,
         albumId: topTrack.trackList[index]?.album[0]?.album_id,
+        likes: topTrack.trackList[index]?.likes,
     };
     playerStore.playList = topTrack.trackList.map((el, i) => ({
         img: el?.picture,
@@ -34,6 +35,7 @@ const onClickTrack = (index: number) => () => {
         trackId: el?.track_id,
         duration: el?.duration,
         albumId: el?.album[0].album_id,
+        likes: el?.likes,
     }));
     playerStore.currentTime = 0;
     if (!playerStore.isPlay) {

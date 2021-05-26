@@ -23,7 +23,7 @@ import {
     ShuffleIcon,
     PlayMainTrackIcon,
     CurrentPlaylistIcon,
-    OkeyIcon,
+    // OkeyIcon,
 } from 'assets/icons';
 import { requestsStore } from 'store/requests.store';
 import {
@@ -179,6 +179,7 @@ const onClickFavorite = () => {
             playerStore.currentTrack.isFavorite = true;
             playerStore.currentTrack.isMediateca = true;
             playerStore.playList = buffer;
+            playerStore.currentTrack.likes += 1;
         });
     } else {
         deleteFromFavourites(playerStore.currentTrack.trackId).then(() => {
@@ -187,6 +188,8 @@ const onClickFavorite = () => {
             buffer[index].isFavorite = false;
             playerStore.currentTrack.isFavorite = false;
             playerStore.playList = buffer;
+            playerStore.currentTrack.likes =
+                playerStore.currentTrack.likes !== 0 ? playerStore.currentTrack.likes - 1 : 0;
         });
     }
 };
@@ -313,7 +316,7 @@ export const AudioLine = () => {
                     <div class={player('name')}>
                         {playerStore.playList[playerStore.currentTrack.index]?.name}
                         <div>
-                            {playerStore.playList[playerStore.currentTrack.index]?.artists.map((artist, index) => (
+                            {playerStore.playList[playerStore.currentTrack.index]?.artists?.map((artist, index) => (
                                 <div onclick={onClickArtist(artist.musician_id)}>
                                     {`${artist.name}${
                                         index === playerStore.playList[playerStore.currentTrack.index]?.artists.length
@@ -363,12 +366,12 @@ export const AudioLine = () => {
                 <div class={player('name')}>
                     {playerStore.playList[playerStore.currentTrack.index]?.name}
                     <div>
-                        {playerStore.playList[playerStore.currentTrack.index]?.artists.map((artist, index) => (
+                        {playerStore.playList[playerStore.currentTrack.index]?.artists?.map((artist, index) => (
                             <Link
                                 child={() =>
                                     `${artist.name}${
                                         index + 1 ===
-                                        playerStore.playList[playerStore.currentTrack.index]?.artists.length
+                                        playerStore.playList[playerStore.currentTrack.index]?.artists?.length
                                             ? ''
                                             : ', '
                                     }`
@@ -403,12 +406,13 @@ export const AudioLine = () => {
                     />
                 </div>
             </div>
-            {onePlaylistStore.playlist.isOkey && (
+
+            {/* {onePlaylistStore.playlist.isOkey ? (
                 <div class={player('changeStatus')} id='addtoPl'>
                     <OkeyIcon />
                     <div class={player('isOkey')}>{'Песня добавлена в плейлист'}</div>
                 </div>
-            )}
+            ) : <div />} */}
 
             {localStorage.getItem('auth') === 'ok' ? (
                 <div class={player('playlist-btns')}>
@@ -434,6 +438,7 @@ export const AudioLine = () => {
                         </div>
                     </div>
                     <div class={player('like-btns')}>
+                        <div class={player('dawd')}>{String(playerStore.currentTrack.likes)}</div>
                         <div
                             class={player('like', playerStore.currentTrack.isFavorite ? 'checked' : '')}
                             onclick={onClickFavorite}

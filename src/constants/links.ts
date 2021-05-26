@@ -34,5 +34,5 @@ export const LINKS = {
     searchArtists: 'search/artists',
     searchUsers: 'search/users',
     searchPlaylists: 'search/playlists',
-    playlistShare: '/playlist/share',
+    playlistShare: '/share/playlist',
 };
