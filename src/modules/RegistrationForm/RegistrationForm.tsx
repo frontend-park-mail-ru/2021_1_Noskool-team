@@ -66,7 +66,7 @@ const onSubmitForm = (values: MouseEvent) => {
                             }, 500);
                             redirectTo(LINKS.main);
                         });
-                    }, 3000);
+                    }, 5000);
                 } else {
                     res.json().then((res) => onSetError(res.error));
                 }
