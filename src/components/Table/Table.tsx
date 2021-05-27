@@ -16,6 +16,7 @@ import { LINKS } from 'constants/links';
 import { isMobile } from 'utils/isMobile';
 
 import './style.scss';
+import { requestsStore } from 'store/requests.store';
 
 const onClickTrack = (index: number, trackList: CurrentTrack[]) => () => {
     playerStore.playList = [...trackList];
@@ -80,29 +81,35 @@ export const TrackTable = ({
     const onClickAddFavourites = (id: number, index: number) => () => {
         addToFavourites(id).then(() => {
             updateAddFavourites(index);
+            requestsStore.favoriteTracks = true;
         });
     };
 
     const onClickAddMediateca = (id: number, index: number) => () => {
         addToMediateca(id).then(() => {
             updateAddMediateca(index);
+            requestsStore.mediatekaTracks = true;
         });
     };
 
     const onClickDeleteFavourites = (id: number, index: number) => () => {
         deleteFromFavourites(id).then(() => {
             updateDeleteFavourites(index);
+            requestsStore.favoriteTracks = true;
         });
     };
 
     const onClickDeleteMediateca = (id: number, index: number) => () => {
         deleteFromMediateca(id).then(() => {
             updateDeleteMediateca(index);
+            requestsStore.mediatekaTracks = true;
         });
     };
 
     const onClickDeleteTrackPlaylist = (id: number) => () => {
         updateDeleteTrackPlaylist(id);
+        requestsStore.onePlaylist = true;
+        requestsStore.allPlaylists = true;
     };
 
     const icons = (trackId: number, i: number, isFavorite: boolean, isMediateca: boolean) => (

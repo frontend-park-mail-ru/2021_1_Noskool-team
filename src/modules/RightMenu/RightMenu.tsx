@@ -4,8 +4,6 @@ import { redirectTo } from 'utils/render';
 import { RightMenu as RightMenuStore } from 'types/right-menu';
 import {
     HomeIcon,
-    SoundOnIcon,
-    HeadPhonesIcon,
     LikeInRoundIcon,
     TargetIcon,
     DiagramIcon,
@@ -19,6 +17,7 @@ import { cn } from 'utils/cn';
 import './style.scss';
 import { isMobile } from 'utils/isMobile';
 import { rightMenuStore } from 'store/right-menu.store';
+import { profileStore } from 'store/profile.store';
 
 const rightMenuCn = cn('right-menu');
 
@@ -32,8 +31,11 @@ const chooseItem = (index: number, isMobile: boolean) => () => {
             case 1:
                 link = LINKS.myPlaylists;
                 break;
-            case 3:
+            case 2:
                 link = LINKS.favoriteTracks;
+                break;
+            case 3:
+                link = LINKS.mediateka;
                 break;
         }
     } else {
@@ -41,16 +43,19 @@ const chooseItem = (index: number, isMobile: boolean) => () => {
             case 0:
                 link = LINKS.main;
                 break;
-            case 3:
+            case 1:
                 link = LINKS.myPlaylists;
                 break;
-            case 4:
+            case 2:
                 link = LINKS.mediatekaTracks;
                 break;
-            case 5:
+            case 3:
                 link = LINKS.favoriteTracks;
                 break;
-            case 7:
+            case 4:
+                link = `${LINKS.user}/${profileStore.profile.id}`;
+                break;
+            case 5:
                 link = LINKS.profile;
                 break;
         }
@@ -73,17 +78,6 @@ export const RightMenu = () => {
             isActive: window.location.pathname === '/',
         },
         {
-            text: 'Рекомендации',
-            icon: SoundOnIcon,
-            isActive: false,
-        },
-        {
-            text: 'Радио',
-            icon: HeadPhonesIcon,
-            isActive: false,
-            className: 'not-fill',
-        },
-        {
             text: 'Плейлисты',
             icon: PlayListMenuIcon,
             isActive: window.location.pathname.startsWith(LINKS.myPlaylists),
@@ -102,7 +96,7 @@ export const RightMenu = () => {
             className: 'not-fill',
         },
         {
-            text: 'Статистика',
+            text: 'Профиль',
             icon: DiagramIcon,
             isActive: false,
         },
@@ -127,15 +121,15 @@ export const RightMenu = () => {
             className: 'not-fill',
         },
         {
-            text: 'Радио',
-            icon: HeadPhonesIcon,
-            isActive: false,
-            className: 'not-fill',
-        },
-        {
             text: 'Избранное',
             icon: LikeInRoundIcon,
             isActive: window.location.pathname.startsWith(LINKS.favorite),
+            className: 'not-fill',
+        },
+        {
+            text: 'Медиатека',
+            icon: TargetIcon,
+            isActive: window.location.pathname.startsWith(LINKS.mediateka),
             className: 'not-fill',
         },
         {

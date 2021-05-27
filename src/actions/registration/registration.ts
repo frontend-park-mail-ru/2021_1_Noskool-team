@@ -14,9 +14,12 @@ export const authUser = (body: AuthUser) => {
 export const logoutUser = () => {
     get<Response>(LOGOUT_USER);
     try {
-        localStorage.clear();
+        localStorage.removeItem('auth');
     } catch (e) {
         alert(`да лол, обнови браузер, ошибочка: ${e}`);
     }
     render();
+    setTimeout(() => {
+        render();
+    }, 100);
 };

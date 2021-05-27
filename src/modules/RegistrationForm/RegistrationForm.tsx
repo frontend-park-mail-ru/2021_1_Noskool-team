@@ -10,7 +10,7 @@ import {
     passwordEqualValidator,
 } from 'utils/form-validators';
 import { authUser, registerUser } from 'actions/registration/registration';
-import { redirectTo } from 'utils/render';
+import { redirectTo, render } from 'utils/render';
 import { LINKS } from 'constants/links';
 import { ErrorFetch } from 'types/common';
 import { isMobile } from 'utils/isMobile';
@@ -50,7 +50,8 @@ const onSubmitForm = (values: MouseEvent) => {
         })
             .then((res) => {
                 if (res.status === 200) {
-                    regFormStore.errorMsg = 'Подождите, идёт регистрация';
+                    regFormStore.errorMsg = '';
+                    regFormStore.waitMsg = 'Подождите, идёт регистрация';
                     setTimeout(() => {
                         authUser({
                             nickname: regFormStore.nickname.value,
@@ -60,6 +61,9 @@ const onSubmitForm = (values: MouseEvent) => {
                             requestsStore.profile = true;
                             requestsStore.allPlaylists = true;
                             regFormStore.errorMsg = '';
+                            setTimeout(() => {
+                                render();
+                            }, 500);
                             redirectTo(LINKS.main);
                         });
                     }, 3000);
@@ -109,9 +113,15 @@ export const RegistrationForm = () => {
                     isPassword={true}
                     input={regFormStore.passwordRepeat}
                 />
-                <div class={formCn('error-msg')}>{regFormStore.errorMsg}</div>
-                <button onclick={onSubmitForm}>{'Зарегистрироваться'}</button>
-                <button onclick={onClickAuth}>{'Или войти'}</button>
+                <div class={formCn(regFormStore.waitMsg ? 'wait-msg' : 'error-msg')}>
+                    {regFormStore.errorMsg || regFormStore.waitMsg}
+                </div>
+                <button class={formCn('btn', regFormStore.waitMsg ? 'disable' : '')} onclick={onSubmitForm}>
+                    {'Зарегистрироваться'}
+                </button>
+                <button class={formCn('btn', regFormStore.waitMsg ? 'disable' : '')} onclick={onClickAuth}>
+                    {'Или войти'}
+                </button>
             </form>
         </div>
     );
