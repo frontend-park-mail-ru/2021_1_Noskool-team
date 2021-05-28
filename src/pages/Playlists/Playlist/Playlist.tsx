@@ -108,10 +108,6 @@ const onClickTrack = () => {
     }
 };
 
-const onClickUser = (id: number) => () => {
-    redirectTo(LINKS.user + `/${id}`);
-};
-
 export const Playlist = () => {
     const ID_IMAGE_INPUT = 'ID_IMAGE_INPUT';
     const id = window.location.pathname.split('/');
@@ -128,6 +124,7 @@ export const Playlist = () => {
 
     const onChacngePhoto = (id: string) => (e: MouseEvent) => {
         changePlaylistPhoto(e.target, id).then(() => {
+            requestsStore.onePlaylist = true;
             render();
         });
     };
@@ -151,14 +148,14 @@ export const Playlist = () => {
     };
 
     const saveDescription = () => {
-        if (playlistForm.description.value !== playlistEditForm.form.description.value) {
+        if (playlistForm?.description.value !== playlistEditForm?.form.description.value) {
             const body = {
                 description: playlistEditForm.form.description.value,
             };
-            if (!playlistEditForm.form.description.value) {
+            if (!playlistEditForm?.form.description.value) {
                 delete body.description;
             }
-            changeDescription(onePlaylistStore.playlist.playlist_id, body).then(() => {
+            changeDescription(onePlaylistStore?.playlist.playlist_id, body).then(() => {
                 playlistForm.description.value = playlistEditForm.form.description.value;
             });
         }
@@ -211,9 +208,9 @@ export const Playlist = () => {
                         onblur={saveDescription}
                         className={'-description'}
                     />
-                    <div class={playlistPage('author')} onclick={onClickUser(profileStore.profile.id)}>
+                    {/* <div class={playlistPage('author')} onclick={onClickUser(profileStore.profile.id)}>
                         {profileStore.profile.login}
-                    </div>
+                    </div> */}
                     <div class={playlistPage('icons-playlist')}>
                         <div class={playlistPage('play-playlist')}>
                             <div class={playlistPage('listen')} onclick={onClickTrack}>
@@ -228,14 +225,14 @@ export const Playlist = () => {
                             type='text'
                             id='link'
                             readonly
-                            value={'noskool-music.ru' + LINKS.playlistShare + '/' + onePlaylistStore.playlist.uid}
+                            value={'noskool-music.ru' + LINKS.playlistShare + '/' + onePlaylistStore.playlist?.uid}
                         ></input>
-                        {profileStore.profile.id !== Number(onePlaylistStore.playlist.user_id) && (
+                        {profileStore.profile.id !== Number(onePlaylistStore.playlist?.user_id) && (
                             <div class={playlistPage('like-palylist')} onclick={isClickAddPlaylist}>
                                 Добавить к себе
                             </div>
                         )}
-                        {profileStore.profile.id === Number(onePlaylistStore.playlist.user_id) && (
+                        {profileStore.profile.id === Number(onePlaylistStore.playlist?.user_id) && (
                             <div class={playlistPage('delete-playlust')} onclick={isClickDeletePlaylist}>
                                 <TrashIcon />
                             </div>
@@ -251,12 +248,12 @@ export const Playlist = () => {
                     </div>
                 ) : (
                     <TrackTable
-                        trackList={toCurrentTrack(onePlaylistStore.playlist.tracks)}
+                        trackList={toCurrentTrack(onePlaylistStore.playlist?.tracks)}
                         isNeedHeader={false}
                         isNeedPhoto={true}
                         isForPlaylist={true}
                         isNotWhite
-                        canDeleteTrack={profileStore.profile.id === Number(onePlaylistStore.playlist.user_id)}
+                        canDeleteTrack={profileStore.profile?.id === Number(onePlaylistStore.playlist?.user_id)}
                         updateAddFavourites={isClickAddFavourites}
                         updateAddMediateca={isClickAddMediateca}
                         updateDeleteFavourites={isClickDeleteFavourites}

@@ -10,6 +10,8 @@ interface Artists {
     musician_id: number;
     name: string;
     picture: string;
+    'in_favourite': boolean;
+    'in_mediateka': boolean;
 }
 
 interface Album {

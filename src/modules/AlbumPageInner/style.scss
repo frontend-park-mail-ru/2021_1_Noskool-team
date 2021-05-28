@@ -15,6 +15,42 @@
     object-fit: cover;
   }
 
+  &__artist-icons {
+    display: flex;
+    margin-top: 25px;
+  }
+
+  &__icon-like {
+    margin-right: 7px;
+    cursor: pointer;
+
+    svg {
+      width: 25px;
+      height: 25px;
+
+      &:hover {
+        path {
+          fill: $pink;
+        }
+      }
+    }
+  }
+
+  &__icon-ok {
+    cursor: pointer;
+
+    svg {
+      width: 25px;
+      height: 25px;
+
+      &:hover {
+        path {
+          stroke: $pink;
+        }
+      }
+    }
+  }
+
   &__information {
     margin-left: 30px;
     width: 400px;

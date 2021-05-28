@@ -21,6 +21,7 @@ const onSubmitForm = (e: MouseEvent) => {
     }).then(() => {
         requestsStore.onePlaylist = true;
         requestsStore.allPlaylists = true;
+        requestsStore.userPlaylists = true;
         redirectTo(LINKS.myPlaylists);
     });
 };
