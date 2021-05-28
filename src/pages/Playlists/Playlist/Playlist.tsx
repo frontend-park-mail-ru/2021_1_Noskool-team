@@ -7,6 +7,7 @@ import {
     deletePlaylist,
     deleteTrackPlaylist,
     addPlaylistToMy,
+    getAllPlaylists,
 } from 'actions/playlist/playlist';
 import { TRACK_HOST } from 'constants/api';
 import { cn } from 'utils/cn';
@@ -22,9 +23,9 @@ import { toCurrentTrack } from 'utils/cast';
 import { redirectTo, render } from 'utils/render';
 import { LINKS } from 'constants/links';
 import { requestsStore } from 'store/requests.store';
+import { OkeyIcon } from 'assets/icons';
 
 import './style.scss';
-import { OkeyIcon } from 'assets/icons';
 
 const playlistPage = cn('playlist-page');
 
@@ -81,19 +82,10 @@ const isClickDeletePlaylist = () => {
 
 const isClickAddPlaylist = () => {
     addPlaylistToMy(onePlaylistStore.playlist.playlist_id).then(() => {
-        const newPlaylist = {
-            playlist_id: onePlaylistStore.playlist.playlist_id,
-            tittle: onePlaylistStore.playlist.tittle,
-            description: onePlaylistStore.playlist.description,
-            picture: onePlaylistStore.playlist.picture,
-            release_date: onePlaylistStore.playlist.release_date,
-            user_id: String(profileStore.profile.id),
-            tracks: onePlaylistStore.playlist.tracks,
-            isOkey: onePlaylistStore.playlist.isOkey,
-            uid: onePlaylistStore.playlist.uid,
-            isCopyLink: onePlaylistStore.playlist.isCopyLink,
-        };
-        playlistStore.albumList.push(newPlaylist);
+        requestsStore.allPlaylists = true;
+        requestsStore.onePlaylist = true;
+        requestsStore.userPlaylists = true;
+        getAllPlaylists();
         document.getElementById('addPlaylist').style.display = 'flex';
         setTimeout(function () {
             document.getElementById('addPlaylist').style.display = 'none';
@@ -207,14 +199,14 @@ export const Playlist = () => {
                         placeholder={'Измените название'}
                         validators={[]}
                         initialName={onePlaylistStore.playlist.tittle}
-                        disabled={Boolean(onePlaylistStore.playlist.user_id !== String(profileStore.profile.id))}
+                        disabled={Boolean(onePlaylistStore.playlist.user_id != String(profileStore.profile.id))}
                         onblur={saveName}
                     />
                     <PlaylistInput
                         input={playlistEditForm.form.description}
                         placeholder={'Измените описание'}
                         validators={[]}
-                        disabled={Boolean(onePlaylistStore.playlist.user_id !== String(profileStore.profile.id))}
+                        disabled={Boolean(onePlaylistStore.playlist.user_id != String(profileStore.profile.id))}
                         initialName={onePlaylistStore.playlist.description}
                         onblur={saveDescription}
                         className={'-description'}

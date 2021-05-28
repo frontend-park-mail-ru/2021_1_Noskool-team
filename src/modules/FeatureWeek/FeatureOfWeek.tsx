@@ -64,7 +64,7 @@ export const FeatureOfWeek = () => {
             ></img>
             <div class={feature('position-feature', isMobile() ? 'mob' : '')}>
                 <div class={feature('title', isMobile() ? 'mob' : '')}>
-                    <div class={feature('title-text', isMobile() ? 'mob' : '')}>FEATURED OF THE WEEK</div>
+                    <div class={feature('title-text', isMobile() ? 'mob' : '')}>Избранное недели</div>
                 </div>
             </div>
             {topTrack.trackList.map((item, index) => (

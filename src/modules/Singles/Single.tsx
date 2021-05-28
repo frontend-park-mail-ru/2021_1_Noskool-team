@@ -109,7 +109,7 @@ export const Single = () => {
         <div class={weekly('', isMobile() ? 'mob' : '')}>
             <div class={weekly('legend')}>
                 <div class={weekly('title', isMobile() ? 'mob' : '')} onclick={onClickWeekly}>
-                    {'Weekly Top Track'}
+                    {'Лучшее за неделю'}
                 </div>
                 <div class={weekly('buttons')}>
                     <div onclick={prevItem} class={weekly('btn', isMobile() ? 'mob' : '')}>

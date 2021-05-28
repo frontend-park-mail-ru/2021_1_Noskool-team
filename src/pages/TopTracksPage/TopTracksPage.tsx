@@ -36,6 +36,7 @@ const isClickDeleteMediateca = (id: number) => {
     requestsStore.getTopTracks = true;
     const buffer = [...tracksStore.trackList];
     buffer[id].in_favorite = false;
+    buffer[id].in_mediateka = false;
     tracksStore.trackList = buffer;
 };
 

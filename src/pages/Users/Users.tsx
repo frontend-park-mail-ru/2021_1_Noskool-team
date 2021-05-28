@@ -89,7 +89,6 @@ const onInputSearch = (e: InputEvent) => {
     headerStore.searchUsers = value;
     getUserSearch(value);
     headerStore.isExpandUsers = true;
-    console.log(headerStore.searchResultUser);
 };
 
 export const Users = () => {

@@ -1,50 +1,43 @@
 import { getBillboardChart } from 'actions/main-page/main-page';
 import { JSX } from 'jsx/jsx';
-import { onClickPlay } from 'modules/AudioLine/AudioLine';
 import { billboardChartStore } from 'store/main-page.store';
-import { playerStore } from 'store/player.store';
 import { requestsStore } from 'store/requests.store';
-import { TRACK_HOST } from 'constants/api';
 import { cn } from 'utils/cn';
+import { TrackTable } from 'components/Table';
+import { toCurrentTrack } from 'utils/cast';
+import { isMobile } from 'utils/isMobile';
 
 import './style.scss';
 
 const topBillboard = cn('top-billboard');
 
-const onClickTrack = (index: number) => () => {
-    playerStore.playList = billboardChartStore.trackList.map((el, i) => ({
-        img: el?.picture,
-        index: i,
-        link: el?.audio,
-        name: el?.tittle,
-        artists: el?.musicians,
-        isFavorite: el?.in_favorite,
-        isMediateca: el?.in_mediateka,
-        trackId: el?.track_id,
-        duration: el?.duration,
-        albumId: el?.album[0].album_id,
-        likes: el?.likes,
-    }));
-    playerStore.currentTrack = {
-        img: billboardChartStore.trackList[index]?.picture,
-        index: index,
-        link: billboardChartStore.trackList[index]?.audio,
-        name: billboardChartStore.trackList[index]?.tittle,
-        artists: billboardChartStore.trackList[index]?.musicians,
-        isFavorite: billboardChartStore.trackList[index]?.in_favorite,
-        isMediateca: billboardChartStore.trackList[index]?.in_mediateka,
-        trackId: billboardChartStore.trackList[index]?.track_id,
-        duration: billboardChartStore.trackList[index]?.duration,
-        albumId: billboardChartStore.trackList[index]?.album[0]?.album_id,
-        likes: billboardChartStore.trackList[index].likes,
-    };
-    playerStore.currentTime = 0;
-    if (!playerStore.isPlay) {
-        onClickPlay();
-    } else {
-        onClickPlay();
-        onClickPlay();
-    }
+const isClickAddFavourites = (id: number) => {
+    requestsStore.getTopTracks = true;
+    const buffer = [...billboardChartStore.trackList];
+    buffer[id].in_mediateka = true;
+    buffer[id].in_favorite = true;
+    billboardChartStore.trackList = buffer;
+};
+
+const isClickDeleteFavourites = (id: number) => {
+    requestsStore.getTopTracks = true;
+    const buffer = [...billboardChartStore.trackList];
+    buffer[id].in_favorite = false;
+    billboardChartStore.trackList = buffer;
+};
+
+const isClickAddMediateca = (id: number) => {
+    const buffer = [...billboardChartStore.trackList];
+    buffer[id].in_mediateka = true;
+    billboardChartStore.trackList = buffer;
+};
+
+const isClickDeleteMediateca = (id: number) => {
+    requestsStore.getTopTracks = true;
+    const buffer = [...billboardChartStore.trackList];
+    buffer[id].in_favorite = false;
+    buffer[id].in_mediateka = false;
+    billboardChartStore.trackList = buffer;
 };
 
 export const BillboardChart = () => {
@@ -54,37 +47,21 @@ export const BillboardChart = () => {
     }
 
     return (
-        <div class={topBillboard('')}>
-            {billboardChartStore.trackList.length !== 0 && (
-                <div class={topBillboard('title')}>{'Тор BillboardChart:'}</div>
-            )}
-            <div class={topBillboard('content')}>
-                <div class={topBillboard('table')}>
-                    {billboardChartStore.trackList.length !== 0 && (
-                        <div class={topBillboard('row', 'header')}>
-                            <div class={topBillboard('cell')}>{'#'}</div>
-                            <div class={topBillboard('cell')}>{'Название'}</div>
-                            <div class={topBillboard('cell')}>{'Исполнитель'}</div>
-                            <div class={topBillboard('cell')}>{''}</div>
-                            <div class={topBillboard('cell')}>{''}</div>
-                        </div>
-                    )}
-                    {billboardChartStore.trackList.map((el, i) => (
-                        <div class={topBillboard('row', 'track')} onclick={onClickTrack(i)}>
-                            <div class={topBillboard('cell')}>{String(i + 1).padStart(2, '0')}</div>
-                            <div class={topBillboard('cell')}>
-                                <img src={TRACK_HOST + el.picture} class={topBillboard('photo')} />
-                                <div class={topBillboard('name')}>{el?.tittle || '???'}</div>
-                            </div>
-                            <div class={topBillboard('cell')}>
-                                {el?.musicians?.map((el) => el?.name).join(', ') || '???'}
-                            </div>
-                            <div class={topBillboard('cell')}>{el.duration}</div>
-                            <div class={topBillboard('cell')}>
-                                <div />
-                            </div>
-                        </div>
-                    ))}
+        <div class={topBillboard('wrapper', isMobile() ? 'mob' : '')}>
+            <div class={topBillboard('')}>
+                {billboardChartStore.trackList.length !== 0 && (
+                    <div class={topBillboard('title')}>{'Топ Billboard:'}</div>
+                )}
+                <div class={topBillboard('content')}>
+                    <div class={topBillboard('table')}>
+                        <TrackTable
+                            trackList={toCurrentTrack(billboardChartStore.trackList)}
+                            updateAddFavourites={isClickAddFavourites}
+                            updateAddMediateca={isClickAddMediateca}
+                            updateDeleteFavourites={isClickDeleteFavourites}
+                            updateDeleteMediateca={isClickDeleteMediateca}
+                        />
+                    </div>
                 </div>
             </div>
         </div>
