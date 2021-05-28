@@ -28,7 +28,7 @@ interface createPlaylist {
 
 export const changePlaylistPhoto = async (img: any, id: string): Promise<Response | undefined> => {
     const formData = new FormData();
-    formData.append('my_file', img.files[0]);
+    formData.append('playlist_picture', img.files[0]);
     let response = await postImg(`${PLAYLIST}${id}/picture`, formData);
     console.log(response);
     if (response.status === 401) {

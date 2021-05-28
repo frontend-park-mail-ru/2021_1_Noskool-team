@@ -103,7 +103,7 @@ export const App = () => {
                         {path === LINKS.billboard && <BillboardChart />}
                         {path.startsWith(LINKS.playlist) && <Playlist />}
                         {path.startsWith(LINKS.artist) && <ArtistPage />}
-                        {path.startsWith(LINKS.user) && <Users />}
+                        {path.startsWith(LINKS.user) && (isAuth ? <Users /> : <NeedAccessPage />)}
                         {path.startsWith(LINKS.search) && <SearchPage />}
 
                         {path.startsWith(LINKS.mediateka) && (isAuth ? <MediatekaPage /> : <NeedAccessPage />)}

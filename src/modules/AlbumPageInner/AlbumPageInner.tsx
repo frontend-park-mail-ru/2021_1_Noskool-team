@@ -12,6 +12,8 @@ import { render } from 'utils/render';
 import { isMobile } from 'utils/isMobile';
 import { Link } from 'components/Link/Link';
 import { LINKS } from 'constants/links';
+import { LikeFillIcon, PlusIcon, LikeIcon, OkeyIcon } from 'assets/icons';
+import { addToFavourites, addToMediateca, deleteFromMediateca, deleteToFavourites } from 'actions/albums/albums';
 
 const albumPage = cn('album-page');
 
@@ -24,6 +26,7 @@ const isClickAddFavourites = (id: number) => {
     buffer[id].in_mediateka = true;
     buffer[id].in_favorite = true;
     albumPageStore.album.tracks = [...buffer];
+    requestsStore.favoriteAlbums = true;
     render();
 };
 
@@ -31,6 +34,7 @@ const isClickDeleteFavourites = (id: number) => {
     const buffer = [...albumPageStore.album.tracks];
     buffer[id].in_favorite = false;
     albumPageStore.album.tracks = buffer;
+    requestsStore.favoriteAlbums = true;
     render();
 };
 
@@ -38,6 +42,7 @@ const isClickAddMediateca = (id: number) => {
     const buffer = [...albumPageStore.album.tracks];
     buffer[id].in_mediateka = true;
     albumPageStore.album.tracks = buffer;
+    requestsStore.mediatekaAlbums = true;
     render();
 };
 
@@ -46,7 +51,42 @@ const isClickDeleteMediateca = (id: number) => {
     buffer[id].in_favorite = false;
     buffer[id].in_mediateka = false;
     albumPageStore.album.tracks = buffer;
+    requestsStore.mediatekaAlbums = true;
     render();
+};
+
+const actionsFavourite = () => {
+    if (albumPageStore.album.in_favourite) {
+        deleteToFavourites(albumPageStore.album.album_id).then(() => {
+            albumPageStore.album.in_favourite = false;
+            albumPageStore.album.in_mediateka = false;
+            requestsStore.favoriteAlbums = true;
+            render();
+        });
+    } else {
+        addToFavourites(albumPageStore.album.album_id).then(() => {
+            albumPageStore.album.in_favourite = true;
+            albumPageStore.album.in_mediateka = true;
+            requestsStore.favoriteAlbums = true;
+            render();
+        });
+    }
+};
+
+const actionsMediateka = () => {
+    if (albumPageStore.album.in_mediateka) {
+        deleteFromMediateca(albumPageStore.album.album_id).then(() => {
+            albumPageStore.album.in_mediateka = false;
+            requestsStore.mediatekaAlbums = true;
+            render();
+        });
+    } else {
+        addToMediateca(albumPageStore.album.album_id).then(() => {
+            albumPageStore.album.in_mediateka = true;
+            requestsStore.mediatekaAlbums = true;
+            render();
+        });
+    }
 };
 
 export const AlbumPageInner = () => {
@@ -77,9 +117,33 @@ export const AlbumPageInner = () => {
                     <div class={albumPage('date')}>
                         {String(new Date(albumPageStore.album.release_date).getFullYear())}
                     </div>
-                    <div class={albumPage('icons')}>
-                        <div class={albumPage('like-album')}></div>
-                        <div class={albumPage('add-album')}></div>
+                    <div class={albumPage('artist-icons')}>
+                        {albumPageStore.album.in_favourite ? (
+                            <div
+                                class={albumPage('icon-like')}
+                                onclick={actionsFavourite}
+                                title={'Удалить из избранного'}
+                            >
+                                <LikeFillIcon />
+                            </div>
+                        ) : (
+                            <div
+                                class={albumPage('icon-like')}
+                                onclick={actionsFavourite}
+                                title={'Добавить из избранного'}
+                            >
+                                <LikeIcon />
+                            </div>
+                        )}
+                        {albumPageStore.album.in_mediateka ? (
+                            <div class={albumPage('icon-ok')} onclick={actionsMediateka} title={'Удалить из медиатеки'}>
+                                <OkeyIcon />
+                            </div>
+                        ) : (
+                            <div class={albumPage('icon-ok')} onclick={actionsMediateka} title={'Добавить в медиатеку'}>
+                                <PlusIcon />
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>

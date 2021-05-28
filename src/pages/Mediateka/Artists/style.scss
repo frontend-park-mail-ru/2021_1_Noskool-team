@@ -1,6 +1,6 @@
 @import '../../../styles/colors.scss';
 
-.favorite-artists {
+.mediateka-artists {
   &__title {
     font-family: 'Comfortaa', cursive;
     font-size: 30px;
@@ -63,7 +63,7 @@
   }
 }
 
-.favourite-artists-mob {
+.mediateka-artists-mob {
   width: calc(100% - 60px);
   padding: 10px;
 
