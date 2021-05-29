@@ -98,7 +98,7 @@ export const RightMenu = () => {
         {
             text: 'Профиль',
             icon: DiagramIcon,
-            isActive: false,
+            isActive: window.location.pathname.startsWith(LINKS.user),
         },
         {
             text: 'Настройки',

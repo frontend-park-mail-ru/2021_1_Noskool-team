@@ -95,7 +95,7 @@ export const MediatekaPage = () => {
             <div class={mediatekaPage('content-wrappers')}>
                 <div class={mediatekaPage('content')}>
                     {window.location.pathname.startsWith(LINKS.mediatekaTracks) && <Tracks />}
-                    {/* {window.location.pathname.startsWith(LINKS.mediatekaAlbums) && <Albums />} */}
+                    {window.location.pathname.startsWith(LINKS.mediatekaAlbums) && <Albums />}
                     {window.location.pathname.startsWith(LINKS.mediatekaArtists) && <Artists />}
                 </div>
             </div>
