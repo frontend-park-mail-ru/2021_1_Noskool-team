@@ -7,4 +7,6 @@ export interface Album {
     tittle: string;
     tracks: TrackBack[];
     musician: Musician[];
+    'in_favourite': boolean;
+    'in_mediateka': boolean;
 }

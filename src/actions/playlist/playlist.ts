@@ -16,8 +16,7 @@ export const getOnePlaylist = async (id: string) => {
     const response = await get<Playlist>(PLAYLIST + id);
     if ('playlist_id' in response) {
         onePlaylistStore.playlist = response;
-        onePlaylistStore.playlist.onClickEditDesc = false;
-        onePlaylistStore.playlist.onClickEditTitle = false;
+        onePlaylistStore.playlist.isOkey = false;
     }
 };
 
@@ -29,7 +28,7 @@ interface createPlaylist {
 
 export const changePlaylistPhoto = async (img: any, id: string): Promise<Response | undefined> => {
     const formData = new FormData();
-    formData.append('my_file', img.files[0]);
+    formData.append('playlist_picture', img.files[0]);
     let response = await postImg(`${PLAYLIST}${id}/picture`, formData);
     console.log(response);
     if (response.status === 401) {
@@ -209,6 +208,32 @@ export const deleteTrackPlaylist = async (id_playlist: number, idTrack: number) 
         const csrf = await getcsrf();
         if (csrf.status === 200) {
             response = await deleteAuth(PLAYLIST + `${id_playlist}/track/${idTrack}`, {});
+            if (response.status !== 200) {
+                redirectTo(LINKS.auth);
+                return new Promise(() => {});
+            }
+        } else {
+            redirectTo(LINKS.auth);
+            return new Promise(() => {});
+        }
+    }
+    return response;
+};
+
+export const addPlaylistToMy = async (id_playlist: number) => {
+    let response = await postAuth(PLAYLIST + `${id_playlist}`, {});
+    if (response.status === 401) {
+        try {
+            localStorage.clear();
+        } catch (e) {
+            alert(`да лол, обнови браузер, ошибочка: ${e}`);
+        }
+        redirectTo(LINKS.auth);
+        return new Promise(() => {});
+    } else if (response.status === 403) {
+        const csrf = await getcsrf();
+        if (csrf.status === 200) {
+            response = await deleteAuth(PLAYLIST + `${id_playlist}`, {});
             if (response.status !== 200) {
                 redirectTo(LINKS.auth);
                 return new Promise(() => {});

@@ -16,6 +16,7 @@ import { LINKS } from 'constants/links';
 import { isMobile } from 'utils/isMobile';
 
 import './style.scss';
+import { requestsStore } from 'store/requests.store';
 
 const onClickTrack = (index: number, trackList: CurrentTrack[]) => () => {
     playerStore.playList = [...trackList];
@@ -47,6 +48,8 @@ interface TrackTableProps {
     isForFavourites?: boolean;
     isNotWhite?: boolean;
     isForPlaylist?: boolean;
+    canDeleteTrack?: boolean;
+    isNeedIcons?: boolean;
     /*eslint-disable */
     updateAddMediateca: (id: number) => void;
     /*eslint-disable */
@@ -67,6 +70,8 @@ export const TrackTable = ({
     isForFavourites = false,
     isNotWhite = false,
     isForPlaylist = false,
+    canDeleteTrack = false,
+    isNeedIcons = true,
     updateAddMediateca,
     updateAddFavourites,
     updateDeleteMediateca,
@@ -76,29 +81,35 @@ export const TrackTable = ({
     const onClickAddFavourites = (id: number, index: number) => () => {
         addToFavourites(id).then(() => {
             updateAddFavourites(index);
+            requestsStore.favoriteTracks = true;
         });
     };
 
     const onClickAddMediateca = (id: number, index: number) => () => {
         addToMediateca(id).then(() => {
             updateAddMediateca(index);
+            requestsStore.mediatekaTracks = true;
         });
     };
 
     const onClickDeleteFavourites = (id: number, index: number) => () => {
         deleteFromFavourites(id).then(() => {
             updateDeleteFavourites(index);
+            requestsStore.favoriteTracks = true;
         });
     };
 
     const onClickDeleteMediateca = (id: number, index: number) => () => {
         deleteFromMediateca(id).then(() => {
             updateDeleteMediateca(index);
+            requestsStore.mediatekaTracks = true;
         });
     };
 
     const onClickDeleteTrackPlaylist = (id: number) => () => {
         updateDeleteTrackPlaylist(id);
+        requestsStore.onePlaylist = true;
+        requestsStore.allPlaylists = true;
     };
 
     const icons = (trackId: number, i: number, isFavorite: boolean, isMediateca: boolean) => (
@@ -133,7 +144,7 @@ export const TrackTable = ({
                 </div>
             )}
 
-            {isForPlaylist && (
+            {isForPlaylist && canDeleteTrack && (
                 <div onclick={onClickDeleteTrackPlaylist(trackId)} class={tracksTable('icon-delete-playlist')}>
                     <DeleteIcon />
                 </div>
@@ -179,9 +190,11 @@ export const TrackTable = ({
                                         ))}
                                     </div>
                                 </div>
-                                <div class={tracksTable('actions')}>
-                                    {icons(el?.trackId, i, el?.isFavorite, el?.isMediateca)}
-                                </div>
+                                {isNeedIcons && (
+                                    <div class={tracksTable('actions')}>
+                                        {icons(el?.trackId, i, el?.isFavorite, el?.isMediateca)}
+                                    </div>
+                                )}
                             </div>
                         ))}
                     </div>
@@ -192,7 +205,7 @@ export const TrackTable = ({
                         {trackList.map((el, i) => (
                             <div class={tracksTable('together')}>
                                 <div class={tracksTable('row', 'track' + (isNotWhite ? '--not-white' : ''))}>
-                                    <div class={tracksTable('cell')} onclick={onClickTrack(i, trackList)}>
+                                    <div class={tracksTable('cell', 'number')} onclick={onClickTrack(i, trackList)}>
                                         {String(i + 1)}
                                     </div>
                                     <div class={tracksTable('cell')}>
@@ -218,9 +231,11 @@ export const TrackTable = ({
                                         ))}
                                     </div>
                                     <div class={tracksTable('cell')}>{el.duration}</div>
-                                    <div class={tracksTable('cell')}>
-                                        {icons(el?.trackId, i, el?.isFavorite, el?.isMediateca)}
-                                    </div>
+                                    {isNeedIcons && (
+                                        <div class={tracksTable('cell')}>
+                                            {icons(el?.trackId, i, el?.isFavorite, el?.isMediateca)}
+                                        </div>
+                                    )}
                                 </div>
                             </div>
                         ))}

@@ -51,14 +51,23 @@ export const PlaylistInput = ({
     return (
         <div class={CnInput('', isMobile() ? 'mob' : '')}>
             <div class={'pl-input-text' + className}>
-                <input
-                    class={disabled ? 'disabled' : ''}
-                    type={isPassword ? 'password' : 'text'}
-                    disabled={disabled}
-                    value={initialName}
-                    oninput={onInput}
-                    onblur={onblur}
-                />
+                {disabled ? (
+                    <input
+                        class={'disabled'}
+                        type={isPassword ? 'password' : 'text'}
+                        disabled
+                        value={initialName}
+                        oninput={onInput}
+                        onblur={onblur}
+                    />
+                ) : (
+                    <input
+                        type={isPassword ? 'password' : 'text'}
+                        value={initialName}
+                        oninput={onInput}
+                        onblur={onblur}
+                    />
+                )}
             </div>
         </div>
     );

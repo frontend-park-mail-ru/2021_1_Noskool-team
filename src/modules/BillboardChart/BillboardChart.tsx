@@ -8,6 +8,8 @@ import { cn } from 'utils/cn';
 import { isMobile } from 'utils/isMobile';
 
 import './style.scss';
+import { redirectTo } from 'utils/render';
+import { LINKS } from 'constants/links';
 
 const onClickTrack = (index: number) => () => {
     playerStore.playList = billboardChartStore.trackList.map((el, i) => ({
@@ -21,6 +23,7 @@ const onClickTrack = (index: number) => () => {
         trackId: el?.track_id,
         duration: el?.duration,
         albumId: el?.album[0]?.album_id,
+        likes: el?.likes,
     }));
     playerStore.currentTrack = {
         img: billboardChartStore.trackList[index]?.picture,
@@ -33,6 +36,7 @@ const onClickTrack = (index: number) => () => {
         trackId: billboardChartStore.trackList[index].track_id,
         duration: billboardChartStore.trackList[index]?.duration,
         albumId: billboardChartStore.trackList[index]?.album[0]?.album_id,
+        likes: billboardChartStore.trackList[index]?.likes,
     };
     playerStore.currentTime = 0;
     if (!playerStore.isPlay) {
@@ -41,6 +45,14 @@ const onClickTrack = (index: number) => () => {
         onClickPlay();
         onClickPlay();
     }
+};
+
+const redirectToArtist = (id: number) => () => {
+    redirectTo(`${LINKS.artist}/${id}`);
+};
+
+const redirectToAlbum = (id: number) => () => {
+    redirectTo(`${LINKS.album}/${id}`);
 };
 
 const tracks = cn('tracks');
@@ -64,9 +76,16 @@ export const BillboardChart = () => {
                         onclick={onClickTrack(index)}
                     ></img>
                     <div class={tracks('song')}>
-                        <div class={tracks('song-name', isMobile() ? 'mob' : '')}>{item?.tittle}</div>
+                        <div
+                            class={tracks('song-name', isMobile() ? 'mob' : '')}
+                            onclick={redirectToAlbum(item?.album[0]?.album_id)}
+                        >
+                            {item?.tittle}
+                        </div>
                         <div class={tracks('song-author', isMobile() ? 'mob' : '')}>
-                            {item?.musicians.map((artist) => artist?.name).join(', ')}
+                            {item?.musicians.map((artist) => (
+                                <span onclick={redirectToArtist(artist?.musician_id)}>{artist?.name}</span>
+                            ))}
                         </div>
                     </div>
                     <div class={tracks('time')}>{item?.duration}</div>

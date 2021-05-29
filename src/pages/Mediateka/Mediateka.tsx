@@ -1,6 +1,7 @@
 import { LINKS } from 'constants/links';
 import { Tracks } from './Tracks';
 import { Albums } from './Albums';
+import { Artists } from './Artists/Artists';
 import { JSX } from 'jsx/jsx';
 import { cn } from 'utils/cn';
 import { redirectTo } from 'utils/render';
@@ -94,7 +95,8 @@ export const MediatekaPage = () => {
             <div class={mediatekaPage('content-wrappers')}>
                 <div class={mediatekaPage('content')}>
                     {window.location.pathname.startsWith(LINKS.mediatekaTracks) && <Tracks />}
-                    {/* {window.location.pathname.startsWith(LINKS.mediatekaAlbums) && <Albums />} */}
+                    {window.location.pathname.startsWith(LINKS.mediatekaAlbums) && <Albums />}
+                    {window.location.pathname.startsWith(LINKS.mediatekaArtists) && <Artists />}
                 </div>
             </div>
         </div>
@@ -124,6 +126,7 @@ export const MediatekaPage = () => {
                 <div class={mediatekaPage('content')}>
                     {window.location.pathname.startsWith(LINKS.mediatekaTracks) && <Tracks />}
                     {window.location.pathname.startsWith(LINKS.mediatekaAlbums) && <Albums />}
+                    {window.location.pathname.startsWith(LINKS.mediatekaArtists) && <Artists />}
                 </div>
             </div>
         </div>

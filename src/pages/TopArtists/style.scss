@@ -12,10 +12,9 @@
   }
 
   &__top-artists {
-    display: grid;
-    grid-template-columns: repeat(4, 200px);
-    grid-column-gap: 30px;
-    grid-row-gap: 30px;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
   }
 
   &__photo {
@@ -33,6 +32,7 @@
 
   &__artist {
     width: 200px;
+    margin-bottom: 30px;
   }
 
   &__name {
@@ -55,5 +55,32 @@
 
   &__genre:hover {
     color: $pink;
+  }
+}
+
+.top-artists-page--mob {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 20px 0 20px 20px;
+  height: calc(100vh - 170px);
+
+  .top-artists-page {
+    &__title {
+      font-size: 20px;
+    }
+
+    &__artist {
+      width: 120px;
+    }
+
+    &__photo {
+      width: 120px;
+      height: 120px;
+    }
+
+    &__top-wrapper {
+      overflow: auto;
+      height: calc(100vh - 270px);
+    }
   }
 }

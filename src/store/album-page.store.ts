@@ -8,6 +8,8 @@ export interface Album {
     tittle: string;
     tracks: TrackBack[];
     musician: Musician[];
+    'in_favourite': boolean;
+    'in_mediateka': boolean;
 }
 
 export interface AlbumPageStore {
@@ -22,5 +24,7 @@ export const albumPageStore = proxy<AlbumPageStore>({
         tittle: '',
         tracks: [],
         musician: [],
+        'in_mediateka': false,
+        'in_favourite': false,
     }),
 });

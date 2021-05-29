@@ -95,8 +95,8 @@ export const FavoritePage = () => {
             <div class={favoritePage('content-wrappers')}>
                 <div class={favoritePage('content')}>
                     {window.location.pathname.startsWith(LINKS.favoriteTracks) && <Tracks />}
-                    {/* {window.location.pathname.startsWith(LINKS.mediatekaAlbums) && <Albums />} */}
-                    {/* {window.location.pathname.startsWith(LINKS.favoriteArtists) && <Artists />} */}
+                    {window.location.pathname.startsWith(LINKS.mediatekaAlbums) && <Albums />}
+                    {window.location.pathname.startsWith(LINKS.favoriteArtists) && <Artists />}
                 </div>
             </div>
         </div>

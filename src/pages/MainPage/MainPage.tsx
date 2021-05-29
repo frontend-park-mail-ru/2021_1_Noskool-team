@@ -24,7 +24,7 @@ export const MainPage = () => {
                     <div class='top-mob'>
                         <div class='billboard-charts-mob'>
                             <div class='title-mob' onclick={onClickBillboard}>
-                                Billboard Top Charts
+                                Топ Billboard
                             </div>
                             <BillboardChart />
                         </div>
@@ -37,7 +37,7 @@ export const MainPage = () => {
                     <div class='top'>
                         <div class='billboard-charts'>
                             <div class='title' onclick={onClickBillboard}>
-                                Billboard Top Charts
+                                Топ Billboard
                             </div>
                             <BillboardChart />
                         </div>

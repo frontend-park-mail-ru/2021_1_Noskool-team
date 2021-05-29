@@ -29,4 +29,5 @@ export interface TrackBack {
     'in_favorite': boolean;
     'in_mediateka': boolean;
     duration: string;
+    likes: number;
 }

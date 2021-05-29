@@ -1,7 +1,7 @@
 @import '../../styles/colors.scss';
 
 .billboard-charts {
-  margin: 5px 0 25px 30px;
+  margin: 5px 0 0 30px;
   height: 440px;
   overflow: hidden;
 
@@ -15,6 +15,7 @@
     text-decoration: none;
     margin-left: 15px;
     cursor: pointer;
+    transition: all 0.3s;
   }
 
   .title:hover {
@@ -82,6 +83,7 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    transition: all 0.3s;
 
     &--mob {
       width: 200px;
@@ -101,6 +103,7 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    transition: all 0.3s;
   }
 
   &__song-author:hover {
@@ -129,64 +132,6 @@
 
       path {
         transition: all 0.3s;
-      }
-    }
-  }
-
-  &__like {
-    @extend %button-music;
-
-    margin-left: 10px;
-    margin-right: 5px;
-
-    svg {
-      path {
-        fill: $gray;
-      }
-    }
-
-    &:hover {
-      svg {
-        path {
-          fill: $pink;
-        }
-      }
-    }
-
-    &--checked {
-      svg {
-        path {
-          fill: $pink;
-        }
-      }
-    }
-  }
-
-  &__add {
-    @extend %button-music;
-
-    background-size: 27px;
-    margin-right: 0;
-
-    &:hover {
-      svg {
-        path {
-          stroke: #ef548e;
-        }
-      }
-    }
-
-    svg {
-      path {
-        stroke: $gray;
-      }
-    }
-
-    &--checked {
-      svg {
-        path {
-          stroke: $pink;
-        }
       }
     }
   }

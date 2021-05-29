@@ -20,7 +20,7 @@ const onBlureSearch = () => {
     headerStore.isExpandSearch = false;
 };
 
-const handleClickOutside = (event: any) => {
+const handleClickOutsideSearch = (event: any) => {
     if (document.getElementById('search-input') && !document.getElementById('search-input').contains(event.target)) {
         if (headerStore.isExpandSearch) {
             onBlureSearch();
@@ -28,7 +28,14 @@ const handleClickOutside = (event: any) => {
     }
 };
 
-document.addEventListener('mousedown', handleClickOutside);
+const handleClickOutsideProfile = (event: any) => {
+    if (document.getElementById('profile-icon') && !document.getElementById('profile-icon').contains(event.target)) {
+        headerStore.isExpand = false;
+    }
+};
+
+document.addEventListener('mousedown', handleClickOutsideSearch);
+document.addEventListener('mousedown', handleClickOutsideProfile);
 
 export const Header = () => {
     const toggle = () => {
@@ -205,7 +212,7 @@ export const Header = () => {
                 </form>
             </div>
             {isAuth ? (
-                <button class={profile()} onclick={toggle}>
+                <button class={profile()} onclick={toggle} id={'profile-icon'}>
                     <img src={HOST + profileStore.profile.photo} class={profile('image')} />
                     <div class={profile('menu', headerStore.isExpand ? 'expand' : '')}>
                         <div class={profile('data')}>

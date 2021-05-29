@@ -27,4 +27,12 @@ export const LINKS = {
     userPlaylist: 'user/playlists',
     userSubscribers: 'user/subscribers',
     userSubscriptions: 'user/subscriptions',
+    search: '/search',
+    searchAll: '/search/all',
+    searchTracks: 'search/tracks',
+    searchAlbums: 'search/albums',
+    searchArtists: 'search/artists',
+    searchUsers: 'search/users',
+    searchPlaylists: 'search/playlists',
+    playlistShare: '/share/playlist',
 };
