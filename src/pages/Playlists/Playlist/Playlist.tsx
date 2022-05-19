@@ -143,6 +143,12 @@ export const Playlist = () => {
             }
             changeName(onePlaylistStore.playlist.playlist_id, body).then(() => {
                 playlistForm.name.value = playlistEditForm.form.name.value;
+                const newPlaylist = playlistStore.albumList;
+                const currentPlaylist = newPlaylist.filter(
+                    (item) => item.playlist_id === onePlaylistStore.playlist.playlist_id
+                );
+                currentPlaylist[0].tittle = playlistForm.name.value;
+                playlistStore.albumList = newPlaylist;
             });
         }
     };
@@ -166,6 +172,7 @@ export const Playlist = () => {
         link.select();
         document.execCommand('copy');
         onePlaylistStore.playlist.isCopyLink = true;
+        document.getElementById('statusShare').style.display = 'flex';
         setTimeout(function () {
             document.getElementById('statusShare').style.display = 'none';
         }, 5000);
@@ -225,7 +232,7 @@ export const Playlist = () => {
                             type='text'
                             id='link'
                             readonly
-                            value={'noskool-music.ru' + LINKS.playlistShare + '/' + onePlaylistStore.playlist?.uid}
+                            value={'localhost:9001' + LINKS.playlistShare + '/' + onePlaylistStore.playlist?.uid}
                         ></input>
                         {profileStore.profile.id !== Number(onePlaylistStore.playlist?.user_id) && (
                             <div class={playlistPage('like-palylist')} onclick={isClickAddPlaylist}>

@@ -17,11 +17,15 @@ import './style.scss';
 
 const sharePlaylistPage = cn('share-playlist-page');
 
-const onClickTrack = () => () => {
+const onClickTrack = () => {
     const trackList = toCurrentTrack(sharePlaylistStore.playlist.tracks);
+    console.log(trackList);
     playerStore.playList = trackList;
     playerStore.currentTrack = trackList[0];
     playerStore.currentTime = 0;
+    onClickPlay();
+    onClickPlay();
+
     if (!playerStore.isPlay) {
         onClickPlay();
     } else {

@@ -218,6 +218,36 @@ const onClickMedia = () => {
     }
 };
 
+const isClickAddFavourites = (id: number) => {
+    const buffer = [...playerStore.playList];
+    buffer[id].isFavorite = true;
+    playerStore.playList = buffer;
+    render();
+};
+
+const isClickDeleteFavourites = (id: number) => {
+    const buffer = [...playerStore.playList];
+    buffer[id].isFavorite = false;
+    playerStore.playList = buffer;
+    render();
+};
+
+const isClickAddMediateca = (id: number) => {
+    const buffer = [...playerStore.playList];
+    buffer[id].isMediateca = true;
+    buffer[id].isFavorite = true;
+    playerStore.playList = buffer;
+    render();
+};
+
+const isClickDeleteMediateca = (id: number) => {
+    const buffer = [...playerStore.playList];
+    buffer[id].isMediateca = false;
+    buffer[id].isFavorite = false;
+    playerStore.playList = buffer;
+    render();
+};
+
 const toggle = () => {
     expandStore.isExpand = !expandStore.isExpand;
 };
@@ -478,10 +508,10 @@ export const AudioLine = () => {
                             <TrackTable
                                 trackList={playerStore.playList}
                                 isNeedHeader={true}
-                                updateAddFavourites={onClickFavorite}
-                                updateAddMediateca={onClickFavorite}
-                                updateDeleteFavourites={onClickFavorite}
-                                updateDeleteMediateca={onClickMedia}
+                                updateAddFavourites={isClickAddFavourites}
+                                updateAddMediateca={isClickAddMediateca}
+                                updateDeleteFavourites={isClickDeleteFavourites}
+                                updateDeleteMediateca={isClickDeleteMediateca}
                             />
                         </div>
                     </div>

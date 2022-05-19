@@ -10,7 +10,7 @@ module.exports = {
     devServer: {
         contentBase: path.join(__dirname, 'out'),
         compress: true,
-        port: 9000,
+        port: 9001,
         historyApiFallback: true,
     },
     module: {
@@ -65,5 +65,5 @@ module.exports = {
             swSrc: "./src/sw.js",
             swDest: "sw.js"
         })
-    ]   
+    ]
 };

@@ -44,25 +44,28 @@ const onClickSubscriptions = () => {
 const onClickSubscribe = () => {
     if (userProfileStore.profile.I_subscribed) {
         unSubscribeUser(userProfileStore.profile.user_id).then(() => {
-            const unsubscriber = [...userProfileStore.profile.subscribers];
-            unsubscriber.filter(({ user_id }) => user_id !== profileStore.profile.id);
+            const unsubscriber = [...userProfileStore.profile.subscriptions];
+            console.log(profileStore.profile.id);
+            unsubscriber.filter((person) => person.user_id !== profileStore.profile.id);
             userProfileStore.profile.subscribers = unsubscriber;
             userProfileStore.profile.I_subscribed = false;
             render();
         });
+        render();
     } else {
         subscribeUser(userProfileStore.profile.user_id).then(() => {
-            const unsubscriber = [...userProfileStore.profile.subscribers];
-            unsubscriber.push({
+            const subscriber = [...userProfileStore.profile.subscribers];
+            subscriber.push({
                 user_id: profileStore.profile.id,
                 nickname: profileStore.profile.login,
                 photo: profileStore.profile.photo,
                 I_subscribed: false,
             });
-            userProfileStore.profile.subscribers = unsubscriber;
+            userProfileStore.profile.subscribers = subscriber;
             userProfileStore.profile.I_subscribed = true;
             render();
         });
+        render();
     }
 };
 
@@ -164,7 +167,7 @@ export const Users = () => {
                         {'Плейлисты'}
                     </div>
                     <div onclick={onClickSubscribers} class={users('item-mob', isClickTab[1] ? 'isChecked' : '')}>
-                        {`Подпичики (${userProfileStore.profile?.subscribers.length})`}
+                        {`Подписчики (${userProfileStore.profile?.subscribers.length})`}
                     </div>
                     <div onclick={onClickSubscriptions} class={users('item-mob', isClickTab[2] ? 'isChecked' : '')}>
                         {`Подписки (${userProfileStore.profile?.subscriptions.length})`}
@@ -176,7 +179,7 @@ export const Users = () => {
                         {'Плейлисты'}
                     </div>
                     <div onclick={onClickSubscribers} class={users('item', isClickTab[1] ? 'isChecked' : '')}>
-                        {`Подпичики (${userProfileStore.profile?.subscribers.length})`}
+                        {`Подпиcчики (${userProfileStore.profile?.subscribers.length})`}
                     </div>
                     <div onclick={onClickSubscriptions} class={users('item', isClickTab[2] ? 'isChecked' : '')}>
                         {`Подписки (${userProfileStore.profile?.subscriptions.length})`}
