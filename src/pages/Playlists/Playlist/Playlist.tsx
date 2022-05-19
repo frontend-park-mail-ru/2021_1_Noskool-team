@@ -6,6 +6,8 @@ import {
     changeDescription,
     deletePlaylist,
     deleteTrackPlaylist,
+    addPlaylistToMy,
+    getAllPlaylists,
 } from 'actions/playlist/playlist';
 import { TRACK_HOST } from 'constants/api';
 import { cn } from 'utils/cn';
@@ -21,6 +23,7 @@ import { toCurrentTrack } from 'utils/cast';
 import { redirectTo, render } from 'utils/render';
 import { LINKS } from 'constants/links';
 import { requestsStore } from 'store/requests.store';
+import { OkeyIcon } from 'assets/icons';
 
 import './style.scss';
 
@@ -77,11 +80,26 @@ const isClickDeletePlaylist = () => {
     });
 };
 
-const onClickTrack = () => () => {
+const isClickAddPlaylist = () => {
+    addPlaylistToMy(onePlaylistStore.playlist.playlist_id).then(() => {
+        requestsStore.allPlaylists = true;
+        requestsStore.onePlaylist = true;
+        requestsStore.userPlaylists = true;
+        getAllPlaylists();
+        document.getElementById('addPlaylist').style.display = 'flex';
+        setTimeout(function () {
+            document.getElementById('addPlaylist').style.display = 'none';
+        }, 5000);
+        render();
+    });
+};
+
+const onClickTrack = () => {
     const trackList = toCurrentTrack(onePlaylistStore.playlist.tracks);
     playerStore.playList = trackList;
     playerStore.currentTrack = trackList[0];
     playerStore.currentTime = 0;
+
     if (!playerStore.isPlay) {
         onClickPlay();
     } else {
@@ -106,6 +124,7 @@ export const Playlist = () => {
 
     const onChacngePhoto = (id: string) => (e: MouseEvent) => {
         changePlaylistPhoto(e.target, id).then(() => {
+            requestsStore.onePlaylist = true;
             render();
         });
     };
@@ -124,22 +143,39 @@ export const Playlist = () => {
             }
             changeName(onePlaylistStore.playlist.playlist_id, body).then(() => {
                 playlistForm.name.value = playlistEditForm.form.name.value;
+                const newPlaylist = playlistStore.albumList;
+                const currentPlaylist = newPlaylist.filter(
+                    (item) => item.playlist_id === onePlaylistStore.playlist.playlist_id
+                );
+                currentPlaylist[0].tittle = playlistForm.name.value;
+                playlistStore.albumList = newPlaylist;
             });
         }
     };
 
     const saveDescription = () => {
-        if (playlistForm.description.value !== playlistEditForm.form.description.value) {
+        if (playlistForm?.description.value !== playlistEditForm?.form.description.value) {
             const body = {
                 description: playlistEditForm.form.description.value,
             };
-            if (!playlistEditForm.form.description.value) {
+            if (!playlistEditForm?.form.description.value) {
                 delete body.description;
             }
-            changeDescription(onePlaylistStore.playlist.playlist_id, body).then(() => {
+            changeDescription(onePlaylistStore?.playlist.playlist_id, body).then(() => {
                 playlistForm.description.value = playlistEditForm.form.description.value;
             });
         }
+    };
+
+    const onClickShare = () => {
+        const link = document.getElementById('link') as HTMLInputElement;
+        link.select();
+        document.execCommand('copy');
+        onePlaylistStore.playlist.isCopyLink = true;
+        document.getElementById('statusShare').style.display = 'flex';
+        setTimeout(function () {
+            document.getElementById('statusShare').style.display = 'none';
+        }, 5000);
     };
 
     return (
@@ -167,19 +203,21 @@ export const Playlist = () => {
                         placeholder={'Измените название'}
                         validators={[]}
                         initialName={onePlaylistStore.playlist.tittle}
-                        disabled={Boolean(onePlaylistStore.playlist.user_id !== String(profileStore.profile.id))}
+                        disabled={Boolean(onePlaylistStore.playlist.user_id != String(profileStore.profile.id))}
                         onblur={saveName}
                     />
                     <PlaylistInput
                         input={playlistEditForm.form.description}
                         placeholder={'Измените описание'}
                         validators={[]}
-                        disabled={Boolean(onePlaylistStore.playlist.user_id !== String(profileStore.profile.id))}
+                        disabled={Boolean(onePlaylistStore.playlist.user_id != String(profileStore.profile.id))}
                         initialName={onePlaylistStore.playlist.description}
                         onblur={saveDescription}
                         className={'-description'}
                     />
-                    <div class={playlistPage('author')}>{profileStore.profile.login}</div>
+                    {/* <div class={playlistPage('author')} onclick={onClickUser(profileStore.profile.id)}>
+                        {profileStore.profile.login}
+                    </div> */}
                     <div class={playlistPage('icons-playlist')}>
                         <div class={playlistPage('play-playlist')}>
                             <div class={playlistPage('listen')} onclick={onClickTrack}>
@@ -187,12 +225,25 @@ export const Playlist = () => {
                             </div>
                             <PlayMainTrackIcon />
                         </div>
-                        {/* <div class={playlistPage('like-palylist')}>
-                            Добавить к себе
-                        </div> */}
-                        <div class={playlistPage('delete-playlust')} onclick={isClickDeletePlaylist}>
-                            <TrashIcon />
+                        <div class={playlistPage('share')} onclick={onClickShare}>
+                            Поделиться
                         </div>
+                        <input
+                            type='text'
+                            id='link'
+                            readonly
+                            value={'localhost:9001' + LINKS.playlistShare + '/' + onePlaylistStore.playlist?.uid}
+                        ></input>
+                        {profileStore.profile.id !== Number(onePlaylistStore.playlist?.user_id) && (
+                            <div class={playlistPage('like-palylist')} onclick={isClickAddPlaylist}>
+                                Добавить к себе
+                            </div>
+                        )}
+                        {profileStore.profile.id === Number(onePlaylistStore.playlist?.user_id) && (
+                            <div class={playlistPage('delete-playlust')} onclick={isClickDeletePlaylist}>
+                                <TrashIcon />
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>
@@ -204,17 +255,30 @@ export const Playlist = () => {
                     </div>
                 ) : (
                     <TrackTable
-                        trackList={toCurrentTrack(onePlaylistStore.playlist.tracks)}
+                        trackList={toCurrentTrack(onePlaylistStore.playlist?.tracks)}
                         isNeedHeader={false}
                         isNeedPhoto={true}
                         isForPlaylist={true}
                         isNotWhite
+                        canDeleteTrack={profileStore.profile?.id === Number(onePlaylistStore.playlist?.user_id)}
                         updateAddFavourites={isClickAddFavourites}
                         updateAddMediateca={isClickAddMediateca}
                         updateDeleteFavourites={isClickDeleteFavourites}
                         updateDeleteMediateca={isClickDeleteMediateca}
                         updateDeleteTrackPlaylist={isClickDeleteTrackPlaylist}
                     />
+                )}
+                <div class={playlistPage('changeStatus')} id='addPlaylist'>
+                    <OkeyIcon />
+                    <div class={playlistPage('isOkey')}>{'Плейлист добавлен'}</div>
+                </div>
+                {onePlaylistStore.playlist.isCopyLink ? (
+                    <div class={playlistPage('changeStatus')} id='statusShare'>
+                        <OkeyIcon />
+                        <div class={playlistPage('isOkey')}>{'Cсылка скопирована'}</div>
+                    </div>
+                ) : (
+                    <div />
                 )}
             </div>
         </div>

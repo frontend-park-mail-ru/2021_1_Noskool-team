@@ -10,6 +10,7 @@ export interface Form {
     lastName: FieldState;
     isValid: boolean;
     errorMsg: string;
+    waitMsg: string;
 }
 
 export const regFormStore = proxy<Form>({
@@ -55,4 +56,5 @@ export const regFormStore = proxy<Form>({
     ),
     isValid: false,
     errorMsg: '',
+    waitMsg: '',
 });

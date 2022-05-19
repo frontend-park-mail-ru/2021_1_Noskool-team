@@ -25,6 +25,7 @@ export interface FavoriteTarck {
     'in_mediateka': boolean;
     'in_favorite': boolean;
     duration: string;
+    likes: number;
 }
 
 export interface FavoriteAlbum {

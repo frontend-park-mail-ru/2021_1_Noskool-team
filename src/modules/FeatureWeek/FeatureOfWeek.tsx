@@ -22,6 +22,7 @@ const onClickTrack = (index: number) => () => {
         trackId: topTrack.trackList[index]?.track_id,
         duration: topTrack.trackList[index]?.duration,
         albumId: topTrack.trackList[index]?.album[0]?.album_id,
+        likes: topTrack.trackList[index]?.likes,
     };
     playerStore.playList = topTrack.trackList.map((el, i) => ({
         img: el?.picture,
@@ -34,6 +35,7 @@ const onClickTrack = (index: number) => () => {
         trackId: el?.track_id,
         duration: el?.duration,
         albumId: el?.album[0].album_id,
+        likes: el?.likes,
     }));
     playerStore.currentTime = 0;
     if (!playerStore.isPlay) {
@@ -62,7 +64,7 @@ export const FeatureOfWeek = () => {
             ></img>
             <div class={feature('position-feature', isMobile() ? 'mob' : '')}>
                 <div class={feature('title', isMobile() ? 'mob' : '')}>
-                    <div class={feature('title-text', isMobile() ? 'mob' : '')}>FEATURED OF THE WEEK</div>
+                    <div class={feature('title-text', isMobile() ? 'mob' : '')}>Избранное недели</div>
                 </div>
             </div>
             {topTrack.trackList.map((item, index) => (

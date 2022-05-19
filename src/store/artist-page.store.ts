@@ -5,6 +5,8 @@ interface Artists {
     musician_id: number;
     name: string;
     picture: string;
+    'in_mediateka': boolean;
+    'in_favourite': boolean;
 }
 
 interface Album {
@@ -25,6 +27,7 @@ export interface ArtistTrack {
     musicians: Artists[];
     duration: string;
     album: Album[];
+    likes: number;
 }
 
 interface ArtistsStore {
@@ -38,6 +41,8 @@ export const artistPageStore = proxy<ArtistsStore>({
         musician_id: '',
         name: '',
         picture: '',
+        in_favourite: false,
+        in_mediateka: false,
     }),
     tracks: [],
 });

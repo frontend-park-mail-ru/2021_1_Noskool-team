@@ -35,7 +35,7 @@ import {
 } from 'actions/main-page/main-page';
 import { LINKS } from 'constants/links';
 import { isMobile } from 'utils/isMobile';
-import { redirectTo } from 'utils/render';
+import { redirectTo, render } from 'utils/render';
 
 import './style.scss';
 import { Link } from 'components/Link/Link';
@@ -179,6 +179,7 @@ const onClickFavorite = () => {
             playerStore.currentTrack.isFavorite = true;
             playerStore.currentTrack.isMediateca = true;
             playerStore.playList = buffer;
+            playerStore.currentTrack.likes += 1;
         });
     } else {
         deleteFromFavourites(playerStore.currentTrack.trackId).then(() => {
@@ -187,6 +188,8 @@ const onClickFavorite = () => {
             buffer[index].isFavorite = false;
             playerStore.currentTrack.isFavorite = false;
             playerStore.playList = buffer;
+            playerStore.currentTrack.likes =
+                playerStore.currentTrack.likes !== 0 ? playerStore.currentTrack.likes - 1 : 0;
         });
     }
 };
@@ -215,8 +218,34 @@ const onClickMedia = () => {
     }
 };
 
-const onSwipeTrack = () => {
-    // console.log(123);
+const isClickAddFavourites = (id: number) => {
+    const buffer = [...playerStore.playList];
+    buffer[id].isFavorite = true;
+    playerStore.playList = buffer;
+    render();
+};
+
+const isClickDeleteFavourites = (id: number) => {
+    const buffer = [...playerStore.playList];
+    buffer[id].isFavorite = false;
+    playerStore.playList = buffer;
+    render();
+};
+
+const isClickAddMediateca = (id: number) => {
+    const buffer = [...playerStore.playList];
+    buffer[id].isMediateca = true;
+    buffer[id].isFavorite = true;
+    playerStore.playList = buffer;
+    render();
+};
+
+const isClickDeleteMediateca = (id: number) => {
+    const buffer = [...playerStore.playList];
+    buffer[id].isMediateca = false;
+    buffer[id].isFavorite = false;
+    playerStore.playList = buffer;
+    render();
 };
 
 const toggle = () => {
@@ -231,11 +260,13 @@ const onClickAddToPlaylist = (id_playlist: number) => () => {
     onePlaylistStore.playlist.isOkey = false;
     addTrackToPlaylist(id_playlist, playerStore.currentTrack.trackId).then(() => {
         onePlaylistStore.playlist.isOkey = true;
+        requestsStore.onePlaylist = true;
+        document.getElementById('addtoPl').style.display = 'flex';
+        render();
         setTimeout(function () {
-            document.getElementById('status').style.display = 'none';
+            document.getElementById('addtoPl').style.display = 'none';
         }, 5000);
     });
-    console.log('dkjgfs');
 };
 
 window.name = windowName;
@@ -301,7 +332,7 @@ export const AudioLine = () => {
 
     if (isMobile()) {
         return (
-            <div class={player('', isMobile() ? 'mob' : '')} onswipe={isMobile() ? onSwipeTrack : undefined}>
+            <div class={player('', isMobile() ? 'mob' : '')}>
                 <audio id={PLAYER_ID} src={TRACK_HOST + playerStore.playList[playerStore.currentTrack.index]?.link}>
                     <source
                         src={TRACK_HOST + playerStore.playList[playerStore.currentTrack.index]?.link}
@@ -313,7 +344,7 @@ export const AudioLine = () => {
                     <div class={player('name')}>
                         {playerStore.playList[playerStore.currentTrack.index]?.name}
                         <div>
-                            {playerStore.playList[playerStore.currentTrack.index]?.artists.map((artist, index) => (
+                            {playerStore.playList[playerStore.currentTrack.index]?.artists?.map((artist, index) => (
                                 <div onclick={onClickArtist(artist.musician_id)}>
                                     {`${artist.name}${
                                         index === playerStore.playList[playerStore.currentTrack.index]?.artists.length
@@ -351,7 +382,7 @@ export const AudioLine = () => {
     }
 
     return (
-        <div class={player('', isMobile() ? 'mob' : '')} onswipe={isMobile() ? onSwipeTrack : undefined}>
+        <div class={player('', isMobile() ? 'mob' : '')}>
             <audio id={PLAYER_ID} src={TRACK_HOST + playerStore.playList[playerStore.currentTrack.index]?.link}>
                 <source
                     src={TRACK_HOST + playerStore.playList[playerStore.currentTrack.index]?.link}
@@ -363,12 +394,12 @@ export const AudioLine = () => {
                 <div class={player('name')}>
                     {playerStore.playList[playerStore.currentTrack.index]?.name}
                     <div>
-                        {playerStore.playList[playerStore.currentTrack.index]?.artists.map((artist, index) => (
+                        {playerStore.playList[playerStore.currentTrack.index]?.artists?.map((artist, index) => (
                             <Link
                                 child={() =>
                                     `${artist.name}${
                                         index + 1 ===
-                                        playerStore.playList[playerStore.currentTrack.index]?.artists.length
+                                        playerStore.playList[playerStore.currentTrack.index]?.artists?.length
                                             ? ''
                                             : ', '
                                     }`
@@ -403,14 +434,13 @@ export const AudioLine = () => {
                     />
                 </div>
             </div>
-            {onePlaylistStore.playlist.isOkey && (
-                <div class={player('changeStatus')} id='status'>
-                    <OkeyIcon />
-                    <div class={player('isOkey')}>{'Песня добавлена в плейлист'}</div>
-                </div>
-            )}
 
-            {localStorage.getItem('auth') === 'ok' && (
+            <div class={player('changeStatus')} id='addtoPl'>
+                <OkeyIcon />
+                <div class={player('isOkey')}>{'Песня добавлена в плейлист'}</div>
+            </div>
+
+            {localStorage.getItem('auth') === 'ok' ? (
                 <div class={player('playlist-btns')}>
                     <div class={player('playlist')} onclick={toggle}>
                         <div class={player('playlist-btn')}>
@@ -478,14 +508,16 @@ export const AudioLine = () => {
                             <TrackTable
                                 trackList={playerStore.playList}
                                 isNeedHeader={true}
-                                updateAddFavourites={onClickFavorite}
-                                updateAddMediateca={onClickFavorite}
-                                updateDeleteFavourites={onClickFavorite}
-                                updateDeleteMediateca={onClickMedia}
+                                updateAddFavourites={isClickAddFavourites}
+                                updateAddMediateca={isClickAddMediateca}
+                                updateDeleteFavourites={isClickDeleteFavourites}
+                                updateDeleteMediateca={isClickDeleteMediateca}
                             />
                         </div>
                     </div>
                 </div>
+            ) : (
+                <div />
             )}
             <div class={player('volume')}>
                 <div class={player('volume-icon')} onclick={onClickVolume}>

@@ -10,6 +10,7 @@ export interface RequestsStore {
     getTopAlbums: boolean;
     mediatekaTracks: boolean;
     mediatekaAlbums: boolean;
+    mediatekaArtists: boolean;
     allPlaylists: boolean;
     onePlaylist: boolean;
     getAlbumId: boolean;
@@ -17,6 +18,13 @@ export interface RequestsStore {
     userPlaylists: boolean;
     userSubscribers: boolean;
     userSubscriptions: boolean;
+    searchAll: boolean;
+    searchTracks: boolean;
+    searchAlbums: boolean;
+    searchPlaylists: boolean;
+    searchArtists: boolean;
+    searchUsers: boolean;
+    sharePlaylist: boolean;
 }
 
 export const requestsStore = proxy<RequestsStore>({
@@ -32,6 +40,7 @@ export const requestsStore = proxy<RequestsStore>({
     getTopAlbums: true,
     mediatekaTracks: true,
     mediatekaAlbums: true,
+    mediatekaArtists: true,
     allPlaylists: true,
     onePlaylist: true,
     getAlbumId: true,
@@ -39,4 +48,11 @@ export const requestsStore = proxy<RequestsStore>({
     userPlaylists: true,
     userSubscribers: true,
     userSubscriptions: true,
+    searchAll: true,
+    searchTracks: true,
+    searchAlbums: true,
+    searchPlaylists: true,
+    searchArtists: true,
+    searchUsers: true,
+    sharePlaylist: true,
 });

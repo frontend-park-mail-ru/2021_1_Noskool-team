@@ -25,6 +25,7 @@ const onClickTrack = (index: number) => () => {
         trackId: el?.track_id,
         duration: el?.duration,
         albumId: el?.album[0]?.album_id,
+        likes: el?.likes,
     }));
     playerStore.currentTrack = {
         img: tracksStore.trackList[index]?.picture,
@@ -37,6 +38,7 @@ const onClickTrack = (index: number) => () => {
         trackId: tracksStore.trackList[index]?.track_id,
         duration: tracksStore.trackList[index]?.duration,
         albumId: tracksStore.trackList[index]?.album[0]?.album_id,
+        likes: tracksStore.trackList[index]?.likes,
     };
     playerStore.currentTime = 0;
     if (!playerStore.isPlay) {
@@ -52,6 +54,14 @@ const slider = cn('slide-items');
 
 const onClickWeekly = () => {
     redirectTo(LINKS.topTracks);
+};
+
+const redirectToArtist = (id: number) => () => {
+    redirectTo(`${LINKS.artist}/${id}`);
+};
+
+const redirectToAlbum = (id: number) => () => {
+    redirectTo(`${LINKS.album}/${id}`);
 };
 
 let isNeedFetch = true;
@@ -99,7 +109,7 @@ export const Single = () => {
         <div class={weekly('', isMobile() ? 'mob' : '')}>
             <div class={weekly('legend')}>
                 <div class={weekly('title', isMobile() ? 'mob' : '')} onclick={onClickWeekly}>
-                    {'Weekly Top Track'}
+                    {'Лучшее за неделю'}
                 </div>
                 <div class={weekly('buttons')}>
                     <div onclick={prevItem} class={weekly('btn', isMobile() ? 'mob' : '')}>
@@ -113,14 +123,19 @@ export const Single = () => {
             <div class={slider()}>
                 <ul id={SLIDER} class={slider('single-items')}>
                     {tracksStore.trackList?.map((item, index) => (
-                        <li class={slider('item')} onclick={onClickTrack(index)}>
+                        <li class={slider('item')}>
                             <img
                                 src={TRACK_HOST + item?.picture}
                                 class={slider('single-img', isMobile() ? 'mob' : '')}
+                                onclick={onClickTrack(index)}
                             />
-                            <div class={slider('name-song', isMobile() ? 'mob' : '')}>{item?.tittle}</div>
+                            <div class={slider('name-song', isMobile() ? 'mob' : '')}>
+                                <span onclick={redirectToAlbum(item?.album[0]?.album_id)}>{item?.tittle}</span>
+                            </div>
                             <div class={slider('singer', isMobile() ? 'mob' : '')}>
-                                {item?.musicians?.map((artist) => artist?.name).join(', ')}
+                                {item?.musicians?.map((artist) => (
+                                    <span onclick={redirectToArtist(artist?.musician_id)}>{artist?.name}</span>
+                                ))}
                             </div>
                         </li>
                     ))}

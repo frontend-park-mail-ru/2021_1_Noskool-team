@@ -2,10 +2,18 @@
 
 .top-billboard {
   background-color: $white;
-  border-radius: 50px;
+  border-radius: 50px 0 0 50px;
   width: 100%;
   box-sizing: border-box;
   padding: 30px;
+  height: 100%;
+
+  &__wrapper {
+    padding: 15px 0 15px 15px;
+    width: 100%;
+    height: calc(100vh - 135px);
+    box-sizing: border-box;
+  }
 
   &__title {
     font-family: 'Comfortaa', cursive;
@@ -28,55 +36,8 @@
     font-size: 20px;
   }
 
-  &__row {
-    width: 100%;
-    display: flex;
-    align-items: center;
-
-    &--header {
-      border-bottom: 1px solid $borders;
-    }
-
-    &--track {
-      cursor: pointer;
-      transition: all 0.3s;
-
-      &:hover {
-        background-color: $cyan-light;
-        color: $white;
-      }
-    }
-  }
-
-  &__cell {
-    padding: 10px;
-    height: 50px;
-    box-sizing: border-box;
-    white-space: pre;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-
-    &:nth-child(1) {
-      border-right: 1px solid $borders;
-      width: 50px;
-    }
-
-    &:nth-child(2) {
-      width: 270px;
-      border-right: 1px solid $borders;
-    }
-
-    &:nth-child(3) {
-      width: 220px;
-      border-right: 1px solid $borders;
-    }
-
-    &:nth-child(4) {
-      width: 70px;
-      border-right: 1px solid $borders;
-    }
+  &__table {
+    height: calc(100vh - 288px);
   }
 
   &__photo {
@@ -84,5 +45,22 @@
     height: 30px;
     margin-right: 20px;
     border-radius: 5px;
+  }
+}
+
+.top-billboard__wrapper--mob {
+  height: calc(100vh - 175px);
+
+  .top-billboard {
+    padding: 20px 0 20px 20px;
+
+    &__table {
+      height: calc(100vh - 300px);
+    }
+
+    &__title {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
   }
 }

@@ -5,6 +5,7 @@ import { tracksStore } from 'store/main-page.store';
 import { requestsStore } from 'store/requests.store';
 import { toCurrentTrack } from 'utils/cast';
 import { cn } from 'utils/cn';
+import { isMobile } from 'utils/isMobile';
 
 import './style.scss';
 
@@ -35,6 +36,7 @@ const isClickDeleteMediateca = (id: number) => {
     requestsStore.getTopTracks = true;
     const buffer = [...tracksStore.trackList];
     buffer[id].in_favorite = false;
+    buffer[id].in_mediateka = false;
     tracksStore.trackList = buffer;
 };
 
@@ -45,16 +47,18 @@ export const Tracks = () => {
     }
 
     return (
-        <div class={topTracks('')}>
+        <div class={topTracks('', isMobile() ? 'mob' : '')}>
             {tracksStore.trackList.length !== 0 && <div class={topTracks('title')}>{'Популярные треки:'}</div>}
-            <TrackTable
-                trackList={toCurrentTrack(tracksStore.trackList)}
-                isNeedHeader
-                updateAddFavourites={isClickAddFavourites}
-                updateAddMediateca={isClickAddMediateca}
-                updateDeleteFavourites={isClickDeleteFavourites}
-                updateDeleteMediateca={isClickDeleteMediateca}
-            />
+            <div class={topTracks('table')}>
+                <TrackTable
+                    trackList={toCurrentTrack(tracksStore.trackList)}
+                    isNeedHeader
+                    updateAddFavourites={isClickAddFavourites}
+                    updateAddMediateca={isClickAddMediateca}
+                    updateDeleteFavourites={isClickDeleteFavourites}
+                    updateDeleteMediateca={isClickDeleteMediateca}
+                />
+            </div>
         </div>
     );
 };

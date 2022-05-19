@@ -18,6 +18,7 @@ export interface CurrentTrack {
     isMediateca: boolean;
     duration: string;
     albumId: number;
+    likes: number;
 }
 
 export interface PlayerStore {
@@ -51,6 +52,7 @@ const lastTrack: CurrentTrack = JSON.parse(localStorage.getItem('lastTrack')) ||
     isFavorite: false,
     isMediateca: false,
     index: 0,
+    likes: 0,
 };
 
 export const playerStore = proxy<PlayerStore>({
@@ -63,6 +65,7 @@ export const playerStore = proxy<PlayerStore>({
         trackId: lastTrack.trackId,
         isFavorite: lastTrack.isFavorite,
         isMediateca: lastTrack.isMediateca,
+        likes: lastTrack.likes,
     }),
     isPlay: false,
     volumeIcon: 2,
@@ -79,6 +82,7 @@ export const playerStore = proxy<PlayerStore>({
             trackId: lastTrack.trackId,
             isFavorite: lastTrack.isFavorite,
             isMediateca: lastTrack.isMediateca,
+            likes: lastTrack.likes,
         },
     ],
 });

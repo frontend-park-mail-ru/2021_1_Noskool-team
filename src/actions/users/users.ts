@@ -29,7 +29,7 @@ export const getAllPlaylists = async (id: number) => {
     }
 };
 
-export const subscribeUser = async (id: number) => {
+export const subscribeUser = async (id: number): Promise<Response | undefined> => {
     let response = await postAuth(USERS + `/${id}/subscribe`, {});
     if (response.status === 401) {
         try {
@@ -52,10 +52,10 @@ export const subscribeUser = async (id: number) => {
             return new Promise(() => {});
         }
     }
-    return response.json();
+    return response;
 };
 
-export const unSubscribeUser = async (id: number) => {
+export const unSubscribeUser = async (id: number): Promise<Response | undefined> => {
     let response = await postAuth(USERS + `/${id}/unsubscribe`, {});
     if (response.status === 401) {
         try {
@@ -78,5 +78,5 @@ export const unSubscribeUser = async (id: number) => {
             return new Promise(() => {});
         }
     }
-    return response.json();
+    return response;
 };

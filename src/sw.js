@@ -4,7 +4,13 @@ const precacheManifest = [].concat(self.__WB_MANIFEST || []);
 precacheAndRoute(precacheManifest);
 
 self.addEventListener('fetch', function (event) {
-    event.respondWith(fetch(event.request).catch(() => useFallback()));
+    event.respondWith(
+        fetch(event.request).catch((error) => {
+            // if (error.)
+            console.log(123123123, error);
+            useFallback();
+        })
+    );
 });
 
 const FALLBACK =
